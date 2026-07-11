@@ -11,6 +11,7 @@ An unofficial, single-page marketing and catalog-analysis site for Seattle indie
 | **Hashtag Strategy** | 45+ hashtags grouped by function (Brand, Genre, Location, Community, Discovery). Click any tag to copy; "Copy full set" grabs them all. |
 | **Social Media Opportunities** | Platform-by-platform priorities and concrete content plays (TikTok, Instagram, Spotify, YouTube, Bandcamp, Threads/X). |
 | **10 Like Artists** | Fan-overlap targets with match scores for playlist pitching, ad look-alikes, and tour asks. |
+| **1,000 True Fans** | Kevin Kelly's framework applied to Tinsley: an interactive revenue calculator, per-fan revenue breakdown, a fan-conversion ladder, and a build playbook. |
 | **90-Day Roadmap** | A sequenced Foundation → Amplify → Convert execution plan. |
 
 ## Run it
@@ -41,6 +42,6 @@ assets/app.js       # rendering + interactivity (filters, copy, charts)
 
 ## Sources
 
-Artist facts, quotes, and catalog compiled from [tinsleymusic.com](https://www.tinsleymusic.com/), the official [EPK](https://www.tinsleymusic.com/epk), [Bandcamp](https://musicbytinsley.bandcamp.com/), [Atwood Magazine](https://atwoodmagazine.com/tybe-tinsley-bad-enough-song-premiere/), [The Spokesman-Review](https://www.spokesman.com/stories/2025/mar/20/west-side-indie-pop-rocker-tinsley-brings-new-albu/), She Is The Music, and KEXP.
+Artist facts, quotes, and catalog compiled from [tinsleymusic.com](https://www.tinsleymusic.com/), the official [EPK](https://www.tinsleymusic.com/epk), [Bandcamp](https://musicbytinsley.bandcamp.com/), [Atwood Magazine](https://atwoodmagazine.com/tybe-tinsley-bad-enough-song-premiere/), [The Spokesman-Review](https://www.spokesman.com/stories/2025/mar/20/west-side-indie-pop-rocker-tinsley-brings-new-albu/), She Is The Music, and KEXP. The superfan framework is drawn from Kevin Kelly's essay [“1,000 True Fans”](https://kk.org/thetechnium/1000-true-fans/) (2008).
 
 > Unofficial fan/strategy project for analysis and marketing planning purposes.

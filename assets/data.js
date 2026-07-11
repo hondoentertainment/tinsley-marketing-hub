@@ -238,6 +238,55 @@ const TINSLEY = {
       why: "Raw acoustic demos — only suited to atmospheric lo-fi or ambient textures." }
   ],
 
+  // ---- 1,000 True Fans (Kevin Kelly framework applied to Tinsley) ----
+  // Source essay: Kevin Kelly, "1,000 True Fans" (2008) — kk.org/thetechnium/1000-true-fans/
+  trueFans: {
+    source: {
+      author: "Kevin Kelly",
+      title: "1,000 True Fans",
+      year: 2008,
+      url: "https://kk.org/thetechnium/1000-true-fans/",
+      quote: "A creator… needs to acquire only 1,000 True Fans to make a living. A True Fan is defined as a fan that will buy anything you produce. These diehard fans will drive 200 miles to see you sing; they will buy the hardback and paperback and audible versions of your book; they will purchase your next figurine sight unseen; they will pay for the 'best-of' DVD version of your free YouTube channel; they will come to your chef's table once a month.",
+      premise: "The idea: an artist doesn't need a hit or millions of passive streams to sustain a career — just ~1,000 True Fans who each spend ~$100/year buying directly. That's ~$100,000/year, mostly high-margin. For Tinsley, the raw materials already exist: KEXP-funded vinyl, a demo-hungry Bandcamp, a devoted PNW scene, and press credibility. The job is to convert acclaim into a direct, ownable fan relationship."
+    },
+
+    // Interactive calculator defaults + ranges
+    model: { fans: 1000, spend: 100, fansMax: 2500, fansStep: 50, spendMax: 300, spendStep: 5 },
+
+    // How ~$100/fan/year is realistically assembled for an indie musician (high-margin, direct)
+    streams: [
+      { label: "Limited vinyl LP", detail: "Signed / colored pressing — the KEXP-funded flagship object.", amount: 32 },
+      { label: "Merch (tee, tote, poster)", detail: "One item a year at a show or Bandcamp drop.", amount: 28 },
+      { label: "Live show ticket", detail: "One PNW headline or support date per year.", amount: 22 },
+      { label: "Bandcamp digital + demos", detail: "Album + exclusive 'the end - demos' on Bandcamp Fridays.", amount: 13 },
+      { label: "Superfan extra", detail: "Tip, bundle add-on, or one-off exclusive.", amount: 5 }
+    ],
+
+    // The conversion funnel: turning passive listeners into True Fans
+    ladder: [
+      { stage: "Passive Listener", worth: "~$0.003 / stream", pct: 100,
+        goal: "Get the follow + Spotify save.", how: "Algorithmic reach, playlist adds, TikTok discovery. Volume, but you don't own them." },
+      { stage: "Follower", worth: "Attention, not $", pct: 22,
+        goal: "Capture an email or DM.", how: "Follows on Spotify/IG/TikTok. Show-goers, story-viewers — reachable but rented on someone else's platform." },
+      { stage: "Engaged Fan", worth: "First $ soon", pct: 8,
+        goal: "Trigger the first purchase.", how: "Repeat listeners who comment, share, and pre-save. Warm enough to buy a ticket or a tee." },
+      { stage: "Paying Fan", worth: "$20–40 / yr", pct: 3,
+        goal: "Turn one purchase into a habit.", how: "Bought a ticket, tee, or Bandcamp download once. Knows the catalog, follows the story." },
+      { stage: "True Fan", worth: "$100+ / yr", pct: 1,
+        goal: "Give them everything to buy.", how: "Buys the vinyl, the merch, the show, the demos. Drives to gigs, gifts your music, defends you online." }
+    ],
+
+    // Playbook to actually build toward 1,000 True Fans
+    playbook: [
+      { title: "Own the relationship", text: "Move fans off rented platforms. Email list + Bandcamp are yours; Spotify followers aren't. Every touchpoint should offer a reason to hand over an email." },
+      { title: "Always have something to buy", text: "True Fans want to spend. Keep a steady shelf: vinyl, signed inserts, tees, demos, bundles. No 'sold out with nothing to replace it.'" },
+      { title: "Sell direct, keep the margin", text: "A $30 Bandcamp/vinyl sale ≈ 10,000 streams. Route superfans to Bandcamp Fridays and D2C merch instead of streaming-only." },
+      { title: "Give real access", text: "Close Friends demos, handwritten vinyl notes, a small Discord, early ticket links. Intimacy is the product True Fans pay for." },
+      { title: "Convert at the point of passion", text: "At shows and viral moments: QR to the email list, merch table front-and-center, post-show thank-you DMs. Capture fans while they're hot." },
+      { title: "Reward loyalty, publicly", text: "Name-check superfans, feature fan covers, first dibs on limited runs. Recognition compounds — True Fans recruit the next True Fans." }
+    ]
+  },
+
   // ---- Actionable 90-day marketing roadmap ----
   roadmap: [
     { phase: "Days 1–30 — Foundation", items: [
@@ -262,5 +311,65 @@ const TINSLEY = {
     { quote: "An earnest, endearing collection of infectious indie-pop and indie-rock, with occasional alt-country undertones… bright guitars, irresistible hooks and plenty of allure.", source: "Chris Sanley, KEXP Music Director" },
     { quote: "The smokey-voiced indie pop artist is as sticky in her lyrics as her music is in melody.", source: "American Songwriter" },
     { quote: "Tinsley's latest single is cathartic country-pop at its finest.", source: "Atwood Magazine" }
-  ]
+  ],
+
+  // ---- Analysis vs. Rick Rubin, "The Creative Act: A Way of Being" (2023) ----
+  // A deliberate counterpoint to the rest of this deck: everything else here is
+  // market-first (hashtags, funnels, conversion). Rubin's book is art-first.
+  // We (1) score how well Tinsley already embodies his core principles, and
+  // (2) stage the tension between the marketing playbook and the creative act.
+  creativeAct: {
+    source: {
+      author: "Rick Rubin",
+      title: "The Creative Act: A Way of Being",
+      year: 2023,
+      quote: "When it comes to the process of creation, the audience comes last. Creating and consuming are two different acts. Making the work for yourself first, honestly, is what gives it a chance to matter to anyone else.",
+      premise: "Every other section of this deck is market-first — hashtags, funnels, conversion ladders. Rubin's book argues the opposite: the work comes first, the audience comes last, and honesty is the only strategy that lasts. So this is the deliberate counterpoint. First we score how much Tinsley already lives the book's principles (spoiler: a lot). Then we stage the tension between the growth playbook and the creative act — and where the two can actually coexist."
+    },
+
+    // How strongly Tinsley's work + career already embody each core principle (0-100)
+    principles: [
+      { name: "Tune In — the artist as antenna", score: 90,
+        idea: "Rubin: we're antennae, collecting seeds from the world through pure awareness. The art is noticing, then transcribing what's already there.",
+        tinsley: "Her diaristic, 'sharp lyrical self-awareness' is exactly this — songs that read like caught observations. 'Good Ride (Mechanical Bullshit)' turns an overheard phrase into a whole mood." },
+      { name: "The mirror — great art is honest", score: 94,
+        idea: "Rubin: a work of art is a self-portrait of the maker. The more honestly you show yourself, the more universal it becomes.",
+        tinsley: "Her strongest asset. The self-titled debut on grief and growing up, and 'Hard to Love' leaning into raw exposure, are honesty made audible — the trait critics keep naming." },
+      { name: "Experiment — beginner's mind", score: 86,
+        idea: "Rubin: follow curiosity, stay a perpetual beginner, refuse to be caged by a genre or a past success.",
+        tinsley: "Electro-pop collabs → #1-poll indie-pop → country-pop pivot → indie rock. Rubin would applaud the roaming; the marketing side of this very deck flags it as a 'positioning risk.'" },
+      { name: "The practice — show up daily", score: 88,
+        idea: "Rubin: creativity is a way of being, not an event. Consistency and volume matter more than any single hit.",
+        tinsley: "19+ releases since 2018, from formative EPs to demos to a debut LP. The catalog depth is the practice — proof the habit, not the outcome, drives her." },
+      { name: "The audience comes last", score: 62,
+        idea: "Rubin: don't create for the market. Serve the work; let reception be a byproduct, never the target.",
+        tinsley: "Half-embodied. The music itself is emotionally uncompromised (acclaim outruns streams). But the career instinct — and this deck — is audience-first. The honest tension." },
+      { name: "Completion — finish and let go", score: 78,
+        idea: "Rubin: at some point you release the work and detach from the result. The 'end' is a choice, not a verdict.",
+        tinsley: "Steady shipping and a raw 'the end - demos' release show a willingness to let imperfect things go. Room to grow: trusting release without over-polishing for the algorithm." }
+    ],
+
+    // The core "versus": the growth playbook vs. the creative act — and the reconciliation
+    tension: {
+      intro: "Where the rest of this deck and Rubin's book openly disagree — and the move that honors both.",
+      rows: [
+        { topic: "Who comes first",
+          deck: "Optimize for the audience: FYP hooks, reach tiers, save/follow CTAs.",
+          rubin: "The audience comes last. Make it true to you; reception is a byproduct.",
+          reconcile: "Create art-first, market second. The honesty is the exact thing the hashtags are selling anyway — so protect it upstream." },
+        { topic: "Positioning & genre",
+          deck: "Pick one hero lane per campaign; genre spread blurs the brand.",
+          rubin: "Follow curiosity. Don't let the market cage the work into a single sound.",
+          reconcile: "Let the art roam freely; use positioning only to frame each release for a listener — market the song, don't shrink the artist." },
+        { topic: "Metrics & numbers",
+          deck: "Streams, conversion rates, and cost-per-follow are the scoreboard.",
+          rubin: "Numbers aren't the point. The work is the point; data can quietly distort it.",
+          reconcile: "Treat metrics as feedback, never as the goal. Ship on conviction, then read the data — not the other way around." },
+        { topic: "Cadence & the feed",
+          deck: "Post 4–5×/week; feed the algorithm to stay discoverable.",
+          rubin: "The practice is daily creation — not daily posting. Protect the making.",
+          reconcile: "Separate the creative practice from the content calendar. Make every day; publish on a schedule that never starves the work." }
+      ]
+    }
+  }
 };

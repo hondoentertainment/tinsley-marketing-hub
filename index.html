@@ -22,7 +22,9 @@
       <a href="#bysong">By Song</a>
       <a href="#social">Social</a>
       <a href="#artists">Like Artists</a>
+      <a href="#truefans">True Fans</a>
       <a href="#roadmap">Roadmap</a>
+      <a href="#rubin">Creative Act</a>
     </nav>
     <a class="nav-cta" data-link="linktree" href="#" target="_blank" rel="noopener">Listen ↗</a>
   </header>
@@ -139,20 +141,100 @@
       <div class="artist-grid" id="artistGrid"></div>
     </section>
 
-    <!-- ===== ROADMAP ===== -->
-    <section class="section alt" id="roadmap">
+    <!-- ===== 1,000 TRUE FANS ===== -->
+    <section class="section alt" id="truefans">
       <div class="section-head">
-        <span class="kicker">08 — Execution</span>
+        <span class="kicker">08 — Superfans</span>
+        <h2>The 1,000 True Fans Model</h2>
+        <p class="lead" id="tfLead"></p>
+      </div>
+
+      <figure class="tf-quote" id="tfQuote"></figure>
+
+      <div class="tf-grid">
+        <div class="card tf-calc">
+          <h3>The math of a sustainable career</h3>
+          <p class="tf-calc-sub">Drag to model how many True Fans — and how much each spends per year — it takes to fund the music.</p>
+          <div class="tf-controls">
+            <label class="tf-control">
+              <span class="tf-control-l">True Fans <b id="tfFansVal"></b></span>
+              <input type="range" id="tfFans" />
+            </label>
+            <label class="tf-control">
+              <span class="tf-control-l">Avg spend / fan / year <b id="tfSpendVal"></b></span>
+              <input type="range" id="tfSpend" />
+            </label>
+          </div>
+          <div class="tf-readout">
+            <div class="tf-big">
+              <span class="tf-big-num" id="tfAnnual"></span>
+              <span class="tf-big-l">projected annual revenue · mostly high-margin, direct-to-fan</span>
+            </div>
+            <div class="tf-sub-metrics">
+              <div><span id="tfMonthly"></span><small>per month</small></div>
+              <div><span id="tfPerFan"></span><small>per fan / month</small></div>
+              <div><span id="tfStreamsEq"></span><small>≈ streams to match*</small></div>
+            </div>
+          </div>
+          <p class="tf-foot">*At ~$0.003 per stream. One <b>$100 True Fan</b> ≈ <b>33,000</b> passive streams — the case for owning the relationship.</p>
+        </div>
+
+        <div class="card tf-streams">
+          <h3>Where ~$100 / fan / year comes from</h3>
+          <div class="tf-stream-list" id="tfStreams"></div>
+          <div class="tf-stream-total"><span>Per True Fan / year</span><b id="tfStreamTotal"></b></div>
+        </div>
+      </div>
+
+      <div class="tf-block">
+        <h3 class="tf-block-h">The fan-conversion ladder</h3>
+        <p class="tf-block-sub">Most listeners stay passive. The strategy is a machine that walks a shrinking, higher-value cohort down each rung — from a rented stream to an owned True Fan.</p>
+        <div class="tf-ladder" id="tfLadder"></div>
+      </div>
+
+      <div class="tf-block">
+        <h3 class="tf-block-h">Playbook: building toward 1,000</h3>
+        <div class="tf-playbook" id="tfPlaybook"></div>
+      </div>
+    </section>
+
+    <!-- ===== ROADMAP ===== -->
+    <section class="section" id="roadmap">
+      <div class="section-head">
+        <span class="kicker">09 — Execution</span>
         <h2>90-Day Marketing Roadmap</h2>
         <p class="lead">A sequenced plan to convert critical acclaim into streaming, fans, and revenue.</p>
       </div>
       <div class="roadmap" id="roadmapGrid"></div>
     </section>
+
+    <!-- ===== ANALYSIS vs. THE CREATIVE ACT ===== -->
+    <section class="section alt" id="rubin">
+      <div class="section-head">
+        <span class="kicker">10 — Philosophy</span>
+        <h2>Analysis vs. Rick Rubin's <em>The Creative Act</em></h2>
+        <p class="lead">The counterpoint to everything above. This deck is market-first; Rubin's book is art-first. We score how much Tinsley already lives its principles — then stage where the growth playbook and the creative act collide.</p>
+      </div>
+
+      <figure class="ca-quote" id="caQuote"></figure>
+
+      <div class="ca-block">
+        <h3 class="ca-block-h">How much she already lives it</h3>
+        <p class="ca-block-sub">Six core principles from the book, scored against her catalog and career. The higher the bar, the more her instincts already match Rubin's.</p>
+        <div class="ca-principles" id="caPrinciples"></div>
+      </div>
+
+      <div class="ca-block">
+        <h3 class="ca-block-h">The tension: playbook vs. the creative act</h3>
+        <p class="ca-block-sub" id="caTensionIntro"></p>
+        <div class="ca-tension" id="caTension"></div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
     <p><strong>Tinsley — Marketing & Analysis Hub</strong></p>
-    <p class="muted">Unofficial strategy site built for analysis & marketing planning. Artist facts, quotes and catalog sourced from tinsleymusic.com, the official EPK, Bandcamp, Atwood Magazine, The Spokesman-Review and KEXP.</p>
+    <p class="muted">Unofficial strategy site built for analysis & marketing planning. Artist facts, quotes and catalog sourced from tinsleymusic.com, the official EPK, Bandcamp, Atwood Magazine, The Spokesman-Review and KEXP. The 1,000 True Fans framework is from <a href="https://kk.org/thetechnium/1000-true-fans/" target="_blank" rel="noopener">Kevin Kelly (2008)</a>.</p>
     <p class="muted">Data lives in <code>assets/data.js</code> — edit there to update the deck.</p>
   </footer>
 

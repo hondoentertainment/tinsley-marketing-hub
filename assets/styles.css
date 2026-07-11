@@ -190,6 +190,38 @@ p { margin: 0; }
 .tag:hover { background: var(--grad); color: #1a0f18; border-color: transparent; }
 .copy-all { margin-top: 24px; }
 
+/* ---------- PER-SONG HASHTAGS ---------- */
+.bysong-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.bs-tab {
+  padding: 8px 15px; border-radius: 999px; font-size: 13px; font-weight: 600; cursor: pointer;
+  background: var(--panel); border: 1px solid var(--line); color: var(--muted); transition: all .18s;
+}
+.bs-tab:hover { color: var(--text); }
+.bs-tab.active { background: var(--grad); color: #1a0f18; border-color: transparent; }
+
+.bs-angle { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--peach); border-radius: 12px; padding: 16px 18px; margin-bottom: 18px; }
+.bs-angle-l { text-transform: uppercase; letter-spacing: 2px; font-size: 11px; font-weight: 700; color: var(--peach); }
+.bs-angle p { font-size: 14.5px; margin-top: 6px; }
+
+.bs-cols { display: grid; grid-template-columns: 1fr 1.3fr; gap: 18px; align-items: start; }
+.bs-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+.bs-card.tiktok { border-top: 3px solid var(--rose); }
+.bs-card.insta { border-top: 3px solid var(--violet); }
+.bs-ch { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.bs-ch h3 { font-size: 18px; }
+.mini-copy {
+  font-size: 12px; font-weight: 600; cursor: pointer; padding: 6px 12px; border-radius: 999px;
+  background: var(--panel-2); border: 1px solid var(--line); color: var(--text); transition: all .15s;
+}
+.mini-copy:hover { background: var(--grad); color: #1a0f18; border-color: transparent; }
+.tier { margin-bottom: 14px; }
+.tier:last-child { margin-bottom: 0; }
+.tier-l { display: block; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+
+@media (max-width: 780px) {
+  .bs-cols { grid-template-columns: 1fr; }
+}
+
 /* ---------- SOCIAL ---------- */
 .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
 .social-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }

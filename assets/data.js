@@ -107,6 +107,60 @@ const TINSLEY = {
     Discovery: ["#NewMusicAlert", "#OnRepeat", "#SadGirlMusic", "#Heartbreak", "#BreakupSong", "#LyricsThatHit", "#MusicTok", "#IndieTok", "#SongwritersOfInstagram"]
   },
 
+  // ---- Per-song hashtag targeting for TikTok & Instagram ----
+  // TikTok: lean, discovery/FYP + trend + niche-community tags (5-8 per post).
+  // Instagram: layered by reach tier — Broad (>500k), Mid (50-500k), Niche (<50k)
+  // so posts surface on both large feeds and reachable niche tabs (8-15 per post).
+  songHashtags: [
+    { title: "Bad Enough", angle: "Post-breakup glow-up / 'choose yourself' anthem — lip-sync the hook with a revenge-glow-up transition.",
+      tiktok: ["#BadEnough", "#breakuptok", "#glowup", "#revengeglowup", "#choosingme", "#countrypop", "#indiepop", "#sadgirlmusic"],
+      igBroad: ["#breakupsong", "#countrypop", "#newmusicfriday", "#selflove"],
+      igMid: ["#indiepop", "#femalesingersongwriter", "#womeninmusic", "#glowup"],
+      igNiche: ["#BadEnough", "#TinsleyMusic", "#seattlemusic", "#pnwmusic", "#indieartist"] },
+
+    { title: "Temporary Insanity", angle: "Chaotic-era / overthinking spiral — POV text overlay of intrusive thoughts over the beat.",
+      tiktok: ["#TemporaryInsanity", "#chaoticera", "#overthinking", "#indiepop", "#relatable", "#indietok", "#newmusic"],
+      igBroad: ["#newmusicfriday", "#indiepop", "#alternativemusic"],
+      igMid: ["#indierock", "#femalesingersongwriter", "#womeninmusic"],
+      igNiche: ["#TemporaryInsanity", "#TinsleyMusic", "#seattlemusic", "#pnwmusic", "#newsingle"] },
+
+    { title: "Tinsley (Debut LP)", angle: "Album era + vinyl story (KEXP-funded pressing) — vinyl unboxing / 'coming of age' montage.",
+      tiktok: ["#Tinsley", "#debutalbum", "#vinyltok", "#vinylrecords", "#comingofage", "#indiepop", "#albumrelease"],
+      igBroad: ["#vinylcommunity", "#vinylrecords", "#recordcollection"],
+      igMid: ["#indiepop", "#indierock", "#kexp"],
+      igNiche: ["#TinsleyTheAlbum", "#TinsleyMusic", "#seattlemusic", "#pnwmusic", "#comingofage"] },
+
+    { title: "Distract Me", angle: "Dreamy situationship / crush-core — soft-focus b-roll with lyric captions.",
+      tiktok: ["#DistractMe", "#dreampop", "#situationship", "#crushcore", "#bedroompop", "#softgirl", "#musictok"],
+      igBroad: ["#dreampop", "#bedroompop", "#chillmusic"],
+      igMid: ["#indiepop", "#softpop", "#femaleartist"],
+      igNiche: ["#DistractMe", "#TinsleyMusic", "#seattlemusic", "#dreamy", "#indieartist"] },
+
+    { title: "Good Ride (Mechanical Bullshit)", angle: "Wry alt-country / coastal-cowgirl — boots + truck b-roll, lean into the funny title bleep.",
+      tiktok: ["#GoodRide", "#countrytok", "#coastalcowgirl", "#altcountry", "#indiecountry", "#cowgirl", "#newmusic"],
+      igBroad: ["#countrymusic", "#americana", "#countrypop"],
+      igMid: ["#altcountry", "#indiecountry", "#femalesingersongwriter"],
+      igNiche: ["#GoodRide", "#TinsleyMusic", "#seattlemusic", "#twang", "#indieartist"] },
+
+    { title: "Classic", angle: "Romantic / first-dance energy — couple montages, wedding & anniversary use.",
+      tiktok: ["#Classic", "#lovesong", "#couplegoals", "#weddingsong", "#inlove", "#indiepop", "#romantic"],
+      igBroad: ["#lovesong", "#weddingmusic", "#firstdancesong"],
+      igMid: ["#indiepop", "#couplegoals", "#romantic"],
+      igNiche: ["#ClassicSong", "#TinsleyMusic", "#seattlemusic", "#femalesingersongwriter", "#indieartist"] },
+
+    { title: "Love Songs (EP)", angle: "Yearning + tastemaker cred (#1 Seattle Times critics poll) — 'songs for the hopeless romantics' carousel.",
+      tiktok: ["#LoveSongs", "#yearning", "#indiepop", "#sadgirlmusic", "#indietok", "#singersongwriter", "#feelings"],
+      igBroad: ["#lovesongs", "#indiepop", "#newmusic"],
+      igMid: ["#indierock", "#femalesingersongwriter", "#kexp"],
+      igNiche: ["#LoveSongsEP", "#TinsleyMusic", "#seattlemusic", "#pnwmusic", "#marcocollins"] },
+
+    { title: "Hard to Love", angle: "Vulnerable confessional — raw acoustic clip or 'the version I don't post' intimacy.",
+      tiktok: ["#HardToLove", "#vulnerable", "#sadgirlmusic", "#indiepop", "#feelings", "#musictok", "#lyricsthathit"],
+      igBroad: ["#sadsongs", "#indiepop", "#newmusic"],
+      igMid: ["#indierock", "#femalesingersongwriter", "#womeninmusic"],
+      igNiche: ["#HardToLove", "#TinsleyMusic", "#seattlemusic", "#pnwmusic", "#indieartist"] }
+  ],
+
   // ---- Social media opportunities per platform ----
   social: [
     { platform: "TikTok", handle: "@tinsleymusic", priority: "Highest",

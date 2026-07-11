@@ -139,6 +139,61 @@
     copy(allTags.join(" "), `Copied ${allTags.length} hashtags`)
   );
 
+  /* ---- per-song hashtags ---- */
+  const bsTabs = $("#bysongTabs");
+  const bsPanel = $("#bysongPanel");
+  let activeSong = 0;
+
+  function tagChips(tags) {
+    return tags
+      .map((t) => `<span class="tag" data-copy="${t}">${t}</span>`)
+      .join("");
+  }
+
+  function renderSong() {
+    const s = D.songHashtags[activeSong];
+    const igAll = [...s.igBroad, ...s.igMid, ...s.igNiche];
+    bsPanel.innerHTML = `
+      <div class="bs-angle"><span class="bs-angle-l">Content angle</span><p>${s.angle}</p></div>
+      <div class="bs-cols">
+        <div class="bs-card tiktok">
+          <div class="bs-ch"><h3>TikTok</h3><button class="mini-copy" data-set="tt">Copy set</button></div>
+          <div class="tags-wrap">${tagChips(s.tiktok)}</div>
+        </div>
+        <div class="bs-card insta">
+          <div class="bs-ch"><h3>Instagram</h3><button class="mini-copy" data-set="ig">Copy set</button></div>
+          <div class="tier"><span class="tier-l">Broad &gt;500k</span><div class="tags-wrap">${tagChips(s.igBroad)}</div></div>
+          <div class="tier"><span class="tier-l">Mid 50–500k</span><div class="tags-wrap">${tagChips(s.igMid)}</div></div>
+          <div class="tier"><span class="tier-l">Niche &lt;50k</span><div class="tags-wrap">${tagChips(s.igNiche)}</div></div>
+        </div>
+      </div>`;
+
+    bsPanel.querySelectorAll(".tag").forEach((t) => {
+      t.addEventListener("click", () => {
+        const v = t.getAttribute("data-copy");
+        copy(v, `Copied ${v}`);
+      });
+    });
+    bsPanel.querySelector('[data-set="tt"]').addEventListener("click", () =>
+      copy(s.tiktok.join(" "), `Copied ${s.tiktok.length} TikTok tags`)
+    );
+    bsPanel.querySelector('[data-set="ig"]').addEventListener("click", () =>
+      copy(igAll.join(" "), `Copied ${igAll.length} Instagram tags`)
+    );
+  }
+
+  D.songHashtags.forEach((s, i) => {
+    const tab = el("button", "bs-tab" + (i === 0 ? " active" : ""), s.title);
+    tab.addEventListener("click", () => {
+      activeSong = i;
+      bsTabs.querySelectorAll(".bs-tab").forEach((b) => b.classList.remove("active"));
+      tab.classList.add("active");
+      renderSong();
+    });
+    bsTabs.appendChild(tab);
+  });
+  renderSong();
+
   /* ---- social ---- */
   const social = $("#socialGrid");
   D.social.forEach((s) => {

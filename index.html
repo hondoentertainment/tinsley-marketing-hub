@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tinsley — Marketing & Analysis Hub</title>
+  <meta name="description" content="A full marketing & catalog analysis site for Seattle indie pop-rock artist Tinsley: catalog assessment, hashtag strategy, social opportunities, and 10 like artists." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <!-- ===== NAV ===== -->
+  <header class="nav" id="nav">
+    <a href="#top" class="brand">TINSLEY<span>·</span>HQ</a>
+    <nav class="nav-links">
+      <a href="#catalog">Catalog</a>
+      <a href="#remix">Remix</a>
+      <a href="#assessment">Assessment</a>
+      <a href="#hashtags">Hashtags</a>
+      <a href="#social">Social</a>
+      <a href="#artists">Like Artists</a>
+      <a href="#roadmap">Roadmap</a>
+    </nav>
+    <a class="nav-cta" data-link="linktree" href="#" target="_blank" rel="noopener">Listen ↗</a>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="top">
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <p class="eyebrow">Marketing & Analysis Hub · Unofficial Strategy Deck</p>
+      <h1 class="hero-title">Tinsley</h1>
+      <p class="hero-sub" id="heroTagline"></p>
+      <p class="hero-bio" id="heroBio"></p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" data-link="spotify" href="#" target="_blank" rel="noopener">▶ Spotify</a>
+        <a class="btn" data-link="bandcamp" href="#" target="_blank" rel="noopener">Bandcamp</a>
+        <a class="btn" data-link="instagram" href="#" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn" data-link="website" href="#" target="_blank" rel="noopener">Official Site</a>
+      </div>
+      <div class="metrics" id="metrics"></div>
+    </div>
+  </section>
+
+  <main>
+    <!-- ===== CATALOG ===== -->
+    <section class="section" id="catalog">
+      <div class="section-head">
+        <span class="kicker">01 — Catalog</span>
+        <h2>Catalog Assessment</h2>
+        <p class="lead">A 19+ release discography spanning early electro-pop collabs to a critically praised self-titled debut and a country-pop pivot. Filter by type or genre to explore.</p>
+      </div>
+      <div class="catalog-layout">
+        <div class="catalog-main">
+          <div class="filters" id="catalogFilters"></div>
+          <div class="track-grid" id="trackGrid"></div>
+        </div>
+        <aside class="catalog-side">
+          <div class="card chart-card">
+            <h3>Genre / era mix</h3>
+            <div class="bars" id="genreBars"></div>
+          </div>
+          <div class="card press-card">
+            <h3>What critics say</h3>
+            <div id="pressList"></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===== EDM REMIX POTENTIAL ===== -->
+    <section class="section" id="remix">
+      <div class="section-head">
+        <span class="kicker">02 — Remixability</span>
+        <h2>EDM Remix Potential</h2>
+        <p class="lead">Every song scored 0–100 for dance-floor conversion, weighing topline hook, tempo/groove fit, existing electronic DNA, and drop payoff. Her early electro-pop collabs (prod. Justin Hartinger &amp; Jake Crocker) rank highest — the stems are practically remix-ready.</p>
+      </div>
+      <div class="remix-legend">
+        <span><i class="lg lg-hook"></i>Hook</span>
+        <span><i class="lg lg-dance"></i>Danceability</span>
+        <span><i class="lg lg-dna"></i>Electronic DNA</span>
+        <span><i class="lg lg-drop"></i>Drop potential</span>
+      </div>
+      <div class="remix-list" id="remixList"></div>
+    </section>
+
+    <!-- ===== ASSESSMENT / SWOT ===== -->
+    <section class="section alt" id="assessment">
+      <div class="section-head">
+        <span class="kicker">03 — Diagnosis</span>
+        <h2>Strengths, Opportunities & Watch-outs</h2>
+        <p class="lead">Where the artist is strong today, where the upside is, and the risks to manage.</p>
+      </div>
+      <div class="swot" id="swot"></div>
+    </section>
+
+    <!-- ===== HASHTAGS ===== -->
+    <section class="section" id="hashtags">
+      <div class="section-head">
+        <span class="kicker">04 — Reach</span>
+        <h2>Hashtag Strategy</h2>
+        <p class="lead">Grouped by function. Mix 2–3 brand + 3–4 genre + 2 location + 1–2 community tags per post. Click any tag to copy.</p>
+      </div>
+      <div class="hashtag-groups" id="hashtagGroups"></div>
+      <button class="btn btn-primary copy-all" id="copyAll">Copy full hashtag set</button>
+    </section>
+
+    <!-- ===== SOCIAL ===== -->
+    <section class="section alt" id="social">
+      <div class="section-head">
+        <span class="kicker">05 — Channels</span>
+        <h2>Social Media Opportunities</h2>
+        <p class="lead">Platform-by-platform priorities and concrete content plays.</p>
+      </div>
+      <div class="social-grid" id="socialGrid"></div>
+    </section>
+
+    <!-- ===== LIKE ARTISTS ===== -->
+    <section class="section" id="artists">
+      <div class="section-head">
+        <span class="kicker">06 — Positioning</span>
+        <h2>10 Like Artists</h2>
+        <p class="lead">Fan-overlap targets for playlist pitching, paid-ad look-alikes, tour support asks, and "if you like…" positioning.</p>
+      </div>
+      <div class="artist-grid" id="artistGrid"></div>
+    </section>
+
+    <!-- ===== ROADMAP ===== -->
+    <section class="section alt" id="roadmap">
+      <div class="section-head">
+        <span class="kicker">07 — Execution</span>
+        <h2>90-Day Marketing Roadmap</h2>
+        <p class="lead">A sequenced plan to convert critical acclaim into streaming, fans, and revenue.</p>
+      </div>
+      <div class="roadmap" id="roadmapGrid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p><strong>Tinsley — Marketing & Analysis Hub</strong></p>
+    <p class="muted">Unofficial strategy site built for analysis & marketing planning. Artist facts, quotes and catalog sourced from tinsleymusic.com, the official EPK, Bandcamp, Atwood Magazine, The Spokesman-Review and KEXP.</p>
+    <p class="muted">Data lives in <code>assets/data.js</code> — edit there to update the deck.</p>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

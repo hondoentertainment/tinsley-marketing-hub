@@ -480,6 +480,12 @@
       if (!btn) return;
       state.cat = btn.dataset.cat;
       catFilters.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === btn));
+      try {
+        const url = new URL(location.href);
+        if (state.cat === 'all') url.searchParams.delete('cat');
+        else url.searchParams.set('cat', state.cat);
+        history.replaceState(null, '', url);
+      } catch (err) {}
       render();
     });
 
@@ -492,6 +498,19 @@
     });
 
     buildCatChips();
+
+    /* Deep-link from hub index: ?cat=Chalk%20%26%20Pavement */
+    try {
+      const params = new URLSearchParams(location.search);
+      const cat = params.get("cat");
+      if (cat && categories.includes(cat)) {
+        state.cat = cat;
+        catFilters.querySelectorAll(".chip").forEach((c) =>
+          c.classList.toggle("active", c.dataset.cat === cat)
+        );
+      }
+    } catch (e) {}
+
     render();
 
     if ("serviceWorker" in navigator) {

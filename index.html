@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Marketing Hub — Campaign & Strategy Library</title>
-  <meta name="description" content="A centralized hub linking every marketing page in one place: artist strategy decks, guerrilla idea libraries, and campaign playbooks." />
+  <meta name="description" content="A centralized hub with a full section index linking every marketing page and deep section: artist strategy decks, guerrilla idea libraries, and campaign playbooks." />
   <meta name="theme-color" content="#0b0a0f" />
   <link rel="canonical" href="https://tinsley-marketing-hub.vercel.app/" />
   <link rel="icon" href="assets/icon-512.png" type="image/png" />
@@ -97,6 +97,66 @@
     }
     .suite-shell .grid { padding-bottom: 8px; }
 
+    /* Full section index */
+    .toc-jump {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 22px;
+      font-size: 14px; font-weight: 600; color: var(--peach);
+      border-bottom: 1px solid rgba(255,178,122,.35);
+    }
+    .toc-jump:hover { color: var(--text); border-bottom-color: rgba(255,255,255,.35); }
+    .toc {
+      margin-top: 8px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255,255,255,.02);
+      overflow: hidden;
+    }
+    .toc-group + .toc-group { border-top: 1px solid var(--line); }
+    .toc-group-head {
+      display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px 20px;
+      padding: 22px 24px 12px;
+    }
+    .toc-group-head a {
+      font-family: "Fraunces", serif; font-size: 20px; font-weight: 900;
+      border-bottom: 1px solid transparent;
+    }
+    .toc-group-head a:hover { border-bottom-color: rgba(255,255,255,.35); }
+    .toc-kind {
+      font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--peach);
+    }
+    .toc-list { list-style: none; padding: 0 12px 16px; }
+    .toc-list a {
+      display: grid; grid-template-columns: 52px 1fr; gap: 12px; align-items: baseline;
+      padding: 11px 12px; border-radius: 12px;
+      transition: background .15s ease;
+    }
+    .toc-list a:hover { background: var(--panel); }
+    .toc-list a:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+    .toc-num {
+      font-family: "Fraunces", serif; font-weight: 900; font-size: 15px; color: var(--faint);
+    }
+    .toc-label { font-size: 15px; font-weight: 600; }
+    .toc-note { display: block; margin-top: 3px; font-size: 13px; font-weight: 400; color: var(--muted); }
+    .toc-list .sub a {
+      grid-template-columns: 52px 1fr;
+      padding-left: 28px;
+    }
+    .toc-list .sub .toc-num { font-size: 12px; letter-spacing: .04em; }
+    .toc-list .sub .toc-label { font-size: 14px; font-weight: 500; color: var(--muted); }
+    .toc-list .sub a:hover .toc-label { color: var(--text); }
+    .toc-search-wrap { margin: 0 24px 18px; }
+    .toc-search {
+      width: 100%; max-width: 420px;
+      padding: 12px 16px; border-radius: 12px;
+      border: 1px solid var(--line); background: var(--panel); color: var(--text);
+      font: inherit; font-size: 14.5px;
+    }
+    .toc-search:focus { outline: 2px solid var(--violet); outline-offset: 2px; }
+    .toc-search::placeholder { color: var(--faint); }
+    .toc-empty { padding: 8px 24px 24px; color: var(--faint); font-size: 14px; }
+    .toc-item.hidden { display: none; }
+    .toc-group.hidden { display: none; }
+
     /* Project grid */
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; padding-bottom: 20px; }
     .proj {
@@ -160,16 +220,27 @@
     <header class="hero">
       <span class="eyebrow">Marketing Studio</span>
       <h1>The <span class="grad">Marketing Hub</span></h1>
-      <p class="lede">One home for every campaign page, strategy deck, and idea library. Pick a project below to dive in — each one is a self-contained, shareable marketing tool.</p>
+      <p class="lede">One home for every campaign page, strategy deck, and idea library. Pick a project below — or jump straight to any section in the full index.</p>
       <div class="stat-row" id="statRow"></div>
+      <a class="toc-jump" href="#index">Jump to full section index &darr;</a>
     </header>
 
     <main id="main">
       <div id="sections"></div>
+
+      <div class="rowhead" id="index">
+        <h2>Full section index</h2>
+        <span id="indexCount"></span>
+      </div>
+      <p class="suite-blurb">Every major section and subsection across the hub — deep-linked so you can open the exact block you need.</p>
+      <div class="toc-search-wrap">
+        <input class="toc-search" id="tocSearch" type="search" placeholder="Filter sections — e.g. remix, hashtags, true fans…" autocomplete="off" />
+      </div>
+      <div class="toc" id="toc"></div>
     </main>
 
     <footer class="wrap" style="padding-left:0;padding-right:0;">
-      <p>A centralized hub linking every marketing page in this workspace. Add a new project by dropping its <code>.html</code> file in and appending one entry to the <code>PAGES</code> list.</p>
+      <p>A centralized hub with project cards plus a full section index deep-linking every major block. Add a page via the <code>PAGES</code> list; add index entries via <code>SECTION_INDEX</code>.</p>
     </footer>
   </div>
 
@@ -231,8 +302,81 @@
       }
     ];
 
+    /* Deep links to every section / subsection across the hub */
+    const SECTION_INDEX = [
+      {
+        page: "tinsley-song.html",
+        title: "Song & Catalog Analysis",
+        kind: "Music analysis",
+        items: [
+          { href: "tinsley-song.html#catalog", num: "01", label: "Catalog Assessment", note: "19+ releases — filter by type, genre mix, press" },
+          { href: "tinsley-song.html#catalog-timeline", num: "01a", label: "Release cadence", note: "Timeline of every release by year and format", sub: true },
+          { href: "tinsley-song.html#remix", num: "02", label: "EDM Remix Potential", note: "0–100 dance-floor scores + sync cues" },
+          { href: "tinsley-song.html#remix-dist", num: "02a", label: "Score distribution", note: "How the catalog clusters by remixability", sub: true },
+          { href: "tinsley-song.html#assessment", num: "03", label: "Strengths, Opportunities & Watch-outs", note: "Catalog-focused SWOT diagnosis" },
+          { href: "tinsley-song.html#artists", num: "04", label: "10 Like Artists", note: "Fan-overlap targets for playlists, ads, tour" },
+          { href: "tinsley-song.html#artist-map", num: "04a", label: "Positioning map", note: "Overlap vs. reachability scatter", sub: true }
+        ]
+      },
+      {
+        page: "tinsley-social.html",
+        title: "Social & Marketing Analysis",
+        kind: "Marketing strategy",
+        items: [
+          { href: "tinsley-social.html#hashtags", num: "01", label: "Hashtag Strategy", note: "Brand, genre, location, community, discovery" },
+          { href: "tinsley-social.html#bysong", num: "02", label: "Key Hashtags by Song", note: "TikTok + Instagram tiers + weekly recipes" },
+          { href: "tinsley-social.html#social", num: "03", label: "Social Media Opportunities", note: "Platform priorities and content plays" },
+          { href: "tinsley-social.html#roadmap", num: "04", label: "Growth Roadmap · 30 → 720 Days", note: "Reach, revenue, product, foundation tracks" },
+          { href: "tinsley-social.html#north-stars", num: "04a", label: "North-star metrics", note: "Editable targets with saved trend history", sub: true },
+          { href: "tinsley-social.html#rmTracker", num: "04b", label: "Milestone tracker", note: "Check off actions — progress saves locally", sub: true }
+        ]
+      },
+      {
+        page: "reference.html",
+        title: "Reference — Frameworks & Philosophy",
+        kind: "Reference library",
+        items: [
+          { href: "reference.html#truefans", num: "01", label: "The 1,000 True Fans Model", note: "Kevin Kelly framework applied to Tinsley" },
+          { href: "reference.html#tf-calc", num: "01a", label: "Revenue calculator", note: "Fans × spend → annual / monthly projection", sub: true },
+          { href: "reference.html#tf-income", num: "01b", label: "Full income model", note: "Streaming + D2C + sync + live mix", sub: true },
+          { href: "reference.html#tf-ladder", num: "01c", label: "Fan-conversion ladder", note: "Passive listener → True Fan", sub: true },
+          { href: "reference.html#tf-playbook", num: "01d", label: "Playbook: building toward 1,000", note: "Six moves to own the relationship", sub: true },
+          { href: "reference.html#rubin", num: "02", label: "Analysis vs. The Creative Act", note: "Rick Rubin counterpoint to the marketing lens" },
+          { href: "reference.html#ca-principles", num: "02a", label: "Principle alignment scores", note: "How much she already lives the book", sub: true },
+          { href: "reference.html#ca-tension", num: "02b", label: "Playbook vs. creative act", note: "Where the two collide — and reconcile", sub: true }
+        ]
+      },
+      {
+        page: "street-marketing.html",
+        title: "Street Marketing — Top 100 Ideas",
+        kind: "Guerrilla playbook",
+        items: [
+          { href: "street-marketing.html", num: "•", label: "All 100 ideas", note: "Searchable, filterable field guide" },
+          { href: "street-marketing.html?cat=" + encodeURIComponent("Chalk & Pavement"), num: "01", label: "Chalk & Pavement", note: "3D chalk, stencils, rain-activated messages", sub: true },
+          { href: "street-marketing.html?cat=" + encodeURIComponent("Guerrilla Installations"), num: "02", label: "Guerrilla Installations", note: "Benches, facades, sky hangs, yarn bombs", sub: true },
+          { href: "street-marketing.html?cat=" + encodeURIComponent("Wearable & Human"), num: "03", label: "Wearable & Human", note: "Mascots, sandwich boards, flash squads", sub: true },
+          { href: "street-marketing.html?cat=" + encodeURIComponent("Stickers & Posters"), num: "04", label: "Stickers & Posters", note: "Wild posting, QR hunts, AR triggers", sub: true },
+          { href: "street-marketing.html?cat=" + encodeURIComponent("Interactive & Experiential"), num: "05", label: "Interactive & Experiential", note: "Vending joy, photo portals, live murals", sub: true },
+          { href: "street-marketing.html?cat=" + encodeURIComponent("Transit & Vehicles"), num: "06", label: "Transit & Vehicles", note: "Bus wraps, drones, food trucks", sub: true },
+          { href: "street-marketing.html?cat=" + encodeURIComponent("Freebies & Sampling"), num: "07", label: "Freebies & Sampling", note: "Samples, golden tickets, giveaways", sub: true },
+          { href: "street-marketing.html?cat=" + encodeURIComponent("Stunts & Flash Mobs"), num: "08", label: "Stunts & Flash Mobs", note: "Spectacle moments that stop traffic", sub: true }
+        ]
+      },
+      {
+        page: "tinsley.html",
+        title: "Tinsley chooser",
+        kind: "Legacy /tinsley",
+        items: [
+          { href: "tinsley.html", num: "•", label: "Pick a deck", note: "Song, Social, or Reference — for old shared links" }
+        ]
+      }
+    ];
+
     const sections = document.getElementById("sections");
     const statRow = document.getElementById("statRow");
+    const tocEl = document.getElementById("toc");
+    const indexCount = document.getElementById("indexCount");
+    const tocSearch = document.getElementById("tocSearch");
 
     function esc(s) {
       return String(s).replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
@@ -261,6 +405,46 @@
         : `<a class="proj" ${style} href="${encodeURI(p.href)}">${inner}</a>`;
     }
 
+    function renderToc(filter) {
+      const q = (filter || "").trim().toLowerCase();
+      let total = 0;
+      let visible = 0;
+      tocEl.innerHTML = SECTION_INDEX.map((group) => {
+        const items = group.items;
+        total += items.length;
+        const list = items.map((item) => {
+          const hay = (item.label + " " + (item.note || "") + " " + group.title).toLowerCase();
+          const show = !q || hay.includes(q);
+          if (show) visible++;
+          return `<li class="toc-item${item.sub ? " sub" : ""}${show ? "" : " hidden"}">
+            <a href="${item.href}">
+              <span class="toc-num">${esc(item.num)}</span>
+              <span>
+                <span class="toc-label">${esc(item.label)}</span>
+                ${item.note ? `<span class="toc-note">${esc(item.note)}</span>` : ""}
+              </span>
+            </a>
+          </li>`;
+        }).join("");
+        const groupShow = !q || items.some((item) =>
+          (item.label + " " + (item.note || "") + " " + group.title).toLowerCase().includes(q)
+        );
+        return `<div class="toc-group${groupShow ? "" : " hidden"}">
+          <div class="toc-group-head">
+            <div>
+              <div class="toc-kind">${esc(group.kind)}</div>
+              <a href="${encodeURI(group.page)}">${esc(group.title)}</a>
+            </div>
+          </div>
+          <ul class="toc-list">${list}</ul>
+        </div>`;
+      }).join("") + (q && visible === 0 ? `<p class="toc-empty">No sections match “${esc(q)}”.</p>` : "");
+
+      indexCount.textContent = q
+        ? `${visible} of ${total} sections`
+        : `${total} sections`;
+    }
+
     function render() {
       let n = 0;
       sections.innerHTML = SUITES.map((suite) => {
@@ -278,13 +462,17 @@
       }).join("");
 
       const liveAll = PAGES.filter(p => p.href).length;
+      const sectionTotal = SECTION_INDEX.reduce((n, g) => n + g.items.length, 0);
       statRow.innerHTML = [
         { b: liveAll, s: "Marketing pages" },
-        { b: "3", s: "Tinsley suite tools" },
+        { b: sectionTotal, s: "Indexed sections" },
         { b: "100+", s: "Guerrilla tactics" }
       ].map(x => `<div class="stat"><b>${x.b}</b><span>${x.s}</span></div>`).join("");
+
+      renderToc("");
     }
 
+    tocSearch.addEventListener("input", () => renderToc(tocSearch.value));
     render();
 
     if ("serviceWorker" in navigator) {

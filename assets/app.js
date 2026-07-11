@@ -232,6 +232,223 @@
     renderSong();
   }
 
+  /* ---- daily content calendar ---- */
+  (function initCalendar() {
+    const shell = $("#calendarShell");
+    const cal = D.contentCalendar;
+    if (!shell || !cal || !cal.days) return;
+
+    const songs = D.songHashtags || [];
+    let songIdx = 0;
+    let filter = "all";
+
+    const STORE_KEY = "tinsley.calendar.week.v1";
+    const dowKeys = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+
+    function isoWeekId(d) {
+      const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+      const dayNum = date.getUTCDay() || 7;
+      date.setUTCDate(date.getUTCDate() + 4 - dayNum);
+      const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+      const week = Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+      return date.getUTCFullYear() + "-W" + String(week).padStart(2, "0");
+    }
+
+    const weekId = isoWeekId(new Date());
+    const todayKey = dowKeys[new Date().getDay()];
+
+    let store = { week: weekId, done: {}, song: 0 };
+    try {
+      const raw = JSON.parse(localStorage.getItem(STORE_KEY));
+      if (raw && raw.week === weekId) store = raw;
+    } catch (e) { /* fresh week */ }
+    if (typeof store.song === "number" && store.song >= 0 && store.song < songs.length) {
+      songIdx = store.song;
+    }
+    const save = () => {
+      store.week = weekId;
+      store.song = songIdx;
+      try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) {}
+    };
+
+    const stripBeatPrefix = (line) =>
+      String(line || "").replace(/^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s*[—–-]\s*/i, "");
+
+    const slotIdea = (day, slot) => {
+      if (typeof day.songBeat === "number" && songs[songIdx]) {
+        const beat = (songs[songIdx].weekPlan || [])[day.songBeat];
+        if (beat && slot.kind === "publish" && slot.platform === "TikTok") {
+          return stripBeatPrefix(beat);
+        }
+      }
+      return slot.idea;
+    };
+
+    const slotId = (dayKey, si) => dayKey + ":" + si;
+
+    const allSlots = () => {
+      const list = [];
+      cal.days.forEach((day) => {
+        day.slots.forEach((slot, si) => {
+          list.push({ day, slot, si, id: slotId(day.key, si) });
+        });
+      });
+      return list;
+    };
+
+    const platforms = ["all", ...new Set(cal.days.flatMap((d) => d.slots.map((s) => s.platform)))];
+
+    const roleLabel = {
+      publish: "Publish",
+      create: "Create",
+      amplify: "Amplify",
+      community: "Community",
+      bank: "Bank"
+    };
+
+    function copyWeekText() {
+      const song = songs[songIdx];
+      const lines = [
+        "Tinsley · Daily Content Calendar · " + weekId,
+        song ? "Featured song: " + song.title : "",
+        cal.cadence,
+        ""
+      ];
+      cal.days.forEach((day) => {
+        lines.push(day.label + " — " + day.focus);
+        day.slots.forEach((slot) => {
+          lines.push("  • [" + slot.platform + " / " + slot.format + "] " + slotIdea(day, slot));
+        });
+        lines.push("");
+      });
+      copy(lines.filter((l, i) => l || i === 0).join("\n"), "Copied this week's calendar");
+    }
+
+    function render() {
+      const song = songs[songIdx];
+      const slots = allSlots();
+      const doneCount = slots.filter((s) => store.done[s.id]).length;
+      const pct = slots.length ? Math.round((doneCount / slots.length) * 100) : 0;
+
+      const songTabs = songs
+        .map((s, i) =>
+          `<button type="button" class="cal-song${i === songIdx ? " active" : ""}" data-song="${i}">${s.title}</button>`
+        )
+        .join("");
+
+      const filters = platforms
+        .map((p) =>
+          `<button type="button" class="cal-filter${filter === p ? " active" : ""}" data-filter="${p}">${p === "all" ? "All platforms" : p}</button>`
+        )
+        .join("");
+
+      const daysHtml = cal.days
+        .map((day) => {
+          const isToday = day.key === todayKey;
+          const daySlots = day.slots
+            .map((slot, si) => {
+              if (filter !== "all" && slot.platform !== filter) return "";
+              const id = slotId(day.key, si);
+              const checked = !!store.done[id];
+              return `<li class="cal-slot${checked ? " done" : ""}" data-id="${id}">
+                <button type="button" class="cal-check" aria-pressed="${checked}" aria-label="Mark done: ${slot.platform} on ${day.label}"></button>
+                <div class="cal-slot-body">
+                  <div class="cal-slot-meta">
+                    <span class="cal-plat">${slot.platform}</span>
+                    <span class="cal-fmt">${slot.format}</span>
+                    <span class="cal-kind ${slot.kind}">${slot.kind}</span>
+                  </div>
+                  <p>${slotIdea(day, slot)}</p>
+                </div>
+              </li>`;
+            })
+            .join("");
+
+          if (filter !== "all" && !daySlots) return "";
+
+          return `<article class="cal-day role-${day.role}${isToday ? " today" : ""}" data-day="${day.key}">
+            <header class="cal-day-h">
+              <div>
+                <span class="cal-dow">${day.label}${isToday ? " · Today" : ""}</span>
+                <span class="cal-role">${roleLabel[day.role] || day.role}</span>
+              </div>
+              <p class="cal-focus">${day.focus}</p>
+            </header>
+            <ul class="cal-slots">${daySlots || `<li class="cal-empty">No ${filter} slots today</li>`}</ul>
+          </article>`;
+        })
+        .join("");
+
+      shell.innerHTML = `
+        <div class="cal-intro">
+          <div class="cal-intro-copy">
+            <p class="cal-principle">${cal.principle}</p>
+            <p class="cal-cadence">${cal.cadence}</p>
+            ${cal.roadmapHook ? `<span class="bs-roadmap">${cal.roadmapHook}</span>` : ""}
+          </div>
+          <div class="cal-progress">
+            <div class="cal-ring" style="--p:${pct}">
+              <span class="cal-ring-pct">${pct}%</span>
+            </div>
+            <div>
+              <strong>${doneCount}/${slots.length}</strong> slots this week
+              <div class="cal-week-id">${weekId}</div>
+            </div>
+          </div>
+        </div>
+        ${song ? `<div class="cal-featured">
+          <span class="bs-angle-l">Featured song this week</span>
+          <p class="cal-angle">${song.angle}</p>
+          <div class="cal-songs">${songTabs}</div>
+        </div>` : ""}
+        <div class="cal-toolbar">
+          <div class="cal-filters">${filters}</div>
+          <div class="cal-actions">
+            <button type="button" class="btn" id="calCopy">Copy week</button>
+            <button type="button" class="btn" id="calReset">Reset week</button>
+          </div>
+        </div>
+        <div class="cal-grid">${daysHtml}</div>`;
+
+      shell.querySelectorAll(".cal-song").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          songIdx = +btn.getAttribute("data-song");
+          save();
+          render();
+        });
+      });
+      shell.querySelectorAll(".cal-filter").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          filter = btn.getAttribute("data-filter");
+          render();
+        });
+      });
+      shell.querySelectorAll(".cal-check").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const li = btn.closest(".cal-slot");
+          const id = li.getAttribute("data-id");
+          if (store.done[id]) delete store.done[id];
+          else store.done[id] = true;
+          save();
+          render();
+        });
+      });
+      const copyBtn = shell.querySelector("#calCopy");
+      if (copyBtn) copyBtn.addEventListener("click", copyWeekText);
+      const resetBtn = shell.querySelector("#calReset");
+      if (resetBtn) {
+        resetBtn.addEventListener("click", () => {
+          store.done = {};
+          save();
+          render();
+          showToast("Week checkoffs cleared");
+        });
+      }
+    }
+
+    render();
+  })();
+
   /* ---- social ---- */
   const social = $("#socialGrid");
   if (social) {

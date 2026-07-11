@@ -18,6 +18,9 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+.section, .tf-block, .ca-block, .viz-block, .ns-block, .rm-tracker, .tf-grid {
+  scroll-margin-top: 88px;
+}
 body {
   margin: 0;
   font-family: "Inter", system-ui, sans-serif;

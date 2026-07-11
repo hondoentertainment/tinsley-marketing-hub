@@ -55,7 +55,7 @@ const TINSLEY = {
     },
     social: {
       job: "Reach & revenue",
-      lede: "A marketing-first playbook: hashtag tiers, per-song posting recipes, platform priorities, and a sequenced growth roadmap — the work of turning listeners into an owned audience."
+      lede: "A marketing-first playbook: hashtag tiers, a daily content calendar, per-song posting recipes, platform priorities, and a sequenced growth roadmap — the work of turning listeners into an owned audience."
     }
   },
 
@@ -242,6 +242,70 @@ const TINSLEY = {
       igMid: ["#indierock", "#femalesingersongwriter", "#womeninmusic"],
       igNiche: ["#HardToLove", "#TinsleyMusic", "#seattlemusic", "#pnwmusic", "#indieartist"] }
   ],
+
+  // ---- Daily content calendar (reusable Mon–Sun cadence) ----
+  // Aligns with the 0–30 day Short-form lever (4–5×/week TikTok + Reels).
+  // Mon / Wed / Fri pull the featured song's weekPlan beats; other days are
+  // create, amplify, community, or bank — so publishing never starves the work.
+  contentCalendar: {
+    cadence: "4–5 publish days per week on TikTok + Reels; daily creation practice; one community day; one bank day.",
+    principle: "Make every day. Publish on a schedule that never starves the work.",
+    roadmapHook: "0–30 days · Short-form",
+    days: [
+      {
+        key: "mon", label: "Mon", role: "publish", focus: "Discovery — FYP test",
+        songBeat: 0,
+        slots: [
+          { platform: "TikTok", format: "15–30s", kind: "publish", idea: "Lead with the week's hook. Ship the featured song's Monday beat." },
+          { platform: "IG Stories", format: "Teaser", kind: "amplify", idea: "3-slide tease of the TikTok + soft 'link in bio' listen CTA." }
+        ]
+      },
+      {
+        key: "tue", label: "Tue", role: "create", focus: "Batch + engage",
+        slots: [
+          { platform: "Studio", format: "Batch", kind: "create", idea: "Film 2–3 clips for Wed / Fri / next Mon while the take is hot." },
+          { platform: "TikTok", format: "Replies", kind: "engage", idea: "Reply to 5–10 comments with a clip or stitch — feed the algorithm without a new post." }
+        ]
+      },
+      {
+        key: "wed", label: "Wed", role: "publish", focus: "Depth — story / carousel",
+        songBeat: 1,
+        slots: [
+          { platform: "TikTok", format: "15–45s", kind: "publish", idea: "Ship the featured song's Wednesday beat (story-behind or listicle)." },
+          { platform: "Instagram", format: "Reel / carousel", kind: "publish", idea: "Mirror or expand the TikTok; use Broad + Mid + Niche hashtag tiers." }
+        ]
+      },
+      {
+        key: "thu", label: "Thu", role: "amplify", focus: "Repurpose winners",
+        slots: [
+          { platform: "IG Reels", format: "Repost", kind: "amplify", idea: "Repurpose Mon/Wed winners within 24–48h; light caption rewrite, same hook." },
+          { platform: "YouTube Shorts", format: "Cut", kind: "amplify", idea: "Drop the best-performing clip as a Short for long-tail SEO." }
+        ]
+      },
+      {
+        key: "fri", label: "Fri", role: "publish", focus: "Community bait",
+        songBeat: 2,
+        slots: [
+          { platform: "TikTok", format: "Stitch / duet / ask", kind: "publish", idea: "Ship the featured song's Friday beat — invite fan participation." },
+          { platform: "IG Close Friends", format: "Demo / BTS", kind: "superfan", idea: "Reward superfans with an unpolished clip, lyric scrap, or early listen." }
+        ]
+      },
+      {
+        key: "sat", label: "Sat", role: "community", focus: "Scene + conversation",
+        slots: [
+          { platform: "Threads / X", format: "Replies", kind: "engage", idea: "Jump into KEXP / Seattle music threads; lyric micro-post if there's a natural hook." },
+          { platform: "IG Stories", format: "Poll / Q&A", kind: "engage", idea: "Ask the audience something real (favorite deep cut, show city, lyric guess)." }
+        ]
+      },
+      {
+        key: "sun", label: "Sun", role: "bank", focus: "Protect the practice",
+        slots: [
+          { platform: "Studio", format: "Bank", kind: "create", idea: "Fill next week's content bank — aim 3 clips ahead. No algorithmic post required." },
+          { platform: "Email / Bandcamp", format: "Optional", kind: "owned", idea: "Only if there's a drop, show, or vinyl story — otherwise rest the channels." }
+        ]
+      }
+    ]
+  },
 
   // ---- Social media opportunities per platform ----
   social: [

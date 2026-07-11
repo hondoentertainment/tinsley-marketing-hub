@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tinsley — Social & Marketing Analysis</title>
-  <meta name="description" content="Social-media & marketing analysis for Seattle indie pop-rock artist Tinsley: hashtag strategy, per-song weekly content recipes, platform plays, and a 30→720 day growth roadmap." />
+  <meta name="description" content="Social-media & marketing analysis for Seattle indie pop-rock artist Tinsley: hashtag strategy, daily content calendar, per-song weekly recipes, platform plays, and a 30→720 day growth roadmap." />
   <meta name="theme-color" content="#0e0b12" />
   <link rel="canonical" href="https://tinsley-marketing-hub.vercel.app/tinsley-social" />
   <link rel="icon" href="assets/icon-512.png" type="image/png" />
@@ -13,7 +13,7 @@
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Tinsley — Social & Marketing Analysis" />
-  <meta property="og:description" content="Hashtag strategy, per-song content recipes, platform plays, and a growth roadmap for indie artist Tinsley." />
+  <meta property="og:description" content="Hashtag strategy, daily content calendar, per-song recipes, platform plays, and a growth roadmap for indie artist Tinsley." />
   <meta property="og:url" content="https://tinsley-marketing-hub.vercel.app/tinsley-social" />
   <meta property="og:image" content="https://tinsley-marketing-hub.vercel.app/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -33,6 +33,7 @@
     <nav class="nav-links">
       <a href="#hashtags">Hashtags</a>
       <a href="#bysong">By Song</a>
+      <a href="#calendar">Calendar</a>
       <a href="#social">Social</a>
       <a href="#roadmap">Roadmap</a>
       <a href="reference.html">Reference ↗</a>
@@ -84,10 +85,20 @@
       <div class="bysong-panel" id="bysongPanel"></div>
     </section>
 
-    <!-- ===== SOCIAL ===== -->
-    <section class="section" id="social">
+    <!-- ===== DAILY CONTENT CALENDAR ===== -->
+    <section class="section" id="calendar">
       <div class="section-head">
-        <span class="kicker">03 — Channels</span>
+        <span class="kicker">03 — Cadence</span>
+        <h2>Daily Content Calendar</h2>
+        <p class="lead">A reusable Mon–Sun week that hits the roadmap’s 4–5× short-form cadence. Pick a featured song — Mon / Wed / Fri pull that song’s recipe. Check off slots as you ship; progress saves in this browser for the current ISO week.</p>
+      </div>
+      <div class="cal-shell" id="calendarShell"></div>
+    </section>
+
+    <!-- ===== SOCIAL ===== -->
+    <section class="section alt" id="social">
+      <div class="section-head">
+        <span class="kicker">04 — Channels</span>
         <h2>Social Media Opportunities</h2>
         <p class="lead">Platform-by-platform priorities and concrete content plays.</p>
       </div>
@@ -95,9 +106,9 @@
     </section>
 
     <!-- ===== ROADMAP ===== -->
-    <section class="section alt" id="roadmap">
+    <section class="section" id="roadmap">
       <div class="section-head">
-        <span class="kicker">04 — Execution</span>
+        <span class="kicker">05 — Execution</span>
         <h2>Growth Roadmap · 30 → 720 Days</h2>
         <p class="lead">Every growth lever, sequenced across six horizons — from foundation to a durable, national career. Each action is tagged by track: <strong>Reach</strong>, <strong>Revenue</strong>, <strong>Product</strong>, and <strong>Foundation</strong>.</p>
       </div>
@@ -107,7 +118,7 @@
         <span><i style="background:var(--violet)"></i>Product — music &amp; releases</span>
         <span><i style="background:var(--peach)"></i>Foundation — brand, data &amp; team</span>
       </div>
-      <div class="ns-block">
+      <div class="ns-block" id="north-stars">
         <div class="viz-head"><h3>North-star metrics</h3><p>The numbers that actually compound. Edit any current value — it saves to this browser and logs a mini trend so you can track momentum over time.</p></div>
         <div class="ns-grid" id="northStars"></div>
       </div>
@@ -116,7 +127,7 @@
     </section>
 
     <!-- ===== REFERENCE CTA ===== -->
-    <section class="section" id="reference-cta">
+    <section class="section alt" id="reference-cta">
       <a class="ref-cta" href="reference.html">
         <div class="ref-cta-body">
           <span class="kicker">Reference — Frameworks &amp; Philosophy</span>
@@ -128,7 +139,7 @@
     </section>
 
     <!-- ===== CROSS-LINK ===== -->
-    <section class="section alt" id="more">
+    <section class="section" id="more">
       <div class="section-head">
         <span class="kicker">Next</span>
         <h2>Looking for the music side?</h2>

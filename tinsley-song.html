@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tinsley — Song & Catalog Analysis</title>
+  <meta name="description" content="Music-first analysis for Seattle indie pop-rock artist Tinsley: catalog assessment, EDM remix scoring with sync notes, SWOT diagnosis, and like-artist positioning." />
+  <meta name="theme-color" content="#0e0b12" />
+  <link rel="canonical" href="https://tinsley-marketing-hub.vercel.app/tinsley-song" />
+  <link rel="icon" href="assets/icon-512.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/icon-512.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tinsley — Song & Catalog Analysis" />
+  <meta property="og:description" content="Catalog assessment, EDM remix scoring with sync notes, SWOT, and like-artist positioning for indie artist Tinsley." />
+  <meta property="og:url" content="https://tinsley-marketing-hub.vercel.app/tinsley-song" />
+  <meta property="og:image" content="https://tinsley-marketing-hub.vercel.app/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://tinsley-marketing-hub.vercel.app/assets/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body data-deck="song">
+  <a class="skip-link" href="#top">Skip to content</a>
+  <!-- ===== NAV ===== -->
+  <header class="nav" id="nav">
+    <a href="index.html" class="hub-back">&larr; Hub</a>
+    <a href="#top" class="brand">TINSLEY<span>·</span>SONG</a>
+    <nav class="nav-links">
+      <a href="#catalog">Catalog</a>
+      <a href="#remix">Remix</a>
+      <a href="#assessment">Assessment</a>
+      <a href="#artists">Like Artists</a>
+      <a href="reference.html">Reference ↗</a>
+      <a href="tinsley-social.html" class="nav-switch">Social Analysis &rarr;</a>
+    </nav>
+    <a class="nav-cta" data-link="linktree" href="#" target="_blank" rel="noopener">Listen ↗</a>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="top">
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <p class="eyebrow">Song & Catalog Analysis · Unofficial Strategy Deck</p>
+      <p class="hero-job" id="heroJob"></p>
+      <h1 class="hero-title">Tinsley</h1>
+      <p class="hero-sub" id="heroTagline"></p>
+      <p class="hero-bio" id="heroBio"></p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" data-link="spotify" href="#" target="_blank" rel="noopener">▶ Spotify</a>
+        <a class="btn" data-link="bandcamp" href="#" target="_blank" rel="noopener">Bandcamp</a>
+        <a class="btn" data-link="instagram" href="#" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn" data-link="website" href="#" target="_blank" rel="noopener">Official Site</a>
+      </div>
+      <div class="metrics" id="metrics"></div>
+      <p class="updated-badge" id="updatedBadge"></p>
+    </div>
+  </section>
+
+  <main>
+    <!-- ===== CATALOG ===== -->
+    <section class="section" id="catalog">
+      <div class="section-head">
+        <span class="kicker">01 — Catalog</span>
+        <h2>Catalog Assessment</h2>
+        <p class="lead">A 19+ release discography spanning early electro-pop collabs to a critically praised self-titled debut and a country-pop pivot. Filter by type or genre to explore.</p>
+      </div>
+      <div class="catalog-layout">
+        <div class="catalog-main">
+          <div class="filters" id="catalogFilters"></div>
+          <div class="track-grid" id="trackGrid"></div>
+        </div>
+        <aside class="catalog-side">
+          <div class="card chart-card">
+            <h3>Genre / era mix</h3>
+            <div class="bars" id="genreBars"></div>
+          </div>
+          <div class="card press-card">
+            <h3>What critics say</h3>
+            <div id="pressList"></div>
+          </div>
+        </aside>
+      </div>
+      <div class="viz-block">
+        <div class="viz-head"><h3>Release cadence</h3><p>Every release plotted by year and color-coded by format — momentum, gaps and the country-pop pivot at a glance.</p></div>
+        <div class="viz" id="catalogTimeline"></div>
+      </div>
+    </section>
+
+    <!-- ===== EDM REMIX POTENTIAL ===== -->
+    <section class="section alt" id="remix">
+      <div class="section-head">
+        <span class="kicker">02 — Remixability</span>
+        <h2>EDM Remix Potential</h2>
+        <p class="lead">Every song scored 0–100 for dance-floor conversion, weighing topline hook, tempo/groove fit, existing electronic DNA, and drop payoff — plus a sync cue note for pitching. Her early electro-pop collabs (prod. Justin Hartinger &amp; Jake Crocker) rank highest — the stems are practically remix-ready.</p>
+      </div>
+      <div class="remix-legend">
+        <span><i class="lg lg-hook"></i>Hook</span>
+        <span><i class="lg lg-dance"></i>Danceability</span>
+        <span><i class="lg lg-dna"></i>Electronic DNA</span>
+        <span><i class="lg lg-drop"></i>Drop potential</span>
+      </div>
+      <div class="viz-block">
+        <div class="viz-head"><h3>Score distribution</h3><p>How the catalog clusters by remix potential — the fat middle is fertile ground for official remixes.</p></div>
+        <div class="viz" id="remixDist"></div>
+      </div>
+      <div class="remix-list" id="remixList"></div>
+    </section>
+
+    <!-- ===== ASSESSMENT / SWOT ===== -->
+    <section class="section" id="assessment">
+      <div class="section-head">
+        <span class="kicker">03 — Diagnosis</span>
+        <h2>Strengths, Opportunities & Watch-outs</h2>
+        <p class="lead">Where the catalog and career are strong today, where the musical upside is (sync, remix, playlist lanes), and the risks to manage — social tactics live on the Social deck.</p>
+      </div>
+      <div class="swot" id="swot"></div>
+    </section>
+
+    <!-- ===== LIKE ARTISTS ===== -->
+    <section class="section alt" id="artists">
+      <div class="section-head">
+        <span class="kicker">04 — Positioning</span>
+        <h2>10 Like Artists</h2>
+        <p class="lead">Fan-overlap targets for playlist pitching, paid-ad look-alikes, tour support asks, and "if you like…" positioning.</p>
+      </div>
+      <div class="viz-block">
+        <div class="viz-head"><h3>Positioning map</h3><p>Fan overlap vs. reachability. Top-right — highly similar <em>and</em> reachable — are the highest-leverage targets to pursue first.</p></div>
+        <div class="viz viz-tall" id="artistMap"></div>
+      </div>
+      <div class="artist-grid" id="artistGrid"></div>
+    </section>
+
+    <!-- ===== REFERENCE CTA ===== -->
+    <section class="section" id="reference-cta">
+      <a class="ref-cta" href="reference.html">
+        <div class="ref-cta-body">
+          <span class="kicker">Reference — Frameworks &amp; Philosophy</span>
+          <h2>Rick Rubin's <em>The Creative Act</em> &amp; the 1,000 True Fans model</h2>
+          <p>The art-first counterpoint to this analysis — plus the revenue framework behind the marketing deck — pulled into a standalone reference library.</p>
+        </div>
+        <span class="ref-cta-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </section>
+
+    <!-- ===== CROSS-LINK ===== -->
+    <section class="section alt" id="more">
+      <div class="section-head">
+        <span class="kicker">Next</span>
+        <h2>Looking for the marketing side?</h2>
+        <p class="lead">Looking for hashtags, platform plays, and the growth roadmap? Those live in Social &amp; Marketing. Frameworks (True Fans + Creative Act) live in Reference.</p>
+      </div>
+      <div class="cross-actions">
+        <a class="btn btn-primary" href="tinsley-social.html">Open Social &amp; Marketing Analysis &rarr;</a>
+        <a class="btn" href="reference.html">Open Reference library</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="methodology" id="methodology"></div>
+    <p><strong>Tinsley — Song & Catalog Analysis</strong></p>
+    <p class="muted">Unofficial strategy site built for analysis & marketing planning. Artist facts, quotes and catalog sourced from tinsleymusic.com, the official EPK, Bandcamp, Atwood Magazine, The Spokesman-Review and KEXP.</p>
+    <p class="muted">Data lives in <code>assets/data.js</code> — edit there to update the deck.</p>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("sw.js").catch(function () {});
+      });
+    }
+  </script>
+</body>
+</html>

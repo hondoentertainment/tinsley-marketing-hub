@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tinsley — Choose a Deck</title>
+  <meta name="description" content="The Tinsley strategy suite split in two: Song & Catalog Analysis, or Social & Marketing Analysis. Plus the Reference frameworks library." />
+  <meta name="theme-color" content="#0e0b12" />
+  <link rel="canonical" href="https://tinsley-marketing-hub.vercel.app/tinsley" />
+  <link rel="icon" href="assets/icon-512.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/icon-512.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tinsley — Choose a Deck" />
+  <meta property="og:description" content="Pick Song & Catalog Analysis or Social & Marketing Analysis — plus the Reference frameworks library." />
+  <meta property="og:url" content="https://tinsley-marketing-hub.vercel.app/tinsley" />
+  <meta property="og:image" content="https://tinsley-marketing-hub.vercel.app/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://tinsley-marketing-hub.vercel.app/assets/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0b12;
+      --panel: #16131e;
+      --panel-2: #1d1928;
+      --line: rgba(255,255,255,.1);
+      --text: #f4f1f8;
+      --muted: #a49bb2;
+      --faint: #6f677e;
+      --rose: #ff6f91;
+      --violet: #b98cff;
+      --peach: #ffb27a;
+      --mint: #7ce0c3;
+      --grad: linear-gradient(120deg, #ff6f91, #b98cff 55%, #ffb27a);
+      --radius: 20px;
+      --shadow: 0 24px 70px rgba(0,0,0,.5);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background:
+        radial-gradient(900px 520px at 15% -10%, rgba(185,140,255,.18), transparent 55%),
+        radial-gradient(800px 480px at 100% 0%, rgba(255,111,145,.12), transparent 50%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 56px 24px 80px; }
+    .hub-back {
+      display: inline-block; font-size: 13px; font-weight: 600; color: var(--muted);
+      margin-bottom: 36px; border-bottom: 1px solid transparent;
+    }
+    .hub-back:hover { color: var(--peach); border-bottom-color: rgba(255,178,122,.4); }
+    .eyebrow {
+      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--peach); margin-bottom: 14px;
+    }
+    h1 {
+      font-family: "Fraunces", Georgia, serif; font-weight: 900;
+      font-size: clamp(36px, 7vw, 64px); line-height: 1.05; letter-spacing: -.02em;
+    }
+    h1 .grad {
+      background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .lede { margin-top: 16px; color: var(--muted); font-size: 17px; max-width: 560px; }
+    .choices { display: grid; gap: 16px; margin-top: 40px; }
+    @media (min-width: 720px) {
+      .choices { grid-template-columns: 1fr 1fr; }
+      .choices .ref { grid-column: 1 / -1; }
+    }
+    .choice {
+      display: flex; flex-direction: column; gap: 10px;
+      background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 26px 24px 22px; transition: transform .18s ease, border-color .2s, box-shadow .2s;
+      position: relative; overflow: hidden;
+    }
+    .choice::before {
+      content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
+      background: var(--accent, var(--grad)); opacity: 0; transition: opacity .2s;
+    }
+    .choice:hover { transform: translateY(-4px); border-color: rgba(255,255,255,.22); box-shadow: var(--shadow); }
+    .choice:hover::before { opacity: 1; }
+    .choice:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; }
+    .kind {
+      font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--peach);
+    }
+    .choice h2 { font-family: "Fraunces", serif; font-size: 24px; font-weight: 900; line-height: 1.15; }
+    .choice p { color: var(--muted); font-size: 14.5px; flex: 1; }
+    .cta { font-size: 14px; font-weight: 700; margin-top: 8px; }
+    .choice:hover .cta { color: var(--peach); }
+    .ref { --accent: linear-gradient(120deg, #7ce0c3, #b98cff); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="hub-back" href="index.html">&larr; Hub</a>
+    <p class="eyebrow">Tinsley suite</p>
+    <h1>The old deck split into <span class="grad">two tools</span></h1>
+    <p class="lede">Pick Song &amp; Catalog for the music analysis, or Social &amp; Marketing for reach and revenue. Frameworks live in Reference.</p>
+
+    <div class="choices">
+      <a class="choice" style="--accent:linear-gradient(120deg,#ff6f91,#b98cff 55%,#ffb27a)" href="tinsley-song.html">
+        <span class="kind">Music analysis</span>
+        <h2>Song &amp; Catalog</h2>
+        <p>Catalog assessment, EDM remix scoring, SWOT diagnosis, and like-artist positioning.</p>
+        <span class="cta">Open song analysis &rarr;</span>
+      </a>
+      <a class="choice" style="--accent:linear-gradient(135deg,#7ce0c3,#b98cff)" href="tinsley-social.html">
+        <span class="kind">Marketing strategy</span>
+        <h2>Social &amp; Marketing</h2>
+        <p>Hashtag strategy, per-song content recipes, platform plays, and the growth roadmap.</p>
+        <span class="cta">Open social analysis &rarr;</span>
+      </a>
+      <a class="choice ref" href="reference.html">
+        <span class="kind">Frameworks</span>
+        <h2>Reference library</h2>
+        <p>1,000 True Fans revenue model and Rick Rubin’s <em>The Creative Act</em> — shared by both decks, kept in one place.</p>
+        <span class="cta">Open reference &rarr;</span>
+      </a>
+    </div>
+  </div>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("sw.js").catch(function () {});
+      });
+    }
+  </script>
+</body>
+</html>

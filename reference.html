@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reference — Frameworks & Philosophy</title>
+  <meta name="description" content="The frameworks behind the Tinsley strategy deck: Kevin Kelly's 1,000 True Fans revenue model and a counterpoint reading of Rick Rubin's The Creative Act." />
+  <meta name="theme-color" content="#0e0b12" />
+  <link rel="canonical" href="https://tinsley-marketing-hub.vercel.app/reference" />
+  <link rel="icon" href="assets/icon-512.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/icon-512.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Reference — Frameworks & Philosophy" />
+  <meta property="og:description" content="The 1,000 True Fans revenue model and a counterpoint reading of Rick Rubin's The Creative Act." />
+  <meta property="og:url" content="https://tinsley-marketing-hub.vercel.app/reference" />
+  <meta property="og:image" content="https://tinsley-marketing-hub.vercel.app/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://tinsley-marketing-hub.vercel.app/assets/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#top">Skip to content</a>
+  <!-- ===== NAV ===== -->
+  <header class="nav" id="nav">
+    <a href="index.html" class="hub-back">&larr; Hub</a>
+    <a href="#top" class="brand">REFERENCE<span>·</span>LIBRARY</a>
+    <nav class="nav-links">
+      <a href="#truefans">True Fans</a>
+      <a href="#rubin">Creative Act</a>
+      <a href="tinsley-song.html">Song Analysis</a>
+      <a href="tinsley-social.html">Social Analysis</a>
+    </nav>
+    <a class="nav-cta" href="tinsley-social.html">Social deck ↗</a>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="top">
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <p class="eyebrow">Reference · Frameworks & Philosophy</p>
+      <h1 class="hero-title">Reference Library</h1>
+      <p class="hero-sub">The two frameworks the Tinsley strategy deck is built on — and argues with.</p>
+      <p class="hero-bio">Pulled out of the main deck so they stand on their own: Kevin Kelly's <strong>1,000 True Fans</strong> revenue model (the economic engine behind the strategy) and a counterpoint reading of Rick Rubin's <strong>The Creative Act</strong> (the art-first philosophy that keeps the marketing honest). Both are applied to Tinsley, but the ideas are portable to any independent artist.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#truefans">▶ 1,000 True Fans</a>
+        <a class="btn" href="#rubin">The Creative Act</a>
+        <a class="btn" href="tinsley-song.html">← Song analysis</a>
+        <a class="btn" href="tinsley-social.html">← Social analysis</a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <!-- ===== 1,000 TRUE FANS ===== -->
+    <section class="section alt" id="truefans">
+      <div class="section-head">
+        <span class="kicker">01 — Superfans</span>
+        <h2>The 1,000 True Fans Model</h2>
+        <p class="lead" id="tfLead"></p>
+      </div>
+
+      <figure class="tf-quote" id="tfQuote"></figure>
+
+      <div class="tf-grid">
+        <div class="card tf-calc">
+          <h3>The math of a sustainable career</h3>
+          <p class="tf-calc-sub">Drag to model how many True Fans — and how much each spends per year — it takes to fund the music.</p>
+          <div class="tf-controls">
+            <label class="tf-control">
+              <span class="tf-control-l">True Fans <b id="tfFansVal"></b></span>
+              <input type="range" id="tfFans" />
+            </label>
+            <label class="tf-control">
+              <span class="tf-control-l">Avg spend / fan / year <b id="tfSpendVal"></b></span>
+              <input type="range" id="tfSpend" />
+            </label>
+          </div>
+          <div class="tf-readout">
+            <div class="tf-big">
+              <span class="tf-big-num" id="tfAnnual"></span>
+              <span class="tf-big-l">projected annual revenue · mostly high-margin, direct-to-fan</span>
+            </div>
+            <div class="tf-sub-metrics">
+              <div><span id="tfMonthly"></span><small>per month</small></div>
+              <div><span id="tfPerFan"></span><small>per fan / month</small></div>
+              <div><span id="tfStreamsEq"></span><small>≈ streams to match*</small></div>
+            </div>
+          </div>
+          <p class="tf-foot">*At ~$0.003 per stream. One <b>$100 True Fan</b> ≈ <b>33,000</b> passive streams — the case for owning the relationship.</p>
+        </div>
+
+        <div class="card tf-streams">
+          <h3>Where ~$100 / fan / year comes from</h3>
+          <div class="tf-stream-list" id="tfStreams"></div>
+          <div class="tf-stream-total"><span>Per True Fan / year</span><b id="tfStreamTotal"></b></div>
+        </div>
+      </div>
+
+      <div class="tf-block">
+        <h3 class="tf-block-h">Full income model — every revenue stream</h3>
+        <p class="tf-block-sub">True Fans are the engine, but a durable career blends four streams. Model the whole picture — streaming, direct-to-fan, sync/licensing, and live — and watch the mix rebalance.</p>
+        <div class="im-wrap" id="incomeModel"></div>
+      </div>
+
+      <div class="tf-block">
+        <h3 class="tf-block-h">The fan-conversion ladder</h3>
+        <p class="tf-block-sub">Most listeners stay passive. The strategy is a machine that walks a shrinking, higher-value cohort down each rung — from a rented stream to an owned True Fan.</p>
+        <div class="tf-ladder" id="tfLadder"></div>
+      </div>
+
+      <div class="tf-block">
+        <h3 class="tf-block-h">Playbook: building toward 1,000</h3>
+        <div class="tf-playbook" id="tfPlaybook"></div>
+      </div>
+    </section>
+
+    <!-- ===== ANALYSIS vs. THE CREATIVE ACT ===== -->
+    <section class="section alt" id="rubin">
+      <div class="section-head">
+        <span class="kicker">02 — Philosophy</span>
+        <h2>Analysis vs. Rick Rubin's <em>The Creative Act</em></h2>
+        <p class="lead">The counterpoint to the strategy deck. That deck is market-first; Rubin's book is art-first. We score how much Tinsley already lives its principles — then stage where the growth playbook and the creative act collide.</p>
+      </div>
+
+      <figure class="ca-quote" id="caQuote"></figure>
+
+      <div class="ca-block">
+        <h3 class="ca-block-h">How much she already lives it</h3>
+        <p class="ca-block-sub">Six core principles from the book, scored against her catalog and career. The higher the bar, the more her instincts already match Rubin's.</p>
+        <div class="ca-principles" id="caPrinciples"></div>
+      </div>
+
+      <div class="ca-block">
+        <h3 class="ca-block-h">The tension: playbook vs. the creative act</h3>
+        <p class="ca-block-sub" id="caTensionIntro"></p>
+        <div class="ca-tension" id="caTension"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p><strong>Reference — Frameworks & Philosophy</strong></p>
+    <p class="muted">Companion to the <a href="tinsley-song.html">Song &amp; Catalog Analysis</a> and <a href="tinsley-social.html">Social &amp; Marketing Analysis</a> decks. The 1,000 True Fans framework is from <a href="https://kk.org/thetechnium/1000-true-fans/" target="_blank" rel="noopener">Kevin Kelly (2008)</a>; the philosophy section responds to Rick Rubin, <cite>The Creative Act: A Way of Being</cite> (2023).</p>
+    <p class="muted">Data lives in <code>assets/data.js</code> — edit there to update these frameworks.</p>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/reference.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("sw.js").catch(function () {});
+      });
+    }
+  </script>
+</body>
+</html>

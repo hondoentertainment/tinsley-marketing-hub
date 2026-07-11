@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tinsley — Social & Marketing Analysis</title>
+  <meta name="description" content="Social-media & marketing analysis for Seattle indie pop-rock artist Tinsley: hashtag strategy, per-song weekly content recipes, platform plays, and a 30→720 day growth roadmap." />
+  <meta name="theme-color" content="#0e0b12" />
+  <link rel="canonical" href="https://tinsley-marketing-hub.vercel.app/tinsley-social" />
+  <link rel="icon" href="assets/icon-512.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/icon-512.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tinsley — Social & Marketing Analysis" />
+  <meta property="og:description" content="Hashtag strategy, per-song content recipes, platform plays, and a growth roadmap for indie artist Tinsley." />
+  <meta property="og:url" content="https://tinsley-marketing-hub.vercel.app/tinsley-social" />
+  <meta property="og:image" content="https://tinsley-marketing-hub.vercel.app/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://tinsley-marketing-hub.vercel.app/assets/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body data-deck="social">
+  <a class="skip-link" href="#top">Skip to content</a>
+  <!-- ===== NAV ===== -->
+  <header class="nav" id="nav">
+    <a href="index.html" class="hub-back">&larr; Hub</a>
+    <a href="#top" class="brand">TINSLEY<span>·</span>SOCIAL</a>
+    <nav class="nav-links">
+      <a href="#hashtags">Hashtags</a>
+      <a href="#bysong">By Song</a>
+      <a href="#social">Social</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="reference.html">Reference ↗</a>
+      <a href="tinsley-song.html" class="nav-switch">Song Analysis &rarr;</a>
+    </nav>
+    <a class="nav-cta" data-link="linktree" href="#" target="_blank" rel="noopener">Listen ↗</a>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="top">
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <p class="eyebrow">Social & Marketing Analysis · Unofficial Strategy Deck</p>
+      <p class="hero-job" id="heroJob"></p>
+      <h1 class="hero-title">Tinsley</h1>
+      <p class="hero-sub" id="heroTagline"></p>
+      <p class="hero-bio" id="heroBio"></p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" data-link="spotify" href="#" target="_blank" rel="noopener">▶ Spotify</a>
+        <a class="btn" data-link="bandcamp" href="#" target="_blank" rel="noopener">Bandcamp</a>
+        <a class="btn" data-link="instagram" href="#" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn" data-link="website" href="#" target="_blank" rel="noopener">Official Site</a>
+      </div>
+      <div class="metrics" id="metrics"></div>
+      <p class="updated-badge" id="updatedBadge"></p>
+    </div>
+  </section>
+
+  <main>
+    <!-- ===== HASHTAGS ===== -->
+    <section class="section" id="hashtags">
+      <div class="section-head">
+        <span class="kicker">01 — Reach</span>
+        <h2>Hashtag Strategy</h2>
+        <p class="lead">Grouped by function. Mix 2–3 brand + 3–4 genre + 2 location + 1–2 community tags per post. Click any tag to copy.</p>
+      </div>
+      <div class="hashtag-groups" id="hashtagGroups"></div>
+      <button class="btn btn-primary copy-all" id="copyAll">Copy full hashtag set</button>
+    </section>
+
+    <!-- ===== PER-SONG HASHTAGS ===== -->
+    <section class="section alt" id="bysong">
+      <div class="section-head">
+        <span class="kicker">02 — Targeting</span>
+        <h2>Key Hashtags by Song</h2>
+        <p class="lead">Tailored tag sets <em>and</em> a Mon / Wed / Fri posting recipe per song, hooked to the growth roadmap. <strong>TikTok:</strong> 5–8 lean discovery tags. <strong>Instagram:</strong> Broad / Mid / Niche tiers. Pick a song, copy tags, ship the week's beats.</p>
+      </div>
+      <div class="bysong-tabs" id="bysongTabs"></div>
+      <div class="bysong-panel" id="bysongPanel"></div>
+    </section>
+
+    <!-- ===== SOCIAL ===== -->
+    <section class="section" id="social">
+      <div class="section-head">
+        <span class="kicker">03 — Channels</span>
+        <h2>Social Media Opportunities</h2>
+        <p class="lead">Platform-by-platform priorities and concrete content plays.</p>
+      </div>
+      <div class="social-grid" id="socialGrid"></div>
+    </section>
+
+    <!-- ===== ROADMAP ===== -->
+    <section class="section alt" id="roadmap">
+      <div class="section-head">
+        <span class="kicker">04 — Execution</span>
+        <h2>Growth Roadmap · 30 → 720 Days</h2>
+        <p class="lead">Every growth lever, sequenced across six horizons — from foundation to a durable, national career. Each action is tagged by track: <strong>Reach</strong>, <strong>Revenue</strong>, <strong>Product</strong>, and <strong>Foundation</strong>.</p>
+      </div>
+      <div class="rm-legend">
+        <span><i style="background:var(--rose)"></i>Reach — audience &amp; discovery</span>
+        <span><i style="background:var(--mint)"></i>Revenue — money &amp; superfans</span>
+        <span><i style="background:var(--violet)"></i>Product — music &amp; releases</span>
+        <span><i style="background:var(--peach)"></i>Foundation — brand, data &amp; team</span>
+      </div>
+      <div class="ns-block">
+        <div class="viz-head"><h3>North-star metrics</h3><p>The numbers that actually compound. Edit any current value — it saves to this browser and logs a mini trend so you can track momentum over time.</p></div>
+        <div class="ns-grid" id="northStars"></div>
+      </div>
+      <div class="rm-tracker" id="rmTracker"></div>
+      <div class="roadmap" id="roadmapGrid"></div>
+    </section>
+
+    <!-- ===== REFERENCE CTA ===== -->
+    <section class="section" id="reference-cta">
+      <a class="ref-cta" href="reference.html">
+        <div class="ref-cta-body">
+          <span class="kicker">Reference — Frameworks &amp; Philosophy</span>
+          <h2>The 1,000 True Fans model &amp; <em>The Creative Act</em></h2>
+          <p>The revenue framework behind this roadmap — with an interactive income calculator and conversion ladder — plus the art-first counterpoint, pulled into a standalone reference library.</p>
+        </div>
+        <span class="ref-cta-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </section>
+
+    <!-- ===== CROSS-LINK ===== -->
+    <section class="section alt" id="more">
+      <div class="section-head">
+        <span class="kicker">Next</span>
+        <h2>Looking for the music side?</h2>
+        <p class="lead">Looking for catalog assessment, remix scoring, and like-artist positioning? Those live in Song &amp; Catalog. Frameworks (True Fans + Creative Act) live in Reference.</p>
+      </div>
+      <div class="cross-actions">
+        <a class="btn btn-primary" href="tinsley-song.html">Open Song &amp; Catalog Analysis &rarr;</a>
+        <a class="btn" href="reference.html">Open Reference library</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="methodology" id="methodology"></div>
+    <p><strong>Tinsley — Social & Marketing Analysis</strong></p>
+    <p class="muted">Unofficial strategy site built for analysis & marketing planning. Artist facts, quotes and catalog sourced from tinsleymusic.com, the official EPK, Bandcamp, Atwood Magazine, The Spokesman-Review and KEXP. The 1,000 True Fans framework lives in the <a href="reference.html">Reference library</a>, sourced from <a href="https://kk.org/thetechnium/1000-true-fans/" target="_blank" rel="noopener">Kevin Kelly (2008)</a>.</p>
+    <p class="muted">Data lives in <code>assets/data.js</code> — edit there to update the deck.</p>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("sw.js").catch(function () {});
+      });
+    }
+  </script>
+</body>
+</html>

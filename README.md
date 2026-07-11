@@ -1,18 +1,19 @@
-# Tinsley — Marketing & Analysis Hub
+# Marketing Hub
 
-An unofficial, single-page marketing and catalog-analysis site for Seattle indie pop-rock artist **Tinsley** (Olivia Tinsley). Built as a strategy deck: catalog assessment, hashtag strategy, social-media opportunities, 10 like artists, and a 90-day marketing roadmap.
+A centralized, static site that links every marketing page in this workspace together. The landing page (`index.html`) is a hub that routes to each self-contained marketing project.
 
-## What's inside
+## Pages
 
-| Section | Purpose |
-| --- | --- |
-| **Catalog Assessment** | Filterable 19+ release discography with genre/mood tagging + a genre/era mix chart and press quotes. |
-| **Strengths / Opportunities / Watch-outs** | SWOT-style diagnosis of the artist's position. |
-| **Hashtag Strategy** | 45+ hashtags grouped by function (Brand, Genre, Location, Community, Discovery). Click any tag to copy; "Copy full set" grabs them all. |
-| **Social Media Opportunities** | Platform-by-platform priorities and concrete content plays (TikTok, Instagram, Spotify, YouTube, Bandcamp, Threads/X). |
-| **10 Like Artists** | Fan-overlap targets with match scores for playlist pitching, ad look-alikes, and tour asks. |
-| **1,000 True Fans** | Kevin Kelly's framework applied to Tinsley: an interactive revenue calculator, per-fan revenue breakdown, a fan-conversion ladder, and a build playbook. |
-| **90-Day Roadmap** | A sequenced Foundation → Amplify → Convert execution plan. |
+| Page | File | What it is |
+| --- | --- | --- |
+| **Marketing Hub** | `index.html` | Central landing page. Groups projects by suite (Tinsley suite + field guides). |
+| **Tinsley chooser** | `tinsley.html` | Legacy `/tinsley` URL — pick Song, Social, or Reference. |
+| **Tinsley — Song & Catalog Analysis** | `tinsley-song.html` | Music-first deck: catalog, EDM remix + sync notes, SWOT, like artists. |
+| **Tinsley — Social & Marketing Analysis** | `tinsley-social.html` | Marketing-first deck: hashtags, per-song weekly recipes, platform plays, roadmap. |
+| **Reference — Frameworks & Philosophy** | `reference.html` | Shared frameworks: 1,000 True Fans + *The Creative Act* (not duplicated in the decks). |
+| **Street Marketing — Top 100 Ideas** | `street-marketing.html` | Searchable guerrilla tactics field guide. Fully self-contained. |
+
+Every sub-page has a "← Hub" link back to `index.html`, so the pages are linked together in both directions.
 
 ## Run it
 
@@ -25,23 +26,51 @@ npx serve .
 python -m http.server 8080
 ```
 
-Then open the printed URL (e.g. http://localhost:8080). You can also just open `index.html` directly in a browser.
+Then open the printed URL (e.g. http://localhost:8080). You can also open `index.html` directly in a browser.
 
-## Editing the strategy
+## Add a new marketing page
 
-All content is data-driven. Edit **`assets/data.js`** — the `TINSLEY` object holds the artist info, catalog, hashtags, social plan, like artists, and roadmap. The UI re-renders from that data automatically.
+1. Drop your new self-contained `your-page.html` in this folder.
+2. Add a "← Hub" backlink in it pointing to `index.html`.
+3. Append one entry to the `PAGES` array in `index.html` (set `suite` to `"tinsley"` or `"field"`, or add a new suite in `SUITES`):
+
+```js
+{
+  suite: "field",
+  title: "Your Campaign Title",
+  kind: "Campaign Type",
+  href: "your-page.html",
+  desc: "One-line description shown on the hub card.",
+  tags: ["Tag A", "Tag B"],
+  accent: "linear-gradient(120deg, #ff6f91, #b98cff)"
+}
+```
+
+The hub re-renders automatically. Entries without an `href` render as a "Coming soon" card.
 
 ## Files
 
 ```
-index.html          # page structure
-assets/styles.css   # design system + layout
-assets/data.js      # ALL strategy content (edit here)
-assets/app.js       # rendering + interactivity (filters, copy, charts)
+index.html            # the central hub (links all pages)
+tinsley.html          # chooser for legacy /tinsley links
+tinsley-song.html     # song & catalog analysis (uses assets/)
+tinsley-social.html   # social & marketing analysis (uses assets/)
+reference.html        # True Fans + Creative Act frameworks
+street-marketing.html # Street marketing Top 100 ideas (self-contained)
+assets/
+  styles.css          # Tinsley design system + layout
+  data.js             # ALL Tinsley strategy content (edit here)
+  app.js              # Song + Social rendering + interactivity
+  reference.js        # Reference page renderer
+  og-image.png        # shared social share card
+  icon-512.png        # shared favicon / app icon
+api/spotify.js        # live Spotify metrics (Vercel serverless)
+sw.js                 # service worker (bump CACHE to invalidate)
+vercel.json           # clean URLs + redirects
 ```
 
 ## Sources
 
-Artist facts, quotes, and catalog compiled from [tinsleymusic.com](https://www.tinsleymusic.com/), the official [EPK](https://www.tinsleymusic.com/epk), [Bandcamp](https://musicbytinsley.bandcamp.com/), [Atwood Magazine](https://atwoodmagazine.com/tybe-tinsley-bad-enough-song-premiere/), [The Spokesman-Review](https://www.spokesman.com/stories/2025/mar/20/west-side-indie-pop-rocker-tinsley-brings-new-albu/), She Is The Music, and KEXP. The superfan framework is drawn from Kevin Kelly's essay [“1,000 True Fans”](https://kk.org/thetechnium/1000-true-fans/) (2008).
+Tinsley artist facts, quotes, and catalog compiled from [tinsleymusic.com](https://www.tinsleymusic.com/), the official [EPK](https://www.tinsleymusic.com/epk), [Bandcamp](https://musicbytinsley.bandcamp.com/), [Atwood Magazine](https://atwoodmagazine.com/tybe-tinsley-bad-enough-song-premiere/), [The Spokesman-Review](https://www.spokesman.com/stories/2025/mar/20/west-side-indie-pop-rocker-tinsley-brings-new-albu/), She Is The Music, and KEXP. The superfan framework is drawn from Kevin Kelly's essay [“1,000 True Fans”](https://kk.org/thetechnium/1000-true-fans/) (2008).
 
 > Unofficial fan/strategy project for analysis and marketing planning purposes.

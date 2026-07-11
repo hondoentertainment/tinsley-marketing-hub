@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Street Marketing · Top 100 Ideas</title>
+  <meta name="description" content="A curated field guide of 100 high-impact, low-budget street & guerrilla marketing ideas. Search, filter by category and budget, and steal the best ones." />
+  <meta name="theme-color" content="#0b0e14" />
+  <link rel="canonical" href="https://tinsley-marketing-hub.vercel.app/street-marketing" />
+  <link rel="icon" href="assets/icon-512.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/icon-512.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Marketing Hub" />
+  <meta property="og:title" content="Street Marketing — Top 100 Ideas" />
+  <meta property="og:description" content="100 high-impact, low-budget guerrilla marketing tactics — searchable and filterable by budget and impact." />
+  <meta property="og:url" content="https://tinsley-marketing-hub.vercel.app/street-marketing" />
+  <meta property="og:image" content="https://tinsley-marketing-hub.vercel.app/assets/og-street.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://tinsley-marketing-hub.vercel.app/assets/og-street.png" />
+  <style>
+    :root {
+      --bg: #0b0e14;
+      --bg-soft: #121722;
+      --card: #161c28;
+      --card-hover: #1c2433;
+      --border: #263042;
+      --text: #e8edf5;
+      --text-dim: #93a1b5;
+      --text-faint: #64748b;
+      --accent: #7c5cff;
+      --accent-2: #22d3ee;
+      --accent-grad: linear-gradient(135deg, #7c5cff 0%, #22d3ee 100%);
+      --low: #34d399;
+      --med: #fbbf24;
+      --high: #fb7185;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 15% -10%, rgba(124,92,255,.18), transparent 60%),
+                  radial-gradient(1000px 500px at 100% 0%, rgba(34,211,238,.12), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+
+    /* Back to hub */
+    .hub-back {
+      position: fixed; top: 16px; left: 16px; z-index: 40;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--text-dim);
+      background: rgba(11,14,20,.7); backdrop-filter: blur(8px);
+      border: 1px solid var(--border); border-radius: 999px;
+      padding: 8px 14px; text-decoration: none; transition: all .16s ease;
+    }
+    .hub-back:hover { color: #fff; border-color: var(--accent); }
+
+    /* Hero */
+    header.hero {
+      padding: 64px 0 28px;
+      text-align: center;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      font-weight: 700;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(34,211,238,.06);
+      margin-bottom: 18px;
+    }
+    h1 {
+      font-size: clamp(32px, 6vw, 60px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      background: var(--accent-grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .subtitle {
+      margin: 16px auto 0;
+      max-width: 620px;
+      color: var(--text-dim);
+      font-size: clamp(15px, 2.4vw, 18px);
+    }
+
+    /* Controls */
+    .controls {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 16px 0 14px;
+      margin-top: 22px;
+      background: linear-gradient(to bottom, rgba(11,14,20,.96) 70%, rgba(11,14,20,0));
+      backdrop-filter: blur(8px);
+    }
+    .search-row { position: relative; }
+    .search-row svg {
+      position: absolute; left: 18px; top: 50%; transform: translateY(-50%);
+      width: 20px; height: 20px; color: var(--text-faint);
+      pointer-events: none;
+    }
+    #search {
+      width: 100%;
+      padding: 16px 18px 16px 50px;
+      font-size: 16px;
+      color: var(--text);
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      outline: none;
+      transition: border-color .18s, box-shadow .18s;
+    }
+    #search::placeholder { color: var(--text-faint); }
+    #search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(124,92,255,.18);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+      align-items: center;
+    }
+    .chip {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dim);
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .16s ease;
+    }
+    .chip:hover { color: var(--text); border-color: var(--accent); }
+    .chip.active {
+      color: #fff;
+      background: var(--accent-grad);
+      border-color: transparent;
+      box-shadow: 0 6px 18px rgba(124,92,255,.35);
+    }
+    .divider { width: 1px; height: 22px; background: var(--border); margin: 0 4px; }
+    .cost-label { font-size: 12px; color: var(--text-faint); margin-right: 2px; text-transform: uppercase; letter-spacing: .08em; }
+
+    .meta-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin: 22px 0 10px; color: var(--text-dim); font-size: 14px;
+    }
+    #count strong { color: var(--text); }
+
+    /* Grid */
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 18px;
+      padding-bottom: 60px;
+    }
+    .card {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 22px 20px;
+      overflow: hidden;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+    }
+    .card::before {
+      content: "";
+      position: absolute; inset: 0 0 auto 0; height: 3px;
+      background: var(--accent-grad);
+      opacity: 0; transition: opacity .18s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      background: var(--card-hover);
+      box-shadow: var(--shadow);
+    }
+    .card:hover::before { opacity: 1; }
+
+    .card-top { display: flex; align-items: flex-start; gap: 14px; }
+    .rank {
+      flex: none;
+      font-size: 18px; font-weight: 800;
+      width: 44px; height: 44px;
+      display: grid; place-items: center;
+      border-radius: 12px;
+      background: rgba(124,92,255,.12);
+      color: var(--accent-2);
+      border: 1px solid var(--border);
+    }
+    .card h3 { font-size: 17px; font-weight: 700; letter-spacing: -.01em; }
+    .card .cat {
+      display: inline-block; margin-top: 4px;
+      font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--accent-2);
+    }
+    .card p { margin-top: 12px; color: var(--text-dim); font-size: 14.5px; }
+
+    .badges { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+    .badge {
+      font-size: 11px; font-weight: 700; letter-spacing: .04em;
+      padding: 4px 10px; border-radius: 999px;
+      border: 1px solid var(--border);
+      text-transform: uppercase;
+    }
+    .badge.cost-Low { color: var(--low); background: rgba(52,211,153,.09); border-color: rgba(52,211,153,.3); }
+    .badge.cost-Med { color: var(--med); background: rgba(251,191,36,.09); border-color: rgba(251,191,36,.3); }
+    .badge.cost-High { color: var(--high); background: rgba(251,113,133,.09); border-color: rgba(251,113,133,.3); }
+    .badge.impact { color: var(--text-dim); background: var(--bg-soft); }
+
+    /* Empty state */
+    .empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 70px 20px;
+      color: var(--text-dim);
+    }
+    .empty .big { font-size: 40px; margin-bottom: 10px; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 26px 0 50px;
+      text-align: center;
+      color: var(--text-faint);
+      font-size: 13px;
+    }
+
+    @media (max-width: 560px) {
+      header.hero { padding: 44px 0 18px; }
+      #grid { grid-template-columns: 1fr; }
+      .divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link" style="position:absolute;left:12px;top:-60px;background:linear-gradient(135deg,#7c5cff,#22d3ee);color:#08121e;font-weight:700;padding:10px 16px;border-radius:10px;transition:top .2s;z-index:200" onfocus="this.style.top='12px'" onblur="this.style.top='-60px'">Skip to content</a>
+  <a class="hub-back" href="index.html">&larr; Marketing Hub</a>
+  <div class="wrap" id="main">
+    <header class="hero">
+      <span class="eyebrow">Guerrilla Playbook</span>
+      <h1>Street Marketing<br>Top 100 Ideas</h1>
+      <p class="subtitle">A curated field guide of high-impact, low-budget ways to turn sidewalks, transit, and crowds into your campaign. Search, filter, and steal the best ones.</p>
+    </header>
+
+    <div class="controls">
+      <div class="search-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="search" type="text" placeholder="Search 100 ideas — e.g. chalk, projection, stickers, mascot..." autocomplete="off" />
+      </div>
+      <div class="filters" id="catFilters"></div>
+      <div class="filters" id="costFilters">
+        <span class="cost-label">Budget</span>
+        <button class="chip active" data-cost="all">Any</button>
+        <button class="chip" data-cost="Low">Low</button>
+        <button class="chip" data-cost="Med">Medium</button>
+        <button class="chip" data-cost="High">High</button>
+      </div>
+    </div>
+
+    <div class="meta-row">
+      <div id="count"></div>
+      <div id="activeCat"></div>
+    </div>
+
+    <main id="grid"></main>
+
+    <footer>Built as a self-contained single page · 100 street marketing ideas · no dependencies</footer>
+  </div>
+
+  <script>
+    const IDEAS = [
+      // Chalk & Pavement
+      { rank: 1, title: "3D Sidewalk Chalk Art", description: "Commission anamorphic pavement art that looks like a hole, waterfall, or product bursting from the ground. Irresistible photo bait.", category: "Chalk & Pavement", cost: "Med", impact: "Viral photos" },
+      { rank: 2, title: "Stenciled Directional Trail", description: "Spray chalk footprints or arrows leading from a busy corner straight to your store or pop-up entrance.", category: "Chalk & Pavement", cost: "Low", impact: "Foot traffic" },
+      { rank: 3, title: "Reverse Graffiti (Clean Tags)", description: "Power-wash your logo into grimy pavement so the message is made of clean concrete. Legal and striking.", category: "Chalk & Pavement", cost: "Low", impact: "Eco angle" },
+      { rank: 4, title: "Rain-Activated Messaging", description: "Hydrophobic spray reveals a hidden slogan only when it rains. A delightful surprise on wet days.", category: "Chalk & Pavement", cost: "Med", impact: "Surprise" },
+      { rank: 5, title: "Chalk Countdown Board", description: "Update a large pavement chalkboard daily counting down to a launch, sale, or event.", category: "Chalk & Pavement", cost: "Low", impact: "Anticipation" },
+      { rank: 6, title: "Puddle Projection Decals", description: "Place weatherproof floor decals near drains so puddles frame your brand message.", category: "Chalk & Pavement", cost: "Low", impact: "Clever" },
+      { rank: 7, title: "Crosswalk Takeover", description: "Partner with the city to reskin a crosswalk with piano keys, barcodes, or product stripes.", category: "Chalk & Pavement", cost: "High", impact: "Landmark" },
+      { rank: 8, title: "Chalk Fill-in-the-Blank", description: "Write a prompt and leave chalk out; let passersby co-create the wall. UGC on the street.", category: "Chalk & Pavement", cost: "Low", impact: "Engagement" },
+      { rank: 9, title: "Glow Chalk Night Trail", description: "UV-reactive chalk art that lights up under blacklight for nightlife districts and festivals.", category: "Chalk & Pavement", cost: "Med", impact: "Nightlife" },
+      { rank: 10, title: "Shadow Slogan Cutouts", description: "Position ground stencils so the afternoon sun casts your message in shadow at peak hour.", category: "Chalk & Pavement", cost: "Low", impact: "Timed" },
+
+      // Guerrilla Installations
+      { rank: 11, title: "Bench Transformation", description: "Wrap a public bench to become a giant chocolate bar, phone, or sofa that fits your product story.", category: "Guerrilla Installations", cost: "Med", impact: "Photo op" },
+      { rank: 12, title: "Manhole Cover Wrap", description: "Turn steaming manholes into coffee cups, ramen bowls, or volcano scenes with a durable decal.", category: "Guerrilla Installations", cost: "Low", impact: "Witty" },
+      { rank: 13, title: "Bus Shelter Diorama", description: "Convert a shelter into an immersive scene: a beach, a gym, a jungle — that people wait inside.", category: "Guerrilla Installations", cost: "High", impact: "Immersive" },
+      { rank: 14, title: "Giant Product Replica", description: "Drop a comically oversized version of your product in a plaza and let phones do the rest.", category: "Guerrilla Installations", cost: "High", impact: "Landmark" },
+      { rank: 15, title: "Zipper Sidewalk Illusion", description: "A huge zipper decal 'unzipping' the pavement to reveal grass, water, or your tagline.", category: "Guerrilla Installations", cost: "Med", impact: "Illusion" },
+      { rank: 16, title: "Stair Riser Story", description: "Turn a public staircase into a progress bar, book spine, or before/after using riser graphics.", category: "Guerrilla Installations", cost: "Med", impact: "Sequential" },
+      { rank: 17, title: "Lamppost Costumes", description: "Dress street poles as popsicles, mascots, or pencils to line an entire block with brand cues.", category: "Guerrilla Installations", cost: "Low", impact: "Repetition" },
+      { rank: 18, title: "Frozen-in-Ice Product", description: "Encase a prize or product in a block of ice in a public square; the reveal is the event.", category: "Guerrilla Installations", cost: "Med", impact: "Curiosity" },
+      { rank: 19, title: "Tree Yarn Bombing", description: "Cozy knit wraps in brand colors on trees and railings for a warm, shareable takeover.", category: "Guerrilla Installations", cost: "Low", impact: "Cozy" },
+      { rank: 20, title: "Fake Storefront Facade", description: "Build a surreal pop-up facade (a giant fridge door, a portal) that fronts a real experience.", category: "Guerrilla Installations", cost: "High", impact: "Intrigue" },
+      { rank: 21, title: "Hanging Sky Installation", description: "Suspend umbrellas, balloons, or product silhouettes over an alley for a magical canopy.", category: "Guerrilla Installations", cost: "Med", impact: "Whimsy" },
+      { rank: 22, title: "Trash Can Basketball", description: "Add a backboard to bins so tossing litter feels like a game, tagged with your brand.", category: "Guerrilla Installations", cost: "Low", impact: "Playful" },
+
+      // Wearable & Human
+      { rank: 23, title: "Roaming Brand Mascot", description: "A characterful mascot working busy corners for hugs, high-fives, and endless selfies.", category: "Wearable & Human", cost: "Med", impact: "Selfies" },
+      { rank: 24, title: "Human Billboards (Sandwich Boards)", description: "Style walkers with clever, funny sandwich boards worth photographing, not ignoring.", category: "Wearable & Human", cost: "Low", impact: "Mobile reach" },
+      { rank: 25, title: "Flash Uniform Squad", description: "A synchronized team in bold matching outfits moving through the city as a moving logo.", category: "Wearable & Human", cost: "Med", impact: "Coordinated" },
+      { rank: 26, title: "Living Statue Performers", description: "Painted living statues themed to your brand that 'come alive' when people donate a follow or scan.", category: "Wearable & Human", cost: "Med", impact: "Spectacle" },
+      { rank: 27, title: "Backpack Screens", description: "Team members wear LED backpack screens looping short ads through transit hubs and queues.", category: "Wearable & Human", cost: "Med", impact: "Tech" },
+      { rank: 28, title: "Costumed Character Race", description: "Stage a lighthearted race of costumed characters down a promenade to draw a crowd.", category: "Wearable & Human", cost: "Med", impact: "Event" },
+      { rank: 29, title: "Umbrella Brigade", description: "On rainy days, hand out and hold branded umbrellas that form a moving color wave.", category: "Wearable & Human", cost: "Low", impact: "Weather win" },
+      { rank: 30, title: "Silent Disco Promo", description: "A headphone dance mob promoting a music, drink, or app brand in a public square.", category: "Wearable & Human", cost: "Med", impact: "Buzz" },
+      { rank: 31, title: "Tattoo (Temporary) Team", description: "Street artists apply free branded temporary tattoos, turning arms into walking ads.", category: "Wearable & Human", cost: "Low", impact: "Wearable" },
+      { rank: 32, title: "Face-Paint Station", description: "Pop-up face painting themed to your mascot at family events and fairs.", category: "Wearable & Human", cost: "Low", impact: "Family" },
+
+      // Stickers & Posters
+      { rank: 33, title: "Die-Cut Sticker Drop", description: "Distinctive die-cut stickers placed on laptops, poles, and skateboards for grassroots spread.", category: "Stickers & Posters", cost: "Low", impact: "Grassroots" },
+      { rank: 34, title: "Wild Posting Wall", description: "Blanket a legal wild-posting wall with a repeating, rhythmic poster pattern.", category: "Stickers & Posters", cost: "Med", impact: "Saturation" },
+      { rank: 35, title: "QR Treasure Hunt", description: "Scatter QR posters citywide; each unlocks a clue toward a prize, driving repeat scans.", category: "Stickers & Posters", cost: "Low", impact: "Game" },
+      { rank: 36, title: "Optical Illusion Posters", description: "Lenticular or anamorphic posters that change as you walk past — people stop and stare.", category: "Stickers & Posters", cost: "Med", impact: "Stop power" },
+      { rank: 37, title: "Peel-Away Layers", description: "A poster people physically peel to reveal the next message or a discount code beneath.", category: "Stickers & Posters", cost: "Low", impact: "Interactive" },
+      { rank: 38, title: "Tear-Off Tab Classic", description: "The humble tear-off flyer, redesigned to be beautiful and genuinely worth taking.", category: "Stickers & Posters", cost: "Low", impact: "Low cost" },
+      { rank: 39, title: "Glow-in-the-Dark Posters", description: "Posters charged by daylight that reveal a second message after dark near nightlife.", category: "Stickers & Posters", cost: "Med", impact: "Day/night" },
+      { rank: 40, title: "Scented Posters", description: "Micro-encapsulated scent (coffee, citrus, pine) that releases when rubbed — smell sells.", category: "Stickers & Posters", cost: "Med", impact: "Sensory" },
+      { rank: 41, title: "AR-Trigger Posters", description: "Simple image markers launch an AR animation of your product bursting off the wall.", category: "Stickers & Posters", cost: "Med", impact: "AR" },
+      { rank: 42, title: "Mini Poster Miniatures", description: "Tiny fake billboards on ledges and windowsills — surprising scale draws close inspection.", category: "Stickers & Posters", cost: "Low", impact: "Charm" },
+
+      // Interactive & Experiential
+      { rank: 43, title: "Vending Machine of Joy", description: "A machine that dispenses free product in exchange for a smile, dance, tweet, or hug.", category: "Interactive & Experiential", cost: "High", impact: "Delight" },
+      { rank: 44, title: "Giant Interactive Button", description: "A big red 'Do Not Press' button that triggers confetti, sound, or a prize when pressed.", category: "Interactive & Experiential", cost: "Med", impact: "Irresistible" },
+      { rank: 45, title: "Photo Booth Portal", description: "A branded set with props and instant prints or GIFs shared straight to social.", category: "Interactive & Experiential", cost: "Med", impact: "UGC" },
+      { rank: 46, title: "Sidewalk Ball Pit", description: "An adult ball pit or foam zone that stops commuters and turns them into kids again.", category: "Interactive & Experiential", cost: "High", impact: "Play" },
+      { rank: 47, title: "Free Hugs / Free Advice", description: "A staffed booth offering a genuine human moment, subtly branded and deeply shareable.", category: "Interactive & Experiential", cost: "Low", impact: "Heart" },
+      { rank: 48, title: "Spin-to-Win Wheel", description: "A prize wheel on a busy corner; everyone wins something, everyone leaves with your brand.", category: "Interactive & Experiential", cost: "Low", impact: "Queue" },
+      { rank: 49, title: "Pop-Up Recording Booth", description: "A soundproof pod where people record a message, cover, or pitch tied to your brand.", category: "Interactive & Experiential", cost: "Med", impact: "Content" },
+      { rank: 50, title: "Interactive Wall of Pegs", description: "A pin-art or peg wall where bodies leave impressions — a tactile, endlessly-photographed toy.", category: "Interactive & Experiential", cost: "Med", impact: "Tactile" },
+      { rank: 51, title: "Human Vending Windows", description: "A 'window' where a real person hands out product like a living vending machine — uncanny fun.", category: "Interactive & Experiential", cost: "Med", impact: "Surprise" },
+      { rank: 52, title: "Scent & Taste Trail", description: "A guided micro-journey of smells and tastes leading to your pop-up, mapped on the sidewalk.", category: "Interactive & Experiential", cost: "Med", impact: "Sensory" },
+      { rank: 53, title: "Live Mural Painting", description: "An artist paints your campaign live over days; the work-in-progress becomes the draw.", category: "Interactive & Experiential", cost: "Med", impact: "Process" },
+      { rank: 54, title: "Interactive Projection Floor", description: "Motion-sensing floor projections that ripple, splash, or spell messages as people walk.", category: "Interactive & Experiential", cost: "High", impact: "Tech wow" },
+
+      // Transit & Vehicles
+      { rank: 55, title: "Full Bus Wrap Illusion", description: "Wrap a bus so it looks squeezed, sliced, or carrying your giant product down the street.", category: "Transit & Vehicles", cost: "High", impact: "Mass reach" },
+      { rank: 56, title: "Branded Food Truck", description: "A themed truck giving out samples that roams to wherever your audience gathers.", category: "Transit & Vehicles", cost: "High", impact: "Mobile hub" },
+      { rank: 57, title: "Bike Courier Swarm", description: "A fleet of branded cargo bikes making sampling drops and playing your jingle.", category: "Transit & Vehicles", cost: "Med", impact: "Nimble" },
+      { rank: 58, title: "Rickshaw / Pedicab Ads", description: "Free short rides in wrapped pedicabs through entertainment districts.", category: "Transit & Vehicles", cost: "Med", impact: "Novelty" },
+      { rank: 59, title: "Subway Handle Takeover", description: "Turn train grab-handles into bracelets, watches, or bags matching your product.", category: "Transit & Vehicles", cost: "Med", impact: "Contextual" },
+      { rank: 60, title: "Escalator Side Panels", description: "Sequential graphics along an escalator create motion — a scene that plays as you rise.", category: "Transit & Vehicles", cost: "Med", impact: "Motion" },
+      { rank: 61, title: "Gas Pump Handle Ads", description: "Branded pump-handle grips and nozzle talkers reach a captive, waiting audience.", category: "Transit & Vehicles", cost: "Low", impact: "Captive" },
+      { rank: 62, title: "Drone Light Show", description: "A choreographed nighttime drone swarm forms your logo and product in the sky.", category: "Transit & Vehicles", cost: "High", impact: "Spectacle" },
+      { rank: 63, title: "Boat / Barge Billboard", description: "A floating billboard cruising a waterfront during festivals and game days.", category: "Transit & Vehicles", cost: "High", impact: "Skyline" },
+      { rank: 64, title: "Skywriting / Banner Plane", description: "A plane-towed banner or skywriting over a beach or stadium crowd at peak.", category: "Transit & Vehicles", cost: "High", impact: "Reach" },
+      { rank: 65, title: "Segway / Scooter Squad", description: "A branded e-scooter team gliding through parks handing out codes and samples.", category: "Transit & Vehicles", cost: "Med", impact: "Agile" },
+
+      // Freebies & Sampling
+      { rank: 66, title: "Surprise Product Sampling", description: "Hand out full-size samples where the need is highest (water at a marathon, umbrellas in rain).", category: "Freebies & Sampling", cost: "Med", impact: "Utility" },
+      { rank: 67, title: "Branded Phone Charging Bar", description: "Free public charging lockers wrapped in your brand — people linger and remember.", category: "Freebies & Sampling", cost: "Med", impact: "Dwell time" },
+      { rank: 68, title: "Free Wi-Fi Bench", description: "Sponsor a solar bench with charging and Wi-Fi; a splash page carries your message.", category: "Freebies & Sampling", cost: "High", impact: "Goodwill" },
+      { rank: 69, title: "Sample-in-a-Newspaper", description: "Tuck a sachet or mini product into free morning papers at transit entrances.", category: "Freebies & Sampling", cost: "Low", impact: "Targeted" },
+      { rank: 70, title: "Ice Cream / Coffee Cart", description: "Free treats on a hot or cold day; the queue itself becomes the advertisement.", category: "Freebies & Sampling", cost: "Med", impact: "Queue buzz" },
+      { rank: 71, title: "Branded Bike Repair Station", description: "A public pump-and-tools stand that helps commuters and earns daily gratitude.", category: "Freebies & Sampling", cost: "Med", impact: "Utility" },
+      { rank: 72, title: "Reusable Bag Giveaway", description: "Give beautiful reusable totes people actually carry — walking billboards for months.", category: "Freebies & Sampling", cost: "Low", impact: "Longevity" },
+      { rank: 73, title: "Pay-With-A-Post Kiosk", description: "Get a free item by posting to social from the spot — turns sampling into reach.", category: "Freebies & Sampling", cost: "Low", impact: "Amplify" },
+      { rank: 74, title: "Warm Drinks for Commuters", description: "Hand hot cocoa to freezing morning commuters; comfort creates lasting affinity.", category: "Freebies & Sampling", cost: "Low", impact: "Warmth" },
+      { rank: 75, title: "Seed Paper Handouts", description: "Plantable seed-paper cards that grow flowers — an eco gift with a long tail.", category: "Freebies & Sampling", cost: "Low", impact: "Eco" },
+
+      // Stunts & Flash Mobs
+      { rank: 76, title: "Choreographed Flash Mob", description: "A crowd erupts into a themed dance in a busy square, ending on your brand reveal.", category: "Stunts & Flash Mobs", cost: "Med", impact: "Viral" },
+      { rank: 77, title: "Frozen Freeze Mob", description: "Dozens freeze mid-motion for two minutes; the stillness stops the whole street.", category: "Stunts & Flash Mobs", cost: "Low", impact: "Wonder" },
+      { rank: 78, title: "Pillow / Foam Fight", description: "A permitted mass pillow fight branded end-to-end — pure joyful chaos and content.", category: "Stunts & Flash Mobs", cost: "Med", impact: "Fun" },
+      { rank: 79, title: "Fake Product Launch Line", description: "Stage an obvious queue outside a pop-up; curiosity draws real people to join it.", category: "Stunts & Flash Mobs", cost: "Low", impact: "FOMO" },
+      { rank: 80, title: "Record-Breaking Attempt", description: "Chase a fun world record tied to your product to earn press and a crowd.", category: "Stunts & Flash Mobs", cost: "Med", impact: "Press" },
+      { rank: 81, title: "Surprise Celebrity Cameo", description: "A pop-in appearance or lookalike stunt at a pop-up sparks instant crowds and clips.", category: "Stunts & Flash Mobs", cost: "High", impact: "Star power" },
+      { rank: 82, title: "Confetti Cannon Moment", description: "Trigger a timed confetti burst over a plaza to punctuate a countdown or reveal.", category: "Stunts & Flash Mobs", cost: "Low", impact: "Climax" },
+      { rank: 83, title: "Street Orchestra Ambush", description: "A hidden ensemble assembles one by one into a full performance around your set piece.", category: "Stunts & Flash Mobs", cost: "Med", impact: "Emotion" },
+      { rank: 84, title: "Giant Group Photo", description: "Rally a crowd to form your logo or word from above, captured by drone for the feed.", category: "Stunts & Flash Mobs", cost: "Med", impact: "Aerial" },
+      { rank: 85, title: "Bubble / Foam Storm", description: "Fill a plaza with harmless foam or bubbles for a euphoric, camera-ready takeover.", category: "Stunts & Flash Mobs", cost: "Med", impact: "Euphoria" },
+
+      // Mixed high-impact extras
+      { rank: 86, title: "Projection Mapping on Buildings", description: "After dark, project animated stories onto a landmark facade during peak foot traffic.", category: "Interactive & Experiential", cost: "High", impact: "Cinematic" },
+      { rank: 87, title: "Interactive Bus Shelter Screen", description: "AR screens that place lions, storms, or your product 'live' on the street behind waiters.", category: "Transit & Vehicles", cost: "High", impact: "Shareable" },
+      { rank: 88, title: "Talking Statue / Voice Box", description: "A hidden speaker lets a statue or poster 'talk' to passersby who lean in.", category: "Interactive & Experiential", cost: "Low", impact: "Uncanny" },
+      { rank: 89, title: "Sidewalk Scale Model City", description: "A miniature branded cityscape on the pavement people crouch to explore.", category: "Guerrilla Installations", cost: "Med", impact: "Detail" },
+      { rank: 90, title: "Interactive Sound Tiles", description: "Pressure tiles that play notes as people step — the sidewalk becomes an instrument.", category: "Interactive & Experiential", cost: "High", impact: "Musical" },
+      { rank: 91, title: "Guerrilla Projection Bikes", description: "Cyclists with projectors cast moving ads onto walls as they roam at night.", category: "Transit & Vehicles", cost: "Med", impact: "Mobile" },
+      { rank: 92, title: "Sticker-Bomb Photo Wall", description: "Invite the public to sticker a designated wall into a living, evolving artwork.", category: "Stickers & Posters", cost: "Low", impact: "Community" },
+      { rank: 93, title: "Chalk Hopscotch Journey", description: "A giant hopscotch course that literally walks kids and parents to your door.", category: "Chalk & Pavement", cost: "Low", impact: "Family" },
+      { rank: 94, title: "Free Portrait Sketch Stand", description: "An artist sketches passersby on branded paper they proudly keep and post.", category: "Wearable & Human", cost: "Low", impact: "Keepsake" },
+      { rank: 95, title: "Mystery Box Handout", description: "Sealed boxes of unknown contents create suspense; the unboxing becomes content.", category: "Freebies & Sampling", cost: "Med", impact: "Curiosity" },
+      { rank: 96, title: "Pop-Up Petting / Puppy Zone", description: "A licensed adoption-partner puppy zone draws crowds and pure positive association.", category: "Interactive & Experiential", cost: "Med", impact: "Heartwarming" },
+      { rank: 97, title: "Human Claw Machine", description: "A giant claw-machine set with a person 'operating' inside — an absurd crowd magnet.", category: "Stunts & Flash Mobs", cost: "High", impact: "Absurd" },
+      { rank: 98, title: "Message-in-Balloon Release", description: "A permitted biodegradable balloon or lantern moment tied to a wish or launch.", category: "Stunts & Flash Mobs", cost: "Med", impact: "Emotional" },
+      { rank: 99, title: "Sidewalk Story Mural Trail", description: "A numbered mural series along a route that tells your brand story block by block.", category: "Guerrilla Installations", cost: "Med", impact: "Journey" },
+      { rank: 100, title: "Golden Ticket Street Hunt", description: "Hide rare golden tickets in the city; social clues turn the whole town into players.", category: "Freebies & Sampling", cost: "Med", impact: "Frenzy" }
+    ];
+
+    const grid = document.getElementById('grid');
+    const search = document.getElementById('search');
+    const catFilters = document.getElementById('catFilters');
+    const costFilters = document.getElementById('costFilters');
+    const countEl = document.getElementById('count');
+    const activeCatEl = document.getElementById('activeCat');
+
+    let state = { q: '', cat: 'all', cost: 'all' };
+
+    const categories = ['all', ...Array.from(new Set(IDEAS.map(i => i.category)))];
+
+    function buildCatChips() {
+      catFilters.innerHTML = categories.map(c =>
+        `<button class="chip ${c === 'all' ? 'active' : ''}" data-cat="${c}">${c === 'all' ? 'All ideas' : c}</button>`
+      ).join('');
+    }
+
+    function escapeHtml(s) {
+      return s.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+    }
+
+    function cardHtml(item) {
+      return `
+        <article class="card">
+          <div class="card-top">
+            <div class="rank">${item.rank}</div>
+            <div>
+              <h3>${escapeHtml(item.title)}</h3>
+              <span class="cat">${escapeHtml(item.category)}</span>
+            </div>
+          </div>
+          <p>${escapeHtml(item.description)}</p>
+          <div class="badges">
+            <span class="badge cost-${item.cost}">${item.cost} budget</span>
+            <span class="badge impact">${escapeHtml(item.impact)}</span>
+          </div>
+        </article>`;
+    }
+
+    function render() {
+      const q = state.q.trim().toLowerCase();
+      const filtered = IDEAS.filter(i => {
+        const matchesCat = state.cat === 'all' || i.category === state.cat;
+        const matchesCost = state.cost === 'all' || i.cost === state.cost;
+        const matchesQ = !q ||
+          i.title.toLowerCase().includes(q) ||
+          i.description.toLowerCase().includes(q) ||
+          i.category.toLowerCase().includes(q) ||
+          i.impact.toLowerCase().includes(q);
+        return matchesCat && matchesCost && matchesQ;
+      });
+
+      countEl.innerHTML = `Showing <strong>${filtered.length}</strong> of ${IDEAS.length} ideas`;
+      activeCatEl.textContent = state.cat === 'all' ? '' : state.cat;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="empty"><div class="big">🔍</div><p>No ideas match your search. Try clearing filters or a different keyword.</p></div>`;
+        return;
+      }
+      grid.innerHTML = filtered.map(cardHtml).join('');
+    }
+
+    search.addEventListener('input', e => { state.q = e.target.value; render(); });
+
+    catFilters.addEventListener('click', e => {
+      const btn = e.target.closest('.chip');
+      if (!btn) return;
+      state.cat = btn.dataset.cat;
+      catFilters.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === btn));
+      render();
+    });
+
+    costFilters.addEventListener('click', e => {
+      const btn = e.target.closest('.chip');
+      if (!btn) return;
+      state.cost = btn.dataset.cost;
+      costFilters.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === btn));
+      render();
+    });
+
+    buildCatChips();
+    render();
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("sw.js").catch(function () {});
+      });
+    }
+  </script>
+</body>
+</html>

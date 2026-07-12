@@ -132,13 +132,21 @@
     .sp-body strong { font-size: 15px; font-weight: 700; }
     .sp-body em { font-style: normal; font-size: 12.5px; color: var(--muted); line-height: 1.35; }
 
-    .toc {
-      margin-top: 8px;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      background: rgba(255,255,255,.02);
-      overflow: hidden;
+    .toc-details {
+      border: 1px solid var(--line); border-radius: 24px;
+      background: rgba(255,255,255,.02); overflow: hidden;
     }
+    .toc-summary {
+      cursor: pointer; list-style: none; padding: 18px 24px;
+      font-family: "Fraunces", serif; font-size: 18px; font-weight: 900;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .toc-summary::-webkit-details-marker { display: none; }
+    .toc-summary::after { content: "+"; font-size: 22px; color: var(--peach); font-weight: 700; }
+    .toc-details[open] .toc-summary::after { content: "–"; }
+    .toc-details[open] .toc-summary { border-bottom: 1px solid var(--line); }
+    .toc-details .toc { border: none; border-radius: 0; background: transparent; margin: 0; }
+    .toc-details .toc-search-wrap { margin-top: 16px; }
     .toc-group + .toc-group { border-top: 1px solid var(--line); }
     .toc-group-head {
       display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px 20px;
@@ -283,21 +291,24 @@
           </li>
         </ol>
       </nav>
-      <a class="toc-jump" href="#index">Or jump to full section index &darr;</a>
+      <a class="toc-jump" href="#index">Browse all sections &darr;</a>
     </header>
 
     <main id="main">
       <div id="sections"></div>
 
       <div class="rowhead" id="index">
-        <h2>Full section index</h2>
+        <h2>Browse all sections</h2>
         <span id="indexCount"></span>
       </div>
-      <p class="suite-blurb">Every major section and subsection across the hub — deep-linked so you can open the exact block you need.</p>
-      <div class="toc-search-wrap">
-        <input class="toc-search" id="tocSearch" type="search" placeholder="Filter sections — e.g. remix, hashtags, true fans…" autocomplete="off" />
-      </div>
-      <div class="toc" id="toc"></div>
+      <p class="suite-blurb">Deep links to every major block. Collapsed by default so Start here stays the primary scan.</p>
+      <details class="toc-details" id="tocDetails">
+        <summary class="toc-summary">Show full section index</summary>
+        <div class="toc-search-wrap">
+          <input class="toc-search" id="tocSearch" type="search" placeholder="Filter sections — e.g. remix, hashtags, true fans…" autocomplete="off" />
+        </div>
+        <div class="toc" id="toc"></div>
+      </details>
     </main>
 
     <footer class="wrap" style="padding-left:0;padding-right:0;">
@@ -374,7 +385,7 @@
           { href: "tinsley-song.html#catalog-timeline", num: "01a", label: "Release cadence", note: "Timeline of every release by year and format", sub: true },
           { href: "tinsley-song.html#remix", num: "02", label: "EDM Remix Potential", note: "0–100 dance-floor scores + sync cues" },
           { href: "tinsley-song.html#remix-dist", num: "02a", label: "Score distribution", note: "How the catalog clusters by remixability", sub: true },
-          { href: "tinsley-song.html#pitch", num: "03", label: "Pitch Kit", note: "Top 5 remix/sync one-pager + Start Here playlist" },
+          { href: "tinsley-song.html#pitch", num: "03", label: "Pitch Kit", note: "Remix/sync + Start Here + EPK downloads (.txt / .md)" },
           { href: "tinsley-song.html#assessment", num: "04", label: "Strengths, Opportunities & Watch-outs", note: "Catalog-focused SWOT diagnosis" },
           { href: "tinsley-song.html#artists", num: "05", label: "10 Like Artists", note: "Fan-overlap targets for playlists, ads, tour" },
           { href: "tinsley-song.html#artist-map", num: "05a", label: "Positioning map", note: "Overlap vs. reachability scatter", sub: true }
@@ -387,11 +398,12 @@
         items: [
           { href: "tinsley-social.html#hashtags", num: "01", label: "Hashtag Strategy", note: "Brand, genre, location, community, discovery" },
           { href: "tinsley-social.html#bysong", num: "02", label: "Key Hashtags by Song", note: "TikTok + Instagram tiers + weekly recipes" },
-          { href: "tinsley-social.html#calendar", num: "03", label: "Daily Content Calendar", note: "Mon–Sun cadence with song recipes + checkoffs" },
+          { href: "tinsley-social.html#calendar", num: "03", label: "Daily Content Calendar", note: "Mon–Sun cadence with skip day, share link, week review" },
           { href: "tinsley-social.html#social", num: "04", label: "Social Media Opportunities", note: "Platform priorities and content plays" },
-          { href: "tinsley-social.html#roadmap", num: "05", label: "Growth Roadmap · 30 → 720 Days", note: "Reach, revenue, product, foundation tracks" },
-          { href: "tinsley-social.html#north-stars", num: "05a", label: "North-star metrics", note: "Editable targets with saved trend history", sub: true },
-          { href: "tinsley-social.html#rmTracker", num: "05b", label: "Milestone tracker", note: "Check off actions — progress saves locally", sub: true }
+          { href: "tinsley-social.html#street-picks", num: "05", label: "Guerrilla picks for Tinsley", note: "Six street tactics reframed for Seattle indie" },
+          { href: "tinsley-social.html#roadmap", num: "06", label: "Growth Roadmap · 30 → 720 Days", note: "Reach, revenue, product, foundation tracks" },
+          { href: "tinsley-social.html#north-stars", num: "06a", label: "North-star metrics", note: "Editable targets with saved trend history", sub: true },
+          { href: "tinsley-social.html#rmTracker", num: "06b", label: "Milestone tracker", note: "Check off actions — progress saves locally", sub: true }
         ]
       },
       {
@@ -535,8 +547,15 @@
       renderToc("");
     }
 
-    tocSearch.addEventListener("input", () => renderToc(tocSearch.value));
+    const tocDetails = document.getElementById("tocDetails");
+    tocSearch.addEventListener("input", () => {
+      const q = tocSearch.value;
+      if (q.trim() && tocDetails && !tocDetails.open) tocDetails.open = true;
+      renderToc(q);
+    });
     render();
+
+    if (location.hash === "#index" && tocDetails) tocDetails.open = true;
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () {

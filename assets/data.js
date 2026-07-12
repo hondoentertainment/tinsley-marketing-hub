@@ -320,6 +320,22 @@ const TINSLEY = {
     ]
   },
 
+  // ---- Guerrilla street picks applied to Tinsley (from the Top 100 field guide) ----
+  streetPicks: [
+    { rank: 1, title: "3D Sidewalk Chalk Art", category: "Chalk & Pavement",
+      angle: "Anamorphic 'Bad Enough' lyric / choose-yourself hole-in-the-ground on Capitol Hill — photo bait for TikTok." },
+    { rank: 35, title: "QR Treasure Hunt", category: "Stickers & Posters",
+      angle: "QR trail from KEXP / record shops to a Bandcamp demo unlock — converts street curiosity to owned email." },
+    { rank: 23, title: "Roaming Brand Mascot", category: "Wearable & Human",
+      angle: "Coastal-cowgirl / diary-girl character at Block Party or UW campus weekend — lean into Good Ride twang." },
+    { rank: 45, title: "Photo Booth Portal", category: "Interactive & Experiential",
+      angle: "Vinyl-unboxing / 'Start Here' listening booth at a merch pop-up — prints a Start Here tracklist card." },
+    { rank: 62, title: "Drone Light Show", category: "Transit & Vehicles",
+      angle: "Only for a festival headline moment — Tinsley monogram over the waterfront as a once-a-year spectacle." },
+    { rank: 100, title: "Golden Ticket Street Hunt", category: "Freebies & Sampling",
+      angle: "Hide signed vinyl inserts / show tickets around Seattle; social clues drive True Fan conversion." }
+  ],
+
   // ---- Social media opportunities per platform ----
   social: [
     { platform: "TikTok", handle: "@tinsleymusic", priority: "Highest",

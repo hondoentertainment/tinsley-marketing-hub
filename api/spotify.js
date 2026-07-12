@@ -94,6 +94,13 @@ module.exports = async (req, res) => {
     res.setHeader("X-Cache", "MISS");
     return res.status(200).json(payload);
   } catch (e) {
+    // Serve last good payload if we have one (stale-while-error) so the UI stays useful.
+    if (cache.data) {
+      res.setHeader("Cache-Control", "public, s-maxage=60, stale-while-revalidate=86400");
+      res.setHeader("X-Cache", "STALE");
+      res.setHeader("X-Error-Reason", String((e && e.message) || e));
+      return res.status(200).json(Object.assign({}, cache.data, { stale: true, reason: String((e && e.message) || e) }));
+    }
     res.setHeader("Cache-Control", "no-store");
     return res.status(200).json({ error: true, reason: String((e && e.message) || e) });
   }

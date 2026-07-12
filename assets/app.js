@@ -257,11 +257,28 @@
     const weekId = isoWeekId(new Date());
     const todayKey = dowKeys[new Date().getDay()];
 
-    let store = { week: weekId, done: {}, song: 0 };
+    let store = { week: weekId, done: {}, skipped: {}, song: 0 };
     try {
       const raw = JSON.parse(localStorage.getItem(STORE_KEY));
-      if (raw && raw.week === weekId) store = raw;
+      if (raw && raw.week === weekId) {
+        store = { week: weekId, done: raw.done || {}, skipped: raw.skipped || {}, song: raw.song || 0 };
+      }
     } catch (e) { /* fresh week */ }
+
+    /* Restore from share link ?c= */
+    try {
+      const shared = new URLSearchParams(location.search).get("c");
+      if (shared) {
+        const decoded = decodeCalShare(shared);
+        if (decoded) {
+          store.done = decoded.done;
+          store.skipped = decoded.skipped;
+          store.song = decoded.song;
+          store.week = weekId;
+        }
+      }
+    } catch (e) {}
+
     if (typeof store.song === "number" && store.song >= 0 && store.song < songs.length) {
       songIdx = store.song;
     }
@@ -296,6 +313,48 @@
       return list;
     };
 
+    function encodeCalShare() {
+      const slots = allSlots();
+      const bytes = [];
+      for (let i = 0; i < slots.length; i += 8) {
+        let b = 0;
+        for (let j = 0; j < 8; j++) if (slots[i + j] && store.done[slots[i + j].id]) b |= 1 << (7 - j);
+        bytes.push(b);
+      }
+      let skipByte = 0;
+      cal.days.forEach((day, i) => {
+        if (store.skipped[day.key]) skipByte |= 1 << i;
+      });
+      bytes.push(skipByte, songIdx & 255);
+      let bin = "";
+      bytes.forEach((b) => (bin += String.fromCharCode(b)));
+      return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    }
+
+    function decodeCalShare(str) {
+      try {
+        let b = str.replace(/-/g, "+").replace(/_/g, "/");
+        while (b.length % 4) b += "=";
+        const bin = atob(b);
+        const slots = allSlots();
+        const done = {};
+        for (let i = 0; i < slots.length; i++) {
+          const byte = bin.charCodeAt(i >> 3) || 0;
+          if (byte & (1 << (7 - (i % 8)))) done[slots[i].id] = true;
+        }
+        const skipIdx = Math.ceil(slots.length / 8);
+        const skipByte = bin.charCodeAt(skipIdx) || 0;
+        const skipped = {};
+        cal.days.forEach((day, i) => {
+          if (skipByte & (1 << i)) skipped[day.key] = true;
+        });
+        const song = bin.charCodeAt(skipIdx + 1) || 0;
+        return { done, skipped, song: Math.min(song, Math.max(0, songs.length - 1)) };
+      } catch (e) {
+        return null;
+      }
+    }
+
     const platforms = ["all", ...new Set(cal.days.flatMap((d) => d.slots.map((s) => s.platform)))];
 
     const roleLabel = {
@@ -306,26 +365,66 @@
       bank: "Bank"
     };
 
-    function copyWeekText() {
+    function weekPlanText() {
       const song = songs[songIdx];
       const lines = ["Tinsley · Daily Content Calendar · " + weekId];
       if (song) lines.push("Featured song: " + song.title);
       lines.push(cal.cadence, "");
       cal.days.forEach((day) => {
-        lines.push(day.label + " — " + day.focus);
-        day.slots.forEach((slot) => {
-          lines.push("  • [" + slot.platform + " / " + slot.format + "] " + slotIdea(day, slot));
+        const skip = !!store.skipped[day.key];
+        lines.push(day.label + " — " + day.focus + (skip ? " [SKIPPED]" : ""));
+        day.slots.forEach((slot, si) => {
+          const id = slotId(day.key, si);
+          const mark = store.done[id] || skip ? "✓" : "○";
+          lines.push("  " + mark + " [" + slot.platform + " / " + slot.format + "] " + slotIdea(day, slot));
         });
         lines.push("");
       });
-      copy(lines.join("\n").trim(), "Copied this week's calendar");
+      return lines.join("\n").trim();
+    }
+
+    function weekReviewText() {
+      const song = songs[songIdx];
+      const slots = allSlots();
+      const doneCount = slots.filter((s) => store.done[s.id] || store.skipped[s.day.key]).length;
+      const skippedDays = cal.days.filter((d) => store.skipped[d.key]).map((d) => d.label);
+      const remaining = slots.filter((s) => !store.done[s.id] && !store.skipped[s.day.key]);
+      const lines = [
+        "TINSLEY · WEEK IN REVIEW · " + weekId,
+        song ? "Featured song: " + song.title : "",
+        "Progress: " + doneCount + "/" + slots.length + " slots (" + (slots.length ? Math.round((doneCount / slots.length) * 100) : 0) + "%)",
+        skippedDays.length ? "Skipped days: " + skippedDays.join(", ") : "Skipped days: none",
+        "",
+        "Shipped / complete:"
+      ];
+      slots.filter((s) => store.done[s.id] || store.skipped[s.day.key]).forEach((s) => {
+        lines.push("  ✓ " + s.day.label + " · " + s.slot.platform + " — " + slotIdea(s.day, s.slot) + (store.skipped[s.day.key] && !store.done[s.id] ? " (day skipped)" : ""));
+      });
+      lines.push("", "Still open:");
+      if (!remaining.length) lines.push("  (none — week complete)");
+      remaining.forEach((s) => {
+        lines.push("  ○ " + s.day.label + " · " + s.slot.platform + " — " + slotIdea(s.day, s.slot));
+      });
+      return lines.filter((l, i) => l !== "" || i === 0).join("\n");
+    }
+
+    function downloadBlob(filename, text) {
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
     }
 
     function render() {
       const song = songs[songIdx];
       const slots = allSlots();
-      const doneCount = slots.filter((s) => store.done[s.id]).length;
-      const pct = slots.length ? Math.round((doneCount / slots.length) * 100) : 0;
+      const effectiveDone = slots.filter((s) => store.done[s.id] || store.skipped[s.day.key]).length;
+      const pct = slots.length ? Math.round((effectiveDone / slots.length) * 100) : 0;
 
       const songTabs = songs
         .map((s, i) =>
@@ -342,13 +441,14 @@
       const daysHtml = cal.days
         .map((day) => {
           const isToday = day.key === todayKey;
+          const skipped = !!store.skipped[day.key];
           const daySlots = day.slots
             .map((slot, si) => {
               if (filter !== "all" && slot.platform !== filter) return "";
               const id = slotId(day.key, si);
-              const checked = !!store.done[id];
-              return `<li class="cal-slot${checked ? " done" : ""}" data-id="${id}">
-                <button type="button" class="cal-check" aria-pressed="${checked}" aria-label="Mark done: ${slot.platform} on ${day.label}"></button>
+              const checked = !!store.done[id] || skipped;
+              return `<li class="cal-slot${checked ? " done" : ""}${skipped ? " skipped" : ""}" data-id="${id}">
+                <button type="button" class="cal-check" aria-pressed="${checked}" aria-label="Mark done: ${slot.platform} on ${day.label}" ${skipped ? "disabled" : ""}></button>
                 <div class="cal-slot-body">
                   <div class="cal-slot-meta">
                     <span class="cal-plat">${slot.platform}</span>
@@ -363,13 +463,14 @@
 
           if (filter !== "all" && !daySlots) return "";
 
-          return `<article class="cal-day role-${day.role}${isToday ? " today" : ""}" data-day="${day.key}">
+          return `<article class="cal-day role-${day.role}${isToday ? " today" : ""}${skipped ? " skipped" : ""}" data-day="${day.key}">
             <header class="cal-day-h">
               <div>
-                <span class="cal-dow">${day.label}${isToday ? " · Today" : ""}</span>
+                <span class="cal-dow">${day.label}${isToday ? " · Today" : ""}${skipped ? " · Skipped" : ""}</span>
                 <span class="cal-role">${roleLabel[day.role] || day.role}</span>
               </div>
               <p class="cal-focus">${day.focus}</p>
+              <button type="button" class="cal-skip-day" data-day="${day.key}" aria-pressed="${skipped}">${skipped ? "Unskip day" : "Skip day"}</button>
             </header>
             <ul class="cal-slots">${daySlots || `<li class="cal-empty">No ${filter} slots today</li>`}</ul>
           </article>`;
@@ -388,7 +489,7 @@
               <span class="cal-ring-pct">${pct}%</span>
             </div>
             <div>
-              <strong>${doneCount}/${slots.length}</strong> slots this week
+              <strong>${effectiveDone}/${slots.length}</strong> slots this week
               <div class="cal-week-id">${weekId}</div>
             </div>
           </div>
@@ -401,7 +502,10 @@
         <div class="cal-toolbar">
           <div class="cal-filters">${filters}</div>
           <div class="cal-actions">
-            <button type="button" class="btn" id="calCopy">Copy week</button>
+            <button type="button" class="btn btn-primary" id="calReview">Copy week review</button>
+            <button type="button" class="btn" id="calShare">Copy share link</button>
+            <button type="button" class="btn" id="calDownload">Download .txt</button>
+            <button type="button" class="btn" id="calCopy">Copy plan</button>
             <button type="button" class="btn" id="calReset">Reset week</button>
           </div>
         </div>
@@ -430,12 +534,38 @@
           render();
         });
       });
+      shell.querySelectorAll(".cal-skip-day").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const key = btn.getAttribute("data-day");
+          if (store.skipped[key]) delete store.skipped[key];
+          else store.skipped[key] = true;
+          save();
+          render();
+        });
+      });
       const copyBtn = shell.querySelector("#calCopy");
-      if (copyBtn) copyBtn.addEventListener("click", copyWeekText);
+      if (copyBtn) copyBtn.addEventListener("click", () => copy(weekPlanText(), "Copied this week's plan"));
+      const reviewBtn = shell.querySelector("#calReview");
+      if (reviewBtn) reviewBtn.addEventListener("click", () => copy(weekReviewText(), "Copied week in review"));
+      const shareBtn = shell.querySelector("#calShare");
+      if (shareBtn) {
+        shareBtn.addEventListener("click", () => {
+          const url = location.origin + location.pathname + "?c=" + encodeCalShare() + "#calendar";
+          copy(url, "Calendar share link copied");
+        });
+      }
+      const dlBtn = shell.querySelector("#calDownload");
+      if (dlBtn) {
+        dlBtn.addEventListener("click", () => {
+          downloadBlob("tinsley-week-review-" + weekId + ".txt", weekReviewText());
+          showToast("Downloaded week review");
+        });
+      }
       const resetBtn = shell.querySelector("#calReset");
       if (resetBtn) {
         resetBtn.addEventListener("click", () => {
           store.done = {};
+          store.skipped = {};
           save();
           render();
           showToast("Week checkoffs cleared");
@@ -736,52 +866,80 @@
     }
   })();
 
-  /* ---- live Spotify hydration (graceful fallback) ---- */
+  /* ---- live Spotify hydration (cache + visible failure) ---- */
   (function live() {
     const liveChip = () => $("#freshLive");
+    const CACHE_KEY = "tinsley.spotify.cache.v1";
+    const applyPayload = (d, fromCache) => {
+      if (!d || !d.artist) return false;
+      const a = d.artist;
+      const liveMetrics = [];
+      if (a.popularity != null) liveMetrics.push({ value: a.popularity + "/100", label: "Spotify popularity", live: true, confidence: "live", source: fromCache ? "Cached Spotify" : "Spotify Web API" });
+      if (a.followers != null) liveMetrics.push({ value: nfCompact(a.followers), label: "Spotify followers", live: true, confidence: "live", source: fromCache ? "Cached Spotify" : "Spotify Web API" });
+      if (metrics) {
+        metrics.querySelectorAll(".metric.live").forEach((n) => n.remove());
+        liveMetrics.forEach((m) => metrics.insertBefore(metricEl(m), metrics.firstChild));
+      }
+      const artMap = d.albumArt || {};
+      document.querySelectorAll(".track[data-title]").forEach((card) => {
+        const title = card.getAttribute("data-title").toLowerCase();
+        let url = artMap[title];
+        if (!url) {
+          const base = title.split(" (")[0];
+          const key = Object.keys(artMap).find((k) => k.startsWith(base) || base.startsWith(k));
+          if (key) url = artMap[key];
+        }
+        const media = card.querySelector(".track-media");
+        if (url && media) media.innerHTML = `<img src="${url}" alt="" loading="lazy" />`;
+      });
+      const badge = $("#updatedBadge");
+      const chip = liveChip();
+      if (chip && d.updatedAt) {
+        const when = new Date(d.updatedAt).toLocaleString();
+        chip.textContent = (fromCache ? "Spotify cached · " : "Spotify live · ") + when;
+        chip.classList.add("on");
+        chip.classList.toggle("cached", !!fromCache);
+      }
+      if (badge) badge.classList.add("islive");
+      return true;
+    };
+
+    const fail = (reason) => {
+      let cached = null;
+      try { cached = JSON.parse(sessionStorage.getItem(CACHE_KEY)); } catch (e) {}
+      if (cached && cached.artist && applyPayload(cached, true)) {
+        const chip = liveChip();
+        if (chip) {
+          chip.title = reason || "Using last successful fetch";
+          chip.classList.add("cached");
+        }
+        return;
+      }
+      const chip = liveChip();
+      if (chip) {
+        const label =
+          reason === "missing_credentials"
+            ? "Spotify · not configured"
+            : reason
+              ? "Spotify · offline (" + reason.replace(/_/g, " ") + ")"
+              : "Spotify · offline";
+        chip.textContent = label;
+        chip.classList.add("off");
+        chip.title = "Live metrics unavailable — curated deck data still works.";
+      }
+    };
+
     fetch("/api/spotify", { headers: { accept: "application/json" } })
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => {
         if (!d || d.error || !d.artist) {
-          const chip = liveChip();
-          if (chip) {
-            chip.textContent = "Spotify · offline";
-            chip.classList.add("off");
-          }
+          fail(d && d.reason);
           return;
         }
-        const a = d.artist;
-        const liveMetrics = [];
-        if (a.popularity != null) liveMetrics.push({ value: a.popularity + "/100", label: "Spotify popularity", live: true, confidence: "live", source: "Spotify Web API" });
-        if (a.followers != null) liveMetrics.push({ value: nfCompact(a.followers), label: "Spotify followers", live: true, confidence: "live", source: "Spotify Web API" });
-        if (metrics) liveMetrics.forEach((m) => metrics.insertBefore(metricEl(m), metrics.firstChild));
-        const artMap = d.albumArt || {};
-        document.querySelectorAll(".track[data-title]").forEach((card) => {
-          const title = card.getAttribute("data-title").toLowerCase();
-          let url = artMap[title];
-          if (!url) {
-            const base = title.split(" (")[0];
-            const key = Object.keys(artMap).find((k) => k.startsWith(base) || base.startsWith(k));
-            if (key) url = artMap[key];
-          }
-          const media = card.querySelector(".track-media");
-          if (url && media) media.innerHTML = `<img src="${url}" alt="" loading="lazy" />`;
-        });
-        const badge = $("#updatedBadge");
-        const chip = liveChip();
-        if (chip && d.updatedAt) {
-          chip.textContent = "Spotify live · " + new Date(d.updatedAt).toLocaleString();
-          chip.classList.add("on");
-        }
-        if (badge) badge.classList.add("islive");
+        try { sessionStorage.setItem(CACHE_KEY, JSON.stringify(d)); } catch (e) {}
+        applyPayload(d, !!d.stale);
       })
-      .catch(() => {
-        const chip = liveChip();
-        if (chip) {
-          chip.textContent = "Spotify · offline";
-          chip.classList.add("off");
-        }
-      });
+      .catch(() => fail("network"));
   })();
 
   /* ---- SVG analytics charts ---- */
@@ -969,18 +1127,44 @@
     document.body.removeChild(ta);
   }
 
-  /* ---- Pitch kit: remix/sync one-pager + Start Here playlist ---- */
+  /* ---- Pitch kit: remix/sync one-pager + Start Here + EPK cold-email block ---- */
   (function pitchKit() {
     const wrap = $("#pitchKit");
     if (!wrap) return;
     const top = (D.remixRanking || []).slice(0, 5);
     const sh = D.startHere;
+    const artist = D.artist || {};
+    const press = (D.press || []).slice(0, 3);
+
     const remixLines = top
       .map((r, i) => `${i + 1}. ${r.title} (${r.score}/100 · ${r.style})\n   Sync: ${r.sync || "—"}\n   Why: ${r.why}`)
       .join("\n\n");
     const startLines = sh
       ? [sh.title, "", sh.blurb, "", ...(sh.tracks || []).map((t, i) => `${i + 1}. ${t.title} — ${t.why}`)].join("\n")
       : "";
+    const pressLines = press.map((p) => `"${p.quote}"\n— ${p.source}`).join("\n\n");
+    const epkBlock = [
+      "TINSLEY — SHORT EPK / COLD EMAIL BLOCK",
+      "",
+      artist.name + (artist.location ? " · " + artist.location : ""),
+      artist.tagline || "",
+      "",
+      artist.bio || "",
+      "",
+      "Links:",
+      artist.links && artist.links.spotify ? "Spotify: " + artist.links.spotify : "",
+      artist.links && artist.links.website ? "Site: " + artist.links.website : "",
+      artist.links && artist.links.epk ? "EPK: " + artist.links.epk : "",
+      "",
+      "Press:",
+      pressLines,
+      "",
+      "Start Here playlist:",
+      startLines
+    ]
+      .filter((l) => l !== undefined)
+      .join("\n");
+
     const fullOnePager = [
       "TINSLEY — PITCH ONE-PAGER",
       "Seattle indie pop-rock · Catalog & sync brief",
@@ -990,7 +1174,34 @@
       remixLines,
       "",
       "=== START HERE PLAYLIST ===",
-      startLines
+      startLines,
+      "",
+      "=== SHORT EPK ===",
+      epkBlock
+    ].join("\n");
+
+    const mdOnePager = [
+      "# Tinsley — Pitch one-pager",
+      "",
+      "_Seattle indie pop-rock · Catalog & sync brief_",
+      D.meta && D.meta.updated ? "_Data as of " + D.meta.updated + "_" : "",
+      "",
+      "## Top 5 remix & sync asks",
+      "",
+      ...top.map((r, i) => `### ${i + 1}. ${r.title} (${r.score}/100)\n**Style:** ${r.style}\n\n**Sync:** ${r.sync || "—"}\n\n${r.why}\n`),
+      "## Start Here playlist",
+      "",
+      sh ? sh.blurb : "",
+      "",
+      ...(sh && sh.tracks ? sh.tracks.map((t, i) => `${i + 1}. **${t.title}** — ${t.why}`) : []),
+      "",
+      "## Short EPK",
+      "",
+      artist.bio || "",
+      "",
+      "### Press",
+      "",
+      ...press.map((p) => `> ${p.quote}\n>\n> — ${p.source}\n`)
     ].join("\n");
 
     const remixRows = top
@@ -1011,11 +1222,29 @@
       .map((t, i) => `<li><span class="pitch-track-n">${i + 1}</span><div><strong>${esc(t.title)}</strong><p>${esc(t.why)}</p></div></li>`)
       .join("");
 
+    const pressHtml = press
+      .map((p) => `<blockquote class="pitch-quote"><p>“${esc(p.quote)}”</p><cite>— ${esc(p.source)}</cite></blockquote>`)
+      .join("");
+
+    const download = (filename, text) => {
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    };
+
     wrap.innerHTML = `
       <div class="pitch-actions">
         <button type="button" class="btn btn-primary" id="pitchCopyAll">Copy full one-pager</button>
-        <button type="button" class="btn" id="pitchCopyRemix">Copy remix / sync brief</button>
-        <button type="button" class="btn" id="pitchCopyStart">Copy Start Here blurb</button>
+        <button type="button" class="btn" id="pitchCopyEpk">Copy EPK / cold email</button>
+        <button type="button" class="btn" id="pitchCopyRemix">Copy remix / sync</button>
+        <button type="button" class="btn" id="pitchDlTxt">Download .txt</button>
+        <button type="button" class="btn" id="pitchDlMd">Download .md</button>
       </div>
       <div class="pitch-grid">
         <div class="pitch-card">
@@ -1028,6 +1257,17 @@
           <p class="pitch-sub">${esc((sh && sh.blurb) || "")}</p>
           <ol class="pitch-tracks">${trackList}</ol>
         </div>
+        <div class="pitch-card pitch-epk">
+          <h3>Short EPK / cold email</h3>
+          <p class="pitch-sub">Bio + press + Start Here — one paste for editors, supervisors, and support-slot asks.</p>
+          <p class="pitch-bio">${esc(artist.bio || "")}</p>
+          <div class="pitch-press">${pressHtml}</div>
+          <div class="pitch-links">
+            ${artist.links && artist.links.spotify ? `<a href="${esc(artist.links.spotify)}" target="_blank" rel="noopener">Spotify</a>` : ""}
+            ${artist.links && artist.links.epk ? `<a href="${esc(artist.links.epk)}" target="_blank" rel="noopener">Official EPK</a>` : ""}
+            ${artist.links && artist.links.website ? `<a href="${esc(artist.links.website)}" target="_blank" rel="noopener">Site</a>` : ""}
+          </div>
+        </div>
       </div>`;
 
     const bind = (id, text, msg) => {
@@ -1035,8 +1275,30 @@
       if (btn) btn.addEventListener("click", () => copy(text, msg));
     };
     bind("pitchCopyAll", fullOnePager, "Copied full one-pager");
+    bind("pitchCopyEpk", epkBlock, "Copied EPK / cold email block");
     bind("pitchCopyRemix", "TOP 5 REMIX / SYNC ASKS\n\n" + remixLines, "Copied remix / sync brief");
-    bind("pitchCopyStart", startLines, "Copied Start Here blurb");
+    const dlTxt = $("#pitchDlTxt");
+    if (dlTxt) dlTxt.addEventListener("click", () => { download("tinsley-pitch-one-pager.txt", fullOnePager); showToast("Downloaded .txt"); });
+    const dlMd = $("#pitchDlMd");
+    if (dlMd) dlMd.addEventListener("click", () => { download("tinsley-pitch-one-pager.md", mdOnePager); showToast("Downloaded .md"); });
+  })();
+
+  /* ---- street picks for Tinsley ---- */
+  (function streetPicks() {
+    const wrap = $("#streetPicks");
+    if (!wrap || !D.streetPicks) return;
+    wrap.innerHTML = D.streetPicks
+      .map((p) => {
+        const catUrl = "street-marketing.html?cat=" + encodeURIComponent(p.category);
+        return `<a class="spick" href="${catUrl}">
+          <span class="spick-rank">#${p.rank}</span>
+          <div>
+            <div class="spick-top"><strong>${esc(p.title)}</strong><span class="spick-cat">${esc(p.category)}</span></div>
+            <p>${esc(p.angle)}</p>
+          </div>
+        </a>`;
+      })
+      .join("");
   })();
 
   /* ---- scroll reveal + animate bars ---- */

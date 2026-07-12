@@ -308,12 +308,9 @@
 
     function copyWeekText() {
       const song = songs[songIdx];
-      const lines = [
-        "Tinsley · Daily Content Calendar · " + weekId,
-        song ? "Featured song: " + song.title : "",
-        cal.cadence,
-        ""
-      ];
+      const lines = ["Tinsley · Daily Content Calendar · " + weekId];
+      if (song) lines.push("Featured song: " + song.title);
+      lines.push(cal.cadence, "");
       cal.days.forEach((day) => {
         lines.push(day.label + " — " + day.focus);
         day.slots.forEach((slot) => {
@@ -321,7 +318,7 @@
         });
         lines.push("");
       });
-      copy(lines.filter((l, i) => l || i === 0).join("\n"), "Copied this week's calendar");
+      copy(lines.join("\n").trim(), "Copied this week's calendar");
     }
 
     function render() {
@@ -713,7 +710,23 @@
   (function provenance() {
     if (!D.meta) return;
     const badge = $("#updatedBadge");
-    if (badge && D.meta.updated) badge.textContent = "Data current as of " + D.meta.updated;
+    if (badge && D.meta.updated) {
+      const updated = D.meta.updated;
+      let ageNote = "";
+      let stale = false;
+      try {
+        const then = new Date(updated + "T12:00:00");
+        const days = Math.floor((Date.now() - then.getTime()) / 86400000);
+        if (!isNaN(days)) {
+          if (days <= 0) ageNote = " · updated today";
+          else if (days === 1) ageNote = " · 1 day ago";
+          else ageNote = " · " + days + " days ago";
+          stale = days > 30;
+        }
+      } catch (e) {}
+      badge.innerHTML = `<span class="fresh-deck">Deck data · ${esc(updated)}${esc(ageNote)}</span><span class="fresh-live" id="freshLive">Spotify · checking…</span>`;
+      if (stale) badge.classList.add("stale");
+    }
     const meth = $("#methodology");
     if (meth) {
       const sources = (D.meta.sources || [])
@@ -725,14 +738,22 @@
 
   /* ---- live Spotify hydration (graceful fallback) ---- */
   (function live() {
+    const liveChip = () => $("#freshLive");
     fetch("/api/spotify", { headers: { accept: "application/json" } })
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => {
-        if (!d || d.error || !d.artist) return;
+        if (!d || d.error || !d.artist) {
+          const chip = liveChip();
+          if (chip) {
+            chip.textContent = "Spotify · offline";
+            chip.classList.add("off");
+          }
+          return;
+        }
         const a = d.artist;
         const liveMetrics = [];
-        if (a.popularity != null) liveMetrics.push({ value: a.popularity + "/100", label: "Spotify popularity", live: true });
-        if (a.followers != null) liveMetrics.push({ value: nfCompact(a.followers), label: "Spotify followers", live: true });
+        if (a.popularity != null) liveMetrics.push({ value: a.popularity + "/100", label: "Spotify popularity", live: true, confidence: "live", source: "Spotify Web API" });
+        if (a.followers != null) liveMetrics.push({ value: nfCompact(a.followers), label: "Spotify followers", live: true, confidence: "live", source: "Spotify Web API" });
         if (metrics) liveMetrics.forEach((m) => metrics.insertBefore(metricEl(m), metrics.firstChild));
         const artMap = d.albumArt || {};
         document.querySelectorAll(".track[data-title]").forEach((card) => {
@@ -747,12 +768,20 @@
           if (url && media) media.innerHTML = `<img src="${url}" alt="" loading="lazy" />`;
         });
         const badge = $("#updatedBadge");
-        if (badge && d.updatedAt) {
-          badge.textContent = "Live Spotify data · fetched " + new Date(d.updatedAt).toLocaleDateString();
-          badge.classList.add("islive");
+        const chip = liveChip();
+        if (chip && d.updatedAt) {
+          chip.textContent = "Spotify live · " + new Date(d.updatedAt).toLocaleString();
+          chip.classList.add("on");
         }
+        if (badge) badge.classList.add("islive");
       })
-      .catch(() => {});
+      .catch(() => {
+        const chip = liveChip();
+        if (chip) {
+          chip.textContent = "Spotify · offline";
+          chip.classList.add("off");
+        }
+      });
   })();
 
   /* ---- SVG analytics charts ---- */
@@ -834,17 +863,33 @@
     })();
   })();
 
-  /* ---- north-star metric tracker (editable, saved, with trend) ---- */
+  /* ---- north-star metric tracker (editable, saved, with trend + stale flag) ---- */
   (function northStar() {
     const wrap = $("#northStars");
     if (!wrap || !D.northStars) return;
     const KEY = "tinsley.northstar.v1";
+    const STALE_MS = 14 * 86400000;
     let store = {};
     try { store = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { store = {}; }
     const save = () => { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} };
     const fmt = (v, f) => (f === "usd" ? "$" + nfInt(v) : nfInt(v));
     const cur = (m) => (store[m.key] && store[m.key].current != null ? store[m.key].current : m.current);
     const hist = (m) => (store[m.key] && store[m.key].history) || [];
+    const lastTouch = (m) => {
+      const h = hist(m);
+      return h.length ? h[h.length - 1].t : null;
+    };
+    const isStale = (m) => {
+      const t = lastTouch(m);
+      if (t == null) return true;
+      return Date.now() - t > STALE_MS;
+    };
+    const staleLabel = (m) => {
+      const t = lastTouch(m);
+      if (t == null) return "Never updated";
+      const days = Math.floor((Date.now() - t) / 86400000);
+      return days === 1 ? "1 day stale" : days + " days stale";
+    };
 
     function spark(h) {
       if (!h || h.length < 2) return `<span class="ns-nohist">Update to log a trend</span>`;
@@ -856,11 +901,21 @@
     }
 
     function render() {
-      wrap.innerHTML = D.northStars
+      const staleCount = D.northStars.filter(isStale).length;
+      const banner = staleCount
+        ? `<div class="ns-stale-banner" role="status">${staleCount} north-star metric${staleCount === 1 ? "" : "s"} need${staleCount === 1 ? "s" : ""} a refresh (no edit in 14+ days). Update the number to log a trend.</div>`
+        : `<div class="ns-fresh-banner" role="status">All north-stars touched within the last 14 days.</div>`;
+
+      wrap.innerHTML = banner + D.northStars
         .map((m) => {
           const c = cur(m), p = Math.min(100, Math.round((c / m.target) * 100));
-          return `<div class="ns-card" data-key="${m.key}">
-            <div class="ns-top"><span class="ns-label">${esc(m.label)}</span><span class="ns-pct ${m.track}">${p}%</span></div>
+          const stale = isStale(m);
+          return `<div class="ns-card${stale ? " stale" : ""}" data-key="${m.key}">
+            <div class="ns-top">
+              <span class="ns-label">${esc(m.label)}</span>
+              <span class="ns-pct ${m.track}">${p}%</span>
+            </div>
+            ${stale ? `<span class="ns-stale-chip">${esc(staleLabel(m))}</span>` : ""}
             <div class="ns-nums"><input class="ns-input" type="number" inputmode="numeric" min="0" value="${c}" aria-label="Current ${esc(m.label)}" /><span class="ns-target">/ ${fmt(m.target, m.fmt)}</span></div>
             <div class="ns-bar"><span class="ns-fill ${m.track}" style="width:${p}%"></span></div>
             <div class="ns-foot"><span class="ns-note">${esc(m.note || "")}</span>${spark(hist(m))}</div>
@@ -913,6 +968,76 @@
     try { document.execCommand("copy"); showToast(msg); } catch (e) { showToast("Copy failed"); }
     document.body.removeChild(ta);
   }
+
+  /* ---- Pitch kit: remix/sync one-pager + Start Here playlist ---- */
+  (function pitchKit() {
+    const wrap = $("#pitchKit");
+    if (!wrap) return;
+    const top = (D.remixRanking || []).slice(0, 5);
+    const sh = D.startHere;
+    const remixLines = top
+      .map((r, i) => `${i + 1}. ${r.title} (${r.score}/100 · ${r.style})\n   Sync: ${r.sync || "—"}\n   Why: ${r.why}`)
+      .join("\n\n");
+    const startLines = sh
+      ? [sh.title, "", sh.blurb, "", ...(sh.tracks || []).map((t, i) => `${i + 1}. ${t.title} — ${t.why}`)].join("\n")
+      : "";
+    const fullOnePager = [
+      "TINSLEY — PITCH ONE-PAGER",
+      "Seattle indie pop-rock · Catalog & sync brief",
+      D.meta && D.meta.updated ? "Data as of " + D.meta.updated : "",
+      "",
+      "=== TOP 5 REMIX / SYNC ASKS ===",
+      remixLines,
+      "",
+      "=== START HERE PLAYLIST ===",
+      startLines
+    ].join("\n");
+
+    const remixRows = top
+      .map(
+        (r, i) => `<li class="pitch-row">
+          <span class="pitch-rank">${i + 1}</span>
+          <div>
+            <div class="pitch-title-row"><strong>${esc(r.title)}</strong><span class="pitch-score">${r.score}</span></div>
+            <div class="pitch-style">${esc(r.style)}</div>
+            ${r.sync ? `<p class="pitch-sync"><span class="rr-sync-l">Sync</span>${esc(r.sync)}</p>` : ""}
+            <p class="pitch-why">${esc(r.why)}</p>
+          </div>
+        </li>`
+      )
+      .join("");
+
+    const trackList = ((sh && sh.tracks) || [])
+      .map((t, i) => `<li><span class="pitch-track-n">${i + 1}</span><div><strong>${esc(t.title)}</strong><p>${esc(t.why)}</p></div></li>`)
+      .join("");
+
+    wrap.innerHTML = `
+      <div class="pitch-actions">
+        <button type="button" class="btn btn-primary" id="pitchCopyAll">Copy full one-pager</button>
+        <button type="button" class="btn" id="pitchCopyRemix">Copy remix / sync brief</button>
+        <button type="button" class="btn" id="pitchCopyStart">Copy Start Here blurb</button>
+      </div>
+      <div class="pitch-grid">
+        <div class="pitch-card">
+          <h3>Top 5 remix &amp; sync asks</h3>
+          <p class="pitch-sub">Highest dance-floor conversion with sync cues for supervisors and remix partners.</p>
+          <ol class="pitch-list">${remixRows}</ol>
+        </div>
+        <div class="pitch-card">
+          <h3>${esc((sh && sh.title) || "Start Here")}</h3>
+          <p class="pitch-sub">${esc((sh && sh.blurb) || "")}</p>
+          <ol class="pitch-tracks">${trackList}</ol>
+        </div>
+      </div>`;
+
+    const bind = (id, text, msg) => {
+      const btn = $("#" + id);
+      if (btn) btn.addEventListener("click", () => copy(text, msg));
+    };
+    bind("pitchCopyAll", fullOnePager, "Copied full one-pager");
+    bind("pitchCopyRemix", "TOP 5 REMIX / SYNC ASKS\n\n" + remixLines, "Copied remix / sync brief");
+    bind("pitchCopyStart", startLines, "Copied Start Here blurb");
+  })();
 
   /* ---- scroll reveal + animate bars ---- */
   const io = new IntersectionObserver(

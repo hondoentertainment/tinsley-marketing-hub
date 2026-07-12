@@ -8,8 +8,8 @@ A centralized, static site that links every marketing page in this workspace tog
 | --- | --- | --- |
 | **Marketing Hub** | `index.html` | Central landing page. Groups projects by suite (Tinsley suite + field guides). |
 | **Tinsley chooser** | `tinsley.html` | Legacy `/tinsley` URL — pick Song, Social, or Reference. |
-| **Tinsley — Song & Catalog Analysis** | `tinsley-song.html` | Music-first deck: catalog, EDM remix + sync notes, SWOT, like artists. |
-| **Tinsley — Social & Marketing Analysis** | `tinsley-social.html` | Marketing-first deck: hashtags, per-song weekly recipes, platform plays, roadmap. |
+| **Tinsley — Song & Catalog Analysis** | `tinsley-song.html` | Music-first deck: catalog, EDM remix + sync notes, pitch one-pagers, SWOT, like artists. |
+| **Tinsley — Social & Marketing Analysis** | `tinsley-social.html` | Marketing-first deck: hashtags, daily content calendar, per-song recipes, platform plays, roadmap. |
 | **Reference — Frameworks & Philosophy** | `reference.html` | Shared frameworks: 1,000 True Fans + *The Creative Act* (not duplicated in the decks). |
 | **Street Marketing — Top 100 Ideas** | `street-marketing.html` | Searchable guerrilla tactics field guide. Fully self-contained. |
 

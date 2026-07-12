@@ -10,7 +10,7 @@ const TINSLEY = {
   // Credibility layer. `updated` drives the "Last updated" badge; `sources`
   // renders the Methodology block; `spotifyArtistId` powers the live data fetch.
   meta: {
-    updated: "2026-07-11",
+    updated: "2026-07-12",
     spotifyArtistId: "1encEkVjZ4iqby8BXZc8Pa",
     canonicalUrl: "https://tinsley-hq.vercel.app/",
     methodology:
@@ -57,6 +57,19 @@ const TINSLEY = {
       job: "Reach & revenue",
       lede: "A marketing-first playbook: hashtag tiers, a daily content calendar, per-song posting recipes, platform priorities, and a sequenced growth roadmap — the work of turning listeners into an owned audience."
     }
+  },
+
+  // ---- "Start Here" playlist pitch (curated entry points for new listeners) ----
+  startHere: {
+    title: "Start Here — Tinsley",
+    blurb: "Five tracks that map the whole artist in under 20 minutes: the country-pop lead, the critics-poll yearning, the dream-pop mood piece, the alt-country wink, and the vulnerable confessional. Pin this as Artist Pick and hand it to editors, sync agents, and first-time listeners.",
+    tracks: [
+      { title: "Bad Enough", why: "Current chapter — cathartic country-pop hook; strongest sync + playlist candidate." },
+      { title: "Classic", why: "Love Songs–era radiance; the romance entry point and wedding/first-dance lane." },
+      { title: "Distract Me", why: "Dreamy situationship mood — Obscure Sound praise; soft-playlist and sync bed." },
+      { title: "Good Ride (Mechanical Bullshit)", why: "Alt-country wit; proves the lane beyond straight indie-pop." },
+      { title: "Hard to Love", why: "Raw confessional — the honesty critics keep naming; Close Friends / acoustic path." }
+    ]
   },
 
   // ---- Career highlights / metrics for the hero band ----

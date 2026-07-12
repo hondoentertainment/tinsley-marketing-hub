@@ -104,6 +104,34 @@
       border-bottom: 1px solid rgba(255,178,122,.35);
     }
     .toc-jump:hover { color: var(--text); border-bottom-color: rgba(255,255,255,.35); }
+
+    .start-path { margin-top: 36px; max-width: 920px; }
+    .start-path-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--peach); margin-bottom: 12px;
+    }
+    .start-path-steps {
+      list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px;
+    }
+    .start-path-steps a {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 14px 14px 16px; border-radius: 16px;
+      border: 1px solid var(--line); background: var(--panel);
+      transition: transform .15s ease, border-color .2s, background .2s;
+      min-height: 100%;
+    }
+    .start-path-steps a:hover { transform: translateY(-3px); border-color: rgba(255,255,255,.22); background: var(--panel-2); }
+    .start-path-steps a:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+    .sp-n {
+      flex: none; width: 28px; height: 28px; border-radius: 9px;
+      display: grid; place-items: center;
+      font-family: "Fraunces", serif; font-weight: 900; font-size: 14px;
+      background: var(--grad); color: #12101a;
+    }
+    .sp-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+    .sp-body strong { font-size: 15px; font-weight: 700; }
+    .sp-body em { font-style: normal; font-size: 12.5px; color: var(--muted); line-height: 1.35; }
+
     .toc {
       margin-top: 8px;
       border: 1px solid var(--line);
@@ -208,6 +236,10 @@
       header.hero { padding: 56px 0 24px; }
       .grid { grid-template-columns: 1fr; }
       .stat-row { gap: 18px; }
+      .start-path-steps { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 400px) {
+      .start-path-steps { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; scroll-behavior: auto; }
@@ -220,9 +252,38 @@
     <header class="hero">
       <span class="eyebrow">Marketing Studio</span>
       <h1>The <span class="grad">Marketing Hub</span></h1>
-      <p class="lede">One home for every campaign page, strategy deck, and idea library. Pick a project below — or jump straight to any section in the full index.</p>
+      <p class="lede">One home for every campaign page, strategy deck, and idea library. Follow the path below for a first pass — or jump into any section in the full index.</p>
       <div class="stat-row" id="statRow"></div>
-      <a class="toc-jump" href="#index">Jump to full section index &darr;</a>
+      <nav class="start-path" aria-label="Start here">
+        <p class="start-path-label">Start here</p>
+        <ol class="start-path-steps">
+          <li>
+            <a href="tinsley-song.html">
+              <span class="sp-n">1</span>
+              <span class="sp-body"><strong>Song</strong><em>Catalog, remix, pitch kit</em></span>
+            </a>
+          </li>
+          <li>
+            <a href="tinsley-social.html">
+              <span class="sp-n">2</span>
+              <span class="sp-body"><strong>Social</strong><em>Hashtags, calendar, roadmap</em></span>
+            </a>
+          </li>
+          <li>
+            <a href="reference.html">
+              <span class="sp-n">3</span>
+              <span class="sp-body"><strong>Reference</strong><em>True Fans + Creative Act</em></span>
+            </a>
+          </li>
+          <li>
+            <a href="street-marketing.html">
+              <span class="sp-n">4</span>
+              <span class="sp-body"><strong>Street</strong><em>100 guerrilla ideas</em></span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+      <a class="toc-jump" href="#index">Or jump to full section index &darr;</a>
     </header>
 
     <main id="main">
@@ -256,8 +317,8 @@
         title: "Tinsley — Song & Catalog Analysis",
         kind: "Music Analysis Deck",
         href: "tinsley-song.html",
-        desc: "Catalog assessment, EDM remix scoring with sync notes, SWOT diagnosis, and like-artist positioning.",
-        tags: ["Catalog Analysis", "Remix Scoring", "Positioning"],
+        desc: "Catalog assessment, EDM remix scoring with sync notes, pitch one-pagers, SWOT diagnosis, and like-artist positioning.",
+        tags: ["Catalog Analysis", "Pitch Kit", "Positioning"],
         accent: "linear-gradient(120deg, #ff6f91, #b98cff 55%, #ffb27a)"
       },
       {
@@ -265,8 +326,8 @@
         title: "Tinsley — Social & Marketing Analysis",
         kind: "Marketing Strategy Deck",
         href: "tinsley-social.html",
-        desc: "Hashtag strategy, per-song weekly content recipes, platform plays, and a 30→720 day growth roadmap.",
-        tags: ["Hashtag Strategy", "Content Recipes", "Roadmap"],
+        desc: "Hashtag strategy, daily content calendar, per-song weekly recipes, platform plays, and a 30→720 day growth roadmap.",
+        tags: ["Hashtag Strategy", "Content Calendar", "Roadmap"],
         accent: "linear-gradient(135deg, #7ce0c3 0%, #b98cff 100%)"
       },
       {
@@ -313,9 +374,10 @@
           { href: "tinsley-song.html#catalog-timeline", num: "01a", label: "Release cadence", note: "Timeline of every release by year and format", sub: true },
           { href: "tinsley-song.html#remix", num: "02", label: "EDM Remix Potential", note: "0–100 dance-floor scores + sync cues" },
           { href: "tinsley-song.html#remix-dist", num: "02a", label: "Score distribution", note: "How the catalog clusters by remixability", sub: true },
-          { href: "tinsley-song.html#assessment", num: "03", label: "Strengths, Opportunities & Watch-outs", note: "Catalog-focused SWOT diagnosis" },
-          { href: "tinsley-song.html#artists", num: "04", label: "10 Like Artists", note: "Fan-overlap targets for playlists, ads, tour" },
-          { href: "tinsley-song.html#artist-map", num: "04a", label: "Positioning map", note: "Overlap vs. reachability scatter", sub: true }
+          { href: "tinsley-song.html#pitch", num: "03", label: "Pitch Kit", note: "Top 5 remix/sync one-pager + Start Here playlist" },
+          { href: "tinsley-song.html#assessment", num: "04", label: "Strengths, Opportunities & Watch-outs", note: "Catalog-focused SWOT diagnosis" },
+          { href: "tinsley-song.html#artists", num: "05", label: "10 Like Artists", note: "Fan-overlap targets for playlists, ads, tour" },
+          { href: "tinsley-song.html#artist-map", num: "05a", label: "Positioning map", note: "Overlap vs. reachability scatter", sub: true }
         ]
       },
       {
@@ -325,10 +387,11 @@
         items: [
           { href: "tinsley-social.html#hashtags", num: "01", label: "Hashtag Strategy", note: "Brand, genre, location, community, discovery" },
           { href: "tinsley-social.html#bysong", num: "02", label: "Key Hashtags by Song", note: "TikTok + Instagram tiers + weekly recipes" },
-          { href: "tinsley-social.html#social", num: "03", label: "Social Media Opportunities", note: "Platform priorities and content plays" },
-          { href: "tinsley-social.html#roadmap", num: "04", label: "Growth Roadmap · 30 → 720 Days", note: "Reach, revenue, product, foundation tracks" },
-          { href: "tinsley-social.html#north-stars", num: "04a", label: "North-star metrics", note: "Editable targets with saved trend history", sub: true },
-          { href: "tinsley-social.html#rmTracker", num: "04b", label: "Milestone tracker", note: "Check off actions — progress saves locally", sub: true }
+          { href: "tinsley-social.html#calendar", num: "03", label: "Daily Content Calendar", note: "Mon–Sun cadence with song recipes + checkoffs" },
+          { href: "tinsley-social.html#social", num: "04", label: "Social Media Opportunities", note: "Platform priorities and content plays" },
+          { href: "tinsley-social.html#roadmap", num: "05", label: "Growth Roadmap · 30 → 720 Days", note: "Reach, revenue, product, foundation tracks" },
+          { href: "tinsley-social.html#north-stars", num: "05a", label: "North-star metrics", note: "Editable targets with saved trend history", sub: true },
+          { href: "tinsley-social.html#rmTracker", num: "05b", label: "Milestone tracker", note: "Check off actions — progress saves locally", sub: true }
         ]
       },
       {

@@ -58,7 +58,15 @@
     <section class="listen-block join" id="join">
       <h2 id="joinTitle">Join the list</h2>
       <p class="listen-lead" id="joinNote"></p>
-      <a class="listen-btn primary" id="ctaEmail2" href="#" target="_blank" rel="noopener">Get demos &amp; first dibs</a>
+      <form class="join-form" id="joinForm" novalidate>
+        <label class="sr-only" for="joinName">Name (optional)</label>
+        <input id="joinName" name="name" type="text" autocomplete="name" placeholder="Name (optional)" />
+        <label class="sr-only" for="joinEmail">Email</label>
+        <input id="joinEmail" name="email" type="email" autocomplete="email" required placeholder="you@email.com" />
+        <button type="submit" class="listen-btn primary">Get demos &amp; first dibs</button>
+      </form>
+      <p class="join-status" id="joinStatus" hidden></p>
+      <p class="listen-fine">Prefer Linktree? <a id="joinFallback" href="#" target="_blank" rel="noopener">Open signup link</a></p>
       <p class="listen-fine" id="showsNote"></p>
     </section>
 

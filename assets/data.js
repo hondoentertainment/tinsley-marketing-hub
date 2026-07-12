@@ -24,7 +24,12 @@ const TINSLEY = {
       { label: "The Spokesman-Review", url: "https://www.spokesman.com/stories/2025/mar/20/west-side-indie-pop-rocker-tinsley-brings-new-albu/", kind: "Press" },
       { label: "Kevin Kelly — 1,000 True Fans (2008)", url: "https://kk.org/thetechnium/1000-true-fans/", kind: "Framework" }
     ],
-    analytics: { plausibleDomain: "", utmDefaults: { source: "hub", medium: "social", campaign: "tinsley" } }
+    analytics: {
+      // Set to your Plausible site domain when registered (e.g. "tinsley-marketing-hub.vercel.app").
+      plausibleDomain: "",
+      vercelInsights: true,
+      utmDefaults: { source: "hub", medium: "social", campaign: "tinsley" }
+    }
   },
 
   artist: {

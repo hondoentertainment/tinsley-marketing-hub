@@ -48,6 +48,62 @@
     } catch (e) {}
   }
 
+  /* ---- Production setup / connector status ---- */
+  (function setup() {
+    const wrap = $("#opsSetup");
+    if (!wrap) return;
+    const items = [
+      { id: "spotify", label: "Spotify live metrics", hint: "SPOTIFY_CLIENT_ID + SPOTIFY_CLIENT_SECRET", check: "/api/spotify" },
+      { id: "email", label: "Email subscribe API", hint: "KIT_API_KEY + KIT_FORM_ID  — or EMAIL_WEBHOOK_URL", check: "/api/subscribe" },
+      { id: "plausible", label: "Plausible analytics", hint: "Set meta.analytics.plausibleDomain in data.js", local: true },
+      { id: "vercel", label: "Vercel Web Analytics", hint: "Enable in Vercel project → Analytics; script already injected", local: true },
+      { id: "listen", label: "Public Listen page", hint: "/listen — Start Here + join form", href: "listen.html" },
+      { id: "seo", label: "Sitemap & robots", hint: "/sitemap.xml · /robots.txt", href: "sitemap.xml" }
+    ];
+
+    wrap.innerHTML = `<div class="ops-setup-grid">${items
+      .map(
+        (it) => `<article class="ops-setup-card" data-id="${esc(it.id)}">
+        <div class="ops-setup-top"><strong>${esc(it.label)}</strong><span class="ops-setup-chip pending">Checking…</span></div>
+        <p class="ops-muted">${esc(it.hint)}</p>
+        ${it.href ? `<a class="btn" href="${esc(it.href)}">Open</a>` : ""}
+      </article>`
+      )
+      .join("")}</div>
+      <p class="ops-hint">After setting Kit/ConvertKit or a webhook, POST to <code>/api/subscribe</code> from the Listen form. Spotify credentials power the Song/Social hero chips.</p>`;
+
+    const setChip = (id, state, label) => {
+      const card = wrap.querySelector('[data-id="' + id + '"]');
+      if (!card) return;
+      const chip = card.querySelector(".ops-setup-chip");
+      chip.className = "ops-setup-chip " + state;
+      chip.textContent = label;
+    };
+
+    const analytics = D.meta && D.meta.analytics;
+    setChip("plausible", analytics && analytics.plausibleDomain ? "ok" : "warn", analytics && analytics.plausibleDomain ? "Domain set" : "Not set");
+    setChip("vercel", analytics && analytics.vercelInsights !== false ? "ok" : "warn", analytics && analytics.vercelInsights !== false ? "Script on" : "Off");
+    setChip("listen", "ok", "Live");
+    setChip("seo", "ok", "Shipped");
+
+    fetch("/api/spotify", { headers: { accept: "application/json" } })
+      .then((r) => r.json())
+      .then((d) => {
+        if (d && d.artist) setChip("spotify", d.stale ? "warn" : "ok", d.stale ? "Stale cache" : "Live");
+        else if (d && d.reason === "missing_credentials") setChip("spotify", "warn", "Env missing");
+        else setChip("spotify", "err", "Offline");
+      })
+      .catch(() => setChip("spotify", "err", "Offline"));
+
+    fetch("/api/subscribe", { method: "GET", headers: { accept: "application/json" } })
+      .then((r) => r.json())
+      .then((d) => {
+        if (d && d.configured) setChip("email", "ok", "Configured");
+        else setChip("email", "warn", "Not configured");
+      })
+      .catch(() => setChip("email", "err", "Unreachable"));
+  })();
+
   /* ---- Weekly ops ritual ---- */
   (function ritual() {
     const wrap = $("#opsRitual");

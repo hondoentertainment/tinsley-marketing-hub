@@ -950,6 +950,7 @@
               rec.history = (rec.history || []).concat([{ t: Date.now(), v: v }]).slice(-24);
               store.followers = rec;
               localStorage.setItem(KEY, JSON.stringify(store));
+              window.dispatchEvent(new CustomEvent("tinsley:northstar"));
             }
           } catch (e) {}
         }
@@ -1110,10 +1111,8 @@
       });
     }
     render();
+    window.addEventListener("tinsley:northstar", render);
   })();
-
-  /* The full income / scenario model moved to the Reference page with the
-     1,000 True Fans framework — see assets/reference.js. */
 
   /* ---- copy helper + toast ---- */
   const toast = $("#toast");
@@ -1336,14 +1335,22 @@
     io.observe(s);
   });
 
-  /* ---- optional Plausible analytics ---- */
+  /* ---- optional analytics (Plausible + Vercel Web Analytics) ---- */
   (function analytics() {
-    const domain = D.meta && D.meta.analytics && D.meta.analytics.plausibleDomain;
-    if (!domain) return;
-    const s = document.createElement("script");
-    s.defer = true;
-    s.setAttribute("data-domain", domain);
-    s.src = "https://plausible.io/js/script.js";
-    document.head.appendChild(s);
+    const a = D.meta && D.meta.analytics;
+    if (!a) return;
+    if (a.plausibleDomain) {
+      const s = document.createElement("script");
+      s.defer = true;
+      s.setAttribute("data-domain", a.plausibleDomain);
+      s.src = "https://plausible.io/js/script.js";
+      document.head.appendChild(s);
+    }
+    if (a.vercelInsights !== false) {
+      const v = document.createElement("script");
+      v.defer = true;
+      v.src = "/_vercel/insights/script.js";
+      document.head.appendChild(v);
+    }
   })();
 })();

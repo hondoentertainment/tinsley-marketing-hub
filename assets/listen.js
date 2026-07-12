@@ -21,17 +21,16 @@
 
   const emailHref = links.emailSignup || links.linktree || "#";
   const spotifyHref = links.spotify || "#";
-  ["ctaEmail", "ctaEmail2"].forEach((id) => {
-    const a = $(id);
-    if (a) {
-      a.href = emailHref;
-      if (L.primaryCta && id === "ctaEmail") a.textContent = L.primaryCta;
-    }
-  });
   const sp = $("ctaSpotify");
   if (sp) {
     sp.href = spotifyHref;
     if (L.secondaryCta) sp.textContent = L.secondaryCta;
+  }
+  const heroJoin = $("ctaEmail");
+  if (heroJoin) {
+    heroJoin.href = "#join";
+    if (L.primaryCta) heroJoin.textContent = L.primaryCta;
+    heroJoin.removeAttribute("target");
   }
 
   const sh = D.startHere;
@@ -63,20 +62,98 @@
     "@context": "https://schema.org",
     "@type": "MusicGroup",
     name: A.name || "Tinsley",
-    url: links.website || "https://tinsley-marketing-hub.vercel.app/listen",
+    url: "https://tinsley-marketing-hub.vercel.app/listen",
     genre: A.genreTags || ["Indie Pop"],
     foundingLocation: A.location,
-    sameAs: [links.spotify, links.instagram, links.tiktok, links.bandcamp, links.youtube].filter(Boolean)
+    sameAs: [links.spotify, links.instagram, links.tiktok, links.bandcamp, links.youtube, links.website].filter(Boolean)
   };
   const ldEl = $("jsonld");
   if (ldEl) ldEl.textContent = JSON.stringify(ld);
 
-  const domain = D.meta && D.meta.analytics && D.meta.analytics.plausibleDomain;
-  if (domain) {
+  /* ---- native email form → /api/subscribe ---- */
+  const form = $("joinForm");
+  const status = $("joinStatus");
+  const fallback = $("joinFallback");
+  if (fallback) {
+    fallback.href = emailHref;
+    fallback.hidden = false;
+  }
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = (form.email && form.email.value || "").trim();
+      const name = (form.name && form.name.value || "").trim();
+      if (!email) return;
+      if (status) {
+        status.hidden = false;
+        status.textContent = "Joining…";
+        status.className = "join-status";
+      }
+      const btn = form.querySelector('button[type="submit"]');
+      if (btn) btn.disabled = true;
+      try {
+        const res = await fetch("/api/subscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", accept: "application/json" },
+          body: JSON.stringify({ email: email, name: name, source: "listen" })
+        });
+        const data = await res.json().catch(() => ({}));
+        if (data && data.ok) {
+          if (status) {
+            status.textContent = "You're on the list. Watch for demos and first dibs.";
+            status.className = "join-status ok";
+          }
+          form.reset();
+          try {
+            const KEY = "tinsley.northstar.v1";
+            const store = JSON.parse(localStorage.getItem(KEY) || "{}") || {};
+            const rec = store.email || {};
+            const cur = rec.current != null ? rec.current : (D.northStars && D.northStars.find((m) => m.key === "email") || {}).current || 0;
+            rec.current = Math.max(0, Math.round(cur)) + 1;
+            rec.history = (rec.history || []).concat([{ t: Date.now(), v: rec.current }]).slice(-24);
+            store.email = rec;
+            localStorage.setItem(KEY, JSON.stringify(store));
+          } catch (err) {}
+        } else if (data && data.reason === "not_configured") {
+          if (status) {
+            status.textContent = "List API not wired yet — opening the signup link.";
+            status.className = "join-status warn";
+          }
+          window.open(emailHref, "_blank", "noopener");
+        } else if (data && data.reason === "invalid_email") {
+          if (status) {
+            status.textContent = "That email doesn’t look right — try again.";
+            status.className = "join-status err";
+          }
+        } else {
+          if (status) {
+            status.textContent = "Couldn’t reach the list — use the fallback link below.";
+            status.className = "join-status err";
+          }
+        }
+      } catch (err) {
+        if (status) {
+          status.textContent = "Offline or blocked — use the fallback link below.";
+          status.className = "join-status err";
+        }
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    });
+  }
+
+  const analytics = D.meta && D.meta.analytics;
+  if (analytics && analytics.plausibleDomain) {
     const s = document.createElement("script");
     s.defer = true;
-    s.setAttribute("data-domain", domain);
+    s.setAttribute("data-domain", analytics.plausibleDomain);
     s.src = "https://plausible.io/js/script.js";
     document.head.appendChild(s);
+  }
+  if (analytics && analytics.vercelInsights !== false) {
+    const v = document.createElement("script");
+    v.defer = true;
+    v.src = "/_vercel/insights/script.js";
+    document.head.appendChild(v);
   }
 })();

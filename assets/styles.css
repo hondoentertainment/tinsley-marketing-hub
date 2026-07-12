@@ -934,6 +934,26 @@ code { background: var(--panel-2); padding: 2px 7px; border-radius: 6px; font-si
 }
 
 /* ---------- OPS COMMAND ---------- */
+.ops-setup-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px;
+}
+.ops-setup-card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.ops-setup-top { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+.ops-setup-chip {
+  flex: none; font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+  padding: 4px 9px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted);
+}
+.ops-setup-chip.ok { color: var(--mint); border-color: rgba(124,224,195,.4); background: rgba(124,224,195,.08); }
+.ops-setup-chip.warn { color: var(--peach); border-color: rgba(255,178,122,.4); background: rgba(255,178,122,.08); }
+.ops-setup-chip.err { color: var(--rose); border-color: rgba(255,111,145,.4); background: rgba(255,111,145,.08); }
+.ops-setup-chip.pending { color: var(--faint); }
+@media (max-width: 900px) {
+  .ops-setup-grid { grid-template-columns: 1fr; }
+}
+
 .ops-cadence, .ops-blurb, .ops-hint { color: var(--muted); font-size: 14.5px; margin-bottom: 18px; max-width: 62ch; }
 .ops-week { color: var(--peach); font-weight: 600; }
 .ops-row-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }

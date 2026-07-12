@@ -117,6 +117,27 @@ a { color: inherit; text-decoration: none; }
   background: linear-gradient(120deg, rgba(232,107,107,.08), rgba(232,196,160,.06));
 }
 .listen-fine { margin-top: 16px; font-size: 14px; color: var(--mute); max-width: 42ch; }
+.listen-fine a { border-bottom: 1px solid rgba(184,169,156,.4); color: var(--sand); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.join-form {
+  display: grid; grid-template-columns: 1fr 1.2fr auto; gap: 10px; max-width: 560px; margin-bottom: 12px;
+}
+.join-form input {
+  width: 100%; background: rgba(247,240,234,.06); border: 1px solid var(--line);
+  color: var(--ink); border-radius: 999px; padding: 14px 18px; font: inherit; font-size: 15px;
+}
+.join-form input:focus { outline: 2px solid var(--sand); outline-offset: 2px; }
+.join-form button { white-space: nowrap; }
+.join-status { font-size: 14px; margin: 0 0 10px; max-width: 42ch; }
+.join-status.ok { color: var(--moss); }
+.join-status.warn { color: var(--sand); }
+.join-status.err { color: var(--rose); }
+@media (max-width: 720px) {
+  .join-form { grid-template-columns: 1fr; }
+}
 
 .listen-tracks { list-style: none; display: flex; flex-direction: column; gap: 18px; }
 .listen-tracks li { display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: start; }

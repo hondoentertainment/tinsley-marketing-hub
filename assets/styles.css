@@ -933,6 +933,81 @@ code { background: var(--panel-2); padding: 2px 7px; border-radius: 6px; font-si
   .ns-grid { grid-template-columns: 1fr; }
 }
 
+/* ---------- OPS COMMAND ---------- */
+.ops-cadence, .ops-blurb, .ops-hint { color: var(--muted); font-size: 14.5px; margin-bottom: 18px; max-width: 62ch; }
+.ops-week { color: var(--peach); font-weight: 600; }
+.ops-row-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.ops-ritual-grid, .ops-weeks, .ops-desk-grid, .ops-fly-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px;
+}
+.ops-ritual-card, .ops-week-card, .ops-desk-card, .ops-fly-card, .ops-factory-card, .ops-leg, .ops-onepager {
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 18px 14px;
+}
+.ops-ritual-h, .ops-week-h, .ops-factory-h, .ops-fly-top, .ops-desk-top, .ops-ladder-top {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px;
+}
+.ops-day, .ops-week-n, .ops-lane {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--peach);
+}
+.ops-week-pct { font-size: 12px; color: var(--muted); }
+.ops-check-list, .ops-plain, .ops-ladder { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.ops-check {
+  display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start;
+  font-size: 13.5px; color: var(--muted);
+}
+.ops-check.on { color: var(--text); opacity: .7; }
+.ops-check.on span { text-decoration: line-through; }
+.ops-tick {
+  width: 18px; height: 18px; margin-top: 2px; border-radius: 6px; border: 1.5px solid var(--line);
+  background: transparent; cursor: pointer; padding: 0;
+}
+.ops-check.on .ops-tick { background: var(--mint); border-color: transparent; }
+.ops-release-progress { margin: 16px 0 8px; }
+.utm-form {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px;
+}
+.utm-form label { display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 600; color: var(--muted); }
+.utm-form em { font-style: normal; font-weight: 400; color: var(--faint); }
+.ops-input, .ops-select, .utm-form input {
+  width: 100%; background: var(--panel-2); border: 1px solid var(--line); color: var(--text);
+  border-radius: 10px; padding: 10px 12px; font: inherit; font-size: 14px;
+}
+.utm-out code {
+  display: block; padding: 14px 16px; border-radius: 12px; background: var(--panel);
+  border: 1px solid var(--line); word-break: break-all; color: var(--peach); font-size: 13px; margin-bottom: 12px;
+}
+.ops-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); }
+.ops-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.ops-table th, .ops-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+.ops-table th { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.ops-muted { color: var(--muted); font-size: 12.5px; }
+.ops-fit { font-size: 13.5px; margin: 6px 0; }
+.ops-desk-card h3, .ops-factory-card h3, .ops-onepager h3 { font-size: 18px; font-weight: 900; margin-bottom: 6px; }
+.ops-factory-cols {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px;
+}
+.ops-factory-cols h4 { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--peach); margin-bottom: 8px; }
+.ops-factory-cols ul { list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--muted); }
+.ops-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.ops-subh { margin: 22px 0 12px; font-size: 18px; font-weight: 900; }
+.paid-form { display: grid; grid-template-columns: 1.4fr 0.7fr 1.4fr auto; gap: 10px; margin-bottom: 14px; }
+.ops-fly-card.on { border-color: rgba(124,224,195,.35); }
+.ops-ladder li {
+  display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: start;
+  padding: 16px 0; border-bottom: 1px solid var(--line);
+}
+.ops-ladder-n {
+  width: 36px; height: 36px; border-radius: 11px; display: grid; place-items: center;
+  font-family: "Fraunces", serif; font-weight: 900; background: var(--panel); border: 1px solid var(--line);
+}
+.ops-price { font-size: 12px; font-weight: 700; color: var(--peach); }
+.ops-legs { display: flex; flex-direction: column; gap: 10px; }
+@media (max-width: 900px) {
+  .ops-ritual-grid, .ops-weeks, .ops-desk-grid, .ops-fly-grid, .ops-two, .ops-factory-cols, .utm-form, .paid-form {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---------- REDUCED MOTION ---------- */
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }

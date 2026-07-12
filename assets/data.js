@@ -23,7 +23,8 @@ const TINSLEY = {
       { label: "Atwood Magazine", url: "https://atwoodmagazine.com/tybe-tinsley-bad-enough-song-premiere/", kind: "Press" },
       { label: "The Spokesman-Review", url: "https://www.spokesman.com/stories/2025/mar/20/west-side-indie-pop-rocker-tinsley-brings-new-albu/", kind: "Press" },
       { label: "Kevin Kelly — 1,000 True Fans (2008)", url: "https://kk.org/thetechnium/1000-true-fans/", kind: "Framework" }
-    ]
+    ],
+    analytics: { plausibleDomain: "", utmDefaults: { source: "hub", medium: "social", campaign: "tinsley" } }
   },
 
   artist: {
@@ -43,7 +44,10 @@ const TINSLEY = {
       bandcamp: "https://musicbytinsley.bandcamp.com/",
       instagram: "https://instagram.com/tinsleymusic",
       tiktok: "https://tiktok.com/@tinsleymusic",
-      epk: "https://www.tinsleymusic.com/epk"
+      epk: "https://www.tinsleymusic.com/epk",
+      // Point this at ConvertKit / Mailchimp / Feature.fm email capture when ready.
+      emailSignup: "https://tr.ee/h6fNd7BTOw",
+      youtube: "https://www.youtube.com/@tinsleymusic"
     }
   },
 
@@ -56,7 +60,21 @@ const TINSLEY = {
     social: {
       job: "Reach & revenue",
       lede: "A marketing-first playbook: hashtag tiers, a daily content calendar, per-song posting recipes, platform priorities, and a sequenced growth roadmap — the work of turning listeners into an owned audience."
+    },
+    ops: {
+      job: "Execute & measure",
+      lede: "The operating system behind the decks: weekly ritual, UTMs, release checklists, press CRM, playlist & sync desk, content factory, paid winners, Seattle flywheel, True Fan ladder, and live routing."
     }
+  },
+
+  // ---- Public listen / fan landing copy ----
+  listen: {
+    headline: "Start here.",
+    sub: "Seattle indie pop-rock — honest, playful, and built for people who keep the vinyl close.",
+    primaryCta: "Join the list",
+    primaryNote: "Drops, demos, and first dibs — never spam.",
+    secondaryCta: "Listen on Spotify",
+    showsNote: "Tour & ticket alerts go to the list first. Watch Linktree for the next PNW date."
   },
 
   // ---- "Start Here" playlist pitch (curated entry points for new listeners) ----
@@ -662,5 +680,182 @@ const TINSLEY = {
           reconcile: "Separate the creative practice from the content calendar. Make every day; publish on a schedule that never starves the work." }
       ]
     }
+  },
+
+  // =====================================================================
+  // OPS COMMAND — world-class execution layer (tiers 1–3)
+  // =====================================================================
+
+  weeklyOps: {
+    title: "Weekly ops ritual",
+    cadence: "Mon plan → mid-week ship → Sun review → north-star touch",
+    days: [
+      { day: "Mon", title: "Plan", actions: ["Open the content calendar and pick this week’s featured song", "Set 1 press or playlist outreach target", "Copy UTMs for any QR / bio / ad links you’re shipping"] },
+      { day: "Tue–Thu", title: "Ship", actions: ["Hit 4–5 short-form slots (skip a day only if needed)", "Log any press replies in Press CRM", "Bank one B-roll / lyric clip for the content factory"] },
+      { day: "Fri", title: "Amplify", actions: ["Repost TikTok winners to Reels / Shorts within 24h", "Check paid-winners threshold before boosting anything", "Optional Bandcamp / email touch if there’s a real drop"] },
+      { day: "Sun", title: "Review", actions: ["Copy week-in-review from the calendar", "Update north-stars (followers, email, D2C)", "Mark release-OS and CRM tasks done"] }
+    ]
+  },
+
+  releaseOs: {
+    title: "Release operating system",
+    blurb: "A reusable 6-week checklist. Pick a single — progress saves in this browser.",
+    releases: ["Bad Enough", "Temporary Insanity", "Hard to Love", "Distract Me", "Good Ride (Mechanical Bullshit)"],
+    weeks: [
+      {
+        week: 1, label: "Lock & bank",
+        tasks: [
+          { id: "w1-story", text: "Lock one-line story + hero visual for this single" },
+          { id: "w1-bank", text: "Film / cut 8–12 short assets (hooks, B-roll, lyric cards)" },
+          { id: "w1-start", text: "Refresh Start Here + Artist Pick to feature this track" },
+          { id: "w1-canvas", text: "Deliver Canvas loop + cover art to distro" }
+        ]
+      },
+      {
+        week: 2, label: "Pitch early",
+        tasks: [
+          { id: "w2-s4a", text: "Submit to Spotify for Artists editorial (4+ weeks out)" },
+          { id: "w2-indies", text: "Build indie curator shortlist (see Playlist desk)" },
+          { id: "w2-press", text: "Draft EPK one-pager + cold email for this release" },
+          { id: "w2-utm", text: "Create UTM pack: bio, TikTok, QR, press" }
+        ]
+      },
+      {
+        week: 3, label: "Seed content",
+        tasks: [
+          { id: "w3-tiktok", text: "Start soft content (no announcement) — test 2 hooks" },
+          { id: "w3-radio", text: "Warm Seattle flywheel contacts (KEXP / The End / C89.5)" },
+          { id: "w3-sync", text: "Tag sync cues + register with library / agent if new" },
+          { id: "w3-email", text: "Tease list with a Close Friends / demo crumb" }
+        ]
+      },
+      {
+        week: 4, label: "Announce",
+        tasks: [
+          { id: "w4-ann", text: "Public announce + smart link on Listen / Linktree" },
+          { id: "w4-press", text: "Send press pitches; log in Press CRM" },
+          { id: "w4-play", text: "Submit to 20–30 indie playlists / SubmitHub" },
+          { id: "w4-ads", text: "Hold paid until organic clears Paid Winners bar" }
+        ]
+      },
+      {
+        week: 5, label: "Release week",
+        tasks: [
+          { id: "w5-drop", text: "Release day: Stories, email, Bandcamp, pin Start Here" },
+          { id: "w5-boost", text: "Boost only clips that hit save/share threshold" },
+          { id: "w5-radio", text: "Follow up radio + Seattle press" },
+          { id: "w5-live", text: "Tie to a show / listening party if scheduled" }
+        ]
+      },
+      {
+        week: 6, label: "Extend & learn",
+        tasks: [
+          { id: "w6-remix", text: "Ship or tease remix / acoustic if planned" },
+          { id: "w6-data", text: "Log city / track insights; update north-stars" },
+          { id: "w6-next", text: "Pick next single and reset this checklist" },
+          { id: "w6-thank", text: "Thank True Fans + playlist adds publicly" }
+        ]
+      }
+    ]
+  },
+
+  pressOutlets: [
+    { id: "kexp", name: "KEXP", lane: "Radio / Seattle", contact: "kexp.org · in-studio / local music", priority: "A" },
+    { id: "theend", name: "107.7 The End", lane: "Radio / Seattle", contact: "Local specialty / new music", priority: "A" },
+    { id: "c895", name: "C89.5", lane: "Radio / Seattle", contact: "College / community radio", priority: "A" },
+    { id: "seatimes", name: "The Seattle Times", lane: "Press / Seattle", contact: "Music critics / poll alumni angle", priority: "A" },
+    { id: "atwood", name: "Atwood Magazine", lane: "Press / National indie", contact: "Premiere history (Bad Enough)", priority: "A" },
+    { id: "obscure", name: "Obscure Sound", lane: "Press / Blog", contact: "Distract Me praise — soft follow-up", priority: "B" },
+    { id: "spokesman", name: "The Spokesman-Review", lane: "Press / PNW", contact: "West-side feature history", priority: "B" },
+    { id: "asit", name: "American Songwriter", lane: "Press / National", contact: "Songcraft / lyric features", priority: "B" },
+    { id: "flood", name: "FLOOD Magazine", lane: "Press / National indie", contact: "Album / live features", priority: "B" },
+    { id: "onesheet", name: "Ones to Watch / indie blogs", lane: "Press / Discovery", contact: "Rising artist lists", priority: "C" }
+  ],
+
+  playlistTargets: [
+    { id: "s4a-indie", name: "Spotify editorial — Indie Pop / Fresh Finds", lane: "Editorial", fit: "Bad Enough, Distract Me, Classic", tip: "Pitch via Spotify for Artists 4+ weeks early with Start Here context." },
+    { id: "s4a-country", name: "Spotify editorial — Country-pop / Americana edge", lane: "Editorial", fit: "Bad Enough, Good Ride", tip: "Lead with Atwood ‘cathartic country-pop’ quote." },
+    { id: "pnw-indie", name: "PNW indie curator lists", lane: "Indie", fit: "Debut LP cuts, Love Songs era", tip: "Seattle Times #1 poll + KEXP vinyl story as social proof." },
+    { id: "sadgirl", name: "Sad-girl / diary-pop user lists", lane: "User", fit: "Hard to Love, Classic, Distract Me", tip: "SubmitHub + manual outreach; lyric screenshots convert." },
+    { id: "sync-lib", name: "Sync libraries / supervisors", lane: "Sync", fit: "Bad Enough, Skin, Lovesick, Distract Me", tip: "Use Pitch Kit sync cues; one ask per track." },
+    { id: "college", name: "College radio charts", lane: "Radio", fit: "Debut LP, Love Songs", tip: "Pair with C89.5 relationship; ship physical if possible." }
+  ],
+
+  contentFactory: [
+    {
+      song: "Bad Enough",
+      hooks: ["choose yourself lip-sync", "revenge glow-up transition", "lyric card: ‘bad enough’ hook"],
+      shots: ["15s hook close-up", "30s story cutdown", "vinyl / mirror B-roll", "caption: ‘for the version of you that stayed’"],
+      captions: ["Choosing me was the plot twist.", "Post-breakup energy, country-pop edition.", "If this finds you — keep it."]
+    },
+    {
+      song: "Distract Me",
+      hooks: ["dreamy situationship POV", "soft filter walk", "‘put this on while…’"],
+      shots: ["window light static take", "lyric overlay slow zoom", "headphones / rainy Seattle B-roll"],
+      captions: ["A dreamily caressing pop success — and a mood.", "For the almosts.", "Soft playlist bait."]
+    },
+    {
+      song: "Good Ride (Mechanical Bullshit)",
+      hooks: ["alt-country wink", "mechanical bull / fairground metaphor", "lyric wit punchline"],
+      shots: ["cowboy-boot detail", "car dashboard night drive", "live acoustic clip"],
+      captions: ["Emotional whiplash, but make it twang.", "The lane beyond straight indie-pop.", "Wit first, heartbreak second."]
+    },
+    {
+      song: "Hard to Love",
+      hooks: ["confessional whisper", "Close Friends teaser", "acoustic bedroom take"],
+      shots: ["single lamp performance", "handwritten lyric page", "fan-comment stitch"],
+      captions: ["Honesty made audible.", "For the ones who stay anyway.", "Demo energy → True Fan fuel."]
+    }
+  ],
+
+  paidWinners: {
+    blurb: "Never boost a loser. Organic clears the bar first — then small paid amplifies.",
+    thresholds: [
+      { metric: "TikTok saves rate", bar: "≥ 3% of views OR clear save spike vs your 7-day median", action: "Eligible for $5–15/day test" },
+      { metric: "Shares / comments", bar: "Comment thread or stitch velocity in first 6h", action: "Duplicate to Reels; consider spark ads" },
+      { metric: "Profile visits → follows", bar: "Follow conversion above your account baseline", action: "Retarget viewers with follow/save CTA" },
+      { metric: "Link clicks (UTM)", bar: "Listen page or email CTR beating bio average", action: "Scale only the winning creative" }
+    ],
+    rules: [
+      "Cap first tests at $50 total until a creative repeats wins twice.",
+      "Kill losers at 24–48h — don’t ‘give it more budget.’",
+      "Always attach UTMs (campaign = release or week id).",
+      "Retarget: video viewers → follow/save; site visitors → email / Bandcamp."
+    ]
+  },
+
+  seattleFlywheel: [
+    { id: "kexp-spin", outlet: "KEXP", cadence: "Ongoing", asset: "In-studio ready: 3-song set + vinyl story one-pager", next: "Offer new single + Start Here for local music desk" },
+    { id: "end-spin", outlet: "107.7 The End", cadence: "Per release", asset: "Clean WAV + short artist letter + Atwood quote", next: "Follow up within 10 days of send" },
+    { id: "c895-spin", outlet: "C89.5", cadence: "Per release", asset: "College radio package + optional physical", next: "Ask for specialty show spin" },
+    { id: "chbp", outlet: "Capitol Hill Block Party", cadence: "Seasonal", asset: "Support-slot one-pager + live routing kit", next: "Apply / network previous performers" },
+    { id: "record-shops", outlet: "Easy Street / Sonic Boom / independent shops", cadence: "Monthly", asset: "QR treasure hunt + listening booth card", next: "Schedule one vinyl day per quarter" },
+    { id: "uw-campus", outlet: "UW / campus weekenders", cadence: "Quarterly", asset: "Mascot / cowgirl character + flyer QR to Listen", next: "Student radio crossover" }
+  ],
+
+  trueFanLadder: [
+    { tier: 1, name: "Listener", price: "Free", offer: "Start Here playlist + social follows", cta: "Smart link on Listen page" },
+    { tier: 2, name: "Subscriber", price: "$0 list", offer: "Email / SMS — demos, dates, first dibs", cta: "Join the list" },
+    { tier: 3, name: "Close Friend", price: "IG Close Friends", offer: "Unreleased snippets, voice notes, early covers", cta: "Add from Stories CTA" },
+    { tier: 4, name: "Bandcamp buyer", price: "$5–40", offer: "Demos, name-your-price, merch bundles", cta: "Bandcamp Friday drops" },
+    { tier: 5, name: "Vinyl / merch", price: "$30–60", offer: "KEXP-funded vinyl lore + signed inserts", cta: "Limited runs with email unlock" },
+    { tier: 6, name: "Ticket priority", price: "Show+", offer: "Presale codes + merch bundle at door", cta: "List-only presale" },
+    { tier: 7, name: "True Fan patron", price: "~$100/yr", offer: "House-show lottery, patron credit, annual zine/demo pack", cta: "Invite after 2+ purchases or 1 show" }
+  ],
+
+  liveRouting: {
+    blurb: "Support-slot routing beside the like-artist map — PNW first, then West Coast, then national openers.",
+    onePager: [
+      "Seattle indie pop-rock with a country-pop edge — Atwood, Seattle Times #1 EP, KEXP vinyl story.",
+      "Draw: hometown radio + growing short-form; merch-ready vinyl narrative.",
+      "Set length: 30–45 min support / 60+ headline small rooms.",
+      "Tech: standard indie backline; acoustic duo option for radio / in-stores.",
+      "Contact: use EPK + Pitch Kit downloads from Song deck."
+    ],
+    legs: [
+      { region: "PNW", markets: ["Seattle", "Portland", "Bellingham", "Spokane", "Vancouver BC"], targets: "College rooms, in-stores, KEXP-adjacent bills" },
+      { region: "West Coast", markets: ["SF / Oakland", "LA (echo / residency)", "Sacramento", "Eugene"], targets: "Support for Samia / Soccer Mommy–adjacent bills; songwriter nights" },
+      { region: "National openers", markets: ["NYC", "Chicago", "Austin", "Nashville (country-pop lane)"], targets: "Pitch like-artists with highest reach scores first (Samia, Soccer Mommy, Holly Humberstone)" }
+    ]
   }
 };

@@ -938,6 +938,21 @@
         }
         try { sessionStorage.setItem(CACHE_KEY, JSON.stringify(d)); } catch (e) {}
         applyPayload(d, !!d.stale);
+        // Auto-sync Spotify followers into north-star store when live data arrives.
+        if (d.artist && d.artist.followers != null) {
+          try {
+            const KEY = "tinsley.northstar.v1";
+            const store = JSON.parse(localStorage.getItem(KEY) || "{}") || {};
+            const rec = store.followers || {};
+            const v = Math.round(d.artist.followers);
+            if (rec.current !== v) {
+              rec.current = v;
+              rec.history = (rec.history || []).concat([{ t: Date.now(), v: v }]).slice(-24);
+              store.followers = rec;
+              localStorage.setItem(KEY, JSON.stringify(store));
+            }
+          } catch (e) {}
+        }
       })
       .catch(() => fail("network"));
   })();
@@ -1320,4 +1335,15 @@
     s.classList.add("reveal");
     io.observe(s);
   });
+
+  /* ---- optional Plausible analytics ---- */
+  (function analytics() {
+    const domain = D.meta && D.meta.analytics && D.meta.analytics.plausibleDomain;
+    if (!domain) return;
+    const s = document.createElement("script");
+    s.defer = true;
+    s.setAttribute("data-domain", domain);
+    s.src = "https://plausible.io/js/script.js";
+    document.head.appendChild(s);
+  })();
 })();

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tinsley — Listen &amp; Join</title>
+  <meta name="description" content="Seattle indie pop-rock artist Tinsley. Start Here playlist, streaming links, and the email list for demos, dates, and first dibs." />
+  <meta name="theme-color" content="#0e0b12" />
+  <link rel="canonical" href="https://tinsley-marketing-hub.vercel.app/listen" />
+  <link rel="icon" href="assets/icon-512.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/icon-512.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tinsley — Listen &amp; Join" />
+  <meta property="og:description" content="Start Here. Seattle indie pop-rock — join the list for demos, dates, and first dibs." />
+  <meta property="og:url" content="https://tinsley-marketing-hub.vercel.app/listen" />
+  <meta property="og:image" content="https://tinsley-marketing-hub.vercel.app/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://tinsley-marketing-hub.vercel.app/assets/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/listen.css" />
+  <script type="application/ld+json" id="jsonld"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="listen-nav">
+    <a class="listen-brand" href="#top">TINSLEY</a>
+    <nav>
+      <a href="#start">Start Here</a>
+      <a href="#join">Join</a>
+      <a href="#links">Links</a>
+    </nav>
+  </header>
+
+  <section class="listen-hero" id="top">
+    <div class="listen-hero-bg" aria-hidden="true"></div>
+    <div class="listen-hero-inner">
+      <p class="listen-loc" id="listenLoc">Seattle</p>
+      <h1 id="listenBrand">Tinsley</h1>
+      <p class="listen-headline" id="listenHeadline"></p>
+      <p class="listen-sub" id="listenSub"></p>
+      <div class="listen-ctas">
+        <a class="listen-btn primary" id="ctaEmail" href="#" target="_blank" rel="noopener">Join the list</a>
+        <a class="listen-btn" id="ctaSpotify" href="#" target="_blank" rel="noopener">Listen on Spotify</a>
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+    <section class="listen-block" id="start">
+      <h2>Start Here</h2>
+      <p class="listen-lead" id="startBlurb"></p>
+      <ol class="listen-tracks" id="startTracks"></ol>
+    </section>
+
+    <section class="listen-block join" id="join">
+      <h2 id="joinTitle">Join the list</h2>
+      <p class="listen-lead" id="joinNote"></p>
+      <a class="listen-btn primary" id="ctaEmail2" href="#" target="_blank" rel="noopener">Get demos &amp; first dibs</a>
+      <p class="listen-fine" id="showsNote"></p>
+    </section>
+
+    <section class="listen-block" id="links">
+      <h2>Everywhere else</h2>
+      <ul class="listen-links" id="smartLinks"></ul>
+    </section>
+  </main>
+
+  <footer class="listen-foot">
+    <p>© <span id="year"></span> Tinsley · <a href="https://www.tinsleymusic.com/" target="_blank" rel="noopener">tinsleymusic.com</a></p>
+  </footer>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/listen.js"></script>
+</body>
+</html>

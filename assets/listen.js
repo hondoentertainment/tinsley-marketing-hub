@@ -19,7 +19,8 @@
   if ($("showsNote")) $("showsNote").textContent = L.showsNote || "";
   if ($("year")) $("year").textContent = String(new Date().getFullYear());
 
-  const emailHref = links.emailSignup || links.linktree || "#";
+  const emailHref = links.emailSignup || links.listen || "#join";
+  const linktreeFallback = links.linktree || "";
   const spotifyHref = links.spotify || "#";
   const sp = $("ctaSpotify");
   if (sp) {
@@ -75,8 +76,9 @@
   const status = $("joinStatus");
   const fallback = $("joinFallback");
   if (fallback) {
-    fallback.href = emailHref;
-    fallback.hidden = false;
+    fallback.href = linktreeFallback || emailHref;
+    fallback.hidden = !fallback.href || fallback.href === "#";
+    fallback.textContent = linktreeFallback ? "Open Linktree signup" : "Open signup link";
   }
   if (form) {
     form.addEventListener("submit", async (e) => {
@@ -113,13 +115,18 @@
             rec.history = (rec.history || []).concat([{ t: Date.now(), v: rec.current }]).slice(-24);
             store.email = rec;
             localStorage.setItem(KEY, JSON.stringify(store));
+            window.dispatchEvent(new CustomEvent("tinsley:northstar"));
           } catch (err) {}
         } else if (data && data.reason === "not_configured") {
           if (status) {
-            status.textContent = "List API not wired yet — opening the signup link.";
+            status.textContent = "List API not wired yet — use Linktree below until Kit/webhook is set in Vercel.";
             status.className = "join-status warn";
           }
-          window.open(emailHref, "_blank", "noopener");
+          if (linktreeFallback) {
+            window.open(linktreeFallback, "_blank", "noopener");
+          } else {
+            window.location.hash = "join";
+          }
         } else if (data && data.reason === "invalid_email") {
           if (status) {
             status.textContent = "That email doesn’t look right — try again.";
@@ -127,13 +134,13 @@
           }
         } else {
           if (status) {
-            status.textContent = "Couldn’t reach the list — use the fallback link below.";
+            status.textContent = "Couldn’t reach the list — use the Linktree fallback below.";
             status.className = "join-status err";
           }
         }
       } catch (err) {
         if (status) {
-          status.textContent = "Offline or blocked — use the fallback link below.";
+          status.textContent = "Offline or blocked — use the Linktree fallback below.";
           status.className = "join-status err";
         }
       } finally {

@@ -1,4 +1,13 @@
 User-agent: *
 Allow: /
+Allow: /listen
+Allow: /street-marketing
+
+# Internal strategy / ops surfaces — use noindex meta + keep out of sitemap
+Disallow: /tinsley-song
+Disallow: /tinsley-social
+Disallow: /tinsley-ops
+Disallow: /tinsley
+Disallow: /reference
 
 Sitemap: https://tinsley-marketing-hub.vercel.app/sitemap.xml

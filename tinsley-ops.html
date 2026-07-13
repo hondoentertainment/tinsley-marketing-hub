@@ -6,6 +6,7 @@
   <title>Tinsley — Ops Command</title>
   <meta name="description" content="Execution OS for Tinsley marketing: weekly ritual, UTM builder, release checklists, press CRM, playlist desk, content factory, paid winners, Seattle flywheel, True Fan ladder, and live routing." />
   <meta name="theme-color" content="#0e0b12" />
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="canonical" href="https://tinsley-marketing-hub.vercel.app/tinsley-ops" />
   <link rel="icon" href="assets/icon-512.png" type="image/png" />
   <link rel="apple-touch-icon" href="assets/icon-512.png" />
@@ -28,6 +29,7 @@
     <a href="#top" class="brand">TINSLEY<span>·</span>OPS</a>
     <nav class="nav-links">
       <a href="#setup">Setup</a>
+      <a href="#this-week">This week</a>
       <a href="#ritual">Ritual</a>
       <a href="#utm">UTM</a>
       <a href="#release-os">Release</a>
@@ -38,9 +40,10 @@
       <a href="#seattle">Seattle</a>
       <a href="#fan-ladder">Fans</a>
       <a href="#live-routing">Live</a>
+      <a href="#backup">Backup</a>
       <a href="listen.html">Listen ↗</a>
     </nav>
-    <a class="nav-cta" data-link="linktree" href="#" target="_blank" rel="noopener">Listen ↗</a>
+    <a class="nav-cta" data-link="listen" href="listen.html">Listen ↗</a>
   </header>
 
   <section class="hero" id="top">
@@ -51,7 +54,7 @@
       <h1>Ship the plan.</h1>
       <p class="hero-bio" id="heroBio"></p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#ritual">Start the weekly ritual</a>
+        <a class="btn btn-primary" href="#this-week">This week’s command</a>
         <a class="btn" href="listen.html">Public Listen page</a>
       </div>
       <div class="updated-badge" id="updatedBadge"></div>
@@ -63,9 +66,27 @@
       <div class="section-head">
         <span class="kicker">00 — Wire-up</span>
         <h2>Production connectors</h2>
-        <p class="lead">Status of the live hooks that turn this hub into a real acquisition system. Set env vars in the Vercel project, then refresh.</p>
+        <p class="lead">Status of the live hooks that turn this hub into a real acquisition system. Copy <code>.env.example</code>, set vars in the Vercel project, then refresh.</p>
       </div>
       <div id="opsSetup"></div>
+    </section>
+
+    <section class="section" id="this-week">
+      <div class="section-head">
+        <span class="kicker">00b — Command strip</span>
+        <h2>This week</h2>
+        <p class="lead">Monday morning in one glance: calendar, ritual, active release, press follow-ups, and north-star KPIs.</p>
+      </div>
+      <div id="opsThisWeek"></div>
+    </section>
+
+    <section class="section alt" id="kpis">
+      <div class="section-head">
+        <span class="kicker">00c — Measurement</span>
+        <h2>KPI snapshot</h2>
+        <p class="lead">North-stars from this browser, plus a weekly note so the 0–30 day “one dashboard” promise lives here — not in five tabs.</p>
+      </div>
+      <div id="opsKpis"></div>
     </section>
 
     <section class="section" id="ritual">
@@ -81,7 +102,7 @@
       <div class="section-head">
         <span class="kicker">02 — Measurement</span>
         <h2>UTM &amp; link builder</h2>
-        <p class="lead">Every bio, QR, ad, and press link should be attributable. Build tagged URLs here; wire Plausible via <code>meta.analytics.plausibleDomain</code> when ready.</p>
+        <p class="lead">Every bio, QR, ad, and press link should land on <strong>/listen</strong> with attribution. Defaults target the owned surface; Plausible loads when the domain is set in <code>data.js</code>.</p>
       </div>
       <div id="utmBuilder"></div>
     </section>
@@ -158,7 +179,16 @@
       <div id="liveRouting"></div>
     </section>
 
-    <section class="section" id="more">
+    <section class="section" id="backup">
+      <div class="section-head">
+        <span class="kicker">11 — Persistence</span>
+        <h2>Export &amp; import ops data</h2>
+        <p class="lead">Download a JSON backup of calendar, ritual, release OS, press CRM, playlists, paid log, Seattle flywheel, roadmap, and north-stars — then restore on another browser.</p>
+      </div>
+      <div id="opsBackup"></div>
+    </section>
+
+    <section class="section alt" id="more">
       <div class="section-head">
         <span class="kicker">Next</span>
         <h2>Strategy decks &amp; public surface</h2>
@@ -176,7 +206,7 @@
   <footer class="footer">
     <div class="methodology" id="methodology"></div>
     <p><strong>Tinsley — Ops Command</strong></p>
-    <p class="muted">Internal execution layer. Trackers save to this browser only. Point <code>artist.links.emailSignup</code> and <code>meta.analytics.plausibleDomain</code> at your real tools when ready.</p>
+    <p class="muted">Internal execution layer (<code>noindex</code>). Trackers save to this browser — use Export &amp; import before switching devices. Wire Kit/Spotify via <code>.env.example</code> → Vercel env.</p>
   </footer>
   <div class="toast" id="toast"></div>
   <script src="assets/data.js"></script>

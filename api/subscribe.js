@@ -3,12 +3,40 @@
    Supports (first match wins):
      1. KIT_API_KEY + KIT_FORM_ID  → Kit / ConvertKit forms API
      2. EMAIL_WEBHOOK_URL         → POST JSON { email, source, name? }
-   Without credentials, returns { ok: false, reason: "not_configured" }
-   so the Listen page can fall back to Linktree / emailSignup URL.
+   GET returns connector status for Ops setup (no side effects).
+   Without credentials, POST returns { ok: false, reason: "not_configured" }
+   so the Listen page can fall back to artist.links.emailSignup (/listen#join).
    ========================================================================= */
 
 function okEmail(email) {
   return typeof email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+}
+
+function kitConfigured() {
+  const key = process.env.KIT_API_KEY || process.env.CONVERTKIT_API_KEY;
+  const formId = process.env.KIT_FORM_ID || process.env.CONVERTKIT_FORM_ID;
+  return !!(key && formId);
+}
+
+function webhookConfigured() {
+  return !!process.env.EMAIL_WEBHOOK_URL;
+}
+
+function statusPayload() {
+  const kit = kitConfigured();
+  const webhook = webhookConfigured();
+  const providers = [];
+  if (kit) providers.push("kit");
+  if (webhook) providers.push("webhook");
+  return {
+    ok: true,
+    configured: kit || webhook,
+    providers: providers,
+    fallback: "/listen#join",
+    hint: kit || webhook
+      ? "POST { email, name?, source } to subscribe"
+      : "Set KIT_API_KEY + KIT_FORM_ID (or EMAIL_WEBHOOK_URL) in Vercel env"
+  };
 }
 
 async function subscribeKit(email, name) {
@@ -43,19 +71,15 @@ async function subscribeWebhook(email, name, source) {
 
 module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Cache-Control", "no-store");
   if (req.method === "OPTIONS") return res.status(204).end();
+  if (req.method === "GET") {
+    return res.status(200).json(statusPayload());
+  }
   if (req.method !== "POST") {
-    return res.status(200).json({
-      ok: false,
-      reason: "method_not_allowed",
-      configured: !!(
-        process.env.EMAIL_WEBHOOK_URL ||
-        ((process.env.KIT_API_KEY || process.env.CONVERTKIT_API_KEY) &&
-          (process.env.KIT_FORM_ID || process.env.CONVERTKIT_FORM_ID))
-      )
-    });
+    return res.status(405).json({ ok: false, reason: "method_not_allowed", ...statusPayload() });
   }
 
   let body = req.body;
@@ -75,9 +99,8 @@ module.exports = async (req, res) => {
     let result = await subscribeKit(email, name);
     if (!result) result = await subscribeWebhook(email, name, source);
     if (!result) {
-      return res.status(200).json({ ok: false, reason: "not_configured" });
+      return res.status(200).json({ ok: false, reason: "not_configured", fallback: "/listen#join" });
     }
-    res.setHeader("Cache-Control", "no-store");
     return res.status(200).json({ ok: true, provider: result.provider });
   } catch (e) {
     console.error("[subscribe]", e);

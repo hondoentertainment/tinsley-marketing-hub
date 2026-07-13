@@ -6,67 +6,66 @@ A centralized, static site that links every marketing page in this workspace tog
 
 | Page | File | What it is |
 | --- | --- | --- |
-| **Marketing Hub** | `index.html` | Central landing page. Groups projects by suite (Tinsley suite + field guides). |
-| **Tinsley chooser** | `tinsley.html` | Legacy `/tinsley` URL — pick Song, Social, or Reference. |
-| **Tinsley — Song & Catalog Analysis** | `tinsley-song.html` | Music-first deck: catalog, EDM remix + sync notes, pitch one-pagers, SWOT, like artists. |
-| **Tinsley — Social & Marketing Analysis** | `tinsley-social.html` | Marketing-first deck: hashtags, daily content calendar, per-song recipes, platform plays, roadmap. |
-| **Reference — Frameworks & Philosophy** | `reference.html` | Shared frameworks: 1,000 True Fans + *The Creative Act* (not duplicated in the decks). |
-| **Street Marketing — Top 100 Ideas** | `street-marketing.html` | Searchable guerrilla tactics field guide. Fully self-contained. |
+| **Marketing Hub** | `index.html` | Central landing page. Project cards + searchable section index. |
+| **Listen** | `listen.html` | **Public fan surface** — Start Here playlist, email capture (`/api/subscribe`), smart links. Primary bio/QR destination. |
+| **Tinsley chooser** | `tinsley.html` | Legacy `/tinsley` URL — pick Song, Social, Ops, Listen, or Reference. |
+| **Tinsley — Song & Catalog Analysis** | `tinsley-song.html` | Music-first deck: catalog, EDM remix + sync notes, pitch kit, SWOT, like artists. Internal (`noindex`). |
+| **Tinsley — Social & Marketing Analysis** | `tinsley-social.html` | Marketing deck: hashtags, daily content calendar, street picks, roadmap. Internal (`noindex`). |
+| **Tinsley — Ops Command** | `tinsley-ops.html` | Execution OS: this-week strip, KPIs, ritual, UTMs, release OS, press CRM, playlists, content factory, paid log, Seattle flywheel, True Fan ladder, live routing, JSON backup. Internal (`noindex`). |
+| **Reference — Frameworks & Philosophy** | `reference.html` | Shared frameworks: 1,000 True Fans + *The Creative Act*. Internal (`noindex`). |
+| **Street Marketing — Top 100 Ideas** | `street-marketing.html` | Searchable guerrilla tactics field guide. Public. |
 
-Every sub-page has a "← Hub" link back to `index.html`, so the pages are linked together in both directions.
+Public SEO surfaces: `/`, `/listen`, `/street-marketing` (see `sitemap.xml` + `robots.txt`). Strategy decks are `noindex`.
 
 ## Run it
 
-It's a static site — no build step required.
-
 ```bash
-# From this folder, any static server works. For example:
 npx serve .
 # or
 python -m http.server 8080
+# or (with API routes)
+npx vercel dev
 ```
 
-Then open the printed URL (e.g. http://localhost:8080). You can also open `index.html` directly in a browser.
+## Production connectors (Vercel env)
+
+Copy `.env.example` and set in **Vercel → Project → Settings → Environment Variables**:
+
+| Variable | Purpose |
+| --- | --- |
+| `SPOTIFY_CLIENT_ID` + `SPOTIFY_CLIENT_SECRET` | Live followers / popularity on Song & Social |
+| `KIT_API_KEY` + `KIT_FORM_ID` | Kit/ConvertKit list via `POST /api/subscribe` |
+| `EMAIL_WEBHOOK_URL` | Alternate webhook for `{ email, name?, source }` |
+
+Without email env vars, the Listen form stays visible and falls back to `#join` / Linktree. Ops → Setup shows connector status.
+
+Plausible: `meta.analytics.plausibleDomain` in `assets/data.js` (already set to the Vercel host — register that site in Plausible).
 
 ## Add a new marketing page
 
 1. Drop your new self-contained `your-page.html` in this folder.
-2. Add a "← Hub" backlink in it pointing to `index.html`.
-3. Append one entry to the `PAGES` array in `index.html` (set `suite` to `"tinsley"` or `"field"`, or add a new suite in `SUITES`):
-
-```js
-{
-  suite: "field",
-  title: "Your Campaign Title",
-  kind: "Campaign Type",
-  href: "your-page.html",
-  desc: "One-line description shown on the hub card.",
-  tags: ["Tag A", "Tag B"],
-  accent: "linear-gradient(120deg, #ff6f91, #b98cff)"
-}
-```
-
-The hub re-renders automatically. Entries without an `href` render as a "Coming soon" card.
+2. Add a "← Hub" backlink pointing to `index.html`.
+3. Append one entry to the `PAGES` array in `index.html` and (optionally) `SECTION_INDEX`.
 
 ## Files
 
 ```
-index.html            # the central hub (links all pages)
+index.html            # hub + section index
+listen.html           # public fan page
 tinsley.html          # chooser for legacy /tinsley links
-tinsley-song.html     # song & catalog analysis (uses assets/)
-tinsley-social.html   # social & marketing analysis (uses assets/)
-reference.html        # True Fans + Creative Act frameworks
-street-marketing.html # Street marketing Top 100 ideas (self-contained)
+tinsley-song.html     # song & catalog (internal)
+tinsley-social.html   # social & marketing (internal)
+tinsley-ops.html      # ops command (internal)
+reference.html        # True Fans + Creative Act
+street-marketing.html # Top 100 guerrilla ideas
 assets/
-  styles.css          # Tinsley design system + layout
-  data.js             # ALL Tinsley strategy content (edit here)
-  app.js              # Song + Social rendering + interactivity
-  reference.js        # Reference page renderer
-  og-image.png        # shared social share card
-  icon-512.png        # shared favicon / app icon
-api/spotify.js        # live Spotify metrics (Vercel serverless)
+  styles.css, data.js, app.js, ops.js, listen.js, listen.css, reference.js
+api/spotify.js        # live Spotify metrics
+api/subscribe.js      # email list subscribe
+.env.example          # required Vercel env vars
+sitemap.xml / robots.txt
 sw.js                 # service worker (bump CACHE to invalidate)
-vercel.json           # clean URLs + redirects
+vercel.json
 ```
 
 ## Sources

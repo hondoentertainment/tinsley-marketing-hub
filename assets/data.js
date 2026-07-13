@@ -10,9 +10,10 @@ const TINSLEY = {
   // Credibility layer. `updated` drives the "Last updated" badge; `sources`
   // renders the Methodology block; `spotifyArtistId` powers the live data fetch.
   meta: {
-    updated: "2026-07-12",
+    updated: "2026-07-13",
     spotifyArtistId: "1encEkVjZ4iqby8BXZc8Pa",
-    canonicalUrl: "https://tinsley-hq.vercel.app/",
+    canonicalUrl: "https://tinsley-marketing-hub.vercel.app/",
+    publicListenPath: "/listen",
     methodology:
       "This deck blends verifiable public data with clearly-labeled analytical estimates. Figures marked LIVE (Spotify followers, popularity, top tracks, artwork) are fetched on page load from the Spotify Web API and reflect the moment you loaded the page. Catalog facts, press quotes and career milestones are sourced from the artist's official channels and published press. Remix scores, like-artist match percentages, and the True-Fans revenue model are the author's analytical estimates for planning purposes — not measured metrics.",
     sources: [
@@ -25,10 +26,11 @@ const TINSLEY = {
       { label: "Kevin Kelly — 1,000 True Fans (2008)", url: "https://kk.org/thetechnium/1000-true-fans/", kind: "Framework" }
     ],
     analytics: {
-      // Set to your Plausible site domain when registered (e.g. "tinsley-marketing-hub.vercel.app").
-      plausibleDomain: "",
+      // Register this host in Plausible (Settings → Sites). Script loads when non-empty.
+      plausibleDomain: "tinsley-marketing-hub.vercel.app",
       vercelInsights: true,
-      utmDefaults: { source: "hub", medium: "social", campaign: "tinsley" }
+      // Default every bio / QR / ad link to the owned Listen surface.
+      utmDefaults: { source: "bio", medium: "social", campaign: "listen" }
     }
   },
 
@@ -50,8 +52,9 @@ const TINSLEY = {
       instagram: "https://instagram.com/tinsleymusic",
       tiktok: "https://tiktok.com/@tinsleymusic",
       epk: "https://www.tinsleymusic.com/epk",
-      // Point this at ConvertKit / Mailchimp / Feature.fm email capture when ready.
-      emailSignup: "https://tr.ee/h6fNd7BTOw",
+      // Primary fan landing + email capture (form posts to /api/subscribe when Kit/webhook env is set).
+      listen: "https://tinsley-marketing-hub.vercel.app/listen",
+      emailSignup: "https://tinsley-marketing-hub.vercel.app/listen#join",
       youtube: "https://www.youtube.com/@tinsleymusic"
     }
   },
@@ -68,7 +71,7 @@ const TINSLEY = {
     },
     ops: {
       job: "Execute & measure",
-      lede: "The operating system behind the decks: weekly ritual, UTMs, release checklists, press CRM, playlist & sync desk, content factory, paid winners, Seattle flywheel, True Fan ladder, and live routing."
+      lede: "The operating system behind the decks: this-week command strip, KPI snapshot, ritual, UTMs to /listen, release checklists, press CRM, content factory, and JSON backup so ops state survives browsers."
     }
   },
 
@@ -79,7 +82,7 @@ const TINSLEY = {
     primaryCta: "Join the list",
     primaryNote: "Drops, demos, and first dibs — never spam.",
     secondaryCta: "Listen on Spotify",
-    showsNote: "Tour & ticket alerts go to the list first. Watch Linktree for the next PNW date."
+    showsNote: "Tour & ticket alerts go to the list first. Next PNW date lands here before anywhere else."
   },
 
   // ---- "Start Here" playlist pitch (curated entry points for new listeners) ----
@@ -546,7 +549,7 @@ const TINSLEY = {
       items: [
         { track: "foundation", lever: "Positioning", text: "Lock a one-line story — 'Seattle indie pop-rock with a country-pop edge' — and choose one hero lane for this cycle." },
         { track: "foundation", lever: "Analytics", text: "Set up Spotify for Artists, Meta Business & TikTok analytics into one KPI dashboard: saves, followers, email sign-ups, D2C sales." },
-        { track: "foundation", lever: "Owned CRM", text: "Launch an email list + one smart link (Feature.fm/Linktree); add email capture to every bio, post, and show." },
+        { track: "foundation", lever: "Owned CRM", text: "Make /listen the primary bio + QR destination; wire Kit/webhook on /api/subscribe so every show and post captures email." },
         { track: "reach", lever: "Streaming", text: "Build & pin a 'Start Here' playlist; refresh Artist Pick, bio, and add a Canvas to every top track." },
         { track: "reach", lever: "Short-form", text: "Commit to a 4–5×/week TikTok + Reels cadence around 'Bad Enough' (lyric POV, revenge-glow-up transitions)." },
         { track: "product", lever: "Catalog", text: "Audit the 19-track catalog; pick the next single and map a 6-week rollout with a content bank." },
@@ -786,12 +789,25 @@ const TINSLEY = {
     { id: "college", name: "College radio charts", lane: "Radio", fit: "Debut LP, Love Songs", tip: "Pair with C89.5 relationship; ship physical if possible." }
   ],
 
+  // Content factory packs — Start Here tracks + Temporary Insanity (next-single lane).
   contentFactory: [
     {
       song: "Bad Enough",
       hooks: ["choose yourself lip-sync", "revenge glow-up transition", "lyric card: ‘bad enough’ hook"],
       shots: ["15s hook close-up", "30s story cutdown", "vinyl / mirror B-roll", "caption: ‘for the version of you that stayed’"],
       captions: ["Choosing me was the plot twist.", "Post-breakup energy, country-pop edition.", "If this finds you — keep it."]
+    },
+    {
+      song: "Temporary Insanity",
+      hooks: ["overthinking POV text overlay", "green flag / red flag listicle", "chaotic-era stitch bait"],
+      shots: ["beat-timed caption cuts", "mirror spiral / hallway walk", "fan DM reply stitch"],
+      captions: ["Intrusive thoughts, but make it a chorus.", "Chaotic era — documented.", "If your brain won’t shut up, press play."]
+    },
+    {
+      song: "Classic",
+      hooks: ["first-dance aspirational", "couple montage / anniversary", "wedding playlist soft CTA"],
+      shots: ["golden-hour couple B-roll", "lyric card on the yearning line", "fan stitch: ‘our song’ ask"],
+      captions: ["Put this on the wedding playlist.", "Romance, indie-pop edition.", "For the ones who still mean it."]
     },
     {
       song: "Distract Me",
@@ -810,6 +826,18 @@ const TINSLEY = {
       hooks: ["confessional whisper", "Close Friends teaser", "acoustic bedroom take"],
       shots: ["single lamp performance", "handwritten lyric page", "fan-comment stitch"],
       captions: ["Honesty made audible.", "For the ones who stay anyway.", "Demo energy → True Fan fuel."]
+    },
+    {
+      song: "Love Songs (EP)",
+      hooks: ["critics-poll flex carousel", "hopeless romantic starter pack", "which track are you?"],
+      shots: ["3-slide poll graphic", "EP medley cutdowns", "Seattle Times #1 screenshot + needle drop"],
+      captions: ["#1 Seattle Times critics poll — still the yearning blueprint.", "Hopeless romantic starter pack.", "Comment your Love Songs track."]
+    },
+    {
+      song: "Tinsley (Debut LP)",
+      hooks: ["vinyl unboxing / KEXP story", "coming-of-age montage", "Start Here deep-cut tease"],
+      shots: ["needle-drop close-up", "track-by-track lyric carousel", "John Richards vinyl lore card"],
+      captions: ["Vinyl funded by KEXP’s John Richards — the flagship.", "Nine tracks on growing up.", "If you only listen to three… Start Here."]
     }
   ],
 

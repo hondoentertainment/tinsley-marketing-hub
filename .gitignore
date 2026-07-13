@@ -4,6 +4,11 @@ node_modules/
 # Vercel
 .vercel
 
+# Secrets
+.env
+.env.local
+.env*.local
+
 # OS / editor
 .DS_Store
 Thumbs.db

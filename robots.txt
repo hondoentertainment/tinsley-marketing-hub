@@ -1,6 +1,10 @@
 User-agent: *
 Allow: /
 Allow: /listen
+Allow: /bad-enough
+Allow: /press
+Allow: /sync
+Allow: /shows
 Allow: /street-marketing
 
 # Internal strategy / ops surfaces — use noindex meta + keep out of sitemap

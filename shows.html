@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tinsley — Shows &amp; Booking</title>
+  <meta name="description" content="Live booking for Seattle indie pop-rock artist Tinsley: support-slot one-pager, PNW to national routing, set lengths, and booking contact." />
+  <meta name="theme-color" content="#120e14" />
+  <link rel="canonical" href="https://tinsley-marketing-hub.vercel.app/shows" />
+  <link rel="icon" href="assets/icon-512.png" type="image/png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tinsley — Shows &amp; Booking" />
+  <meta property="og:description" content="PNW-first live routing, support one-pager, and booking path for promoters." />
+  <meta property="og:url" content="https://tinsley-marketing-hub.vercel.app/shows" />
+  <meta property="og:image" content="https://tinsley-marketing-hub.vercel.app/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/public.css" />
+</head>
+<body data-page="shows">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="pub-nav">
+    <a class="pub-brand" href="listen.html">TINSLEY</a>
+    <nav>
+      <a href="press.html">Press</a>
+      <a href="sync.html">Sync</a>
+      <a href="shows.html" class="active">Shows</a>
+      <a href="bad-enough.html">Bad Enough</a>
+    </nav>
+    <a class="pub-nav-listen" href="listen.html">Listen</a>
+  </header>
+
+  <section class="pub-hero" data-tone="shows" id="top">
+    <div class="pub-hero-bg" aria-hidden="true"></div>
+    <div class="pub-hero-inner">
+      <p class="pub-eyebrow">Live &amp; booking</p>
+      <h1 id="shHeadline">PNW rooms first.</h1>
+      <p class="pub-lede" id="shLede"></p>
+      <div class="pub-ctas">
+        <a class="pub-btn primary" id="ctaEpk" href="#" target="_blank" rel="noopener">Booking via EPK ↗</a>
+        <a class="pub-btn" id="ctaListen" href="listen.html#join">Fan list / dates</a>
+        <a class="pub-btn" href="press.html">Press Kit</a>
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+    <section class="pub-section">
+      <h2>Why book</h2>
+      <ul class="pub-draw" id="shDraw"></ul>
+    </section>
+
+    <section class="pub-section">
+      <h2>Set &amp; tech</h2>
+      <div class="pub-set" id="shSet"></div>
+    </section>
+
+    <section class="pub-section">
+      <h2>Support-slot one-pager</h2>
+      <p class="lead" id="shBlurb"></p>
+      <div class="pub-onepager">
+        <ul id="shOnePager"></ul>
+      </div>
+      <button type="button" class="pub-btn" id="copyOnePager">Copy one-pager</button>
+    </section>
+
+    <section class="pub-section">
+      <h2>Routing legs</h2>
+      <div class="pub-legs" id="shLegs"></div>
+    </section>
+
+    <section class="pub-section">
+      <h2>Holds &amp; offers</h2>
+      <p class="lead" id="shBooking"></p>
+      <div class="pub-ctas">
+        <a class="pub-btn primary" href="https://www.tinsleymusic.com/epk" target="_blank" rel="noopener">Official EPK ↗</a>
+        <a class="pub-btn" href="listen.html">Listen / Start Here</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pub-foot">
+    <p>© <span id="year"></span> Tinsley · Live surface</p>
+    <nav>
+      <a href="press.html">Press</a>
+      <a href="sync.html">Sync</a>
+      <a href="bad-enough.html">Bad Enough</a>
+      <a href="index.html">Hub</a>
+    </nav>
+  </footer>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/public.js"></script>
+  <script>
+    (function () {
+      var btn = document.getElementById("copyOnePager");
+      if (!btn || typeof TINSLEY === "undefined") return;
+      btn.addEventListener("click", function () {
+        var lines = ["TINSLEY — SUPPORT-SLOT ONE-PAGER", ""].concat(
+          (TINSLEY.liveRouting && TINSLEY.liveRouting.onePager) || []
+        );
+        var text = lines.join("\n");
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            btn.textContent = "Copied";
+            setTimeout(function () { btn.textContent = "Copy one-pager"; }, 1600);
+          });
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

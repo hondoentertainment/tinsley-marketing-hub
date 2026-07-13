@@ -890,5 +890,85 @@ const TINSLEY = {
       { region: "West Coast", markets: ["SF / Oakland", "LA (echo / residency)", "Sacramento", "Eugene"], targets: "Support for Samia / Soccer Mommy–adjacent bills; songwriter nights" },
       { region: "National openers", markets: ["NYC", "Chicago", "Austin", "Nashville (country-pop lane)"], targets: "Pitch like-artists with highest reach scores first (Samia, Soccer Mommy, Holly Humberstone)" }
     ]
+  },
+
+  // ---- Public marketing surfaces (press / sync / shows / single campaign) ----
+  pressKit: {
+    eyebrow: "Electronic Press Kit",
+    headline: "For editors, radio, and playlist desks.",
+    lede: "Seattle indie pop-rock with a country-pop edge — diary-clear hooks, KEXP-backed vinyl, and a #1 Seattle Times critics-poll EP.",
+    oneLiner: "Seattle indie pop-rock with a country-pop edge.",
+    contactNote: "Booking & press: use the official EPK form on tinsleymusic.com, or reply via the channels below.",
+    assets: [
+      { label: "Official EPK", hrefKey: "epk", note: "Photos, bio, and booking from the artist site" },
+      { label: "Spotify", hrefKey: "spotify", note: "Artist profile + Start Here playlist" },
+      { label: "Bandcamp", hrefKey: "bandcamp", note: "Vinyl, demos, high-margin catalog" },
+      { label: "Listen page", href: "listen.html", note: "Fan Start Here + email list" }
+    ],
+    facts: [
+      { k: "Based in", v: "Seattle, WA" },
+      { k: "Active since", v: "2018" },
+      { k: "Flagship", v: "Self-titled debut LP (2025)" },
+      { k: "Lead single", v: "Bad Enough (2026)" },
+      { k: "Radio", v: "KEXP · 107.7 The End · C89.5" },
+      { k: "Milestone", v: "#1 Seattle Times WA critics poll (Love Songs EP)" }
+    ]
+  },
+
+  syncPage: {
+    eyebrow: "Sync & licensing",
+    headline: "Clear stories. Sticky hooks. Sync-ready moods.",
+    lede: "Pitch-ready cues for supervisors — diary-forward toplines with country-pop, dream-pop, and electro catalog depth.",
+    contactNote: "For sync inquiries, start with the official EPK / management contact. Tag cues below when submitting.",
+    moods: [
+      { mood: "Choose yourself / glow-up", tracks: ["Bad Enough"], use: "End credits, revenge arcs, YA empowerment" },
+      { mood: "Coming of age / grief", tracks: ["Tinsley (Debut LP)", "Hard to Love"], use: "Intimate drama, montage under dialogue" },
+      { mood: "Dreamy situationship", tracks: ["Distract Me"], use: "Travel, crush, soft lifestyle beds" },
+      { mood: "Alt-country wit", tracks: ["Good Ride (Mechanical Bullshit)"], use: "Road trip, wry romance, coastal-cowgirl" },
+      { mood: "Wedding / first dance", tracks: ["Classic"], use: "Ceremony, anniversary, romance spots" },
+      { mood: "Anxious / spiral", tracks: ["Heart Attack", "Temporary Insanity"], use: "Thriller-adjacent teen drama, comedy chaos" }
+    ]
+  },
+
+  showsPage: {
+    eyebrow: "Live & booking",
+    headline: "PNW rooms first. Then the map opens.",
+    lede: "Support-ready sets with merch-ready vinyl lore — college rooms, in-stores, and KEXP-adjacent bills before West Coast openers.",
+    bookingNote: "For offers and holds, use the official EPK booking channel. Include market, capacity, and date windows.",
+    draw: [
+      "Hometown radio relationships (KEXP, 107.7 The End, C89.5)",
+      "Short-form discovery engine around Bad Enough",
+      "Vinyl story funded by KEXP’s John Richards",
+      "Acoustic duo option for radio / record shops"
+    ],
+    set: [
+      { label: "Support", detail: "30–45 min" },
+      { label: "Headline (small)", detail: "60+ min" },
+      { label: "Tech", detail: "Standard indie backline" },
+      { label: "Alt format", detail: "Acoustic duo for in-stores / radio" }
+    ]
+  },
+
+  campaignBadEnough: {
+    song: "Bad Enough",
+    eyebrow: "Single · 2026",
+    headline: "Cathartic country-pop at its finest.",
+    lede: "Post-breakup. Choose yourself. The lead single of the next chapter — Atwood-praised and built for glow-up lip-syncs.",
+    quote: { text: "Tinsley's latest single is cathartic country-pop at its finest.", source: "Atwood Magazine" },
+    ctas: [
+      { label: "Stream on Spotify", hrefKey: "spotify", primary: true },
+      { label: "Join the list", href: "listen.html#join" },
+      { label: "Bandcamp", hrefKey: "bandcamp" }
+    ],
+    angles: [
+      { title: "The hook", text: "Lip-sync the chorus with a revenge-glow-up transition — FYP bait that still sounds like her." },
+      { title: "The story", text: "Diary-clear ‘choosing me’ energy after the debut LP era — same honesty, sharper edge." },
+      { title: "The lane", text: "Country-pop crossover without abandoning Seattle indie DNA — playlist and sync dual threat." }
+    ],
+    weekBeats: [
+      "Mon — Hook lip-sync + text: ‘choosing me’",
+      "Wed — 15s story-behind: one line about writing the chorus",
+      "Fri — Stitch/duet ask: show your glow-up to this hook"
+    ]
   }
 };

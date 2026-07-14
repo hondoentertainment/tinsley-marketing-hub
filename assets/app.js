@@ -1458,7 +1458,7 @@
     ".diff-item",
     ".spick",
     ".artist",
-    ".htag-group",
+    ".htg",
     ".ns-card"
   ].join(", ");
   document.querySelectorAll(staggerSel).forEach((n) => n.classList.add("reveal-child"));

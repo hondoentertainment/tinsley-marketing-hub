@@ -606,6 +606,107 @@
     });
   }
 
+  /* ---- market differentiators ---- */
+  (function differentiators() {
+    const root = $("#diffRoot");
+    const diff = D.differentiators;
+    if (!root || !diff) return;
+    const esc = (s) =>
+      String(s == null ? "" : s).replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+
+    const month = (diff.thisMonth || [])
+      .map((t, i) => `<li><span class="diff-n">${String(i + 1).padStart(2, "0")}</span><span>${esc(t)}</span></li>`)
+      .join("");
+
+    const groups = (diff.groups || [])
+      .map((g) => {
+        const items = (g.items || [])
+          .map(
+            (it) => `<article class="diff-item">
+            <h4>${esc(it.title)}</h4>
+            <p class="diff-action"><strong>Do:</strong> ${esc(it.action)}</p>
+            <p class="diff-why">${esc(it.why)}</p>
+          </article>`
+          )
+          .join("");
+        return `<div class="diff-group" data-id="${esc(g.id)}">
+          <div class="diff-group-h">
+            <h3>${esc(g.title)}</h3>
+            <p>${esc(g.blurb || "")}</p>
+          </div>
+          <div class="diff-items">${items}</div>
+        </div>`;
+      })
+      .join("");
+
+    root.innerHTML = `
+      <div class="diff-frame">
+        <div class="diff-vs" role="group" aria-label="Crowd versus wedge">
+          <div class="diff-vs-side crowd">
+            <span class="diff-l">Crowd</span>
+            <p>${esc(diff.enemy)}</p>
+          </div>
+          <div class="diff-vs-mid" aria-hidden="true">vs</div>
+          <div class="diff-vs-side wedge">
+            <span class="diff-l">Wedge</span>
+            <p>${esc(diff.wedge)}</p>
+          </div>
+        </div>
+        <div class="diff-oneliner">
+          <span class="diff-l">Hero line this cycle</span>
+          <p id="diffOneLiner">${esc(diff.oneLiner)}</p>
+          <button type="button" class="btn" id="diffCopyLine">Copy one-liner</button>
+        </div>
+      </div>
+      <div class="diff-month">
+        <div class="diff-month-h">
+          <h3>This month — highest leverage</h3>
+          <p>Four moves that separate her from interchangeable diary-pop before anything else.</p>
+        </div>
+        <ol class="diff-month-list">${month}</ol>
+      </div>
+      <div class="diff-groups">${groups}</div>
+      <div class="diff-actions">
+        <button type="button" class="btn btn-primary" id="diffCopyAll">Copy full brief</button>
+        <a class="btn" href="press.html">Open Press Kit</a>
+        <a class="btn" href="bad-enough.html">Bad Enough campaign</a>
+        <a class="btn" href="tinsley-social.html#calendar">Content calendar</a>
+      </div>`;
+
+    const brief = () => {
+      const lines = [
+        "TINSLEY — DIFFERENTIATORS BRIEF",
+        "",
+        "Crowd: " + diff.enemy,
+        "Wedge: " + diff.wedge,
+        "Hero line: " + diff.oneLiner,
+        "",
+        "THIS MONTH",
+        ...(diff.thisMonth || []).map((t, i) => i + 1 + ". " + t),
+        ""
+      ];
+      (diff.groups || []).forEach((g) => {
+        lines.push(g.title.toUpperCase());
+        (g.items || []).forEach((it) => {
+          lines.push("• " + it.title);
+          lines.push("  Do: " + it.action);
+          lines.push("  Why: " + it.why);
+        });
+        lines.push("");
+      });
+      return lines.join("\n").trim();
+    };
+
+    const copyLine = $("#diffCopyLine");
+    if (copyLine) {
+      copyLine.addEventListener("click", () => copy(diff.oneLiner, "Copied hero one-liner"));
+    }
+    const copyAll = $("#diffCopyAll");
+    if (copyAll) {
+      copyAll.addEventListener("click", () => copy(brief(), "Copied differentiators brief"));
+    }
+  })();
+
   /* ---- roadmap (30 → 720 day growth timeline) + milestone tracker ---- */
   (function initRoadmap() {
     const rm = $("#roadmapGrid");
@@ -1324,6 +1425,20 @@
           e.target.querySelectorAll(".bar-fill, .match-fill, .mini-fill, .tf-rung-fill, .ca-fill").forEach((b) => {
             b.style.width = b.getAttribute("data-w") + "%";
           });
+          e.target.querySelectorAll(".cal-ring, .rm-ring").forEach((ring) => {
+            const p = ring.style.getPropertyValue("--p") || ring.getAttribute("data-p");
+            if (p != null && String(p).trim() !== "") {
+              const final = String(p).replace("%", "").trim();
+              ring.style.setProperty("--p", "0");
+              requestAnimationFrame(() => {
+                requestAnimationFrame(() => ring.style.setProperty("--p", final));
+              });
+            }
+          });
+          e.target.querySelectorAll(".reveal-child").forEach((child, i) => {
+            child.style.setProperty("--reveal-i", String(i));
+            child.classList.add("in");
+          });
           io.unobserve(e.target);
         }
       });
@@ -1334,6 +1449,92 @@
     s.classList.add("reveal");
     io.observe(s);
   });
+  const staggerSel = [
+    ".track",
+    ".remix-row",
+    ".social-card",
+    ".cal-day",
+    ".rm-phase",
+    ".diff-item",
+    ".spick",
+    ".artist",
+    ".htag-group",
+    ".ns-card"
+  ].join(", ");
+  document.querySelectorAll(staggerSel).forEach((n) => n.classList.add("reveal-child"));
+
+  /* ---- nav: mobile drawer + scroll-spy + deck jumps ---- */
+  (function deckChrome() {
+    const toggle = $("#navToggle");
+    const links = $("#navLinks");
+    if (toggle && links) {
+      const close = () => {
+        document.body.classList.remove("nav-open");
+        toggle.setAttribute("aria-expanded", "false");
+      };
+      toggle.addEventListener("click", () => {
+        const open = !document.body.classList.contains("nav-open");
+        document.body.classList.toggle("nav-open", open);
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      links.querySelectorAll("a").forEach((a) => a.addEventListener("click", close));
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") close();
+      });
+    }
+
+    const sectionLinks = Array.from(document.querySelectorAll("#navLinks a[href^='#']"));
+    const sections = sectionLinks
+      .map((a) => document.querySelector(a.getAttribute("href")))
+      .filter(Boolean);
+    if (sectionLinks.length && sections.length) {
+      const spy = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((en) => en.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (!visible) return;
+          const id = "#" + visible.target.id;
+          sectionLinks.forEach((a) => a.classList.toggle("is-active", a.getAttribute("href") === id));
+        },
+        { rootMargin: "-20% 0px -55% 0px", threshold: [0.1, 0.25, 0.5] }
+      );
+      sections.forEach((s) => spy.observe(s));
+    }
+
+    document.querySelectorAll("[data-jump]").forEach((node) => {
+      node.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const href = node.getAttribute("data-jump");
+        if (href) window.location.href = href;
+      });
+    });
+
+    const bio = $("#heroBio");
+    if (bio && window.matchMedia("(max-width: 560px)").matches) {
+      const btn = el("button", "btn btn-quiet hero-bio-more", "Read more");
+      btn.type = "button";
+      btn.addEventListener("click", () => {
+        const open = bio.classList.toggle("is-expanded");
+        btn.textContent = open ? "Show less" : "Read more";
+      });
+      bio.insertAdjacentElement("afterend", btn);
+    }
+
+    if (deckKey === "song" || deckKey === "social") {
+      const bar = el("div", "deck-bar");
+      bar.setAttribute("aria-label", "Switch analysis deck");
+      if (deckKey === "song") {
+        bar.innerHTML = `<span class="deck-bar-here">Song deck</span><a href="tinsley-social.html">Switch to Social &rarr;</a>`;
+      } else {
+        bar.innerHTML = `<span class="deck-bar-here">Social deck</span><a href="tinsley-song.html">Switch to Song &rarr;</a>`;
+      }
+      const footer = document.querySelector(".footer");
+      if (footer) footer.insertAdjacentElement("beforebegin", bar);
+      else document.body.appendChild(bar);
+    }
+  })();
 
   /* ---- optional analytics (Plausible + Vercel Web Analytics) ---- */
   (function analytics() {

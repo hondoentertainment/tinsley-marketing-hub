@@ -31,16 +31,21 @@
   <header class="nav" id="nav">
     <a href="index.html" class="hub-back">&larr; Hub</a>
     <a href="#top" class="brand">TINSLEY<span>·</span>SONG</a>
-    <nav class="nav-links">
+    <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open section menu">
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+      Sections
+    </button>
+    <nav class="nav-links" id="navLinks">
       <a href="#catalog">Catalog</a>
       <a href="#remix">Remix</a>
       <a href="#pitch">Pitch Kit</a>
       <a href="#assessment">Assessment</a>
       <a href="#artists">Like Artists</a>
+      <a href="#differentiators">Differentiators</a>
       <a href="reference.html">Reference ↗</a>
       <a href="tinsley-ops.html">Ops ↗</a>
-      <a href="tinsley-social.html" class="nav-switch">Social Analysis &rarr;</a>
     </nav>
+    <a href="tinsley-social.html" class="nav-switch">Social &rarr;</a>
     <a class="nav-cta" data-link="listen" href="listen.html">Listen ↗</a>
   </header>
 
@@ -54,11 +59,13 @@
       <p class="hero-sub" id="heroTagline"></p>
       <p class="hero-bio" id="heroBio"></p>
       <div class="hero-actions">
-        <a class="btn btn-primary" data-link="spotify" href="#" target="_blank" rel="noopener">▶ Spotify</a>
-        <a class="btn" data-link="bandcamp" href="#" target="_blank" rel="noopener">Bandcamp</a>
-        <a class="btn" data-link="instagram" href="#" target="_blank" rel="noopener">Instagram</a>
-        <a class="btn" data-link="website" href="#" target="_blank" rel="noopener">Official Site</a>
+        <a class="btn btn-primary" href="#catalog">Explore catalog</a>
+        <a class="btn" href="#differentiators">Differentiators</a>
+        <a class="btn btn-quiet" data-link="spotify" href="#" target="_blank" rel="noopener">▶ Spotify</a>
+        <a class="btn btn-quiet" data-link="bandcamp" href="#" target="_blank" rel="noopener">Bandcamp</a>
+        <a class="btn btn-quiet" data-link="instagram" href="#" target="_blank" rel="noopener">Instagram</a>
       </div>
+      <p class="hero-deck-hint"><a href="tinsley-social.html#calendar">Marketing playbook &amp; calendar live on Social &rarr;</a></p>
       <div class="metrics" id="metrics"></div>
       <p class="updated-badge" id="updatedBadge"></p>
     </div>
@@ -135,7 +142,7 @@
     </section>
 
     <!-- ===== LIKE ARTISTS ===== -->
-    <section class="section alt" id="artists">
+    <section class="section" id="artists">
       <div class="section-head">
         <span class="kicker">05 — Positioning</span>
         <h2>10 Like Artists</h2>
@@ -148,8 +155,18 @@
       <div class="artist-grid" id="artistGrid"></div>
     </section>
 
+    <!-- ===== DIFFERENTIATORS ===== -->
+    <section class="section alt" id="differentiators">
+      <div class="section-head">
+        <span class="kicker">06 — Differentiation</span>
+        <h2>How not to be interchangeable</h2>
+        <p class="lead">The crowded lane is diary-pop confessional. These are the wedges, paths, and products that make Tinsley non-substitutable — then the traps that collapse her into a peer clone.</p>
+      </div>
+      <div id="diffRoot"></div>
+    </section>
+
     <!-- ===== REFERENCE CTA ===== -->
-    <section class="section" id="reference-cta">
+    <section class="section alt" id="reference-cta">
       <a class="ref-cta" href="reference.html">
         <div class="ref-cta-body">
           <span class="kicker">Reference — Frameworks &amp; Philosophy</span>
@@ -161,17 +178,35 @@
     </section>
 
     <!-- ===== CROSS-LINK ===== -->
-    <section class="section alt" id="more">
+    <section class="section" id="more">
       <div class="section-head">
         <span class="kicker">Next</span>
-        <h2>Looking for the marketing side?</h2>
-        <p class="lead">Looking for hashtags, platform plays, and the growth roadmap? Those live in Social &amp; Marketing. Frameworks (True Fans + Creative Act) live in Reference.</p>
+        <h2>Continue the strategy</h2>
+        <p class="lead">This deck is catalog &amp; positioning. Reach, calendar, and the growth roadmap live on Social — Ops turns both into weekly execution.</p>
+      </div>
+      <div class="deck-pair">
+        <div class="deck-card deck-card--here" aria-current="page">
+          <span class="deck-card-l">You're here</span>
+          <h3>Song &amp; Catalog</h3>
+          <p>Remix scoring, pitch kit, SWOT, like-artists, and differentiators.</p>
+        </div>
+        <a class="deck-card deck-card--go" href="tinsley-social.html">
+          <span class="deck-card-l">Switch decks</span>
+          <h3>Social &amp; Marketing <span aria-hidden="true">&rarr;</span></h3>
+          <p>Hashtags, daily calendar, platform plays, street picks, and the 30→720 roadmap.</p>
+          <ul class="deck-card-jumps">
+            <li><span data-jump="tinsley-social.html#calendar">Calendar</span></li>
+            <li><span data-jump="tinsley-social.html#bysong">By song</span></li>
+            <li><span data-jump="tinsley-social.html#roadmap">Roadmap</span></li>
+          </ul>
+        </a>
       </div>
       <div class="cross-actions">
         <a class="btn btn-primary" href="tinsley-ops.html">Open Ops Command &rarr;</a>
-        <a class="btn" href="tinsley-social.html">Open Social &amp; Marketing Analysis</a>
+        <a class="btn" href="press.html">Press Kit</a>
+        <a class="btn" href="bad-enough.html">Bad Enough campaign</a>
         <a class="btn" href="listen.html">Public Listen page</a>
-        <a class="btn" href="reference.html">Open Reference library</a>
+        <a class="btn" href="reference.html">Reference library</a>
       </div>
     </section>
   </main>

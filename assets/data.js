@@ -171,6 +171,62 @@ const TINSLEY = {
     ]
   },
 
+  // ---- Market differentiators (how not to be interchangeable with diary-pop peers) ----
+  differentiators: {
+    enemy: "The crowded diary-pop / sad-girl confessional lane — Maisie Peters, Gracie Abrams, Lizzy McAlpine peers.",
+    wedge: "Win on assets they can’t copy: Seattle country-pop, KEXP-funded vinyl provenance, and a smokey vocal identity.",
+    oneLiner: "Seattle indie pop-rock with a country-pop edge.",
+    thisMonth: [
+      "Lock the one-liner everywhere (bios, Press Kit, Bad Enough creatives).",
+      "Ship a KEXP-vinyl myth series (unboxing, needle-drop, John Richards lore).",
+      "Run only Bad Enough country-Seattle creatives this cycle.",
+      "Harden TinsleyMusic SEO — mononym collisions are brand risk."
+    ],
+    groups: [
+      {
+        id: "wedges",
+        title: "Own the wedges",
+        blurb: "Levers peers in the confessional lane cannot manufacture.",
+        items: [
+          { title: "Lead with Seattle country-pop", action: "Use one hero line this cycle — kill competing descriptors in bios and creatives.", why: "“Indie girl with feelings” is a commodity; Seattle + country-pop is scarce." },
+          { title: "KEXP-funded vinyl as brand myth", action: "Monthly content + merch that only works because the pressing story is true.", why: "Provenance is a moat — algorithm peers can’t buy this narrative." },
+          { title: "Weaponize the smokey vocal", action: "Close-mic, imperfect takes as the default visual signature.", why: "A recognizable instrument beats another polished lip-sync clone." },
+          { title: "“Country but make it Seattle”", action: "Recurring format: twang + rain / ferry / Capitol Hill — never Nashville cosplay.", why: "Alt-country without the costume is an empty competitive space." },
+          { title: "Own the mononym", action: "Standardize TinsleyMusic; clear title tracks; SEO against Tinsley Ellis / tinsel collisions.", why: "Brand defense is differentiation when search is contested." }
+        ]
+      },
+      {
+        id: "path",
+        title: "Compete on path",
+        blurb: "How she enters the market should not look like a pure TikTok peer.",
+        items: [
+          { title: "Tastemaker-first, TikTok-second", action: "Lead pitches with #1 Seattle Times + KEXP / The End / C89.5 — then short-form.", why: "She’s critic-born; most confessional peers are algorithm-born." },
+          { title: "Pin Start Here hard", action: "Never let discovery land on formative electro first.", why: "Coherence is the product when the catalog spans eras." },
+          { title: "One hero lane per release", action: "Bad Enough = country-pop glow-up. Next single ≠ also dream-pop.", why: "Range is a strength only when cycles are sequential." }
+        ]
+      },
+      {
+        id: "products",
+        title: "Products only she can sell",
+        blurb: "Offers that lean on honesty, hometown, and owned audience.",
+        items: [
+          { title: "Superfan demos / Close Friends", action: "Raw scraps + vinyl lore as the product, not another polished reel.", why: "Intimacy scales when the feed is full of polish." },
+          { title: "Sync with scene language", action: "Pitch Bad Enough / Classic / Hard to Love as choose-yourself / YA / coming-of-age — not “available for sync.”", why: "Mood specificity beats generic indie availability." },
+          { title: "Hometown flywheel as moat", action: "Record-shop days, KEXP-adjacent bills, Block Party path before national openers.", why: "PNW inevitability is the story national bookers buy." }
+        ]
+      },
+      {
+        id: "avoid",
+        title: "Don’t look like everyone else",
+        blurb: "Borrow the audience; don’t borrow the aesthetic.",
+        items: [
+          { title: "Skip pure whisper-core / pure sad-girl cosplay", action: "Wit + twang + Seattle over Gracie-adjacent whisper aesthetics.", why: "Copying the category leader collapses positioning." },
+          { title: "Collab sideways, not up-copy", action: "Remix early electro (Skin / Lovesick) or PNW peers — not a soundalike feature.", why: "Sideways moves expand the map without erasing the wedge." }
+        ]
+      }
+    ]
+  },
+
   // ---- Hashtag strategy (grouped) ----
   hashtags: {
     Brand: ["#Tinsley", "#TinsleyMusic", "#TinsleyTheAlbum", "#BadEnough"],

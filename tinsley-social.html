@@ -31,7 +31,11 @@
   <header class="nav" id="nav">
     <a href="index.html" class="hub-back">&larr; Hub</a>
     <a href="#top" class="brand">TINSLEY<span>·</span>SOCIAL</a>
-    <nav class="nav-links">
+    <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open section menu">
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+      Sections
+    </button>
+    <nav class="nav-links" id="navLinks">
       <a href="#hashtags">Hashtags</a>
       <a href="#bysong">By Song</a>
       <a href="#calendar">Calendar</a>
@@ -40,8 +44,8 @@
       <a href="#roadmap">Roadmap</a>
       <a href="reference.html">Reference ↗</a>
       <a href="tinsley-ops.html">Ops ↗</a>
-      <a href="tinsley-song.html" class="nav-switch">Song Analysis &rarr;</a>
     </nav>
+    <a href="tinsley-song.html" class="nav-switch">Song &rarr;</a>
     <a class="nav-cta" data-link="listen" href="listen.html">Listen ↗</a>
   </header>
 
@@ -55,11 +59,13 @@
       <p class="hero-sub" id="heroTagline"></p>
       <p class="hero-bio" id="heroBio"></p>
       <div class="hero-actions">
-        <a class="btn btn-primary" data-link="spotify" href="#" target="_blank" rel="noopener">▶ Spotify</a>
-        <a class="btn" data-link="bandcamp" href="#" target="_blank" rel="noopener">Bandcamp</a>
-        <a class="btn" data-link="instagram" href="#" target="_blank" rel="noopener">Instagram</a>
-        <a class="btn" data-link="website" href="#" target="_blank" rel="noopener">Official Site</a>
+        <a class="btn btn-primary" href="#calendar">Open this week’s calendar</a>
+        <a class="btn" href="#roadmap">Growth roadmap</a>
+        <a class="btn btn-quiet" data-link="spotify" href="#" target="_blank" rel="noopener">▶ Spotify</a>
+        <a class="btn btn-quiet" data-link="instagram" href="#" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn btn-quiet" data-link="bandcamp" href="#" target="_blank" rel="noopener">Bandcamp</a>
       </div>
+      <p class="hero-deck-hint"><a href="tinsley-song.html#catalog">Catalog, remix scoring &amp; differentiators live on Song &rarr;</a></p>
       <div class="metrics" id="metrics"></div>
       <p class="updated-badge" id="updatedBadge"></p>
     </div>
@@ -137,11 +143,12 @@
         <div class="ns-grid" id="northStars"></div>
       </div>
       <div class="rm-tracker" id="rmTracker"></div>
+      <p class="hero-deck-hint rm-deck-hint"><a href="tinsley-song.html#differentiators">Positioning wedges &amp; what to avoid live on Song &rarr;</a></p>
       <div class="roadmap" id="roadmapGrid"></div>
     </section>
 
     <!-- ===== REFERENCE CTA ===== -->
-    <section class="section alt" id="reference-cta">
+    <section class="section" id="reference-cta">
       <a class="ref-cta" href="reference.html">
         <div class="ref-cta-body">
           <span class="kicker">Reference — Frameworks &amp; Philosophy</span>
@@ -153,17 +160,34 @@
     </section>
 
     <!-- ===== CROSS-LINK ===== -->
-    <section class="section" id="more">
+    <section class="section alt" id="more">
       <div class="section-head">
         <span class="kicker">Next</span>
-        <h2>Looking for the music side?</h2>
-        <p class="lead">Looking for catalog assessment, remix scoring, and like-artist positioning? Those live in Song &amp; Catalog. Frameworks (True Fans + Creative Act) live in Reference.</p>
+        <h2>Continue the strategy</h2>
+        <p class="lead">This deck is reach &amp; revenue. Catalog assessment, remix scoring, and differentiators live on Song — Ops turns both into weekly execution.</p>
+      </div>
+      <div class="deck-pair">
+        <div class="deck-card deck-card--here" aria-current="page">
+          <span class="deck-card-l">You're here</span>
+          <h3>Social &amp; Marketing</h3>
+          <p>Hashtags, calendar, platform plays, street picks, and the growth roadmap.</p>
+        </div>
+        <a class="deck-card deck-card--go" href="tinsley-song.html">
+          <span class="deck-card-l">Switch decks</span>
+          <h3>Song &amp; Catalog <span aria-hidden="true">&rarr;</span></h3>
+          <p>Catalog assessment, EDM remix scoring, pitch kit, SWOT, and market differentiators.</p>
+          <ul class="deck-card-jumps">
+            <li><span data-jump="tinsley-song.html#catalog">Catalog</span></li>
+            <li><span data-jump="tinsley-song.html#remix">Remix</span></li>
+            <li><span data-jump="tinsley-song.html#differentiators">Differentiators</span></li>
+          </ul>
+        </a>
       </div>
       <div class="cross-actions">
         <a class="btn btn-primary" href="tinsley-ops.html">Open Ops Command &rarr;</a>
-        <a class="btn" href="tinsley-song.html">Open Song &amp; Catalog Analysis</a>
-        <a class="btn" href="reference.html">Open Reference library</a>
+        <a class="btn" href="reference.html">Reference library</a>
         <a class="btn" href="listen.html">Public Listen page</a>
+        <a class="btn" href="shows.html">Shows</a>
       </div>
     </section>
   </main>

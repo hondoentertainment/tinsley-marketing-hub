@@ -291,11 +291,41 @@
     const stripBeatPrefix = (line) =>
       String(line || "").replace(/^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s*[—–-]\s*/i, "");
 
+    function factorySlug(title) {
+      return String(title || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+    }
+
+    function matchFactory(title) {
+      const packs = D.contentFactory || [];
+      if (!title) return null;
+      const exact = packs.find((p) => p.song === title);
+      if (exact) return exact;
+      return packs.find(
+        (p) => title.indexOf(p.song) === 0 || p.song.indexOf(title.split(" (")[0]) === 0
+      ) || null;
+    }
+
     const slotIdea = (day, slot) => {
-      if (typeof day.songBeat === "number" && songs[songIdx]) {
-        const beat = (songs[songIdx].weekPlan || [])[day.songBeat];
+      const song = songs[songIdx];
+      if (typeof day.songBeat === "number" && song) {
+        const beat = (song.weekPlan || [])[day.songBeat];
         if (beat && slot.kind === "publish" && slot.platform === "TikTok") {
           return stripBeatPrefix(beat);
+        }
+      }
+      const pack = song ? matchFactory(song.title) : null;
+      if (pack) {
+        if (slot.kind === "create" && pack.shots && pack.shots[0]) {
+          return slot.idea + " — Factory: " + pack.shots[0];
+        }
+        if (slot.kind === "publish" && slot.platform !== "TikTok" && pack.captions && pack.captions[0]) {
+          return slot.idea + " — Caption cue: " + pack.captions[0];
+        }
+        if (slot.kind === "superfan" && pack.hooks && pack.hooks[0]) {
+          return slot.idea + " — Hook: " + pack.hooks[0];
         }
       }
       return slot.idea;
@@ -456,6 +486,11 @@
                     <span class="cal-kind ${slot.kind}">${slot.kind}</span>
                   </div>
                   <p>${slotIdea(day, slot)}</p>
+                  ${
+                    song && matchFactory(song.title)
+                      ? `<a class="cal-factory-link" href="tinsley-ops.html#factory-${factorySlug(matchFactory(song.title).song)}">Open factory pack →</a>`
+                      : ""
+                  }
                 </div>
               </li>`;
             })
@@ -498,6 +533,13 @@
           <span class="bs-angle-l">Featured song this week</span>
           <p class="cal-angle">${song.angle}</p>
           <div class="cal-songs">${songTabs}</div>
+          ${
+            matchFactory(song.title)
+              ? `<p class="cal-factory-cta"><a class="btn btn-primary" href="tinsley-ops.html#factory-${factorySlug(matchFactory(song.title).song)}">Open ${song.title} factory pack</a>
+                 <a class="btn" href="tinsley-ops.html#creatives">Log a creative</a>
+                 <a class="btn" href="tinsley-ops.html#engage">Engagement queue</a></p>`
+              : ""
+          }
         </div>` : ""}
         <div class="cal-toolbar">
           <div class="cal-filters">${filters}</div>
@@ -1207,10 +1249,43 @@
           rec.history = (rec.history || []).concat([{ t: Date.now(), v: v }]).slice(-24);
           store[key] = rec;
           save();
+          try { window.dispatchEvent(new CustomEvent("tinsley:northstar")); } catch (e) {}
           render();
         });
       });
     }
+
+    const tools = el("div", "ns-tools");
+    tools.innerHTML = `<button type="button" class="btn" id="nsPullSpotify">Pull Spotify followers</button>
+      <a class="btn" href="tinsley-ops.html#kpis">Sunday review on Ops</a>
+      <span class="ops-muted ns-tools-hint">Monthly listeners still come from Spotify for Artists (not in the public API).</span>`;
+    wrap.parentNode.insertBefore(tools, wrap);
+
+    const pullBtn = $("#nsPullSpotify");
+    if (pullBtn) {
+      pullBtn.addEventListener("click", () => {
+        pullBtn.disabled = true;
+        fetch("/api/spotify", { headers: { accept: "application/json" } })
+          .then((r) => r.json())
+          .then((d) => {
+            if (d && d.artist && d.artist.followers != null) {
+              const v = Math.max(0, Math.round(d.artist.followers));
+              const rec = store.followers || {};
+              rec.current = v;
+              rec.history = (rec.history || []).concat([{ t: Date.now(), v: v }]).slice(-24);
+              store.followers = rec;
+              save();
+              showToast("Spotify followers → " + nfInt(v));
+              render();
+              try { window.dispatchEvent(new CustomEvent("tinsley:northstar")); } catch (e) {}
+            } else if (d && d.reason === "missing_credentials") showToast("Spotify env not configured");
+            else showToast("Spotify pull failed");
+          })
+          .catch(() => showToast("Spotify unreachable"))
+          .finally(() => { pullBtn.disabled = false; });
+      });
+    }
+
     render();
     window.addEventListener("tinsley:northstar", render);
   })();

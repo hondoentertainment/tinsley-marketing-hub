@@ -2,6 +2,8 @@ User-agent: *
 Allow: /
 Allow: /listen
 Allow: /bad-enough
+Allow: /temporary-insanity
+Allow: /campaign
 Allow: /press
 Allow: /sync
 Allow: /shows

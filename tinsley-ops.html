@@ -32,12 +32,15 @@
       <a href="#this-week">This week</a>
       <a href="#ritual">Ritual</a>
       <a href="#utm">UTM</a>
+      <a href="#creatives">Creatives</a>
+      <a href="#engage">Engage</a>
       <a href="#release-os">Release</a>
       <a href="#press-crm">Press</a>
       <a href="#playlist-sync">Playlists</a>
       <a href="#content-factory">Factory</a>
       <a href="#paid">Paid</a>
       <a href="#seattle">Seattle</a>
+      <a href="#street-ops">Street</a>
       <a href="#fan-ladder">Fans</a>
       <a href="#live-routing">Live</a>
       <a href="#backup">Backup</a>
@@ -84,7 +87,7 @@
       <div class="section-head">
         <span class="kicker">00c — Measurement</span>
         <h2>KPI snapshot</h2>
-        <p class="lead">North-stars from this browser, plus a weekly note so the 0–30 day “one dashboard” promise lives here — not in five tabs.</p>
+        <p class="lead">North-stars from this browser, a structured Sunday review, and a one-click Spotify followers pull when credentials are live.</p>
       </div>
       <div id="opsKpis"></div>
     </section>
@@ -102,9 +105,27 @@
       <div class="section-head">
         <span class="kicker">02 — Measurement</span>
         <h2>UTM &amp; link builder</h2>
-        <p class="lead">Every bio, QR, ad, and press link should land on <strong>/listen</strong> with attribution. Defaults target the owned surface; Plausible loads when the domain is set in <code>data.js</code>.</p>
+        <p class="lead">Every bio, QR, ad, and press link should land on <strong>/listen</strong> with attribution. Use presets for Seattle field plays — Plausible loads when the domain is set in <code>data.js</code>.</p>
       </div>
       <div id="utmBuilder"></div>
+    </section>
+
+    <section class="section" id="creatives">
+      <div class="section-head">
+        <span class="kicker">02b — Organic inventory</span>
+        <h2>Creative / hook log</h2>
+        <p class="lead">Log every posted clip — hook, platform, URL, saves/views, verdict. Organic winners become inventory; losers get killed before paid.</p>
+      </div>
+      <div id="creativeLog"></div>
+    </section>
+
+    <section class="section alt" id="engage">
+      <div class="section-head">
+        <span class="kicker">02c — Community</span>
+        <h2>Engagement queue</h2>
+        <p class="lead">Feed Tuesday reply slots and Saturday scene time — clear stitches, comments, and DMs without reinventing the list each week.</p>
+      </div>
+      <div id="engageQueue"></div>
     </section>
 
     <section class="section" id="release-os">
@@ -161,6 +182,15 @@
       <div class="ops-fly-grid" id="seattleFlywheel"></div>
     </section>
 
+    <section class="section" id="street-ops">
+      <div class="section-head">
+        <span class="kicker">08b — Field</span>
+        <h2>Street tactic tracker</h2>
+        <p class="lead">Guerrilla picks from the Social deck — check off when shipped and log last-run so Seattle leverage leaves the idea pile.</p>
+      </div>
+      <div id="streetOps"></div>
+    </section>
+
     <section class="section" id="fan-ladder">
       <div class="section-head">
         <span class="kicker">09 — Revenue</span>
@@ -183,7 +213,7 @@
       <div class="section-head">
         <span class="kicker">11 — Persistence</span>
         <h2>Export &amp; import ops data</h2>
-        <p class="lead">Download a JSON backup of calendar, ritual, release OS, press CRM, playlists, paid log, Seattle flywheel, roadmap, and north-stars — then restore on another browser.</p>
+        <p class="lead">Download a JSON backup of calendar, ritual, creatives, engagement, street ops, release OS, press CRM, playlists, paid log, Seattle flywheel, roadmap, and north-stars — then restore on another browser.</p>
       </div>
       <div id="opsBackup"></div>
     </section>

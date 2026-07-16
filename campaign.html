@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tinsley — Campaign</title>
+  <meta name="description" content="Tinsley single campaign page — stream, join the list, steal the weekly recipe and hashtags." />
+  <meta name="theme-color" content="#120e14" />
+  <link rel="canonical" href="https://tinsley-marketing-hub.vercel.app/campaign" />
+  <link rel="icon" href="assets/icon-512.png" type="image/png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tinsley — Campaign" />
+  <meta property="og:description" content="Single campaign template — recipe, angles, hashtags, list CTA." />
+  <meta property="og:url" content="https://tinsley-marketing-hub.vercel.app/campaign" />
+  <meta property="og:image" content="https://tinsley-marketing-hub.vercel.app/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/public.css" />
+</head>
+<body data-page="campaign">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="pub-nav">
+    <a class="pub-brand" href="listen.html">TINSLEY</a>
+    <nav>
+      <a href="press.html">Press</a>
+      <a href="sync.html">Sync</a>
+      <a href="shows.html">Shows</a>
+      <a href="bad-enough.html">Bad Enough</a>
+      <a href="temporary-insanity.html">Temporary Insanity</a>
+    </nav>
+    <a class="pub-nav-listen" href="listen.html">Listen</a>
+  </header>
+
+  <section class="pub-hero" data-tone="campaign" id="top">
+    <div class="pub-hero-bg" aria-hidden="true"></div>
+    <div class="pub-hero-inner">
+      <p class="pub-eyebrow" id="campEyebrow">Campaign</p>
+      <h1><span class="grad" id="campTitle">Campaign</span></h1>
+      <p class="pub-lede" id="campLede"></p>
+      <p class="pub-lede" style="margin-top:10px;font-family:Fraunces,Georgia,serif;font-size:clamp(22px,3.5vw,28px);color:var(--ink);max-width:22ch" id="campHeadline"></p>
+      <div class="pub-ctas" id="campCtas"></div>
+    </div>
+  </section>
+
+  <main id="main">
+    <section class="pub-section" id="campPickerWrap" hidden>
+      <h2>Pick a campaign</h2>
+      <p class="lead">Use <code>?id=bad-enough</code> or <code>?id=temporary-insanity</code> — or choose below.</p>
+      <div class="pub-ctas" id="campPicker"></div>
+    </section>
+
+    <section class="pub-section camp-body">
+      <blockquote class="pub-quote">
+        <p id="campQuote"></p>
+        <cite id="campQuoteSrc"></cite>
+      </blockquote>
+    </section>
+
+    <section class="pub-section camp-body">
+      <h2>Why this song</h2>
+      <div class="pub-angles" id="campAngles"></div>
+    </section>
+
+    <section class="pub-section camp-body">
+      <h2>This week’s recipe</h2>
+      <p class="lead">Three beats for short-form — same cadence as the Social calendar.</p>
+      <ol class="pub-beats" id="campBeats"></ol>
+    </section>
+
+    <section class="pub-section camp-body">
+      <h2>Hashtags to steal</h2>
+      <ul class="pub-tags" id="campTags"></ul>
+    </section>
+
+    <section class="pub-section camp-body">
+      <h2>Go deeper</h2>
+      <div class="pub-ctas">
+        <a class="pub-btn primary" href="listen.html#join">Join the list</a>
+        <a class="pub-btn" href="press.html">Press Kit</a>
+        <a class="pub-btn" href="listen.html#start">Start Here</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pub-foot">
+    <p>© <span id="year"></span> Tinsley · Campaign template</p>
+    <nav>
+      <a href="press.html">Press</a>
+      <a href="listen.html">Listen</a>
+    </nav>
+  </footer>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/public.js"></script>
+</body>
+</html>

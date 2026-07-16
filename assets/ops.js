@@ -113,12 +113,47 @@
     "tinsley.ops.press.v1",
     "tinsley.ops.playlists.v1",
     "tinsley.ops.paid.v1",
+    "tinsley.ops.creatives.v1",
+    "tinsley.ops.engage.v1",
+    "tinsley.ops.street.v1",
     "tinsley.ops.seattle.v1",
     "tinsley.ops.kpiNote.v1",
     "tinsley.calendar.week.v1",
     "tinsley.roadmap.progress.v1",
     "tinsley.northstar.v1"
   ];
+
+  function factorySlug(title) {
+    return String(title || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+  }
+
+  function matchFactory(title) {
+    const packs = D.contentFactory || [];
+    if (!title) return { idx: -1, pack: null };
+    const exact = packs.findIndex((p) => p.song === title);
+    if (exact >= 0) return { idx: exact, pack: packs[exact] };
+    const soft = packs.findIndex(
+      (p) => title.indexOf(p.song) === 0 || p.song.indexOf(title.split(" (")[0]) === 0
+    );
+    return soft >= 0 ? { idx: soft, pack: packs[soft] } : { idx: -1, pack: null };
+  }
+
+  function writeNorthStar(key, value) {
+    const KEY = "tinsley.northstar.v1";
+    let store = load(KEY, {});
+    const rec = store[key] || {};
+    const v = Math.max(0, Math.round(Number(value) || 0));
+    rec.current = v;
+    rec.history = (rec.history || []).concat([{ t: Date.now(), v: v }]).slice(-24);
+    store[key] = rec;
+    save(KEY, store);
+    try {
+      window.dispatchEvent(new CustomEvent("tinsley:northstar"));
+    } catch (e) {}
+  }
 
   function isoWeekId(d) {
     const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
@@ -142,24 +177,6 @@
   (function thisWeek() {
     const wrap = $("#opsThisWeek");
     if (!wrap) return;
-
-    function factorySlug(title) {
-      return String(title || "")
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-|-$/g, "");
-    }
-
-    function matchFactory(title) {
-      const packs = D.contentFactory || [];
-      if (!title) return { idx: -1, pack: null };
-      const exact = packs.findIndex((p) => p.song === title);
-      if (exact >= 0) return { idx: exact, pack: packs[exact] };
-      const soft = packs.findIndex(
-        (p) => title.indexOf(p.song) === 0 || p.song.indexOf(title.split(" (")[0]) === 0
-      );
-      return soft >= 0 ? { idx: soft, pack: packs[soft] } : { idx: -1, pack: null };
-    }
 
     function packText(pack) {
       if (!pack) return "";
@@ -198,15 +215,22 @@
         });
     }
 
+    function topCreative() {
+      const log = load("tinsley.ops.creatives.v1", []);
+      const boost = log.find((e) => e.verdict === "boost");
+      const repost = log.find((e) => e.verdict === "repost");
+      return boost || repost || log[0] || null;
+    }
+
     function render() {
       const week = isoWeekId(new Date());
       const dow = new Date().getDay();
       const habit =
         dow === 0
-          ? { label: "Sunday — Review", text: "Update north-stars, save the KPI note, download a JSON backup." }
+          ? { label: "Sunday — Review", text: "Pull Spotify followers, fill the Sunday review fields, kill one hook, download a JSON backup." }
           : dow === 1
             ? { label: "Monday — Plan", text: "Pick the featured song on the calendar, then run this strip top to bottom." }
-            : { label: "Ship days", text: "Hit calendar slots, log press replies, bank one factory clip." };
+            : { label: "Ship days", text: "Hit calendar slots, log creatives, clear 3 engagement queue items." };
 
       const cal = load("tinsley.calendar.week.v1", {});
       let calDone = 0;
@@ -227,6 +251,7 @@
         "—";
       const fac = matchFactory(featured);
       const facHref = fac.pack ? "#factory-" + factorySlug(fac.pack.song) : "#content-factory";
+      const winner = topCreative();
 
       const ritual = load("tinsley.ops.ritual.v1", {});
       let ritualDone = 0;
@@ -306,6 +331,21 @@
             <a class="btn" href="tinsley-social.html#calendar">Pick song on calendar</a>
           </div>
         </div>
+        <div class="ops-featured-pack ops-winner-pack">
+          <div>
+            <span class="ops-strip-h">Organic creative winner</span>
+            <p>${
+              winner
+                ? `<strong>${esc(winner.hook || winner.creative || "Untitled")}</strong> · ${esc(winner.platform || "—")} · ${esc(winner.verdict || "logged")} · ${esc(winner.metric || winner.result || "")}`
+                : "No creatives logged yet — ship a clip, then mark boost / repost / kill."
+            }</p>
+          </div>
+          <div class="ops-row-actions" style="margin-top:0">
+            <a class="btn btn-primary" href="#creatives">Open creative log</a>
+            <a class="btn" href="#engage">Engagement queue</a>
+            <a class="btn" href="#paid">Paid (winners only)</a>
+          </div>
+        </div>
         <div class="ops-week-strip">
           <article class="ops-strip-card">
             <div class="ops-strip-h">Calendar</div>
@@ -378,14 +418,24 @@
     window.addEventListener("tinsley:ops-refresh", render);
   })();
 
-  /* ---- KPI snapshot + weekly note ---- */
+  /* ---- KPI snapshot + structured Sunday review ---- */
   (function kpis() {
     const wrap = $("#opsKpis");
     if (!wrap) return;
     const NOTE_KEY = "tinsley.ops.kpiNote.v1";
     const week = isoWeekId(new Date());
     let noteStore = load(NOTE_KEY, {});
-    if (noteStore.week !== week) noteStore = { week: week, note: noteStore.note || "", history: noteStore.history || [] };
+    if (noteStore.week !== week) {
+      noteStore = {
+        week: week,
+        note: noteStore.note || "",
+        topHook: noteStore.topHook || "",
+        topPost: noteStore.topPost || "",
+        listGrowth: noteStore.listGrowth || "",
+        kill: noteStore.kill || "",
+        history: noteStore.history || []
+      };
+    }
 
     function spark(history) {
       const pts = (history || []).slice(-12).map((h) => Number(h.v) || 0);
@@ -424,26 +474,75 @@
         .join("");
 
       wrap.innerHTML = `
+        <div class="ops-row-actions" style="margin-bottom:16px">
+          <button type="button" class="btn btn-primary" id="kpiPullSpotify">Pull Spotify followers</button>
+          <a class="btn" href="tinsley-social.html#north-stars">Edit all on Social</a>
+          <a class="btn" href="tinsley-social.html#calendar">Calendar week review</a>
+        </div>
         <div class="ops-kpi-grid">${cards}</div>
         <div class="ops-kpi-note">
-          <label for="kpiNote"><strong>This week’s KPI note</strong> <span class="ops-muted">(${esc(week)})</span></label>
-          <textarea id="kpiNote" class="ops-textarea" rows="3" placeholder="What moved? What to double down on Sunday?">${esc(noteStore.note || "")}</textarea>
+          <h3 class="ops-subh" style="margin-top:0">Sunday review</h3>
+          <p class="ops-hint">Fill these four fields before you close the week — they replace a blank note with decisions.</p>
+          <div class="ops-review-grid">
+            <label>Top hook <input class="ops-input" id="kpiTopHook" type="text" placeholder="e.g. choose yourself lip-sync" value="${esc(noteStore.topHook || "")}" /></label>
+            <label>Top post URL <input class="ops-input" id="kpiTopPost" type="url" placeholder="https://…" value="${esc(noteStore.topPost || "")}" /></label>
+            <label>List growth this week <input class="ops-input" id="kpiListGrowth" type="text" placeholder="+12 emails · 40 Listen clicks" value="${esc(noteStore.listGrowth || "")}" /></label>
+            <label>One kill decision <input class="ops-input" id="kpiKill" type="text" placeholder="Kill: whisper-core test #3" value="${esc(noteStore.kill || "")}" /></label>
+          </div>
+          <label for="kpiNote"><strong>Extra note</strong> <span class="ops-muted">(${esc(week)})</span></label>
+          <textarea id="kpiNote" class="ops-textarea" rows="2" placeholder="Anything else for next Monday?">${esc(noteStore.note || "")}</textarea>
           <div class="ops-row-actions">
-            <button type="button" class="btn btn-primary" id="kpiSave">Save note</button>
+            <button type="button" class="btn btn-primary" id="kpiSave">Save Sunday review</button>
             <button type="button" class="btn" id="kpiCopy">Copy snapshot</button>
             <a class="btn" href="#backup">Download backup</a>
-            <a class="btn" href="tinsley-social.html#north-stars">Edit values on Social</a>
+            <a class="btn" href="#creatives">Log creative verdict</a>
           </div>
-          <p class="ops-hint" style="margin-bottom:0;margin-top:12px">Sunday ritual: refresh north-stars from Spotify for Artists → save this note → Export JSON on Backup.</p>
+          <p class="ops-hint" style="margin-bottom:0;margin-top:12px">Sunday ritual: Pull Spotify followers → update TikTok/IG/email north-stars → save this review → Export JSON.</p>
         </div>`;
+
+      const pull = $("#kpiPullSpotify");
+      if (pull) {
+        pull.addEventListener("click", () => {
+          pull.disabled = true;
+          pull.textContent = "Pulling…";
+          fetch("/api/spotify", { headers: { accept: "application/json" } })
+            .then((r) => r.json())
+            .then((d) => {
+              if (d && d.artist && d.artist.followers != null) {
+                writeNorthStar("followers", d.artist.followers);
+                showToast("Spotify followers → " + Number(d.artist.followers).toLocaleString("en-US"));
+              } else if (d && d.reason === "missing_credentials") {
+                showToast("Spotify env not configured");
+              } else {
+                showToast("Spotify pull failed");
+              }
+            })
+            .catch(() => showToast("Spotify unreachable"))
+            .finally(() => {
+              pull.disabled = false;
+              pull.textContent = "Pull Spotify followers";
+              render();
+            });
+        });
+      }
+
       $("#kpiSave").addEventListener("click", () => {
         noteStore.week = week;
+        noteStore.topHook = ($("#kpiTopHook").value || "").trim();
+        noteStore.topPost = ($("#kpiTopPost").value || "").trim();
+        noteStore.listGrowth = ($("#kpiListGrowth").value || "").trim();
+        noteStore.kill = ($("#kpiKill").value || "").trim();
         noteStore.note = ($("#kpiNote").value || "").trim();
         noteStore.history = (noteStore.history || [])
-          .concat([{ t: Date.now(), note: noteStore.note }])
+          .concat([{
+            t: Date.now(),
+            note: noteStore.note,
+            topHook: noteStore.topHook,
+            kill: noteStore.kill
+          }])
           .slice(-20);
         save(NOTE_KEY, noteStore);
-        showToast("KPI note saved");
+        showToast("Sunday review saved");
       });
       $("#kpiCopy").addEventListener("click", () => {
         const store2 = load("tinsley.northstar.v1", {});
@@ -453,7 +552,12 @@
           const cur = rec.current != null ? rec.current : m.current;
           lines.push(`${m.label}: ${cur} / ${m.target}`);
         });
-        if (noteStore.note) lines.push("", "Note: " + noteStore.note);
+        lines.push("", "SUNDAY REVIEW");
+        if (noteStore.topHook) lines.push("Top hook: " + noteStore.topHook);
+        if (noteStore.topPost) lines.push("Top post: " + noteStore.topPost);
+        if (noteStore.listGrowth) lines.push("List growth: " + noteStore.listGrowth);
+        if (noteStore.kill) lines.push("Kill: " + noteStore.kill);
+        if (noteStore.note) lines.push("Note: " + noteStore.note);
         copy(lines.join("\n"), "KPI snapshot copied");
       });
     }
@@ -606,8 +710,16 @@
     const wrap = $("#utmBuilder");
     if (!wrap) return;
     const defs = (D.meta && D.meta.analytics && D.meta.analytics.utmDefaults) || {};
+    const presets = (D.meta && D.meta.analytics && D.meta.analytics.utmPresets) || [];
     const baseDefault = listenUrl();
+    const presetBtns = presets
+      .map((p) => `<button type="button" class="btn utm-preset" data-id="${esc(p.id)}">${esc(p.label)}</button>`)
+      .join("");
     wrap.innerHTML = `
+      <div class="utm-presets">
+        <span class="ops-strip-h">Presets</span>
+        <div class="ops-row-actions">${presetBtns || '<span class="ops-muted">No presets in data.js</span>'}</div>
+      </div>
       <div class="utm-form">
         <label>Base URL<input id="utmBase" type="url" value="${esc(baseDefault)}" /></label>
         <label>utm_source<input id="utmSource" type="text" value="${esc(defs.source || "bio")}" /></label>
@@ -650,6 +762,180 @@
       $("#utmBase").value = (D.artist.links && D.artist.links.linktree) || "";
       build();
     });
+    wrap.querySelectorAll(".utm-preset").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const p = presets.find((x) => x.id === btn.getAttribute("data-id"));
+        if (!p) return;
+        $("#utmBase").value = listenUrl();
+        $("#utmSource").value = p.source || "";
+        $("#utmMedium").value = p.medium || "";
+        $("#utmCampaign").value = p.campaign || "";
+        $("#utmContent").value = p.content || "";
+        build();
+        showToast(p.label + " preset applied");
+      });
+    });
+  })();
+
+  /* ---- Creative / hook log ---- */
+  (function creatives() {
+    const wrap = $("#creativeLog");
+    if (!wrap) return;
+    const KEY = "tinsley.ops.creatives.v1";
+    let log = load(KEY, []);
+    const verdicts = ["boost", "repost", "kill", "hold"];
+
+    function render() {
+      const rows = log
+        .map(
+          (e, i) => `<tr>
+          <td>${esc(e.date)}</td>
+          <td><strong>${esc(e.hook)}</strong><div class="ops-muted">${esc(e.platform)}${e.url ? ` · <a href="${esc(e.url)}" target="_blank" rel="noopener">link</a>` : ""}</div></td>
+          <td>${esc(e.metric || "—")}</td>
+          <td><span class="ops-verdict ${esc(e.verdict || "")}">${esc(e.verdict || "—")}</span></td>
+          <td><button type="button" class="btn cre-del" data-i="${i}">Remove</button></td>
+        </tr>`
+        )
+        .join("");
+      wrap.innerHTML = `
+        <p class="ops-blurb">Organic inventory lives here. Mark <strong>boost</strong> only after saves/views clear your bar — then consider Paid.</p>
+        <div class="cre-form">
+          <input class="ops-input" id="creHook" placeholder="Hook name (e.g. choose yourself lip-sync)" />
+          <select class="ops-select" id="crePlatform">
+            <option>TikTok</option><option>Instagram</option><option>YouTube Shorts</option><option>Other</option>
+          </select>
+          <input class="ops-input" id="creUrl" type="url" placeholder="Post URL" />
+          <input class="ops-input" id="creMetric" placeholder="Saves / views (e.g. 4.2% save · 12k views)" />
+          <select class="ops-select" id="creVerdict">
+            ${verdicts.map((v) => `<option value="${v}">${v}</option>`).join("")}
+          </select>
+          <button type="button" class="btn btn-primary" id="creAdd">Log creative</button>
+        </div>
+        <div class="ops-table-wrap"><table class="ops-table">
+          <thead><tr><th>Date</th><th>Hook</th><th>Metric</th><th>Verdict</th><th></th></tr></thead>
+          <tbody>${rows || '<tr><td colspan="5" class="ops-muted">No creatives logged yet.</td></tr>'}</tbody>
+        </table></div>
+        <div class="ops-row-actions">
+          <button type="button" class="btn" id="creCopy">Copy log</button>
+          <a class="btn" href="#this-week">See winner on This week</a>
+        </div>`;
+      $("#creAdd").addEventListener("click", () => {
+        const hook = ($("#creHook").value || "").trim();
+        if (!hook) return showToast("Add a hook name");
+        log.unshift({
+          date: new Date().toISOString().slice(0, 10),
+          hook: hook,
+          platform: $("#crePlatform").value,
+          url: ($("#creUrl").value || "").trim(),
+          metric: ($("#creMetric").value || "").trim(),
+          verdict: $("#creVerdict").value
+        });
+        save(KEY, log);
+        try { window.dispatchEvent(new CustomEvent("tinsley:ops-refresh")); } catch (e) {}
+        render();
+        showToast("Creative logged");
+      });
+      wrap.querySelectorAll(".cre-del").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          log.splice(+btn.getAttribute("data-i"), 1);
+          save(KEY, log);
+          try { window.dispatchEvent(new CustomEvent("tinsley:ops-refresh")); } catch (e) {}
+          render();
+        });
+      });
+      $("#creCopy").addEventListener("click", () => {
+        const lines = ["TINSLEY — CREATIVE LOG", ""].concat(
+          log.map((e) => `${e.date} · ${e.platform} · ${e.hook} · ${e.metric || "—"} · ${e.verdict}${e.url ? " · " + e.url : ""}`)
+        );
+        copy(lines.join("\n"), "Creative log copied");
+      });
+    }
+    render();
+  })();
+
+  /* ---- Engagement queue ---- */
+  (function engage() {
+    const wrap = $("#engageQueue");
+    if (!wrap) return;
+    const KEY = "tinsley.ops.engage.v1";
+    const week = isoWeekId(new Date());
+    let store = load(KEY, { week: week, done: {}, custom: [] });
+    if (store.week !== week) store = { week: week, done: {}, custom: store.custom || [] };
+
+    function items() {
+      const seeds = (D.engagementQueue || []).map((e) => ({ ...e, seed: true }));
+      const custom = (store.custom || []).map((e) => ({ ...e, seed: false }));
+      return seeds.concat(custom);
+    }
+
+    function render() {
+      const list = items();
+      const doneN = list.filter((e) => store.done[e.id]).length;
+      const rows = list
+        .map((e) => {
+          const on = !!store.done[e.id];
+          return `<li class="ops-check${on ? " on" : ""}" data-id="${esc(e.id)}">
+            <button type="button" class="ops-tick" aria-pressed="${on}"></button>
+            <div>
+              <strong>${esc(e.platform)}</strong>
+              <span class="ops-muted"> · ${esc(e.lane || "queue")}</span>
+              <p>${esc(e.target)}</p>
+            </div>
+            ${e.seed ? "" : `<button type="button" class="btn eng-del" data-id="${esc(e.id)}">Remove</button>`}
+          </li>`;
+        })
+        .join("");
+      wrap.innerHTML = `
+        <p class="ops-blurb">Clear <strong>${doneN}/${list.length}</strong> this week (${esc(week)}). Ties to calendar Tue replies + Sat scene slots.</p>
+        <ul class="ops-check-list ops-engage-list">${rows}</ul>
+        <div class="eng-form">
+          <select class="ops-select" id="engPlatform"><option>TikTok</option><option>Instagram</option><option>Threads</option><option>Other</option></select>
+          <input class="ops-input" id="engTarget" placeholder="Add a reply / stitch / DM target" />
+          <button type="button" class="btn btn-primary" id="engAdd">Add</button>
+          <button type="button" class="btn" id="engReset">Reset week checks</button>
+        </div>
+        <div class="ops-row-actions">
+          <a class="btn" href="tinsley-social.html#calendar">Open calendar</a>
+        </div>`;
+      wrap.querySelectorAll(".ops-check").forEach((li) => {
+        const id = li.getAttribute("data-id");
+        li.querySelector(".ops-tick").addEventListener("click", () => {
+          if (store.done[id]) delete store.done[id];
+          else store.done[id] = true;
+          save(KEY, store);
+          render();
+        });
+      });
+      wrap.querySelectorAll(".eng-del").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-id");
+          store.custom = (store.custom || []).filter((c) => c.id !== id);
+          delete store.done[id];
+          save(KEY, store);
+          render();
+        });
+      });
+      $("#engAdd").addEventListener("click", () => {
+        const target = ($("#engTarget").value || "").trim();
+        if (!target) return showToast("Add a target");
+        store.custom.push({
+          id: "c" + Date.now(),
+          platform: $("#engPlatform").value,
+          target: target,
+          lane: "custom"
+        });
+        save(KEY, store);
+        render();
+        showToast("Engagement item added");
+      });
+      $("#engReset").addEventListener("click", () => {
+        store.done = {};
+        save(KEY, store);
+        render();
+        showToast("Week checks cleared");
+      });
+    }
+    render();
   })();
 
   /* ---- Release OS ---- */
@@ -982,6 +1268,69 @@
           save(KEY, store);
           render();
         });
+      });
+    }
+    render();
+  })();
+
+  /* ---- Street tactic tracker ---- */
+  (function streetOps() {
+    const wrap = $("#streetOps");
+    if (!wrap || !D.streetPicks) return;
+    const KEY = "tinsley.ops.street.v1";
+    let store = load(KEY, {});
+
+    function render() {
+      wrap.innerHTML =
+        D.streetPicks
+          .map((p) => {
+            const id = "sp-" + p.rank;
+            const rec = store[id] || { done: false, lastRun: "", note: "" };
+            return `<article class="ops-street-card${rec.done ? " on" : ""}" data-id="${esc(id)}">
+              <div class="ops-fly-top">
+                <div>
+                  <span class="ops-muted">#${p.rank} · ${esc(p.category)}</span>
+                  <strong>${esc(p.title)}</strong>
+                </div>
+                <button type="button" class="cal-skip-day street-toggle" aria-pressed="${!!rec.done}">${rec.done ? "Shipped" : "Mark shipped"}</button>
+              </div>
+              <p>${esc(p.angle)}</p>
+              <div class="ops-street-meta">
+                <label>Last run <input class="ops-input street-date" type="date" value="${esc(rec.lastRun || "")}" /></label>
+                <label>Note <input class="ops-input street-note" type="text" placeholder="Where / what happened" value="${esc(rec.note || "")}" /></label>
+              </div>
+            </article>`;
+          })
+          .join("") +
+        `<div class="ops-row-actions">
+          <a class="btn" href="tinsley-social.html#street-picks">Social street picks</a>
+          <a class="btn" href="street-marketing.html">All 100 ideas</a>
+        </div>`;
+
+      wrap.querySelectorAll(".ops-street-card").forEach((card) => {
+        const id = card.getAttribute("data-id");
+        const sync = () => {
+          const prev = store[id] || {};
+          store[id] = {
+            done: !!prev.done,
+            lastRun: card.querySelector(".street-date").value,
+            note: card.querySelector(".street-note").value
+          };
+          save(KEY, store);
+        };
+        card.querySelector(".street-toggle").addEventListener("click", () => {
+          const prev = store[id] || {};
+          const done = !prev.done;
+          store[id] = {
+            done: done,
+            lastRun: done && !prev.lastRun ? new Date().toISOString().slice(0, 10) : card.querySelector(".street-date").value,
+            note: card.querySelector(".street-note").value
+          };
+          save(KEY, store);
+          render();
+        });
+        card.querySelector(".street-date").addEventListener("change", sync);
+        card.querySelector(".street-note").addEventListener("input", sync);
       });
     }
     render();

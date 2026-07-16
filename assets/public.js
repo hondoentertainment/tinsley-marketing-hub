@@ -190,9 +190,9 @@
     if (listen) listen.href = "listen.html#join";
   }
 
-  /* ---- Bad Enough campaign ---- */
+  /* ---- Bad Enough campaign (legacy ids) ---- */
   if (page === "bad-enough") {
-    const C = D.campaignBadEnough || {};
+    const C = D.campaignBadEnough || (D.campaigns && D.campaigns["bad-enough"]) || {};
     const set = (id, text) => {
       const el = document.getElementById(id);
       if (el && text != null) el.textContent = text;
@@ -228,10 +228,89 @@
     }
 
     const tags = $("#beTags");
-    const song = (D.songHashtags || []).find((s) => s.title === "Bad Enough");
+    const song = (D.songHashtags || []).find((s) => s.title === (C.song || "Bad Enough"));
     if (tags && song) {
       const all = [].concat(song.tiktok || [], song.igBroad || [], song.igMid || []).slice(0, 14);
       tags.innerHTML = all.map((t) => `<li>${esc(t)}</li>`).join("");
+    }
+  }
+
+  /* ---- Generic campaign pages (temporary-insanity.html, campaign.html?id=) ---- */
+  if (page === "campaign") {
+    const params = new URLSearchParams(location.search);
+    const slug =
+      document.body.getAttribute("data-campaign") ||
+      params.get("id") ||
+      "";
+    const map = D.campaigns || {};
+    let C = slug && map[slug] ? map[slug] : null;
+
+    if (!C) {
+      const pickerWrap = $("#campPickerWrap");
+      const picker = $("#campPicker");
+      if (pickerWrap) pickerWrap.hidden = false;
+      document.querySelectorAll(".camp-body").forEach((n) => { n.hidden = true; });
+      if (picker) {
+        picker.innerHTML = Object.keys(map)
+          .filter((k) => map[k])
+          .map((k) => {
+            const c = map[k];
+            return `<a class="pub-btn${k === "bad-enough" ? " primary" : ""}" href="campaign.html?id=${esc(k)}">${esc(c.song || k)}</a>`;
+          })
+          .join("");
+      }
+      const set = (id, text) => {
+        const el = document.getElementById(id);
+        if (el && text != null) el.textContent = text;
+      };
+      set("campTitle", "Campaigns");
+      set("campEyebrow", "Pick a single");
+      set("campHeadline", "One public surface per release cycle.");
+      set("campLede", "Clone this template for the next hero single — recipe, angles, hashtags, list CTA.");
+    } else {
+      const set = (id, text) => {
+        const el = document.getElementById(id);
+        if (el && text != null) el.textContent = text;
+      };
+      set("campEyebrow", C.eyebrow || "Single");
+      set("campTitle", C.song || "Campaign");
+      set("campHeadline", C.headline);
+      set("campLede", C.lede);
+      if (C.quote) {
+        set("campQuote", C.quote.text);
+        set("campQuoteSrc", C.quote.source);
+      }
+      document.title = "Tinsley — " + (C.song || "Campaign");
+
+      const ctas = $("#campCtas");
+      if (ctas && C.ctas) {
+        ctas.innerHTML = C.ctas
+          .map((c) => {
+            const href = hrefOf(c);
+            const ext = href.indexOf("http") === 0;
+            return `<a class="pub-btn${c.primary ? " primary" : ""}" href="${esc(href)}"${ext ? ' target="_blank" rel="noopener"' : ""}>${esc(c.label)}</a>`;
+          })
+          .join("");
+      }
+
+      const angles = $("#campAngles");
+      if (angles && C.angles) {
+        angles.innerHTML = C.angles
+          .map((a) => `<article class="pub-angle"><h3>${esc(a.title)}</h3><p>${esc(a.text)}</p></article>`)
+          .join("");
+      }
+
+      const beats = $("#campBeats");
+      if (beats && C.weekBeats) {
+        beats.innerHTML = C.weekBeats.map((b) => `<li>${esc(b)}</li>`).join("");
+      }
+
+      const tags = $("#campTags");
+      const song = (D.songHashtags || []).find((s) => s.title === C.song);
+      if (tags && song) {
+        const all = [].concat(song.tiktok || [], song.igBroad || [], song.igMid || []).slice(0, 14);
+        tags.innerHTML = all.map((t) => `<li>${esc(t)}</li>`).join("");
+      }
     }
   }
 

@@ -30,7 +30,18 @@ const TINSLEY = {
       plausibleDomain: "tinsley-marketing-hub.vercel.app",
       vercelInsights: true,
       // Default every bio / QR / ad link to the owned Listen surface.
-      utmDefaults: { source: "bio", medium: "social", campaign: "listen" }
+      utmDefaults: { source: "bio", medium: "social", campaign: "listen" },
+      // One-click UTM presets for field + platform plays (Ops #utm).
+      utmPresets: [
+        { id: "tiktok-bio", label: "TikTok bio", source: "tiktok", medium: "bio", campaign: "listen", content: "bio" },
+        { id: "ig-bio", label: "IG bio", source: "instagram", medium: "bio", campaign: "listen", content: "bio" },
+        { id: "ig-story", label: "IG Stories", source: "instagram", medium: "story", campaign: "listen", content: "story" },
+        { id: "kexp-qr", label: "KEXP / radio QR", source: "kexp", medium: "qr", campaign: "seattle", content: "radio" },
+        { id: "record-shop", label: "Record-shop trail", source: "recordshop", medium: "qr", campaign: "seattle", content: "trail" },
+        { id: "chbp-flyer", label: "Capitol Hill Block Party", source: "chbp", medium: "flyer", campaign: "seattle", content: "flyer" },
+        { id: "show-poster", label: "Show poster", source: "live", medium: "poster", campaign: "listen", content: "door" },
+        { id: "hook-a", label: "Hook A creative", source: "tiktok", medium: "social", campaign: "listen", content: "hook-a" }
+      ]
     }
   },
 
@@ -569,12 +580,26 @@ const TINSLEY = {
   // Starting values are planning estimates; the site lets you edit `current`
   // live and logs a trend history to localStorage. `fmt`: int | usd.
   northStars: [
-    { key: "listeners", label: "Monthly listeners", track: "reach", current: 8000, target: 50000, fmt: "int", note: "Spotify monthly listeners — the top of the funnel." },
-    { key: "followers", label: "Spotify followers", track: "reach", current: 3500, target: 25000, fmt: "int", note: "Owned-ish audience that gets Release Radar reach." },
+    { key: "listeners", label: "Monthly listeners", track: "reach", current: 8000, target: 50000, fmt: "int", note: "Spotify monthly listeners — the top of the funnel (manual from Spotify for Artists)." },
+    { key: "followers", label: "Spotify followers", track: "reach", current: 3500, target: 25000, fmt: "int", note: "Owned-ish audience that gets Release Radar reach. Pullable from /api/spotify when env is set." },
+    { key: "tiktok", label: "TikTok followers", track: "reach", current: 1200, target: 25000, fmt: "int", note: "Short-form discovery engine — update every Sunday from TikTok analytics." },
+    { key: "igReach", label: "IG reach (7d)", track: "reach", current: 4500, target: 40000, fmt: "int", note: "Weekly Instagram reach — pair with saves on winning Reels." },
+    { key: "igSaves", label: "IG saves (7d)", track: "reach", current: 180, target: 2000, fmt: "int", note: "Save rate is the organic bar before paid boost." },
+    { key: "listenClicks", label: "Listen UTM clicks (7d)", track: "foundation", current: 40, target: 500, fmt: "int", note: "Clicks to /listen from attributed links — Plausible or link tool." },
+    { key: "emailWeek", label: "Email signups (7d)", track: "foundation", current: 8, target: 80, fmt: "int", note: "Weekly list growth — the conversion that matters." },
     { key: "email", label: "Email subscribers", track: "foundation", current: 400, target: 5000, fmt: "int", note: "Truly owned audience — the most valuable list." },
     { key: "truefans", label: "True fans", track: "revenue", current: 80, target: 1000, fmt: "int", note: "Superfans spending ~$100/yr direct. The endgame." },
     { key: "sync", label: "Sync placements", track: "revenue", current: 1, target: 12, fmt: "int", note: "TV / film / ad / game placements landed." },
     { key: "d2c", label: "Monthly D2C revenue", track: "revenue", current: 700, target: 8000, fmt: "usd", note: "High-margin direct income (Bandcamp, merch, vinyl)." }
+  ],
+
+  // Engagement queue seeds — Ops #engage clears these into Tue/Sat reply slots.
+  engagementQueue: [
+    { id: "eq1", platform: "TikTok", target: "Reply to top 5 comments on this week’s hook with a clip or stitch", lane: "algorithm" },
+    { id: "eq2", platform: "TikTok", target: "Stitch one fan duet / glow-up from Bad Enough comments", lane: "community" },
+    { id: "eq3", platform: "Instagram", target: "Answer Story Q&A + DM soft CTA to /listen", lane: "owned" },
+    { id: "eq4", platform: "Threads", target: "Jump into one KEXP / Seattle music thread with a lyric or vinyl note", lane: "scene" },
+    { id: "eq5", platform: "TikTok", target: "Leave thoughtful comments on 3 PNW peer posts (no spam links)", lane: "scene" }
   ],
 
   // ---- Full income / scenario model defaults (streaming + D2C + sync + live) ----
@@ -1007,6 +1032,7 @@ const TINSLEY = {
 
   campaignBadEnough: {
     song: "Bad Enough",
+    slug: "bad-enough",
     eyebrow: "Single · 2026",
     headline: "Cathartic country-pop at its finest.",
     lede: "Post-breakup. Choose yourself. The lead single of the next chapter — Atwood-praised and built for glow-up lip-syncs.",
@@ -1026,5 +1052,37 @@ const TINSLEY = {
       "Wed — 15s story-behind: one line about writing the chorus",
       "Fri — Stitch/duet ask: show your glow-up to this hook"
     ]
+  },
+
+  // Named campaign pages — Bad Enough + next-single template (Temporary Insanity).
+  // campaign.html?id=<slug> and dedicated HTML files both read from here.
+  campaigns: {
+    "bad-enough": null, // filled below after campaignBadEnough
+    "temporary-insanity": {
+      song: "Temporary Insanity",
+      slug: "temporary-insanity",
+      eyebrow: "Single · next chapter",
+      headline: "Intrusive thoughts, but make it a chorus.",
+      lede: "Chaotic-era overthinking — POV spiral energy for the fans who live in their heads. Built for stitch bait and green-flag / red-flag listicles.",
+      quote: { text: "Honest, playful, and built for people who keep the vinyl close.", source: "Tinsley positioning" },
+      ctas: [
+        { label: "Stream on Spotify", hrefKey: "spotify", primary: true },
+        { label: "Join the list", href: "listen.html#join" },
+        { label: "Start Here", href: "listen.html#start" }
+      ],
+      angles: [
+        { title: "The hook", text: "Beat-timed POV captions of intrusive thoughts — relatable without whisper-core cosplay." },
+        { title: "The format", text: "Green flag / red flag listicles set to the chorus; fan DM reply stitches on Friday." },
+        { title: "The lane", text: "Chaotic-era indie pop that still points back to Seattle honesty — not interchangeable diary-pop." }
+      ],
+      weekBeats: [
+        "Mon — POV overthinking captions timed to the beat drop",
+        "Wed — Green flag / red flag list set to the chorus",
+        "Fri — Relatable comment reply stitch from a fan DM"
+      ]
+    }
   }
 };
+
+// Alias Bad Enough into the campaigns map for the generic campaign template.
+TINSLEY.campaigns["bad-enough"] = TINSLEY.campaignBadEnough;

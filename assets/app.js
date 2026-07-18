@@ -1069,6 +1069,10 @@
         chip.textContent = label;
         chip.classList.add("off");
         chip.title = "Live metrics unavailable — curated deck data still works.";
+        if (document.body.classList.contains("present-mode")) {
+          chip.hidden = true;
+          chip.setAttribute("aria-hidden", "true");
+        }
       }
     };
 
@@ -1259,6 +1263,12 @@
     tools.innerHTML = `<button type="button" class="btn" id="nsPullSpotify">Pull Spotify followers</button>
       <a class="btn" href="tinsley-ops.html#kpis">Sunday review on Ops</a>
       <span class="ops-muted ns-tools-hint">Monthly listeners still come from Spotify for Artists (not in the public API).</span>`;
+    if (document.body.classList.contains("present-mode")) {
+      const pull = tools.querySelector("#nsPullSpotify");
+      const hint = tools.querySelector(".ns-tools-hint");
+      if (pull) pull.hidden = true;
+      if (hint) hint.hidden = true;
+    }
     wrap.parentNode.insertBefore(tools, wrap);
 
     const pullBtn = $("#nsPullSpotify");
@@ -1435,6 +1445,7 @@
         <button type="button" class="btn" id="pitchCopyRemix">Copy remix / sync</button>
         <button type="button" class="btn" id="pitchDlTxt">Download .txt</button>
         <button type="button" class="btn" id="pitchDlMd">Download .md</button>
+        <button type="button" class="btn" id="pitchPrint">Print / PDF leave-behind</button>
       </div>
       <div class="pitch-grid">
         <div class="pitch-card">
@@ -1471,6 +1482,8 @@
     if (dlTxt) dlTxt.addEventListener("click", () => { download("tinsley-pitch-one-pager.txt", fullOnePager); showToast("Downloaded .txt"); });
     const dlMd = $("#pitchDlMd");
     if (dlMd) dlMd.addEventListener("click", () => { download("tinsley-pitch-one-pager.md", mdOnePager); showToast("Downloaded .md"); });
+    const printBtn = $("#pitchPrint");
+    if (printBtn) printBtn.addEventListener("click", () => window.print());
   })();
 
   /* ---- street picks for Tinsley ---- */

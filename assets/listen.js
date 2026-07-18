@@ -88,6 +88,12 @@
   function setUnwiredMode(unwired) {
     if (joinLive) joinLive.hidden = !!unwired;
     if (joinUnwired) joinUnwired.hidden = !unwired;
+    const note = $("joinUnwiredNote");
+    if (note) {
+      note.textContent = document.body.classList.contains("present-mode")
+        ? "Join the list on Linktree — demos, dates, and first dibs."
+        : "Native email capture wires when Kit / webhook is set — until then Linktree is the live signup path.";
+    }
     if (heroJoin) {
       if (unwired && linktreeFallback) {
         heroJoin.href = linktreeFallback;

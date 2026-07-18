@@ -21,6 +21,7 @@
 </head>
 <body data-page="shows">
   <a class="skip-link" href="#main">Skip to content</a>
+  <div id="presentBar" class="present-bar" hidden></div>
   <header class="pub-nav">
     <a class="pub-brand" href="listen.html">TINSLEY</a>
     <nav>
@@ -63,7 +64,10 @@
       <div class="pub-onepager">
         <ul id="shOnePager"></ul>
       </div>
-      <button type="button" class="pub-btn" id="copyOnePager">Copy one-pager</button>
+      <div class="pub-ctas" style="margin-top:18px">
+        <button type="button" class="pub-btn" id="copyOnePager">Copy one-pager</button>
+        <button type="button" class="pub-btn primary" id="printOnePager">Print / PDF leave-behind</button>
+      </div>
     </section>
 
     <section class="pub-section">
@@ -97,19 +101,22 @@
   <script>
     (function () {
       var btn = document.getElementById("copyOnePager");
-      if (!btn || typeof TINSLEY === "undefined") return;
-      btn.addEventListener("click", function () {
-        var lines = ["TINSLEY — SUPPORT-SLOT ONE-PAGER", ""].concat(
-          (TINSLEY.liveRouting && TINSLEY.liveRouting.onePager) || []
-        );
-        var text = lines.join("\n");
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(function () {
-            btn.textContent = "Copied";
-            setTimeout(function () { btn.textContent = "Copy one-pager"; }, 1600);
-          });
-        }
-      });
+      var printBtn = document.getElementById("printOnePager");
+      if (btn && typeof TINSLEY !== "undefined") {
+        btn.addEventListener("click", function () {
+          var lines = ["TINSLEY — SUPPORT-SLOT ONE-PAGER", ""].concat(
+            (TINSLEY.liveRouting && TINSLEY.liveRouting.onePager) || []
+          );
+          var text = lines.join("\n");
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function () {
+              btn.textContent = "Copied";
+              setTimeout(function () { btn.textContent = "Copy one-pager"; }, 1600);
+            });
+          }
+        });
+      }
+      if (printBtn) printBtn.addEventListener("click", function () { window.print(); });
     })();
   </script>
 </body>

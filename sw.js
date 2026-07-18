@@ -1,6 +1,6 @@
 /* Service worker — cache-first for static assets, network-first for pages
    and the live API. Bump CACHE version to invalidate old caches. */
-const CACHE = "marketing-hub-v18";
+const CACHE = "marketing-hub-v19";
 const CORE = [
   "/",
   "/index.html",
@@ -28,6 +28,7 @@ const CORE = [
   "/assets/reference.js",
   "/assets/data.js",
   "/assets/icon-512.png",
+  "/assets/hero-tinsley.jpg",
   "/sitemap.xml",
   "/robots.txt",
   "/site.webmanifest"

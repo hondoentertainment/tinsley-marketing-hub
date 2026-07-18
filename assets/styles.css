@@ -1405,9 +1405,15 @@ body.present-mode #backup { display: none; }
 body.present-mode .nav-links a[href="#setup"],
 body.present-mode .nav-links a[href="#backup"] { display: none; }
 body.present-mode .nav { top: 0; }
+body.present-mode #freshLive.off,
+body.present-mode #nsPullSpotify,
+body.present-mode #kpiPullSpotify,
+body.present-mode .ns-tools-hint { display: none !important; }
 
 @media print {
   .present-bar { display: none !important; }
+  .pitch-actions, .ops-row-actions, .btn { display: none !important; }
+  #pitchKit .pitch-grid { break-inside: avoid; }
 }
 
 .utm-presets { margin-bottom: 18px; }

@@ -481,6 +481,7 @@
       wrap.innerHTML = `
         <div class="ops-row-actions" style="margin-bottom:16px">
           <button type="button" class="btn btn-primary" id="kpiPullSpotify">Pull Spotify followers</button>
+          <button type="button" class="btn" id="opsDemoSeed">Load demo week</button>
           <a class="btn" href="tinsley-social.html#north-stars">Edit all on Social</a>
           <a class="btn" href="tinsley-social.html#calendar">Calendar week review</a>
         </div>
@@ -507,6 +508,7 @@
 
       const pull = $("#kpiPullSpotify");
       if (pull) {
+        if (document.body.classList.contains("present-mode")) pull.hidden = true;
         pull.addEventListener("click", () => {
           pull.disabled = true;
           pull.textContent = "Pulling…";
@@ -528,6 +530,50 @@
               pull.textContent = "Pull Spotify followers";
               render();
             });
+        });
+      }
+
+      const demoSeed = $("#opsDemoSeed");
+      if (demoSeed) {
+        demoSeed.addEventListener("click", () => {
+          const today = new Date().toISOString().slice(0, 10);
+          const creatives = [
+            {
+              date: today,
+              hook: "choose yourself lip-sync",
+              platform: "TikTok",
+              url: "",
+              metric: "4.8% save · 18k views",
+              verdict: "boost"
+            },
+            {
+              date: today,
+              hook: "glow-up mirror cut",
+              platform: "Instagram",
+              url: "",
+              metric: "2.1% save · 6.4k reach",
+              verdict: "repost"
+            },
+            {
+              date: today,
+              hook: "whisper-core test #3",
+              platform: "TikTok",
+              url: "",
+              metric: "0.6% save · 1.2k views",
+              verdict: "kill"
+            }
+          ];
+          save("tinsley.ops.creatives.v1", creatives);
+          noteStore.week = week;
+          noteStore.topHook = "choose yourself lip-sync";
+          noteStore.topPost = "";
+          noteStore.listGrowth = "+14 emails · 52 Listen clicks";
+          noteStore.kill = "Kill: whisper-core test #3";
+          noteStore.note = "Demo week seeded for presentation — replace with real Sunday numbers.";
+          save(NOTE_KEY, noteStore);
+          showToast("Demo week loaded");
+          render();
+          try { window.dispatchEvent(new CustomEvent("tinsley:demo-seed")); } catch (e) {}
         });
       }
 
@@ -736,6 +782,7 @@
         <code id="utmResult"></code>
         <div class="ops-row-actions">
           <button type="button" class="btn btn-primary" id="utmCopy">Copy link</button>
+          <button type="button" class="btn" id="utmQr">Download QR PNG</button>
           <button type="button" class="btn" id="utmListen">Reset to Listen</button>
           <button type="button" class="btn" id="utmLinktree">Linktree fallback</button>
         </div>
@@ -759,6 +806,44 @@
     fields.forEach((f) => f && f.addEventListener("input", build));
     build();
     $("#utmCopy").addEventListener("click", () => copy($("#utmResult").textContent, "UTM link copied"));
+    $("#utmQr").addEventListener("click", () => {
+      const url = ($("#utmResult").textContent || "").trim();
+      if (!url || url.indexOf("http") !== 0) return showToast("Build a valid UTM link first");
+      const qrApi =
+        "https://api.qrserver.com/v1/create-qr-code/?size=480x480&margin=16&format=png&data=" +
+        encodeURIComponent(url);
+      const btn = $("#utmQr");
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "Preparing…";
+      }
+      fetch(qrApi)
+        .then((r) => {
+          if (!r.ok) throw new Error("qr_fail");
+          return r.blob();
+        })
+        .then((blob) => {
+          const a = document.createElement("a");
+          const obj = URL.createObjectURL(blob);
+          a.href = obj;
+          a.download = "tinsley-utm-qr.png";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(obj);
+          showToast("QR PNG downloaded");
+        })
+        .catch(() => {
+          window.open(qrApi, "_blank", "noopener");
+          showToast("Opened QR — save the image");
+        })
+        .finally(() => {
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = "Download QR PNG";
+          }
+        });
+    });
     $("#utmListen").addEventListener("click", () => {
       $("#utmBase").value = listenUrl();
       build();
@@ -855,6 +940,10 @@
         copy(lines.join("\n"), "Creative log copied");
       });
     }
+    window.addEventListener("tinsley:demo-seed", () => {
+      log = load(KEY, []);
+      render();
+    });
     render();
   })();
 

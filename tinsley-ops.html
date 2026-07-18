@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body data-deck="ops">
+  <div id="presentBar" class="present-bar" hidden></div>
   <a class="skip-link" href="#top">Skip to content</a>
   <header class="nav" id="nav">
     <a href="index.html" class="hub-back">&larr; Hub</a>
@@ -69,9 +70,12 @@
       <div class="section-head">
         <span class="kicker">00 — Wire-up</span>
         <h2>Production connectors</h2>
-        <p class="lead">Status of the live hooks that turn this hub into a real acquisition system. Copy <code>.env.example</code>, set vars in the Vercel project, then refresh.</p>
+        <p class="lead">Wire these before treating the hub as a live acquisition system. Collapsed by default for demos — open when you’re ready to connect Kit / Spotify.</p>
       </div>
-      <div id="opsSetup"></div>
+      <details class="ops-setup-details" id="opsSetupDetails">
+        <summary class="ops-setup-summary">Show connector status <span class="ops-muted">(Spotify · email · analytics)</span></summary>
+        <div id="opsSetup"></div>
+      </details>
     </section>
 
     <section class="section" id="this-week">
@@ -240,6 +244,7 @@
   </footer>
   <div class="toast" id="toast"></div>
   <script src="assets/data.js"></script>
+  <script src="assets/present.js"></script>
   <script src="assets/app.js"></script>
   <script src="assets/ops.js"></script>
   <script>

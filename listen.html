@@ -58,15 +58,21 @@
     <section class="listen-block join" id="join">
       <h2 id="joinTitle">Join the list</h2>
       <p class="listen-lead" id="joinNote"></p>
-      <form class="join-form" id="joinForm" novalidate>
-        <label class="sr-only" for="joinName">Name (optional)</label>
-        <input id="joinName" name="name" type="text" autocomplete="name" placeholder="Name (optional)" />
-        <label class="sr-only" for="joinEmail">Email</label>
-        <input id="joinEmail" name="email" type="email" autocomplete="email" required placeholder="you@email.com" />
-        <button type="submit" class="listen-btn primary">Get demos &amp; first dibs</button>
-      </form>
-      <p class="join-status" id="joinStatus" hidden></p>
-      <p class="listen-fine">List API not ready? <a id="joinFallback" href="#" target="_blank" rel="noopener">Open Linktree signup</a></p>
+      <div id="joinLive">
+        <form class="join-form" id="joinForm" novalidate>
+          <label class="sr-only" for="joinName">Name (optional)</label>
+          <input id="joinName" name="name" type="text" autocomplete="name" placeholder="Name (optional)" />
+          <label class="sr-only" for="joinEmail">Email</label>
+          <input id="joinEmail" name="email" type="email" autocomplete="email" required placeholder="you@email.com" />
+          <button type="submit" class="listen-btn primary">Get demos &amp; first dibs</button>
+        </form>
+        <p class="join-status" id="joinStatus" hidden></p>
+        <p class="listen-fine">Prefer Linktree? <a id="joinFallback" href="#" target="_blank" rel="noopener">Open signup there</a></p>
+      </div>
+      <div id="joinUnwired" hidden>
+        <a class="listen-btn primary" id="joinLinktreePrimary" href="#" target="_blank" rel="noopener">Join via Linktree</a>
+        <p class="listen-fine" style="margin-top:14px">Native email capture wires when Kit / webhook is set — until then Linktree is the live signup path.</p>
+      </div>
       <p class="listen-fine" id="showsNote"></p>
     </section>
 
@@ -87,6 +93,7 @@
   </footer>
 
   <script src="assets/data.js"></script>
+  <script src="assets/present.js"></script>
   <script src="assets/listen.js"></script>
 </body>
 </html>

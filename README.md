@@ -31,6 +31,12 @@ npx serve .
 npx vercel dev
 ```
 
+## Present to the artist
+
+Open **https://tinsley-marketing-hub.vercel.app/?present=1** — present mode hides Ops Setup/Backup, keeps the demo path sticky, and switches Listen to Linktree signup until Kit is wired.
+
+Demo order: Listen → Press → Bad Enough → Song/Social (optional).
+
 ## Production connectors (Vercel env)
 
 See `.env.example` for `SPOTIFY_*`, `KIT_*` / `EMAIL_WEBHOOK_URL`.

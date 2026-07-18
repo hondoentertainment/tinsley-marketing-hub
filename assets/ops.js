@@ -70,7 +70,12 @@
       </article>`
       )
       .join("")}</div>
-      <p class="ops-hint">Copy <code>.env.example</code> → Vercel env for Kit (<code>KIT_API_KEY</code> + <code>KIT_FORM_ID</code>) or <code>EMAIL_WEBHOOK_URL</code>, plus Spotify client credentials. Listen form posts to <code>/api/subscribe</code>; bio/QR defaults to <code>/listen</code>.</p>`;
+      <p class="ops-hint">Copy <code>.env.example</code> → Vercel env for Kit (<code>KIT_API_KEY</code> + <code>KIT_FORM_ID</code>) or <code>EMAIL_WEBHOOK_URL</code>, plus Spotify client credentials. Listen form posts to <code>/api/subscribe</code>; bio/QR defaults to <code>/listen</code>. For artist demos, keep this panel collapsed and use <a href="index.html?present=1">present mode</a>.</p>`;
+
+    const details = $("#opsSetupDetails");
+    if (details && document.body.classList.contains("present-mode")) {
+      details.open = false;
+    }
 
     const setChip = (id, state, label) => {
       const card = wrap.querySelector('[data-id="' + id + '"]');

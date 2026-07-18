@@ -71,15 +71,49 @@
   const ldEl = $("jsonld");
   if (ldEl) ldEl.textContent = JSON.stringify(ld);
 
-  /* ---- native email form → /api/subscribe ---- */
+  /* ---- native email form → /api/subscribe (Linktree when unwired) ---- */
   const form = $("joinForm");
   const status = $("joinStatus");
   const fallback = $("joinFallback");
+  const joinLive = $("joinLive");
+  const joinUnwired = $("joinUnwired");
+  const joinLt = $("joinLinktreePrimary");
+
   if (fallback) {
     fallback.href = linktreeFallback || emailHref;
     fallback.hidden = !fallback.href || fallback.href === "#";
-    fallback.textContent = linktreeFallback ? "Open Linktree signup" : "Open signup link";
   }
+  if (joinLt && linktreeFallback) joinLt.href = linktreeFallback;
+
+  function setUnwiredMode(unwired) {
+    if (joinLive) joinLive.hidden = !!unwired;
+    if (joinUnwired) joinUnwired.hidden = !unwired;
+    if (heroJoin) {
+      if (unwired && linktreeFallback) {
+        heroJoin.href = linktreeFallback;
+        heroJoin.setAttribute("target", "_blank");
+        heroJoin.setAttribute("rel", "noopener");
+        heroJoin.textContent = L.primaryCta || "Join the list";
+      } else {
+        heroJoin.href = "#join";
+        heroJoin.removeAttribute("target");
+        heroJoin.removeAttribute("rel");
+        if (L.primaryCta) heroJoin.textContent = L.primaryCta;
+      }
+    }
+  }
+
+  /* Probe once — if Kit/webhook missing, demo Linktree as the live path */
+  fetch("/api/subscribe", { method: "GET", headers: { accept: "application/json" } })
+    .then((r) => r.json())
+    .then((d) => {
+      setUnwiredMode(!(d && d.configured));
+    })
+    .catch(() => {
+      /* Keep form visible offline; submit handler still falls back */
+      setUnwiredMode(false);
+    });
+
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -118,15 +152,13 @@
             window.dispatchEvent(new CustomEvent("tinsley:northstar"));
           } catch (err) {}
         } else if (data && data.reason === "not_configured") {
+          setUnwiredMode(true);
           if (status) {
-            status.textContent = "List API not wired yet — use Linktree below until Kit/webhook is set in Vercel.";
+            status.hidden = false;
+            status.textContent = "Opening Linktree signup — native list isn’t wired yet.";
             status.className = "join-status warn";
           }
-          if (linktreeFallback) {
-            window.open(linktreeFallback, "_blank", "noopener");
-          } else {
-            window.location.hash = "join";
-          }
+          if (linktreeFallback) window.open(linktreeFallback, "_blank", "noopener");
         } else if (data && data.reason === "invalid_email") {
           if (status) {
             status.textContent = "That email doesn’t look right — try again.";
@@ -134,13 +166,13 @@
           }
         } else {
           if (status) {
-            status.textContent = "Couldn’t reach the list — use the Linktree fallback below.";
+            status.textContent = "Couldn’t reach the list — try Linktree below.";
             status.className = "join-status err";
           }
         }
       } catch (err) {
         if (status) {
-          status.textContent = "Offline or blocked — use the Linktree fallback below.";
+          status.textContent = "Offline or blocked — try Linktree below.";
           status.className = "join-status err";
         }
       } finally {

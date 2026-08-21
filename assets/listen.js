@@ -63,6 +63,7 @@
     { label: "TikTok", href: links.tiktok },
     { label: "Linktree", href: links.linktree },
     { label: "Official site", href: links.website },
+    { label: "Shows", href: links.shows || "https://www.tinsleymusic.com/shows" },
     { label: "EPK", href: links.epk },
     { label: "YouTube", href: links.youtube }
   ].filter((x) => x.href);

@@ -409,6 +409,7 @@
       <a href="#tinsley">Decks</a>
       <a href="#public">Drafts</a>
       <a href="#index">Index</a>
+      <a href="tinsley-tour.html">Tour</a>
       <a href="tinsley-ops.html#this-week" class="hub-nav-listen">This week</a>
     </nav>
   </div>
@@ -418,9 +419,10 @@
       <p class="eyebrow">Private · Artist workspace</p>
       <h1 class="brand-mark">Tinsley</h1>
       <p class="hero-line">Your marketing desk for the next chapter.</p>
-      <p class="lede">Decks, weekly ops, and draft pages you can mark up — not a fan destination. Fans stay on tinsleymusic.com until you decide otherwise.</p>
+      <p class="lede">Next public date: Fri Aug 28 — Femme Friday at Hidden Hall with Girl Parallel and Veronica North. Decks, weekly ops, and draft pages you can mark up — not a fan destination. Fans stay on tinsleymusic.com until you decide otherwise.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="tinsley-ops.html#this-week">This week</a>
+        <a class="btn" href="tinsley-tour.html">Tour desk</a>
         <a class="btn" href="tinsley-song.html">Song deck</a>
         <a class="btn" href="listen.html">Review Listen draft</a>
         <a class="btn btn-quiet" href="#demo">Review order</a>
@@ -532,6 +534,15 @@
         accent: "linear-gradient(135deg, #ffb27a 0%, #ff6f91 55%, #b98cff 100%)"
       },
       {
+        suite: "tinsley",
+        title: "Tour Desk",
+        kind: "Booking OS",
+        href: "tinsley-tour.html",
+        desc: "Self-booking tools: next-show day sheet, advance checklist, holds, venue and support-slot asks, festival windows, settlement math, and a regional-run planner.",
+        tags: ["Tour", "Holds", "Settlement", "Advance"],
+        accent: "linear-gradient(135deg, #ffb27a 0%, #e8c4a0 55%, #c4789a 100%)"
+      },
+      {
         suite: "public",
         title: "Listen — proposed fan landing",
         kind: "Draft surface",
@@ -618,7 +629,7 @@
       {
         id: "tinsley",
         title: "Strategy & ops",
-        blurb: "Your working decks — catalog, marketing playbook, weekly ops, and frameworks."
+        blurb: "Your working decks — catalog, marketing playbook, weekly ops, tour desk, and frameworks."
       },
       {
         id: "public",
@@ -686,7 +697,23 @@
           { href: "tinsley-ops.html#street-ops", num: "08b", label: "Street tactic tracker", note: "Guerrilla checkoffs + last-run dates" },
           { href: "tinsley-ops.html#fan-ladder", num: "09", label: "True Fan product ladder", note: "Listener → patron tiers" },
           { href: "tinsley-ops.html#live-routing", num: "10", label: "Live routing kit", note: "Support one-pager + tour legs" },
-          { href: "tinsley-ops.html#backup", num: "11", label: "Export & import", note: "JSON backup of ops + calendar + north-stars" }
+          { href: "tinsley-ops.html#backup", num: "11", label: "Export & import", note: "JSON backup of ops + calendar + north-stars + tour" }
+        ]
+      },
+      {
+        page: "tinsley-tour.html",
+        title: "Tour Desk",
+        kind: "Booking OS",
+        items: [
+          { href: "tinsley-tour.html#next-show", num: "00", label: "Next show command", note: "Hidden Hall day sheet + run of show" },
+          { href: "tinsley-tour.html#advance", num: "01", label: "Advance checklist", note: "T–14 through the morning after" },
+          { href: "tinsley-tour.html#settle", num: "02", label: "Settlement calculator", note: "Guarantee vs door + merch − costs" },
+          { href: "tinsley-tour.html#holds", num: "03", label: "Holds & offers", note: "Research → hold → offer → confirm" },
+          { href: "tinsley-tour.html#venues", num: "04", label: "Venue targets", note: "PNW rooms with proof + step-ups" },
+          { href: "tinsley-tour.html#asks", num: "05", label: "Support-slot asks", note: "Peers, warm bills, stretch like-artists" },
+          { href: "tinsley-tour.html#fests", num: "06", label: "Festival windows", note: "CHBP, Bumbershoot, Treefort, KEXP" },
+          { href: "tinsley-tour.html#kit", num: "07", label: "Show kit", note: "Tech, hospitality, merch, setlists" },
+          { href: "tinsley-tour.html#run", num: "08", label: "Regional run planner", note: "6-date in vs out sketch" }
         ]
       },
       {
@@ -725,8 +752,10 @@
         title: "Shows & Booking",
         kind: "Industry surface",
         items: [
-          { href: "shows.html", num: "•", label: "Shows landing", note: "PNW-first booking pitch" },
-          { href: "shows.html#main", num: "01", label: "One-pager & routing", note: "Support slot + tour legs", sub: true }
+          { href: "shows.html", num: "•", label: "Shows landing", note: "Next: Hidden Hall Aug 28" },
+          { href: "shows.html#dates", num: "01", label: "Dates", note: "Upcoming + 2026 run from the official calendar", sub: true },
+          { href: "shows.html#main", num: "02", label: "One-pager & routing", note: "Support slot + tour legs", sub: true },
+          { href: "tinsley-tour.html", num: "03", label: "Tour desk", note: "Advance, holds, settlement — the working OS", sub: true }
         ]
       },
       {

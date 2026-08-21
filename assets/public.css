@@ -236,6 +236,23 @@ a { color: inherit; text-decoration: none; }
 .pub-sync-list .style { font-size: 12px; font-weight: 700; color: var(--sand); margin-top: 2px; }
 .pub-sync-list p { margin-top: 6px; font-size: 14px; color: var(--mute); }
 
+.pub-dates { list-style: none; display: flex; flex-direction: column; gap: 0; }
+.pub-dates li {
+  padding: 16px 0; border-bottom: 1px solid var(--line);
+}
+.pub-dates li.upcoming {
+  padding: 18px 16px; margin: 0 -16px 8px; border-radius: 16px;
+  border: 1px solid rgba(232,196,160,.35);
+  background: rgba(232,196,160,.08);
+}
+.pub-dates .when {
+  font-family: "Fraunces", Georgia, serif; font-weight: 900; font-size: 18px;
+}
+.pub-dates .venue { margin-top: 4px; font-weight: 700; color: var(--sand); font-size: 13px; }
+.pub-dates p { margin-top: 6px; font-size: 14px; color: var(--mute); }
+.pub-dates a { display: block; }
+.pub-dates a:hover .when { color: var(--sand); }
+
 .pub-legs { display: grid; gap: 20px; }
 .pub-leg { padding-bottom: 16px; border-bottom: 1px solid var(--line); }
 .pub-leg h3 {

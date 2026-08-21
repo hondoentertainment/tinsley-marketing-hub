@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Tinsley — Tour Desk</title>
+  <meta name="description" content="Self-booking tour desk for Tinsley: next-show day sheet, advance checklist, holds, venue targets, support-slot asks, festival windows, settlement, and a regional-run planner." />
+  <meta name="theme-color" content="#0e0b12" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://tinsley-marketing-hub.vercel.app/tinsley-tour" />
+  <link rel="icon" href="assets/icon-512.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/icon-512.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tinsley — Tour Desk" />
+  <meta property="og:description" content="Book, advance, and settle — a working tour OS for a self-booking artist." />
+  <meta property="og:url" content="https://tinsley-marketing-hub.vercel.app/tinsley-tour" />
+  <meta property="og:image" content="https://tinsley-marketing-hub.vercel.app/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body data-deck="tour">
+  <div id="presentBar" class="present-bar" hidden data-invite="1"></div>
+  <a class="skip-link" href="#top">Skip to content</a>
+  <header class="nav" id="nav">
+    <a href="index.html" class="hub-back">&larr; Hub</a>
+    <a href="#top" class="brand">TINSLEY<span>·</span>TOUR</a>
+    <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open section menu">
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+      Sections
+    </button>
+    <nav class="nav-links" id="navLinks" aria-label="Tour desk sections">
+      <a href="#next-show">Next show</a>
+      <a href="#advance">Advance</a>
+      <a href="#settle">Settle</a>
+      <a href="#holds">Holds</a>
+      <a href="#venues">Venues</a>
+      <a href="#asks">Support</a>
+      <a href="#fests">Festivals</a>
+      <a href="#kit">Show kit</a>
+      <a href="#run">Run</a>
+      <a href="shows.html">Shows draft ↗</a>
+    </nav>
+    <a class="nav-cta" href="tinsley-ops.html">Ops ↗</a>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <p class="eyebrow">Tour Desk · Self-booking OS</p>
+      <p class="hero-job" id="heroJob"></p>
+      <h1>Get on the road on purpose.</h1>
+      <p class="hero-bio" id="heroBio"></p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#next-show">Next show command</a>
+        <a class="btn" href="#holds">Holds &amp; asks</a>
+        <a class="btn" href="https://www.tinsleymusic.com/shows" target="_blank" rel="noopener">Official calendar ↗</a>
+      </div>
+      <div class="updated-badge" id="updatedBadge"></div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section" id="next-show">
+      <div class="section-head">
+        <span class="kicker">00 — This week</span>
+        <h2>Next show command</h2>
+        <p class="lead">One night, one sheet. Copy it into Notes, print it, or run the advance list underneath.</p>
+      </div>
+      <div id="tourNext"></div>
+    </section>
+
+    <section class="section alt" id="advance">
+      <div class="section-head">
+        <span class="kicker">01 — Before the van</span>
+        <h2>Advance checklist</h2>
+        <p class="lead">T–14 through the morning after. Checkoffs save in this browser so you can run the same ritual every date.</p>
+      </div>
+      <div id="tourAdvance"></div>
+    </section>
+
+    <section class="section" id="settle">
+      <div class="section-head">
+        <span class="kicker">02 — Money</span>
+        <h2>Settlement calculator</h2>
+        <p class="lead">Guarantee vs door, plus merch, minus the night’s costs. Planning numbers — not a tax form.</p>
+      </div>
+      <div id="tourSettle"></div>
+    </section>
+
+    <section class="section alt" id="holds">
+      <div class="section-head">
+        <span class="kicker">03 — Pipeline</span>
+        <h2>Holds &amp; offers</h2>
+        <p class="lead">Track every date window the way a booker does. Research → hold → offer → confirm or pass.</p>
+      </div>
+      <div id="tourHolds"></div>
+    </section>
+
+    <section class="section" id="venues">
+      <div class="section-head">
+        <span class="kicker">04 — Rooms</span>
+        <h2>Venue targets</h2>
+        <p class="lead">PNW rooms she can already walk into with proof — then the step-up. Status saves locally.</p>
+      </div>
+      <div id="tourVenues"></div>
+    </section>
+
+    <section class="section alt" id="asks">
+      <div class="section-head">
+        <span class="kicker">05 — Bills</span>
+        <h2>Support-slot asks</h2>
+        <p class="lead">Peers first, warm national-adjacent next, like-artists when a real hold exists. Don’t cold-email the stretch list.</p>
+      </div>
+      <div id="tourAsks"></div>
+    </section>
+
+    <section class="section" id="fests">
+      <div class="section-head">
+        <span class="kicker">06 — Season</span>
+        <h2>Festival &amp; showcase windows</h2>
+        <p class="lead">Hometown first. SXSW only after a real regional run can pay for it.</p>
+      </div>
+      <div id="tourFests"></div>
+    </section>
+
+    <section class="section alt" id="kit">
+      <div class="section-head">
+        <span class="kicker">07 — Leave-behind</span>
+        <h2>Show kit</h2>
+        <p class="lead">Tech, hospitality, merch pack, and two setlists you can paste into an advance email.</p>
+      </div>
+      <div id="tourKit"></div>
+    </section>
+
+    <section class="section" id="run">
+      <div class="section-head">
+        <span class="kicker">08 — The map</span>
+        <h2>Regional run planner</h2>
+        <p class="lead">A 6-date PNW/West sketch: guarantees + merch vs gas, beds, and food. Use it to decide if the run is worth leaving town.</p>
+      </div>
+      <div id="tourRun"></div>
+    </section>
+
+    <section class="section alt" id="more">
+      <div class="section-head">
+        <span class="kicker">Next</span>
+        <h2>Draft booking surface &amp; weekly ops</h2>
+        <p class="lead">Shows.html is the leave-behind. Ops is the Monday command. This desk is the road.</p>
+      </div>
+      <div class="cross-actions">
+        <a class="btn btn-primary" href="shows.html">Review Shows draft</a>
+        <a class="btn" href="tinsley-ops.html#live-routing">Ops live routing</a>
+        <a class="btn" href="tinsley-song.html#artists">Like-artist map</a>
+        <a class="btn" href="https://www.tinsleymusic.com/epk" target="_blank" rel="noopener">Official EPK ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="methodology" id="methodology"></div>
+    <p><strong>Tinsley — Tour Desk</strong></p>
+    <p class="muted">Internal booking OS (<code>noindex</code>). Trackers save to this browser — export from Ops backup after you use it. Official dates stay on <a href="https://www.tinsleymusic.com/shows" target="_blank" rel="noopener">tinsleymusic.com/shows</a>.</p>
+  </footer>
+  <div class="toast" id="toast"></div>
+  <script src="assets/data.js"></script>
+  <script src="assets/present.js"></script>
+  <script src="assets/app.js"></script>
+  <script src="assets/tour.js"></script>
+</body>
+</html>

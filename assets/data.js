@@ -10,7 +10,7 @@ const TINSLEY = {
   // Credibility layer. `updated` drives the "Last updated" badge; `sources`
   // renders the Methodology block; `spotifyArtistId` powers the live data fetch.
   meta: {
-    updated: "2026-07-13",
+    updated: "2026-08-21",
     spotifyArtistId: "1encEkVjZ4iqby8BXZc8Pa",
     canonicalUrl: "https://tinsley-marketing-hub.vercel.app/",
     publicListenPath: "/listen",
@@ -63,6 +63,7 @@ const TINSLEY = {
       instagram: "https://instagram.com/tinsleymusic",
       tiktok: "https://tiktok.com/@tinsleymusic",
       epk: "https://www.tinsleymusic.com/epk",
+      shows: "https://www.tinsleymusic.com/shows",
       // Draft Listen surface for review (form posts to /api/subscribe when Kit/webhook env is set).
       listen: "https://tinsley-marketing-hub.vercel.app/listen",
       emailSignup: "https://tinsley-marketing-hub.vercel.app/listen#join",
@@ -83,17 +84,21 @@ const TINSLEY = {
     ops: {
       job: "Execute & measure",
       lede: "The operating system behind the decks: this-week command strip, KPI snapshot, ritual, UTMs to /listen, release checklists, press CRM, content factory, and JSON backup so ops state survives browsers."
+    },
+    tour: {
+      job: "Book, advance, settle",
+      lede: "A working tour desk for a self-booking artist: next-show day sheet, advance checklist, holds, venue and support-slot asks, festival windows, settlement math, and a regional-run planner — so touring is a system, not a one-off gig."
     }
   },
 
   // ---- Listen draft copy (proposed fan landing, for artist review) ----
   listen: {
     headline: "Start here.",
-    sub: "Seattle indie pop-rock — honest, playful, and built for people who keep the vinyl close.",
+    sub: "Seattle indie pop-rock — honest, playful, and built for people who keep the vinyl close. Next date: Fri Aug 28 at Hidden Hall.",
     primaryCta: "Join the list",
     primaryNote: "Drops, demos, and first dibs — never spam.",
     secondaryCta: "Listen on Spotify",
-    showsNote: "Tour & ticket alerts go to the list first. Next PNW date lands here before anywhere else."
+    showsNote: "Next date: Fri Aug 28 — Femme Friday at Hidden Hall (Seattle) with Girl Parallel and Veronica North. Official tickets live on tinsleymusic.com/shows."
   },
 
   // ---- "Start Here" playlist pitch (curated entry points for new listeners) ----
@@ -122,7 +127,7 @@ const TINSLEY = {
   // ---- Catalog: chronological-ish assessment of the discography ----
   catalog: [
     { title: "Bad Enough", year: 2026, type: "Single", mood: "Empowered", genre: "Pop-Rock",
-      note: "Lead single of her next chapter — 'cathartic country-pop at its finest' (Atwood). Post-breakup, choose-yourself anthem. Strongest sync + playlist candidate." },
+      note: "Released Feb 12, 2026; official video premiered Mar 13 at Hotel Crocodile (Lobby Session) and published Mar 21. Atwood: 'cathartic country-pop at its finest.' Strongest sync + playlist candidate." },
     { title: "Temporary Insanity", year: 2025, type: "Single", mood: "Restless", genre: "Indie Pop",
       note: "Recent release extending the debut-era momentum." },
     { title: "Tinsley (Debut LP)", year: 2025, type: "Album", mood: "Coming-of-age", genre: "Indie Pop-Rock",
@@ -657,7 +662,7 @@ const TINSLEY = {
         { track: "revenue", lever: "D2C Drop", text: "Run a Bandcamp Friday drop + limited vinyl / merch bundle timed to the single." },
         { track: "revenue", lever: "Superfans", text: "Launch Close Friends + a small Discord and the first true-fan offer (signed insert, early ticket access)." },
         { track: "reach", lever: "Retargeting", text: "Retarget all video viewers and site visitors with save / follow + merch CTAs." },
-        { track: "revenue", lever: "Live", text: "Book 1–2 PNW shows; run QR email capture, a front-and-center merch table, and post-show thank-you DMs." },
+        { track: "revenue", lever: "Live", text: "Advance Hidden Hall (Aug 28), then book the next 3 PNW holds from the Tour desk — QR + merch table + thank-you DMs every night." },
         { track: "reach", lever: "PR", text: "Convert TikTok traction into 2–3 blog / radio feature placements." },
         { track: "product", lever: "Release", text: "Ship the single, read the data, and start teasing the next release immediately." },
         { track: "foundation", lever: "Review", text: "Review 90-day KPIs; double down on the top market and top song for the next cycle." }
@@ -943,6 +948,7 @@ const TINSLEY = {
     { id: "end-spin", outlet: "107.7 The End", cadence: "Per release", asset: "Clean WAV + short artist letter + Atwood quote", next: "Follow up within 10 days of send" },
     { id: "c895-spin", outlet: "C89.5", cadence: "Per release", asset: "College radio package + optional physical", next: "Ask for specialty show spin" },
     { id: "chbp", outlet: "Capitol Hill Block Party", cadence: "Seasonal", asset: "Support-slot one-pager + live routing kit", next: "Apply / network previous performers" },
+    { id: "hidden-hall", outlet: "Hidden Hall (Femme Friday)", cadence: "Aug 28, 2026", asset: "QR to official tickets + list capture at door", next: "This Friday — merch table + thank-you DMs after" },
     { id: "record-shops", outlet: "Easy Street / Sonic Boom / independent shops", cadence: "Monthly", asset: "QR treasure hunt + listening booth card", next: "Schedule one vinyl day per quarter" },
     { id: "uw-campus", outlet: "UW / campus weekenders", cadence: "Quarterly", asset: "Mascot / cowgirl character + flyer QR to Listen", next: "Student radio crossover" }
   ],
@@ -958,19 +964,175 @@ const TINSLEY = {
   ],
 
   liveRouting: {
-    blurb: "Support-slot routing beside the like-artist map — PNW first, then West Coast, then national openers.",
+    blurb: "2026 proof is already on the books — Hidden Hall this week, plus Cailin Russo support, a Tacoma headline, and last fall’s Suzzallo West Coast run. PNW first, then the map.",
     onePager: [
       "Seattle indie pop-rock with a country-pop edge — Atwood, Seattle Times #1 EP, KEXP vinyl story.",
-      "Draw: hometown radio + growing short-form; merch-ready vinyl narrative.",
-      "Set length: 30–45 min support / 60+ headline small rooms.",
-      "Tech: standard indie backline; acoustic duo option for radio / in-stores.",
-      "Contact: use EPK + Pitch Kit downloads from Song deck."
+      "Next date: Fri Aug 28, 2026 — Femme Friday at Hidden Hall with Girl Parallel and Veronica North.",
+      "2026 live: Spanish Ballroom headline (Feb 12), Bad Enough video premiere at Hotel Crocodile (Mar 13), Cailin Russo support at Barboza (Mar 17), Wild Buffalo, Belltown Yacht Club, Yonder Cider acoustic, Add-a-Ball (Jun 18).",
+      "2025 routing already opened the West: Suzzallo support (Spokane → San Diego) plus KEXP Town Hall with John Richards.",
+      "Set length: 30–45 min support / 60+ headline small rooms. Acoustic duo option for taprooms / radio.",
+      "Contact: official EPK on tinsleymusic.com + Pitch Kit from the Song deck."
     ],
     legs: [
       { region: "PNW", markets: ["Seattle", "Portland", "Bellingham", "Spokane", "Vancouver BC"], targets: "College rooms, in-stores, KEXP-adjacent bills" },
       { region: "West Coast", markets: ["SF / Oakland", "LA (echo / residency)", "Sacramento", "Eugene"], targets: "Support for Samia / Soccer Mommy–adjacent bills; songwriter nights" },
       { region: "National openers", markets: ["NYC", "Chicago", "Austin", "Nashville (country-pop lane)"], targets: "Pitch like-artists with highest reach scores first (Samia, Soccer Mommy, Holly Humberstone)" }
     ]
+  },
+
+  // ---- Tour desk (self-booking OS for an aspiring touring musician) ----
+  tourDesk: {
+    nextShow: {
+      date: "2026-08-28",
+      when: "Fri Aug 28, 2026",
+      title: "Femme Friday",
+      venue: "Hidden Hall",
+      address: "400 N 35th St, Seattle, WA",
+      city: "Seattle, WA",
+      doors: "8:00pm",
+      show: "8:30pm",
+      age: "21+",
+      bill: ["Tinsley", "Veronica North", "Girl Parallel"],
+      tickets: "https://www.tinsleymusic.com/shows",
+      notes: "Hometown 3-band bill. Merch + list QR before doors. Settlement and thank-yous before you leave.",
+      daySheet: [
+        { t: "5:30pm", item: "Load-in, park, find house manager" },
+        { t: "6:15pm", item: "Soundcheck — Bad Enough + one mid-set song" },
+        { t: "7:15pm", item: "Merch table + ticket/list QR live before doors" },
+        { t: "8:00pm", item: "Doors / guest list at the door" },
+        { t: "Set", item: "Confirm slot length with the house — typically 30–40 on a 3-band night" },
+        { t: "After", item: "Count merch, settle, thank venue + bill, log the night" }
+      ]
+    },
+    advance: [
+      {
+        id: "t14",
+        label: "T–14",
+        items: [
+          { id: "hold", text: "Hold or offer in writing — date, guarantee or door %, set length" },
+          { id: "rider", text: "Send tech rider + hospitality + stage plot / input list" },
+          { id: "travel", text: "Travel, parking, and load-in window confirmed" },
+          { id: "announce", text: "Announce on list + Stories; official tickets only (tinsleymusic.com/shows)" },
+          { id: "merch", text: "Count merch, restock, pack float + Square/reader + QR stand" },
+          { id: "guest", text: "Guest-list names + plus-one policy to the house" }
+        ]
+      },
+      {
+        id: "t7",
+        label: "T–7",
+        items: [
+          { id: "times", text: "Reconfirm load-in, soundcheck, set time, curfew" },
+          { id: "deal", text: "Settlement terms in writing (guarantee, vs door, merch cut)" },
+          { id: "table", text: "Merch table location and who staffs it during the set" },
+          { id: "content", text: "Plan one recap clip + one still; assign the phone" },
+          { id: "set", text: "Lock a 30–40 support set or 60+ headline set — print two copies" }
+        ]
+      },
+      {
+        id: "day",
+        label: "Day of",
+        items: [
+          { id: "in", text: "Load-in on time; water and setlists on stage" },
+          { id: "qr", text: "QR + merch live before first person walks in" },
+          { id: "door", text: "Guest list at the door; no late adds after soundcheck" },
+          { id: "video", text: "Film the hook song from the room, not the stage" },
+          { id: "settle", text: "Settle before you leave — cash or check, written count" }
+        ]
+      },
+      {
+        id: "after",
+        label: "After",
+        items: [
+          { id: "thanks", text: "Thank venue + bill (text/email same night)" },
+          { id: "dms", text: "Thank-you DMs to new follows and people who bought merch" },
+          { id: "recap", text: "Recap post within 24 hours — one clip, one still, next-date CTA" },
+          { id: "log", text: "Log settlement, merch, emails captured, and one booking intro to ask" },
+          { id: "ask", text: "Ask the booker for one intro or a return hold this season" }
+        ]
+      }
+    ],
+    venues: [
+      { id: "hidden-hall", name: "Hidden Hall", city: "Seattle", cap: 200, fit: "This Friday — treat as a home room", priority: "A" },
+      { id: "barboza", name: "Barboza", city: "Seattle", cap: 190, fit: "Already supported Cailin Russo here — ask for a headline or co-bill", priority: "A" },
+      { id: "tractor", name: "Tractor Tavern", city: "Seattle", cap: 300, fit: "KEXP-adjacent bills; NYE + Jaws of Brooklyn history", priority: "A" },
+      { id: "sunset", name: "Sunset Tavern", city: "Seattle", cap: 180, fit: "Sold-out headline history — return date", priority: "A" },
+      { id: "lou", name: "Madame Lou’s", city: "Seattle", cap: 250, fit: "Support room that already put her in front of Sheppard / Sam Fischer", priority: "B" },
+      { id: "croc", name: "The Crocodile / Hotel Crocodile", city: "Seattle", cap: 400, fit: "Lobby Session + video premiere — stay in the building", priority: "A" },
+      { id: "wild-buffalo", name: "Wild Buffalo", city: "Bellingham", cap: 400, fit: "Two 2026 visits already — make it a circuit stop", priority: "A" },
+      { id: "spanish", name: "Spanish Ballroom", city: "Tacoma", cap: 300, fit: "Feb 12 headline — ask for a fall return", priority: "A" },
+      { id: "white-eagle", name: "White Eagle", city: "Portland", cap: 200, fit: "Album-release room — first PDX hold of the next run", priority: "A" },
+      { id: "miss-studios", name: "Mississippi Studios", city: "Portland", cap: 400, fit: "Step-up PDX room once White Eagle repeats", priority: "B" },
+      { id: "cobalt", name: "The Cobalt", city: "Vancouver BC", cap: 350, fit: "Album-release room — passport routing for a 4-date PNW", priority: "B" },
+      { id: "district", name: "The District", city: "Spokane", cap: 200, fit: "Suzzallo support already opened this market", priority: "B" }
+    ],
+    supportAsks: [
+      { id: "veronica", name: "Veronica North", lane: "PNW peer", ask: "Keep sharing bills; trade Seattle / Bellingham holds", reach: "Now" },
+      { id: "girl-p", name: "Girl Parallel", lane: "PNW peer", ask: "Aug 28 bill — ask for a fall co-headline", reach: "Now" },
+      { id: "fiona", name: "Fiona Grey", lane: "PNW peer", ask: "BYC bill already happened — pitch a PDX / Tacoma swap", reach: "Now" },
+      { id: "cailin", name: "Cailin Russo", lane: "National-adjacent", ask: "Thank-you + ‘any West Coast leftovers’ after Barboza support", reach: "Warm" },
+      { id: "suzzallo", name: "Suzzallo", lane: "West Coast", ask: "Stay in orbit after the Sept 2025 run — first call for another support", reach: "Warm" },
+      { id: "samia", name: "Samia", lane: "Like-artist", ask: "Support-slot one-pager when a PNW or West date lands", reach: "Stretch" },
+      { id: "soccer", name: "Soccer Mommy", lane: "Like-artist", ask: "Same kit — guitar-forward bills, highest reach score on the map", reach: "Stretch" },
+      { id: "holly", name: "Holly Humberstone", lane: "Like-artist", ask: "UK/US routing; only pitch when a West Coast hold is real", reach: "Stretch" }
+    ],
+    festivals: [
+      { id: "chbp", name: "Capitol Hill Block Party", when: "July · Seattle", next: "Apply / network alumni when the form opens", window: "Winter–spring" },
+      { id: "bumber", name: "Bumbershoot", when: "Labor Day · Seattle", next: "Local showcase path + one-pager", window: "Winter" },
+      { id: "treefort", name: "Treefort", when: "March · Boise", next: "Boise already on the Suzzallo run — apply as a showcase", window: "Fall" },
+      { id: "bite", name: "Bite of Seattle", when: "July · Mural Stage", next: "Played 2024 — ask for a return", window: "Spring" },
+      { id: "cloudbreak", name: "Cloudbreak", when: "Fall · Seattle", next: "Headlined Barboza 2024 — stay in the family", window: "Summer" },
+      { id: "kexp-show", name: "KEXP / Town Hall bills", when: "Rolling", next: "Death & Music already happened — offer an in-studio + vinyl story", window: "Ongoing" },
+      { id: "sxsw", name: "SXSW", when: "March · Austin", next: "Only after a 6–10 date run exists to justify the cost", window: "Fall" },
+      { id: "treefort-satellite", name: "Pickathon / country-pop showcases", when: "Summer · OR", next: "Good Ride / Bad Enough lane — one targeted submit", window: "Winter" }
+    ],
+    kit: {
+      tech: [
+        "Standard indie backline — drums, bass amp, guitar amp if the house has them; we can travel light.",
+        "Inputs: vocal (SM58 or house), acoustic DI, electric DI or amp mic, optional keys DI.",
+        "30–45 min support / 60+ headline. Acoustic duo option for taprooms, radio, and in-stores.",
+        "No playback required. Click optional. In-ears optional — wedges are fine."
+      ],
+      hospitality: [
+        "Water on stage. A quiet corner to put cases is enough.",
+        "One parking / load-in note is more useful than a full rider.",
+        "Guest list: 6 unless the house says otherwise. Cutoff at soundcheck.",
+        "Merch: we staff our own table; 0% house cut preferred, 10–15% if that’s the room policy — confirm in the offer."
+      ],
+      merch: [
+        { item: "Vinyl (KEXP-funded story)", price: 30, pack: 12 },
+        { item: "Tee", price: 28, pack: 18 },
+        { item: "Tote", price: 18, pack: 10 },
+        { item: "Poster", price: 12, pack: 20 },
+        { item: "Sticker pack", price: 3, pack: 40 }
+      ],
+      sets: {
+        support: ["Distract Me", "Classic", "Good Ride (Mechanical Bullshit)", "Hard to Love", "Bad Enough"],
+        headline: ["Distract Me", "Temporary Insanity", "Classic", "Good Ride (Mechanical Bullshit)", "Skin", "Heart Attack", "Hard to Love", "the end — acoustic", "Bad Enough"]
+      }
+    },
+    deal: {
+      guarantee: 300,
+      doorSplit: 70,
+      tickets: 80,
+      ticketPrice: 17,
+      merch: 220,
+      merchCogs: 70,
+      travel: 40,
+      lodging: 0,
+      other: 25
+    },
+    run: {
+      dates: 6,
+      guarantee: 350,
+      merch: 180,
+      gas: 90,
+      lodging: 110,
+      food: 40,
+      merchCogs: 55,
+      miles: 220
+    },
+    advanceEmail:
+      "Hi {name},\n\nConfirming Tinsley for {date} at {venue}.\n\nSet: 30–45 support / 60+ headline. Standard indie backline; acoustic duo available.\nTech rider + hospitality attached. Guest list of 6 unless you prefer otherwise.\n\nDraw: Seattle indie pop-rock with a country-pop edge — Atwood on Bad Enough, KEXP vinyl story, #1 Seattle Times EP. Next hometown date is Fri Aug 28 at Hidden Hall (Femme Friday).\n\nEPK + photos: https://www.tinsleymusic.com/epk\nOfficial calendar: https://www.tinsleymusic.com/shows\n\nPlease reply with load-in, set time, settlement (guarantee / door / merch), and parking.\n\nThank you,\nTinsley"
   },
 
   // ---- Public marketing surfaces (press / sync / shows / single campaign) ----
@@ -990,7 +1152,8 @@ const TINSLEY = {
       { k: "Based in", v: "Seattle, WA" },
       { k: "Active since", v: "2018" },
       { k: "Flagship", v: "Self-titled debut LP (2025)" },
-      { k: "Lead single", v: "Bad Enough (2026)" },
+      { k: "Lead single", v: "Bad Enough (Feb 12, 2026) + video" },
+      { k: "Next date", v: "Aug 28, 2026 · Hidden Hall, Seattle" },
       { k: "Radio", v: "KEXP · 107.7 The End · C89.5" },
       { k: "Milestone", v: "#1 Seattle Times WA critics poll (Love Songs EP)" }
     ]
@@ -1013,33 +1176,117 @@ const TINSLEY = {
 
   showsPage: {
     eyebrow: "Live & booking",
-    headline: "PNW rooms first. Then the map opens.",
-    lede: "Support-ready sets with merch-ready vinyl lore — college rooms, in-stores, and KEXP-adjacent bills before West Coast openers.",
-    bookingNote: "For offers and holds, use the official EPK booking channel. Include market, capacity, and date windows.",
+    headline: "Next: Hidden Hall, Aug 28.",
+    lede: "Femme Friday at Hidden Hall with Girl Parallel and Veronica North — doors 8:00pm, 21+. Official tickets on tinsleymusic.com/shows.",
+    bookingNote: "For offers and holds, use the official EPK booking channel. Include market, capacity, and date windows. Official calendar: tinsleymusic.com/shows.",
     draw: [
-      "Hometown radio relationships (KEXP, 107.7 The End, C89.5)",
-      "Short-form discovery engine around Bad Enough",
-      "Vinyl story funded by KEXP’s John Richards",
-      "Acoustic duo option for radio / record shops"
+      "This Friday: Femme Friday at Hidden Hall with Girl Parallel and Veronica North",
+      "2026 already includes a Tacoma headline, Cailin Russo support at Barboza, and the Bad Enough video premiere",
+      "Hometown radio (KEXP, 107.7 The End, C89.5) plus John Richards / Town Hall",
+      "West Coast proof: Sept 2025 Suzzallo support run (Spokane → San Diego)"
     ],
     set: [
       { label: "Support", detail: "30–45 min" },
       { label: "Headline (small)", detail: "60+ min" },
       { label: "Tech", detail: "Standard indie backline" },
       { label: "Alt format", detail: "Acoustic duo for in-stores / radio" }
+    ],
+    calendarUrl: "https://www.tinsleymusic.com/shows",
+    dates: [
+      {
+        date: "2026-08-28",
+        when: "Fri Aug 28, 2026",
+        venue: "Hidden Hall",
+        city: "Seattle, WA",
+        note: "Femme Friday with Girl Parallel and Veronica North. Doors 8:00pm, 21+.",
+        href: "https://www.tinsleymusic.com/shows",
+        status: "upcoming"
+      },
+      {
+        date: "2026-06-18",
+        when: "Jun 18, 2026",
+        venue: "Add-a-Ball",
+        city: "Seattle, WA",
+        note: "With Great Comet and Moving in Slow.",
+        status: "past"
+      },
+      {
+        date: "2026-05-01",
+        when: "May 1, 2026",
+        venue: "Yonder Cider × Bale Breaker",
+        city: "Seattle, WA",
+        note: "Acoustic set — first Summer Music Nights.",
+        status: "past"
+      },
+      {
+        date: "2026-04-22",
+        when: "Apr 22, 2026",
+        venue: "Belltown Yacht Club",
+        city: "Seattle, WA",
+        note: "With Fiona Grey.",
+        status: "past"
+      },
+      {
+        date: "2026-03-27",
+        when: "Mar 27, 2026",
+        venue: "Wild Buffalo",
+        city: "Bellingham, WA",
+        note: "With Veronica North.",
+        status: "past"
+      },
+      {
+        date: "2026-03-17",
+        when: "Mar 17, 2026",
+        venue: "Barboza",
+        city: "Seattle, WA",
+        note: "Supporting Cailin Russo.",
+        status: "past"
+      },
+      {
+        date: "2026-03-13",
+        when: "Mar 13, 2026",
+        venue: "Hotel Crocodile",
+        city: "Seattle, WA",
+        note: "Lobby Session + Bad Enough music video premiere.",
+        status: "past"
+      },
+      {
+        date: "2026-02-12",
+        when: "Feb 12, 2026",
+        venue: "Spanish Ballroom",
+        city: "Tacoma, WA",
+        note: "Headline with Michael the Band and Joyla Red. Same day as the Bad Enough release.",
+        status: "past"
+      },
+      {
+        date: "2025-11-16",
+        when: "Nov 16, 2025",
+        venue: "Town Hall",
+        city: "Seattle, WA",
+        note: "Death & Music — KEXP, hosted by John Richards.",
+        status: "past"
+      },
+      {
+        date: "2025-09",
+        when: "Sep 16–23, 2025",
+        venue: "Suzzallo support run",
+        city: "Spokane → San Diego",
+        note: "West Coast dates: Spokane, Boise, Provo, Denver, Albuquerque, Phoenix, San Diego.",
+        status: "past"
+      }
     ]
   },
 
   campaignBadEnough: {
     song: "Bad Enough",
     slug: "bad-enough",
-    eyebrow: "Single · 2026",
+    eyebrow: "Single · Feb 12, 2026",
     headline: "Cathartic country-pop at its finest.",
-    lede: "Post-breakup. Choose yourself. The lead single of the next chapter — Atwood-praised and built for glow-up lip-syncs.",
+    lede: "Released Feb 12; video premiered Mar 13 at Hotel Crocodile. Post-breakup. Choose yourself. Atwood-praised and built for glow-up lip-syncs.",
     quote: { text: "Tinsley's latest single is cathartic country-pop at its finest.", source: "Atwood Magazine" },
     ctas: [
       { label: "Stream on Spotify", hrefKey: "spotify", primary: true },
-      { label: "Join the list", href: "listen.html#join" },
+      { label: "Aug 28 tickets", href: "https://www.tinsleymusic.com/shows" },
       { label: "Bandcamp", hrefKey: "bandcamp" }
     ],
     angles: [

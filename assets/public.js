@@ -184,6 +184,21 @@
         .join("");
     }
 
+    const dates = $("#shDates");
+    if (dates && S.dates) {
+      dates.innerHTML = S.dates
+        .map((g) => {
+          const head = `${esc(g.when)} · ${esc(g.venue)}`;
+          const meta = `${esc(g.city)}${g.status === "upcoming" ? " · Upcoming" : ""}`;
+          const body = `<div class="when">${head}</div><div class="venue">${meta}</div><p>${esc(g.note || "")}</p>`;
+          if (g.href) {
+            return `<li class="${g.status || "past"}"><a href="${esc(g.href)}" target="_blank" rel="noopener">${body}</a></li>`;
+          }
+          return `<li class="${g.status || "past"}">${body}</li>`;
+        })
+        .join("");
+    }
+
     const epk = $("#ctaEpk");
     if (epk && links.epk) epk.href = links.epk;
     const listen = $("#ctaListen");

@@ -125,7 +125,14 @@
     "tinsley.ops.kpiNote.v1",
     "tinsley.calendar.week.v1",
     "tinsley.roadmap.progress.v1",
-    "tinsley.northstar.v1"
+    "tinsley.northstar.v1",
+    "tinsley.tour.advance.v1",
+    "tinsley.tour.holds.v1",
+    "tinsley.tour.venues.v1",
+    "tinsley.tour.asks.v1",
+    "tinsley.tour.fests.v1",
+    "tinsley.tour.deal.v1",
+    "tinsley.tour.run.v1"
   ];
 
   function factorySlug(title) {
@@ -317,11 +324,27 @@
         listenUtm = u.toString();
       } catch (e) {}
 
+      const nextShow = D.tourDesk && D.tourDesk.nextShow;
+      const nextShowCard = nextShow
+        ? `<div class="ops-featured-pack">
+          <div>
+            <span class="ops-strip-h">Next show</span>
+            <p><strong>${esc(nextShow.when)}</strong> — ${esc(nextShow.title)} at ${esc(nextShow.venue)}. ${esc((nextShow.bill || []).join(" · "))}.</p>
+          </div>
+          <div class="ops-row-actions" style="margin-top:0">
+            <a class="btn btn-primary" href="tinsley-tour.html#next-show">Open tour desk</a>
+            <a class="btn" href="tinsley-tour.html#advance">Advance list</a>
+            <a class="btn" href="${esc(nextShow.tickets || "https://www.tinsleymusic.com/shows")}" target="_blank" rel="noopener">Tickets ↗</a>
+          </div>
+        </div>`
+        : "";
+
       wrap.innerHTML = `
         <div class="ops-habit">
           <span class="ops-habit-l">${esc(habit.label)}</span>
           <p>${esc(habit.text)}</p>
         </div>
+        ${nextShowCard}
         <p class="ops-cadence">ISO week <span class="ops-week">${esc(week)}</span> · Featured song: <strong>${esc(featured)}</strong>
           ${overdueN ? ` · <span class="ops-overdue-n">${overdueN} press overdue</span>` : ""}
         </p>
@@ -621,7 +644,7 @@
     const wrap = $("#opsBackup");
     if (!wrap) return;
     wrap.innerHTML = `
-      <p class="ops-hint">Exports include Ops modules plus calendar, roadmap progress, and north-stars from this browser. Import merges keys into localStorage (does not clear unrelated keys).</p>
+      <p class="ops-hint">Exports include Ops modules, Tour desk trackers, calendar, roadmap progress, and north-stars from this browser. Import merges keys into localStorage (does not clear unrelated keys).</p>
       <div class="ops-row-actions">
         <button type="button" class="btn btn-primary" id="opsExport">Download JSON backup</button>
         <button type="button" class="btn" id="opsCopyJson">Copy JSON</button>
@@ -1479,6 +1502,7 @@
         </div>
       </div>
       <div class="ops-row-actions">
+        <a class="btn btn-primary" href="tinsley-tour.html">Open tour desk</a>
         <a class="btn" href="tinsley-song.html#artists">Like-artist map</a>
         <a class="btn" href="tinsley-song.html#pitch">Pitch Kit</a>
       </div>`;

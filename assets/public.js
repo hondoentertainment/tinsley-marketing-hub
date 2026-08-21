@@ -336,6 +336,7 @@ function injectWorkPath() {
   const note = document.querySelector(".artist-note");
   if (!note || document.querySelector(".work-path")) return;
   const steps = [
+    { id: "today", href: "today.html", label: "This week" },
     { id: "song", href: "tinsley-song.html", label: "1 Song" },
     { id: "marketing", href: "tinsley-social.html", label: "2 Marketing" },
     { id: "pr", href: "press.html", label: "3 PR" },

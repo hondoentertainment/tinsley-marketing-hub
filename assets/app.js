@@ -421,7 +421,7 @@
 
     function weekPlanText() {
       const song = songs[songIdx];
-      const lines = ["Tinsley · Daily Content Calendar · " + weekId];
+      const lines = ["Tinsley · Posting week · " + weekId];
       if (song) lines.push("Featured song: " + song.title);
       lines.push(cal.cadence, "");
       cal.days.forEach((day) => {
@@ -739,7 +739,7 @@
         <div class="ig-foot">
           <button type="button" class="btn btn-primary" id="igCopyAll">Copy full Instagram brief</button>
           <a class="btn" href="#bysong">Per-song Instagram recipes</a>
-          <a class="btn" href="#calendar">Drop into this week’s calendar</a>
+          <a class="btn" href="#calendar">Drop into this posting week</a>
         </div>`;
 
       root.querySelectorAll("[data-ig]").forEach((btn) => {
@@ -1794,10 +1794,14 @@
   /* ---- optional analytics (Plausible + Vercel Web Analytics) ---- */
   (function workPath() {
     const deck = document.body.getAttribute("data-deck");
-    if (deck !== "song" && deck !== "social") return;
-    if (document.querySelector(".work-path")) return;
-    const here = deck === "song" ? "song" : "marketing";
+    if (!deck || document.querySelector(".work-path")) return;
+    const here =
+      deck === "song" ? "song" :
+      deck === "social" ? "marketing" :
+      deck === "today" || deck === "ops" || deck === "tour" ? "today" : "";
+    if (!here && deck !== "ops" && deck !== "tour" && deck !== "today") return;
     const steps = [
+      { id: "today", href: "today.html", label: "This week" },
       { id: "song", href: "tinsley-song.html", label: "1 Song" },
       { id: "marketing", href: "tinsley-social.html", label: "2 Marketing" },
       { id: "pr", href: "press.html", label: "3 PR" },
@@ -1814,6 +1818,19 @@
       .join('<span aria-hidden="true">→</span>');
     const header = document.getElementById("nav");
     if (header) header.after(nav);
+
+    const G = D.artistGuide && D.artistGuide.minutes && D.artistGuide.minutes[deck];
+    if (!G || document.querySelector(".minutes-strip")) return;
+    const strip = document.createElement("aside");
+    strip.className = "minutes-strip";
+    strip.setAttribute("aria-label", "Twenty minutes on this page");
+    const stepsHtml = (G.steps || []).map((s) => `<li>${s}</li>`).join("");
+    strip.innerHTML = `
+      <p class="minutes-kicker">20 minutes here</p>
+      <p class="minutes-here">${G.here}</p>
+      <ol>${stepsHtml}</ol>
+      <a class="minutes-next" href="${G.nextHref}">${G.next}</a>`;
+    nav.after(strip);
   })();
 
   (function analytics() {

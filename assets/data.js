@@ -75,19 +75,97 @@ const TINSLEY = {
   decks: {
     song: {
       job: "Catalog & positioning",
-      lede: "A music-first read of the catalog: what each era does well, which songs convert to remixes or sync, and which artists sit next to her on the map — not the content calendar."
+      lede: "A music-first read of your catalog: what each era does well, which songs pitch, and who sits next to you on the map — before you write a caption or a press email."
     },
     social: {
       job: "Reach & revenue",
-      lede: "A marketing-first playbook: Instagram desk, hashtag tiers, a daily content calendar, per-song posting recipes, platform priorities, and a sequenced growth roadmap — the work of turning listeners into an owned audience."
+      lede: "Your weekly show-up: Instagram desk, posting week, per-song recipes, and the growth roadmap — how listeners become an owned audience."
     },
     ops: {
       job: "Execute & measure",
-      lede: "The operating system behind the decks: this-week command strip, KPI snapshot, ritual, UTMs to /listen, release checklists, press CRM, content factory, and JSON backup so ops state survives browsers."
+      lede: "Where you ship: this-week command, ritual, press follow-ups, and a backup so your checks survive browsers."
     },
     tour: {
       job: "Book, advance, settle",
-      lede: "A working tour desk for a self-booking artist: next-show day sheet, advance checklist, holds, venue and support-slot asks, festival windows, settlement math, and a regional-run planner — so touring is a system, not a one-off gig."
+      lede: "Your booking desk: Friday’s day sheet, the advance list, holds, rooms to ask, settlement math, and a run planner — so touring is a system, not a one-off gig."
+    }
+  },
+
+  // ---- Artist-facing clarity: today, labels, 20-minute jobs ----
+  artistGuide: {
+    howTo: [
+      "This site is for you. Fans stay on tinsleymusic.com.",
+      "Pink This week opens your Friday sheet — what to do now.",
+      "The numbered path is how you think when you have an hour to plan.",
+      "Anything marked Draft is not for QR codes, bios, or tickets."
+    ],
+    labels: {
+      do: { short: "Do", blurb: "A working tool — check things off, copy, ship." },
+      review: { short: "Review", blurb: "Read this before you post or email." },
+      draft: { short: "Draft", blurb: "Looks public. It isn’t. Don’t send fans here." },
+      official: { short: "Official", blurb: "The only place fans, tickets, and the EPK belong." }
+    },
+    today: {
+      kicker: "Do this week",
+      title: "Hidden Hall · Friday Aug 28",
+      lede: "Advance the show. Official tickets only. Don’t send anyone to this hub.",
+      when: "Fri Aug 28, 2026",
+      venue: "Hidden Hall",
+      bill: "Femme Friday with Girl Parallel and Veronica North",
+      doors: "Doors 8:00pm · 21+",
+      tickets: "https://www.tinsleymusic.com/shows"
+    },
+    minutes: {
+      song: {
+        here: "You’re deciding what to stand on.",
+        next: "Next: Marketing — what you post this week.",
+        nextHref: "tinsley-social.html",
+        steps: [
+          "Read the differentiators — one wedge, not ten.",
+          "Open Pitch Kit and copy the line you’ll actually say.",
+          "Then go to Marketing and pick this week’s song."
+        ]
+      },
+      social: {
+        here: "You’re deciding what to post.",
+        next: "Next: PR — what you send out.",
+        nextHref: "press.html",
+        steps: [
+          "Open the Instagram desk and run the Hidden Hall show week.",
+          "Copy this week’s bio. Official tickets only in Stories.",
+          "Check one slot on the posting week, then go to PR."
+        ]
+      },
+      ops: {
+        here: "You’re shipping the week.",
+        next: "Need the night itself? Open the Friday sheet.",
+        nextHref: "today.html",
+        steps: [
+          "Do the This week strip — one command, not the whole OS.",
+          "Log a press follow-up if something is overdue.",
+          "Export backup after you check things off."
+        ]
+      },
+      tour: {
+        here: "You’re advancing Friday.",
+        next: "Need the one-page night sheet? Open Today.",
+        nextHref: "today.html",
+        steps: [
+          "Open the show calendar only if you’re checking a date.",
+          "Run the Hidden Hall day sheet and advance list.",
+          "Stories stickers go to tinsleymusic.com/shows — never this hub."
+        ]
+      },
+      today: {
+        here: "This is the only page you need tonight.",
+        next: "When the show is advanced, walk the path.",
+        nextHref: "index.html#path",
+        steps: [
+          "Copy the day sheet into Notes.",
+          "Post today’s Instagram beat — official ticket sticker.",
+          "After the set: thank-yous, not a full-set video."
+        ]
+      }
     }
   },
 
@@ -399,7 +477,7 @@ const TINSLEY = {
   // Mon / Wed / Fri pull the featured song's weekPlan beats; other days are
   // create, amplify, community, or bank — so publishing never starves the work.
   contentCalendar: {
-    cadence: "4–5 publish days per week on TikTok + Reels; daily creation practice; one community day; one bank day.",
+    cadence: "4–5 publish days per week on TikTok + Reels. This is the posting week — show dates live on the show calendar.",
     principle: "Make every day. Publish on a schedule that never starves the work.",
     roadmapHook: "0–30 days · Short-form",
     days: [

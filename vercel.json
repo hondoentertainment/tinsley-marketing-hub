@@ -4,9 +4,14 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/tinsley",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/tinsley.html",
-      "destination": "/tinsley",
-      "permanent": false
+      "destination": "/",
+      "permanent": true
     }
   ]
 }

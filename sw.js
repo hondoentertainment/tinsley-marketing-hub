@@ -1,9 +1,10 @@
 /* Service worker — cache-first for static assets, network-first for pages
    and the live API. Bump CACHE version to invalidate old caches. */
-const CACHE = "marketing-hub-v21";
+const CACHE = "marketing-hub-v22";
 const CORE = [
   "/",
   "/index.html",
+  "/today.html",
   "/tinsley.html",
   "/tinsley-song.html",
   "/tinsley-social.html",

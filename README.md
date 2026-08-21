@@ -6,7 +6,8 @@ Private artist workspace — strategy decks, weekly ops, and draft surfaces to r
 
 | Page | File | What it is |
 | --- | --- | --- |
-| **Marketing Hub** | `index.html` | Central landing page. Project cards + searchable section index. |
+| **Marketing Hub** | `index.html` | Artist front door. Today card, plan path, Do/Review/Draft/Official cards. |
+| **This week** | `today.html` | Friday sheet — Hidden Hall day sheet, Instagram show week, how-to print. |
 | **Listen** | `listen.html` | **Draft fan landing** — Start Here, email capture mock, smart links. Review only — do not send fans or QR codes here. |
 | **Press Kit** | `press.html` | Shareable EPK for editors & radio — bio, quotes, facts, Start Here, assets. |
 | **Sync & Licensing** | `sync.html` | Mood map + top sync-ready tracks for music supervisors. |
@@ -14,7 +15,7 @@ Private artist workspace — strategy decks, weekly ops, and draft surfaces to r
 | **Bad Enough** | `bad-enough.html` | Lead-single campaign page — stream, list, angles, recipe, hashtags. |
 | **Temporary Insanity** | `temporary-insanity.html` | Next-single campaign page (same template). |
 | **Campaign template** | `campaign.html` | Generic `?id=` campaign surface for future singles. |
-| **Tinsley chooser** | `tinsley.html` | Legacy `/tinsley` URL — pick Song, Social, Ops, Listen, public surfaces, or Reference. |
+| **Tinsley chooser** | `tinsley.html` | Redirects to the hub. `/tinsley` is not a second front door. |
 | **Tinsley — Song & Catalog Analysis** | `tinsley-song.html` | Music-first deck (internal / `noindex`). |
 | **Tinsley — Social & Marketing Analysis** | `tinsley-social.html` | Marketing deck (internal / `noindex`). |
 | **Tinsley — Ops Command** | `tinsley-ops.html` | Execution OS (internal / `noindex`). |
@@ -33,7 +34,7 @@ npx vercel dev
 
 ## Work path
 
-Song analysis → Marketing → PR → Campaigns, then Ops and Tour. Start from the homepage.
+Do this week first (`today.html`). When you have an hour: Song → Marketing → PR → Campaigns, then Ops and Tour. Cards are labeled Do, Review, Draft, or Official. Fans stay on tinsleymusic.com.
 
 ## Production connectors (Vercel env)
 

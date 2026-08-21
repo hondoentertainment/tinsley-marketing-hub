@@ -327,8 +327,9 @@
             <p><strong>${esc(nextShow.when)}</strong> — ${esc(nextShow.title)} at ${esc(nextShow.venue)}. ${esc((nextShow.bill || []).join(" · "))}.</p>
           </div>
           <div class="ops-row-actions" style="margin-top:0">
-            <a class="btn btn-primary" href="tinsley-tour.html#next-show">Open tour desk</a>
-            <a class="btn" href="tinsley-tour.html#calendar">Full calendar</a>
+            <a class="btn btn-primary" href="today.html">Friday sheet</a>
+            <a class="btn" href="tinsley-tour.html#next-show">Tour desk</a>
+            <a class="btn" href="tinsley-tour.html#calendar">Show calendar</a>
             <a class="btn" href="tinsley-tour.html#advance">Advance list</a>
             <a class="btn" href="${esc(nextShow.tickets || "https://www.tinsleymusic.com/shows")}" target="_blank" rel="noopener">Tickets ↗</a>
           </div>
@@ -1498,7 +1499,8 @@
       </div>
       <div class="ops-row-actions">
         <a class="btn btn-primary" href="tinsley-tour.html">Open tour desk</a>
-        <a class="btn" href="tinsley-tour.html#calendar">Full calendar</a>
+        <a class="btn" href="today.html">Friday sheet</a>
+        <a class="btn" href="tinsley-tour.html#calendar">Show calendar</a>
         <a class="btn" href="shows.html#dates">Shows draft calendar</a>
         <a class="btn" href="tinsley-song.html#artists">Like-artist map</a>
         <a class="btn" href="tinsley-song.html#pitch">Pitch Kit</a>

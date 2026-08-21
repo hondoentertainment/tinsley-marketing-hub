@@ -99,7 +99,8 @@
         <div class="ops-row-actions">
           <button type="button" class="btn btn-primary" id="copyDaySheet">Copy day sheet</button>
           <a class="btn" href="${esc(S.tickets)}" target="_blank" rel="noopener">Official tickets ↗</a>
-          <a class="btn" href="#calendar">Full calendar</a>
+          <a class="btn" href="today.html">Friday sheet</a>
+          <a class="btn" href="#calendar">Show calendar</a>
           <a class="btn" href="#advance">Run advance list</a>
         </div>
       </article>`;

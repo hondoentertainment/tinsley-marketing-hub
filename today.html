@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Tinsley — This week</title>
+  <meta name="description" content="Friday sheet for Tinsley: Hidden Hall day sheet, Instagram show week, official tickets. Private artist workspace — not for fans." />
+  <meta name="theme-color" content="#0e0b12" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://tinsley-marketing-hub.vercel.app/today" />
+  <link rel="icon" href="assets/icon-512.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/icon-512.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tinsley — This week" />
+  <meta property="og:description" content="Friday sheet: day sheet, Instagram beats, official tickets." />
+  <meta property="og:url" content="https://tinsley-marketing-hub.vercel.app/today" />
+  <meta property="og:image" content="https://tinsley-marketing-hub.vercel.app/assets/og-hub.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body data-deck="today">
+  <a class="skip-link" href="#top">Skip to content</a>
+  <header class="nav" id="nav">
+    <a href="index.html" class="hub-back">&larr; Hub</a>
+    <a href="#top" class="brand">TINSLEY<span>·</span>TODAY</a>
+    <nav class="nav-links" id="navLinks" aria-label="Friday sheet">
+      <a href="#night">Night sheet</a>
+      <a href="#instagram-week">Instagram</a>
+      <a href="#how">How to use this</a>
+      <a href="tinsley-tour.html">Tour desk ↗</a>
+      <a href="index.html#path">Plan path ↗</a>
+    </nav>
+    <a class="nav-cta" href="https://www.tinsleymusic.com/shows" target="_blank" rel="noopener">Official tickets ↗</a>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <p class="eyebrow">Do · This week</p>
+      <p class="hero-job">One page for Friday. Nothing else required.</p>
+      <h1>Hidden Hall night sheet.</h1>
+      <p class="hero-bio">Femme Friday, Aug 28. Official tickets only. This hub is for you — fans stay on tinsleymusic.com.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#night">Day sheet</a>
+        <a class="btn" href="#instagram-week">Today’s Instagram beat</a>
+        <button type="button" class="btn" id="printToday">Print / save PDF</button>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section" id="night">
+      <div class="section-head">
+        <span class="kicker">The night</span>
+        <h2>Day sheet</h2>
+        <p class="lead">Copy this into Notes. Run it. Don’t livestream the set.</p>
+      </div>
+      <div id="todayNight"></div>
+    </section>
+
+    <section class="section alt" id="instagram-week">
+      <div class="section-head">
+        <span class="kicker">The posts</span>
+        <h2>Instagram show week</h2>
+        <p class="lead">One beat a day. Story stickers go to tinsleymusic.com/shows — never a hub link.</p>
+      </div>
+      <div id="todayIg"></div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="section-head">
+        <span class="kicker">Keep this</span>
+        <h2>How I use this site</h2>
+        <p class="lead">Four rules. Screenshot or print. That’s the whole orientation.</p>
+      </div>
+      <div id="todayHow"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p><strong>Tinsley — This week</strong></p>
+    <p class="muted">Private workspace. Official home: <a href="https://www.tinsleymusic.com/" target="_blank" rel="noopener">tinsleymusic.com</a>.</p>
+  </footer>
+  <div class="toast" id="toast"></div>
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+  <script>
+    (function () {
+      var D = window.TINSLEY;
+      if (!D) return;
+      var G = D.artistGuide || {};
+      var S = (D.tourDesk && D.tourDesk.nextShow) || {};
+      var Ig = (D.instagramPlaybook && D.instagramPlaybook.thisWeek) || {};
+      var $ = function (id) { return document.getElementById(id); };
+      var esc = function (s) {
+        return String(s == null ? "" : s).replace(/[&<>"']/g, function (m) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m];
+        });
+      };
+      var night = $("todayNight");
+      if (night) {
+        var sheet = (S.daySheet || []).map(function (row) {
+          return "<li><span class=\"tour-time\">" + esc(row.t) + "</span><span>" + esc(row.item) + "</span></li>";
+        }).join("");
+        night.innerHTML =
+          '<article class="tour-next">' +
+            "<div class=\"tour-next-top\"><div>" +
+              "<p class=\"ops-day\">" + esc(S.when || G.today.when) + "</p>" +
+              "<h3>" + esc(S.title) + " · " + esc(S.venue) + "</h3>" +
+              "<p class=\"ops-muted\">" + esc(S.address || "") + "</p>" +
+              "<p>Doors " + esc(S.doors) + " · Show " + esc(S.show) + " · " + esc(S.age) + "</p>" +
+              "<p class=\"tour-bill\">" + esc((S.bill || []).join(" · ")) + "</p>" +
+            "</div><div class=\"tour-next-meta\"><span class=\"ops-price\">Upcoming</span><p>" + esc(S.notes || "") + "</p></div></div>" +
+            "<ol class=\"tour-sheet\">" + sheet + "</ol>" +
+            "<div class=\"ops-row-actions\">" +
+              "<button type=\"button\" class=\"btn btn-primary\" id=\"copyDay\">Copy day sheet</button>" +
+              "<a class=\"btn\" href=\"" + esc(S.tickets || "https://www.tinsleymusic.com/shows") + "\" target=\"_blank\" rel=\"noopener\">Official tickets ↗</a>" +
+              "<a class=\"btn\" href=\"tinsley-tour.html#advance\">Advance list</a>" +
+            "</div></article>";
+        var copyDay = $("copyDay");
+        if (copyDay) {
+          copyDay.addEventListener("click", function () {
+            var text = ["TINSLEY — DAY SHEET", S.when + " · " + S.title, S.venue + " — " + S.address, ""]
+              .concat((S.daySheet || []).map(function (r) { return r.t + " — " + r.item; }))
+              .concat(["", "Tickets: " + S.tickets]).join("\n");
+            if (navigator.clipboard) navigator.clipboard.writeText(text);
+            copyDay.textContent = "Copied";
+            setTimeout(function () { copyDay.textContent = "Copy day sheet"; }, 1600);
+          });
+        }
+      }
+      var ig = $("todayIg");
+      if (ig && Ig.beats) {
+        ig.innerHTML =
+          "<p class=\"ops-blurb\">" + esc(Ig.lede || "") + "</p>" +
+          "<ol class=\"ig-beats today-ig-beats\">" +
+          Ig.beats.map(function (b) {
+            return "<li><span class=\"ig-day\">" + esc(b.day) + "</span><span class=\"ig-fmt\">" + esc(b.format) + "</span><span>" + esc(b.idea) + "</span></li>";
+          }).join("") +
+          "</ol>" +
+          "<div class=\"ops-row-actions\" style=\"margin-top:18px\">" +
+            "<a class=\"btn btn-primary\" href=\"tinsley-social.html#instagram\">Open Instagram desk</a>" +
+            "<a class=\"btn\" href=\"tinsley-tour.html#calendar\">Show calendar</a>" +
+          "</div>";
+      }
+      var how = $("todayHow");
+      if (how && G.howTo) {
+        how.innerHTML =
+          "<ol class=\"howto-print\">" +
+          G.howTo.map(function (line, i) { return "<li><span class=\"howto-n\">" + (i + 1) + "</span>" + esc(line) + "</li>"; }).join("") +
+          "</ol>" +
+          "<div class=\"ops-row-actions\" style=\"margin-top:18px\">" +
+            "<button type=\"button\" class=\"btn btn-primary\" id=\"printHow\">Print these four rules</button>" +
+            "<a class=\"btn\" href=\"index.html#path\">When you have an hour →</a>" +
+          "</div>";
+      }
+      function printPage() { window.print(); }
+      var pt = $("printToday");
+      var ph = $("printHow");
+      if (pt) pt.addEventListener("click", printPage);
+      if (ph) ph.addEventListener("click", printPage);
+    })();
+  </script>
+</body>
+</html>

@@ -1,13 +1,13 @@
 # Marketing Hub
 
-A centralized, static site that links every marketing page in this workspace together. The landing page (`index.html`) is a hub that routes to each self-contained marketing project.
+Private artist workspace — strategy decks, weekly ops, and draft surfaces to review. Not a fan site. Official home stays [tinsleymusic.com](https://www.tinsleymusic.com/).
 
 ## Pages
 
 | Page | File | What it is |
 | --- | --- | --- |
 | **Marketing Hub** | `index.html` | Central landing page. Project cards + searchable section index. |
-| **Listen** | `listen.html` | **Public fan surface** — Start Here playlist, email capture (`/api/subscribe`), smart links. Primary bio/QR destination. |
+| **Listen** | `listen.html` | **Draft fan landing** — Start Here, email capture mock, smart links. Review only — do not send fans or QR codes here. |
 | **Press Kit** | `press.html` | Shareable EPK for editors & radio — bio, quotes, facts, Start Here, assets. |
 | **Sync & Licensing** | `sync.html` | Mood map + top sync-ready tracks for music supervisors. |
 | **Shows & Booking** | `shows.html` | Support one-pager, routing legs, set/tech, booking CTA. |
@@ -21,7 +21,7 @@ A centralized, static site that links every marketing page in this workspace tog
 | **Reference — Frameworks & Philosophy** | `reference.html` | True Fans + *The Creative Act* (internal / `noindex`). |
 | **Street Marketing — Top 100 Ideas** | `street-marketing.html` | Guerrilla tactics field guide. Public. |
 
-**Public SEO:** `/`, `/listen`, `/bad-enough`, `/temporary-insanity`, `/campaign`, `/press`, `/sync`, `/shows`, `/street-marketing` (see `sitemap.xml` + `robots.txt`). Strategy decks stay `noindex`.
+**SEO:** The whole hub is `noindex` + `robots.txt` Disallow. Fans should not land here.
 
 ## Run it
 
@@ -33,9 +33,9 @@ npx vercel dev
 
 ## Present to the artist
 
-Open **https://tinsley-marketing-hub.vercel.app/?present=1** — present mode hides Ops Setup/Backup, keeps the demo path sticky, and switches Listen to Linktree signup until Kit is wired.
+Open **https://tinsley-marketing-hub.vercel.app/?present=1** — focus mode hides unfinished connectors so you can review drafts in order.
 
-Demo order: Listen → Press → Bad Enough → Song/Social (optional).
+Review order: Listen draft → Press draft → Bad Enough draft → Song/Social (optional).
 
 ## Production connectors (Vercel env)
 

@@ -248,4 +248,28 @@
     s.classList.add("reveal");
     io.observe(s);
   });
+
+  const toggle = document.getElementById("navToggle");
+  const links = document.getElementById("navLinks");
+  if (toggle && links) {
+    const close = () => {
+      document.body.classList.remove("nav-open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open section menu");
+    };
+    toggle.addEventListener("click", () => {
+      const open = !document.body.classList.contains("nav-open");
+      document.body.classList.toggle("nav-open", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "Close section menu" : "Open section menu");
+      if (open) {
+        const first = links.querySelector("a");
+        if (first) first.focus();
+      }
+    });
+    links.querySelectorAll("a").forEach((a) => a.addEventListener("click", close));
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
+  }
 })();

@@ -1,19 +1,5 @@
 User-agent: *
-Allow: /
-Allow: /listen
-Allow: /bad-enough
-Allow: /temporary-insanity
-Allow: /campaign
-Allow: /press
-Allow: /sync
-Allow: /shows
-Allow: /street-marketing
+Disallow: /
 
-# Internal strategy / ops surfaces — use noindex meta + keep out of sitemap
-Disallow: /tinsley-song
-Disallow: /tinsley-social
-Disallow: /tinsley-ops
-Disallow: /tinsley
-Disallow: /reference
-
-Sitemap: https://tinsley-marketing-hub.vercel.app/sitemap.xml
+# Artist workspace only — do not index as a fan site.
+# Official home: https://www.tinsleymusic.com/

@@ -1447,7 +1447,7 @@
       )
       .join("")}</ol>
       <div class="ops-row-actions">
-        <a class="btn btn-primary" href="listen.html">Open Listen / capture page</a>
+        <a class="btn btn-primary" href="listen.html">Review Listen draft</a>
         <a class="btn" href="reference.html#truefans">True Fans calculator</a>
       </div>`;
   })();

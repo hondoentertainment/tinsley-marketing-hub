@@ -41,19 +41,26 @@
     });
   }
 
-  /* Optional host for a present bar */
+  /* Present bar: walkthrough chrome for the artist. Invite only on pages that opt in. */
   const host = document.getElementById("presentBar");
   if (host) {
-    host.hidden = false;
-    host.innerHTML = on
-      ? `<div class="present-bar-inner">
-          <span><strong>Present mode</strong> — Lead with Listen → Press → Bad Enough. Skip Ops Setup. Frame as a working prototype, not the official site.</span>
+    const invite = host.getAttribute("data-invite") === "1";
+    if (on) {
+      host.hidden = false;
+      host.innerHTML = `<div class="present-bar-inner">
+          <span><strong>Focus mode</strong> — Review Listen → Press → Bad Enough. Skip Ops Setup. These are drafts, not live fan pages.</span>
           <a class="present-bar-btn" href="?present=0">Exit</a>
-        </div>`
-      : `<div class="present-bar-inner">
-          <span>Ready for the artist? Turn on present mode to hide unfinished connectors and keep the demo path clean.</span>
-          <a class="present-bar-btn" href="?present=1">Enter present mode</a>
         </div>`;
+    } else if (invite) {
+      host.hidden = false;
+      host.innerHTML = `<div class="present-bar-inner">
+          <span>Focus mode hides unfinished connectors so you can review the draft surfaces in order.</span>
+          <a class="present-bar-btn" href="?present=1">Enter focus mode</a>
+        </div>`;
+    } else {
+      host.hidden = true;
+      host.innerHTML = "";
+    }
   }
 
   window.TinsleyPresent = { on: on, withPresent: withPresent };

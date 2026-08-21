@@ -1,7 +1,7 @@
 {
   "name": "Marketing Hub",
   "short_name": "Marketing Hub",
-  "description": "A centralized hub of marketing strategy pages, decks, and idea libraries.",
+  "description": "Private marketing workspace for the artist — strategy decks, ops, and draft surfaces.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

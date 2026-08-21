@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Reference — Frameworks & Philosophy</title>
   <meta name="description" content="The frameworks behind the Tinsley strategy deck: Kevin Kelly's 1,000 True Fans revenue model and a counterpoint reading of Rick Rubin's The Creative Act." />
   <meta name="theme-color" content="#0e0b12" />
@@ -31,7 +31,11 @@
   <header class="nav" id="nav">
     <a href="index.html" class="hub-back">&larr; Hub</a>
     <a href="#top" class="brand">REFERENCE<span>·</span>LIBRARY</a>
-    <nav class="nav-links">
+    <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open section menu">
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+      Sections
+    </button>
+    <nav class="nav-links" id="navLinks" aria-label="Reference sections">
       <a href="#truefans">True Fans</a>
       <a href="#rubin">Creative Act</a>
       <a href="tinsley-song.html">Song Analysis</a>

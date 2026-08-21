@@ -29,7 +29,7 @@ const TINSLEY = {
       // Register this host in Plausible (Settings → Sites). Script loads when non-empty.
       plausibleDomain: "tinsley-marketing-hub.vercel.app",
       vercelInsights: true,
-      // Default every bio / QR / ad link to the owned Listen surface.
+      // Draft Listen URL for artist review — do not send fans or QR here.
       utmDefaults: { source: "bio", medium: "social", campaign: "listen" },
       // One-click UTM presets for field + platform plays (Ops #utm).
       utmPresets: [
@@ -63,7 +63,7 @@ const TINSLEY = {
       instagram: "https://instagram.com/tinsleymusic",
       tiktok: "https://tiktok.com/@tinsleymusic",
       epk: "https://www.tinsleymusic.com/epk",
-      // Primary fan landing + email capture (form posts to /api/subscribe when Kit/webhook env is set).
+      // Draft Listen surface for review (form posts to /api/subscribe when Kit/webhook env is set).
       listen: "https://tinsley-marketing-hub.vercel.app/listen",
       emailSignup: "https://tinsley-marketing-hub.vercel.app/listen#join",
       youtube: "https://www.youtube.com/@tinsleymusic"
@@ -86,7 +86,7 @@ const TINSLEY = {
     }
   },
 
-  // ---- Public listen / fan landing copy ----
+  // ---- Listen draft copy (proposed fan landing, for artist review) ----
   listen: {
     headline: "Start here.",
     sub: "Seattle indie pop-rock — honest, playful, and built for people who keep the vinyl close.",

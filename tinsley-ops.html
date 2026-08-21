@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Tinsley — Ops Command</title>
   <meta name="description" content="Execution OS for Tinsley marketing: weekly ritual, UTM builder, release checklists, press CRM, playlist desk, content factory, paid winners, Seattle flywheel, True Fan ladder, and live routing." />
   <meta name="theme-color" content="#0e0b12" />
@@ -23,12 +23,16 @@
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body data-deck="ops">
-  <div id="presentBar" class="present-bar" hidden></div>
+  <div id="presentBar" class="present-bar" hidden data-invite="1"></div>
   <a class="skip-link" href="#top">Skip to content</a>
   <header class="nav" id="nav">
     <a href="index.html" class="hub-back">&larr; Hub</a>
     <a href="#top" class="brand">TINSLEY<span>·</span>OPS</a>
-    <nav class="nav-links">
+    <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open section menu">
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+      Sections
+    </button>
+    <nav class="nav-links" id="navLinks" aria-label="Ops sections">
       <a href="#setup">Setup</a>
       <a href="#this-week">This week</a>
       <a href="#ritual">Ritual</a>
@@ -59,7 +63,7 @@
       <p class="hero-bio" id="heroBio"></p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#this-week">This week’s command</a>
-        <a class="btn" href="listen.html">Public Listen page</a>
+        <a class="btn" href="listen.html">Listen draft</a>
       </div>
       <div class="updated-badge" id="updatedBadge"></div>
     </div>
@@ -225,11 +229,11 @@
     <section class="section alt" id="more">
       <div class="section-head">
         <span class="kicker">Next</span>
-        <h2>Strategy decks &amp; public surface</h2>
+        <h2>Strategy decks &amp; draft surfaces</h2>
         <p class="lead">Ops executes what Song, Social, and Reference define. Fans should land on Listen — not this internal command center.</p>
       </div>
       <div class="cross-actions">
-        <a class="btn btn-primary" href="listen.html">Open Listen page</a>
+        <a class="btn btn-primary" href="listen.html">Review Listen draft</a>
         <a class="btn" href="tinsley-social.html">Social deck</a>
         <a class="btn" href="tinsley-song.html">Song deck</a>
         <a class="btn" href="reference.html">Reference</a>

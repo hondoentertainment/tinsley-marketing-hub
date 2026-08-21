@@ -60,10 +60,16 @@
     };
     types.forEach((tp) => {
       const chip = el("button", "chip" + (tp === "All" ? " active" : ""), tp);
+      chip.type = "button";
+      chip.setAttribute("aria-pressed", tp === "All" ? "true" : "false");
       chip.addEventListener("click", () => {
         activeFilter = tp;
-        filterWrap.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
+        filterWrap.querySelectorAll(".chip").forEach((c) => {
+          c.classList.remove("active");
+          c.setAttribute("aria-pressed", "false");
+        });
         chip.classList.add("active");
+        chip.setAttribute("aria-pressed", "true");
         renderTracks();
       });
       filterWrap.appendChild(chip);
@@ -1559,11 +1565,17 @@
       const close = () => {
         document.body.classList.remove("nav-open");
         toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Open section menu");
       };
       toggle.addEventListener("click", () => {
         const open = !document.body.classList.contains("nav-open");
         document.body.classList.toggle("nav-open", open);
         toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        toggle.setAttribute("aria-label", open ? "Close section menu" : "Open section menu");
+        if (open) {
+          const first = links.querySelector("a");
+          if (first) first.focus();
+        }
       });
       links.querySelectorAll("a").forEach((a) => a.addEventListener("click", close));
       window.addEventListener("keydown", (e) => {
@@ -1583,7 +1595,12 @@
             .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
           if (!visible) return;
           const id = "#" + visible.target.id;
-          sectionLinks.forEach((a) => a.classList.toggle("is-active", a.getAttribute("href") === id));
+          sectionLinks.forEach((a) => {
+            const on = a.getAttribute("href") === id;
+            a.classList.toggle("is-active", on);
+            if (on) a.setAttribute("aria-current", "location");
+            else a.removeAttribute("aria-current");
+          });
         },
         { rootMargin: "-20% 0px -55% 0px", threshold: [0.1, 0.25, 0.5] }
       );

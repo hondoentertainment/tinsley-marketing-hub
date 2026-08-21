@@ -265,8 +265,8 @@
       };
       set("campTitle", "Campaigns");
       set("campEyebrow", "Pick a single");
-      set("campHeadline", "One public surface per release cycle.");
-      set("campLede", "Clone this template for the next hero single — recipe, angles, hashtags, list CTA.");
+      set("campHeadline", "One draft surface per release cycle.");
+      set("campLede", "Clone this template for the next hero single — recipe, angles, hashtags, list CTA. Not live for fans.");
     } else {
       const set = (id, text) => {
         const el = document.getElementById(id);
@@ -316,4 +316,51 @@
 
   wireYear();
   analytics();
+  enhancePublicNav();
 })();
+
+function enhancePublicNav() {
+  const header = document.querySelector(".pub-nav");
+  if (!header) return;
+  const nav = header.querySelector("nav");
+  if (!nav) return;
+  if (!nav.id) nav.id = "pubNavLinks";
+  nav.setAttribute("aria-label", "Public pages");
+
+  nav.querySelectorAll("a").forEach((a) => {
+    if (a.classList.contains("active")) a.setAttribute("aria-current", "page");
+  });
+
+  let btn = header.querySelector(".pub-nav-toggle");
+  if (!btn) {
+    btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "pub-nav-toggle";
+    btn.setAttribute("aria-expanded", "false");
+    btn.setAttribute("aria-controls", nav.id);
+    btn.setAttribute("aria-label", "Open menu");
+    btn.innerHTML = '<span class="nav-toggle-bars" aria-hidden="true"></span><span>Menu</span>';
+    const listen = header.querySelector(".pub-nav-listen");
+    header.insertBefore(btn, listen || nav);
+  }
+
+  const setOpen = (open) => {
+    document.body.classList.toggle("pub-nav-open", open);
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+    btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    if (open) {
+      const first = nav.querySelector("a");
+      if (first) first.focus();
+    }
+  };
+
+  btn.addEventListener("click", () => setOpen(!document.body.classList.contains("pub-nav-open")));
+  nav.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setOpen(false);
+  });
+
+  const onScroll = () => header.classList.toggle("is-solid", window.scrollY > 12);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+}

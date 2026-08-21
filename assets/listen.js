@@ -1,4 +1,4 @@
-/* Public Listen page — fan-facing surface (not the ops hub) */
+/* Listen draft — proposed fan landing for the artist to review */
 (function () {
   "use strict";
   if (typeof TINSLEY === "undefined") return;
@@ -14,7 +14,6 @@
   if ($("listenBrand")) $("listenBrand").textContent = A.name || "Tinsley";
   if ($("listenHeadline")) $("listenHeadline").textContent = L.headline || "Start here.";
   if ($("listenSub")) $("listenSub").textContent = L.sub || A.tagline || "";
-  if ($("joinTitle")) $("joinTitle").textContent = L.primaryCta || "Join the list";
   if ($("joinNote")) $("joinNote").textContent = L.primaryNote || "";
   if ($("showsNote")) $("showsNote").textContent = L.showsNote || "";
   if ($("year")) $("year").textContent = String(new Date().getFullYear());
@@ -38,9 +37,24 @@
   if (sh && $("startBlurb")) $("startBlurb").textContent = sh.blurb || "";
   if (sh && $("startTracks")) {
     $("startTracks").innerHTML = (sh.tracks || [])
-      .map((t, i) => `<li><span class="n">${i + 1}</span><div><strong>${esc(t.title)}</strong><p>${esc(t.why)}</p></div></li>`)
+      .map((t, i) => {
+        const q = encodeURIComponent("Tinsley " + t.title);
+        const href = t.href || "https://open.spotify.com/search/" + q;
+        return `<li>
+          <span class="n">${i + 1}</span>
+          <div>
+            <a class="listen-track" href="${esc(href)}" target="_blank" rel="noopener">
+              <strong>${esc(t.title)}</strong>
+              <span class="listen-track-go">Play on Spotify</span>
+            </a>
+            <p>${esc(t.why)}</p>
+          </div>
+        </li>`;
+      })
       .join("");
   }
+  const startCta = $("startSpotify");
+  if (startCta && spotifyHref) startCta.href = spotifyHref;
 
   const smart = [
     { label: "Spotify", href: links.spotify },
@@ -58,18 +72,6 @@
       .map((x) => `<li><a href="${esc(x.href)}" target="_blank" rel="noopener">${esc(x.label)}</a></li>`)
       .join("");
   }
-
-  const ld = {
-    "@context": "https://schema.org",
-    "@type": "MusicGroup",
-    name: A.name || "Tinsley",
-    url: "https://tinsley-marketing-hub.vercel.app/listen",
-    genre: A.genreTags || ["Indie Pop"],
-    foundingLocation: A.location,
-    sameAs: [links.spotify, links.instagram, links.tiktok, links.bandcamp, links.youtube, links.website].filter(Boolean)
-  };
-  const ldEl = $("jsonld");
-  if (ldEl) ldEl.textContent = JSON.stringify(ld);
 
   /* ---- native email form → /api/subscribe (Linktree when unwired) ---- */
   const form = $("joinForm");
@@ -91,8 +93,8 @@
     const note = $("joinUnwiredNote");
     if (note) {
       note.textContent = document.body.classList.contains("present-mode")
-        ? "Join the list on Linktree — demos, dates, and first dibs."
-        : "Native email capture wires when Kit / webhook is set — until then Linktree is the live signup path.";
+        ? "Linktree is the live signup until this draft is wired."
+        : "This form is a prototype. Kit / webhook is not live — don’t send fans here.";
     }
     if (heroJoin) {
       if (unwired && linktreeFallback) {
@@ -123,9 +125,19 @@
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const email = (form.email && form.email.value || "").trim();
+      const emailInput = form.email;
+      const email = (emailInput && emailInput.value || "").trim();
       const name = (form.name && form.name.value || "").trim();
-      if (!email) return;
+      if (emailInput) emailInput.setAttribute("aria-invalid", email ? "false" : "true");
+      if (!email) {
+        if (status) {
+          status.hidden = false;
+          status.textContent = "Add your email so we can send demos and first dibs.";
+          status.className = "join-status err";
+        }
+        if (emailInput) emailInput.focus();
+        return;
+      }
       if (status) {
         status.hidden = false;
         status.textContent = "Joining…";
@@ -201,4 +213,47 @@
     v.src = "/_vercel/insights/script.js";
     document.head.appendChild(v);
   }
+
+  enhanceListenNav();
 })();
+
+function enhanceListenNav() {
+  const header = document.querySelector(".listen-nav");
+  if (!header) return;
+  const nav = header.querySelector("nav");
+  if (!nav) return;
+  if (!nav.id) nav.id = "listenNavLinks";
+  nav.setAttribute("aria-label", "On this page");
+
+  let btn = header.querySelector(".listen-nav-toggle");
+  if (!btn) {
+    btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "listen-nav-toggle";
+    btn.setAttribute("aria-expanded", "false");
+    btn.setAttribute("aria-controls", nav.id);
+    btn.setAttribute("aria-label", "Open menu");
+    btn.innerHTML = '<span class="nav-toggle-bars" aria-hidden="true"></span><span>Menu</span>';
+    header.appendChild(btn);
+  }
+
+  const setOpen = (open) => {
+    document.body.classList.toggle("listen-nav-open", open);
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+    btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    if (open) {
+      const first = nav.querySelector("a");
+      if (first) first.focus();
+    }
+  };
+
+  btn.addEventListener("click", () => setOpen(!document.body.classList.contains("listen-nav-open")));
+  nav.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setOpen(false);
+  });
+
+  const onScroll = () => header.classList.toggle("is-solid", window.scrollY > 12);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+}

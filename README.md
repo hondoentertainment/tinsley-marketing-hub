@@ -31,11 +31,9 @@ npx serve .
 npx vercel dev
 ```
 
-## Present to the artist
+## Work path
 
-Open **https://tinsley-marketing-hub.vercel.app/?present=1** — focus mode hides unfinished connectors so you can review drafts in order.
-
-Review order: Listen draft → Press draft → Bad Enough draft → Song/Social (optional).
+Song analysis → Marketing → PR → Campaigns, then Ops and Tour. Start from the homepage.
 
 ## Production connectors (Vercel env)
 

@@ -184,20 +184,7 @@
         .join("");
     }
 
-    const dates = $("#shDates");
-    if (dates && S.dates) {
-      dates.innerHTML = S.dates
-        .map((g) => {
-          const head = `${esc(g.when)} · ${esc(g.venue)}`;
-          const meta = `${esc(g.city)}${g.status === "upcoming" ? " · Upcoming" : ""}`;
-          const body = `<div class="when">${head}</div><div class="venue">${meta}</div><p>${esc(g.note || "")}</p>`;
-          if (g.href) {
-            return `<li class="${g.status || "past"}"><a href="${esc(g.href)}" target="_blank" rel="noopener">${body}</a></li>`;
-          }
-          return `<li class="${g.status || "past"}">${body}</li>`;
-        })
-        .join("");
-    }
+    // Full month calendar + archive list live in calendar.js (#showCal).
 
     const epk = $("#ctaEpk");
     if (epk && links.epk) epk.href = links.epk;
@@ -332,7 +319,39 @@
   wireYear();
   analytics();
   enhancePublicNav();
+  injectWorkPath();
 })();
+
+function injectWorkPath() {
+  const page = document.body.getAttribute("data-page");
+  const here =
+    page === "press" || page === "sync"
+      ? "pr"
+      : page === "bad-enough" || page === "temporary-insanity" || page === "campaign" || page === "listen"
+        ? "campaigns"
+        : page === "shows"
+          ? "work"
+          : "";
+  if (!here) return;
+  const note = document.querySelector(".artist-note");
+  if (!note || document.querySelector(".work-path")) return;
+  const steps = [
+    { id: "song", href: "tinsley-song.html", label: "1 Song" },
+    { id: "marketing", href: "tinsley-social.html", label: "2 Marketing" },
+    { id: "pr", href: "press.html", label: "3 PR" },
+    { id: "campaigns", href: "bad-enough.html", label: "4 Campaigns" }
+  ];
+  const nav = document.createElement("nav");
+  nav.className = "work-path";
+  nav.setAttribute("aria-label", "Work path");
+  nav.innerHTML = steps
+    .map((s) => {
+      const on = s.id === here ? ' aria-current="step"' : "";
+      return `<a href="${s.href}"${on}>${s.label}</a>`;
+    })
+    .join('<span aria-hidden="true">→</span>');
+  note.after(nav);
+}
 
 function enhancePublicNav() {
   const header = document.querySelector(".pub-nav");

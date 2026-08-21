@@ -21,9 +21,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/calendar.css" />
 </head>
 <body data-deck="tour">
-  <div id="presentBar" class="present-bar" hidden data-invite="1"></div>
   <a class="skip-link" href="#top">Skip to content</a>
   <header class="nav" id="nav">
     <a href="index.html" class="hub-back">&larr; Hub</a>
@@ -33,6 +33,7 @@
       Sections
     </button>
     <nav class="nav-links" id="navLinks" aria-label="Tour desk sections">
+      <a href="#calendar">Calendar</a>
       <a href="#next-show">Next show</a>
       <a href="#advance">Advance</a>
       <a href="#settle">Settle</a>
@@ -55,7 +56,8 @@
       <h1>Get on the road on purpose.</h1>
       <p class="hero-bio" id="heroBio"></p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#next-show">Next show command</a>
+        <a class="btn btn-primary" href="#calendar">Full calendar</a>
+        <a class="btn" href="#next-show">Next show command</a>
         <a class="btn" href="#holds">Holds &amp; asks</a>
         <a class="btn" href="https://www.tinsleymusic.com/shows" target="_blank" rel="noopener">Official calendar ↗</a>
       </div>
@@ -64,7 +66,16 @@
   </section>
 
   <main>
-    <section class="section" id="next-show">
+    <section class="section" id="calendar">
+      <div class="section-head">
+        <span class="kicker">00 — Dates</span>
+        <h2>Full show calendar</h2>
+        <p class="lead">Every official date from tinsleymusic.com/shows — month grid plus the full archive. Upcoming is marked; tickets stay on the official site.</p>
+      </div>
+      <div class="tcal" data-tcal id="tourCal"></div>
+    </section>
+
+    <section class="section alt" id="next-show">
       <div class="section-head">
         <span class="kicker">00 — This week</span>
         <h2>Next show command</h2>
@@ -73,7 +84,7 @@
       <div id="tourNext"></div>
     </section>
 
-    <section class="section alt" id="advance">
+    <section class="section" id="advance">
       <div class="section-head">
         <span class="kicker">01 — Before the van</span>
         <h2>Advance checklist</h2>
@@ -167,8 +178,8 @@
   </footer>
   <div class="toast" id="toast"></div>
   <script src="assets/data.js"></script>
-  <script src="assets/present.js"></script>
   <script src="assets/app.js"></script>
   <script src="assets/tour.js"></script>
+  <script src="assets/calendar.js"></script>
 </body>
 </html>

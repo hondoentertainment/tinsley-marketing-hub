@@ -79,7 +79,7 @@ const TINSLEY = {
     },
     social: {
       job: "Reach & revenue",
-      lede: "A marketing-first playbook: hashtag tiers, a daily content calendar, per-song posting recipes, platform priorities, and a sequenced growth roadmap — the work of turning listeners into an owned audience."
+      lede: "A marketing-first playbook: Instagram desk, hashtag tiers, a daily content calendar, per-song posting recipes, platform priorities, and a sequenced growth roadmap — the work of turning listeners into an owned audience."
     },
     ops: {
       job: "Execute & measure",
@@ -263,6 +263,11 @@ const TINSLEY = {
         "Wed — 15s story-behind: one line about writing the chorus.",
         "Fri — Stitch/duet ask: 'show your glow-up to this hook.'"
       ],
+      igPlan: [
+        "Reel — Glow-up transition. Hook in 1.2s, on-screen text ‘choosing me,’ save prompt in caption.",
+        "Carousel — 5 slides: the lyric / the Atwood quote / the story / Start Here / Hidden Hall.",
+        "Stories — 3 frames of the Reel + official ticket sticker (tinsleymusic.com/shows)."
+      ],
       roadmapHook: "0–30 days · Short-form",
       tiktok: ["#BadEnough", "#breakuptok", "#glowup", "#revengeglowup", "#choosingme", "#countrypop", "#indiepop", "#sadgirlmusic"],
       igBroad: ["#breakupsong", "#countrypop", "#newmusicfriday", "#selflove"],
@@ -274,6 +279,11 @@ const TINSLEY = {
         "Mon — POV overthinking captions timed to the beat drop.",
         "Wed — 'Green flag / red flag' list set to the chorus.",
         "Fri — Relatable comment reply stitch from a fan DM."
+      ],
+      igPlan: [
+        "Reel — Green-flag / red-flag list timed to the chorus. Last slide: ‘comment your color.’",
+        "Carousel — Intrusive-thought cards (6 slides) ending on a listen sticker.",
+        "Stories — Add Yours: ‘a thought you wish had a chorus.’"
       ],
       roadmapHook: "31–60 days · Social",
       tiktok: ["#TemporaryInsanity", "#chaoticera", "#overthinking", "#indiepop", "#relatable", "#indietok", "#newmusic"],
@@ -287,6 +297,11 @@ const TINSLEY = {
         "Wed — Track-by-track carousel: one lyric that defined the era.",
         "Fri — 'If you only listen to 3 songs…' Start Here clip."
       ],
+      igPlan: [
+        "Reel — Needle-drop + one line: vinyl funded by KEXP’s John Richards.",
+        "Carousel — Track-by-track: one lyric that defined growing up.",
+        "Stories — Close Friends: packing / signing a copy, then invite to Highlights → Vinyl."
+      ],
       roadmapHook: "0–30 days · Streaming + D2C",
       tiktok: ["#Tinsley", "#debutalbum", "#vinyltok", "#vinylrecords", "#comingofage", "#indiepop", "#albumrelease"],
       igBroad: ["#vinylcommunity", "#vinylrecords", "#recordcollection"],
@@ -298,6 +313,11 @@ const TINSLEY = {
         "Mon — Soft b-roll + lyric caption on the dreamiest line.",
         "Wed — 'Songs for your situationship' stitch bait.",
         "Fri — Aesthetic Seattle night-walk edit to the chorus."
+      ],
+      igPlan: [
+        "Reel — Rainy Seattle walk, lyric on the dreamiest line, no talking.",
+        "Carousel — ‘Songs for your situationship’ 4-slide stack (Distract Me last).",
+        "Stories — Poll: crush / almost / rewind — then link Start Here."
       ],
       roadmapHook: "31–60 days · Paid Ads (boost winners)",
       tiktok: ["#DistractMe", "#dreampop", "#situationship", "#crushcore", "#bedroompop", "#softgirl", "#musictok"],
@@ -311,6 +331,11 @@ const TINSLEY = {
         "Wed — Coastal-cowgirl trend with the twang hook.",
         "Fri — 'Country but make it Seattle' positioning clip."
       ],
+      igPlan: [
+        "Reel — Title bleep + boots. Caption: ‘country, but make it Seattle.’",
+        "Carousel — Coastal-cowgirl starter pack (song / look / like-artists Faye + Kacey).",
+        "Stories — Add Yours: ‘your most country moment in a city.’"
+      ],
       roadmapHook: "31–60 days · Playlists + Sync",
       tiktok: ["#GoodRide", "#countrytok", "#coastalcowgirl", "#altcountry", "#indiecountry", "#cowgirl", "#newmusic"],
       igBroad: ["#countrymusic", "#americana", "#countrypop"],
@@ -322,6 +347,11 @@ const TINSLEY = {
         "Mon — Couple montage / first-dance aspirational clip.",
         "Wed — 'Put this on your wedding playlist' soft CTA.",
         "Fri — Fan-submitted anniversary stitch request."
+      ],
+      igPlan: [
+        "Reel — First-dance energy, save CTA: ‘wedding playlist.’",
+        "Carousel — When to use Classic (ceremony / drive home / anniversary).",
+        "Stories — Ask for anniversary clips; add the best to Highlights → Love."
       ],
       roadmapHook: "61–90 days · PR (sync + wedding blogs)",
       tiktok: ["#Classic", "#lovesong", "#couplegoals", "#weddingsong", "#inlove", "#indiepop", "#romantic"],
@@ -335,6 +365,11 @@ const TINSLEY = {
         "Wed — 'Hopeless romantic starter pack' EP medley.",
         "Fri — Comment prompt: which Love Songs track are you?"
       ],
+      igPlan: [
+        "Reel — Seattle Times #1 screenshot → needle-drop of the yearning cut.",
+        "Carousel — Hopeless-romantic starter pack + ‘which track are you?’ last slide.",
+        "Stories — Poll the three EP moods; DM the winner a Start Here link."
+      ],
       roadmapHook: "0–30 days · Positioning + PR",
       tiktok: ["#LoveSongs", "#yearning", "#indiepop", "#sadgirlmusic", "#indietok", "#singersongwriter", "#feelings"],
       igBroad: ["#lovesongs", "#indiepop", "#newmusic"],
@@ -346,6 +381,11 @@ const TINSLEY = {
         "Mon — Close-mic acoustic, no polish — intimacy bait.",
         "Wed — Lyric-that-hits caption on the most exposed line.",
         "Fri — 'Songs I almost didn't release' framing."
+      ],
+      igPlan: [
+        "Reel — Close-mic, lamp light, no polish. First line on screen.",
+        "Carousel — ‘The version I almost didn’t release’ + the lyric that stays.",
+        "Close Friends — Voice note of the exposed line, then invite to the public Reel next day."
       ],
       roadmapHook: "61–90 days · Superfans (Close Friends)",
       tiktok: ["#HardToLove", "#vulnerable", "#sadgirlmusic", "#indiepop", "#feelings", "#musictok", "#lyricsthathit"],
@@ -368,14 +408,15 @@ const TINSLEY = {
         songBeat: 0,
         slots: [
           { platform: "TikTok", format: "15–30s", kind: "publish", idea: "Lead with the week's hook. Ship the featured song's Monday beat." },
-          { platform: "IG Stories", format: "Teaser", kind: "amplify", idea: "3-slide tease of the TikTok + soft 'link in bio' listen CTA." }
+          { platform: "IG Stories", format: "Teaser", kind: "amplify", idea: "3 frames: hook clip, one lyric, then a sticker — official tickets if a show is up, otherwise Start Here." }
         ]
       },
       {
         key: "tue", label: "Tue", role: "create", focus: "Batch + engage",
         slots: [
-          { platform: "Studio", format: "Batch", kind: "create", idea: "Film 2–3 clips for Wed / Fri / next Mon while the take is hot." },
-          { platform: "TikTok", format: "Replies", kind: "engage", idea: "Reply to 5–10 comments with a clip or stitch — feed the algorithm without a new post." }
+          { platform: "Studio", format: "Batch", kind: "create", idea: "Film 2–3 clips for Wed / Fri / next Mon while the take is hot. Shoot a vertical cover frame for Reels — don’t reuse the TikTok crop." },
+          { platform: "TikTok", format: "Replies", kind: "engage", idea: "Reply to 5–10 comments with a clip or stitch — feed the algorithm without a new post." },
+          { platform: "Instagram", format: "Replies + saves", kind: "engage", idea: "Reply to Reel comments by name; ask one save question in the thread (‘which line hit?’)." }
         ]
       },
       {
@@ -383,13 +424,13 @@ const TINSLEY = {
         songBeat: 1,
         slots: [
           { platform: "TikTok", format: "15–45s", kind: "publish", idea: "Ship the featured song's Wednesday beat (story-behind or listicle)." },
-          { platform: "Instagram", format: "Reel / carousel", kind: "publish", idea: "Mirror or expand the TikTok; use Broad + Mid + Niche hashtag tiers." }
+          { platform: "Instagram", format: "Reel / carousel", kind: "publish", idea: "Ship the song’s Instagram recipe — recut the first 1.2s, Broad + Mid + Niche tags, one CTA (save, comment, or official link)." }
         ]
       },
       {
         key: "thu", label: "Thu", role: "amplify", focus: "Repurpose winners",
         slots: [
-          { platform: "IG Reels", format: "Repost", kind: "amplify", idea: "Repurpose Mon/Wed winners within 24–48h; light caption rewrite, same hook." },
+          { platform: "IG Reels", format: "Recut", kind: "amplify", idea: "Repurpose Mon/Wed winners within 24–48h. New cover frame, rewritten first line, same hook — never a raw TikTok dump." },
           { platform: "YouTube Shorts", format: "Cut", kind: "amplify", idea: "Drop the best-performing clip as a Short for long-tail SEO." }
         ]
       },
@@ -398,14 +439,14 @@ const TINSLEY = {
         songBeat: 2,
         slots: [
           { platform: "TikTok", format: "Stitch / duet / ask", kind: "publish", idea: "Ship the featured song's Friday beat — invite fan participation." },
-          { platform: "IG Close Friends", format: "Demo / BTS", kind: "superfan", idea: "Reward superfans with an unpolished clip, lyric scrap, or early listen." }
+          { platform: "IG Close Friends", format: "Demo / BTS", kind: "superfan", idea: "Unpolished clip, voice note, or lyric scrap — then a public Reel tomorrow so CF feels first." }
         ]
       },
       {
         key: "sat", label: "Sat", role: "community", focus: "Scene + conversation",
         slots: [
           { platform: "Threads / X", format: "Replies", kind: "engage", idea: "Jump into KEXP / Seattle music threads; lyric micro-post if there's a natural hook." },
-          { platform: "IG Stories", format: "Poll / Q&A", kind: "engage", idea: "Ask the audience something real (favorite deep cut, show city, lyric guess)." }
+          { platform: "IG Stories", format: "Poll / Q&A", kind: "engage", idea: "One real ask (deep cut, show city, lyric guess). Screenshot the winning reply into Monday’s Reel." }
         ]
       },
       {
@@ -420,17 +461,17 @@ const TINSLEY = {
 
   // ---- Guerrilla street picks applied to Tinsley (from the Top 100 field guide) ----
   streetPicks: [
-    { rank: 1, title: "3D Sidewalk Chalk Art", category: "Chalk & Pavement",
+    { rank: 1, title: "3D Sidewalk Chalk Art", category: "Chalk & Pavement", cost: "$$$",
       angle: "Anamorphic 'Bad Enough' lyric / choose-yourself hole-in-the-ground on Capitol Hill — photo bait for TikTok." },
-    { rank: 35, title: "QR Treasure Hunt", category: "Stickers & Posters",
+    { rank: 35, title: "QR Treasure Hunt", category: "Stickers & Posters", cost: "$",
       angle: "QR trail from KEXP / record shops to a Bandcamp demo unlock — converts street curiosity to owned email." },
-    { rank: 23, title: "Roaming Brand Mascot", category: "Wearable & Human",
+    { rank: 23, title: "Roaming Brand Mascot", category: "Wearable & Human", cost: "$$$",
       angle: "Coastal-cowgirl / diary-girl character at Block Party or UW campus weekend — lean into Good Ride twang." },
-    { rank: 45, title: "Photo Booth Portal", category: "Interactive & Experiential",
+    { rank: 45, title: "Photo Booth Portal", category: "Interactive & Experiential", cost: "$$$",
       angle: "Vinyl-unboxing / 'Start Here' listening booth at a merch pop-up — prints a Start Here tracklist card." },
-    { rank: 62, title: "Drone Light Show", category: "Transit & Vehicles",
+    { rank: 62, title: "Drone Light Show", category: "Transit & Vehicles", cost: "$$$$",
       angle: "Only for a festival headline moment — Tinsley monogram over the waterfront as a once-a-year spectacle." },
-    { rank: 100, title: "Golden Ticket Street Hunt", category: "Freebies & Sampling",
+    { rank: 100, title: "Golden Ticket Street Hunt", category: "Freebies & Sampling", cost: "$$",
       angle: "Hide signed vinyl inserts / show tickets around Seattle; social clues drive True Fan conversion." }
   ],
 
@@ -440,8 +481,15 @@ const TINSLEY = {
       why: "Best discovery engine for sad-girl / breakup indie-pop; short lyric-hook clips scale fast.",
       plays: ["Lyric POV videos on 'Bad Enough' hook ('choose yourself' angle).", "'Story behind the song' series for the debut LP.", "Duet/stitch with fans covering her songs.", "Behind-the-scenes Seattle studio + vinyl unboxing."] },
     { platform: "Instagram", handle: "@tinsleymusic", priority: "High",
-      why: "Home base for brand, press, tour and superfan community; Reels mirror TikTok.",
-      plays: ["Reels repurposed from TikTok within 24h.", "Carousel: press quotes (KEXP, American Songwriter).", "Show announcements + ticket-link stories.", "Close Friends demos to reward superfans."] },
+      why: "Home base. TikTok finds strangers; Instagram keeps them — grid, Stories, Close Friends, and official ticket stickers.",
+      desk: "tinsley-social.html#instagram",
+      plays: [
+        "Open the Instagram desk for Reels, carousels, Stories, Close Friends, and Hidden Hall week.",
+        "Recut TikTok winners for Reels (new 1.2s cover — never a raw dump).",
+        "Carousels do the work Reels can’t: press stack, Start Here, track-by-track.",
+        "Stories convert: official tickets only, polls that become Monday’s Reel.",
+        "Close Friends first, public next day — that’s how superfans stay."
+      ] },
     { platform: "Spotify", handle: "Artist profile", priority: "High",
       why: "Conversion + retention layer; where press and TikTok interest turns into streams.",
       plays: ["Pitch every release via Spotify for Artists 4+ weeks early.", "Maintain an Artist Pick + 'Start Here' playlist.", "Canvas loops for each single.", "Target editorial: Fresh Finds, Indie Pop, New Music Friday PNW."] },
@@ -455,6 +503,83 @@ const TINSLEY = {
       why: "Real-time scene engagement with KEXP, journalists and PNW music community.",
       plays: ["Reply-guy into KEXP + Seattle music threads.", "Lyric micro-posts.", "Press-win reshares for credibility."] }
   ],
+
+  // ---- Instagram desk (home-base marketing, not a second TikTok) ----
+  instagramPlaybook: {
+    handle: "@tinsleymusic",
+    job: "TikTok finds strangers. Instagram turns them into ticket-buyers, Close Friends, and email.",
+    principle: "Reels can hunt. The grid, Stories, and Close Friends convert. Official tickets only — tinsleymusic.com/shows.",
+    rules: [
+      "Recut the first 1.2s for Reels. A raw TikTok dump dies on the cover frame.",
+      "Every caption has one job: save, comment, Close Friends, or an official link.",
+      "Hashtags: 2 Broad + 2 Mid + 2 Niche from the song’s Instagram tiers.",
+      "Stories stickers beat ‘link in bio’ on show weeks.",
+      "Close Friends first, public the next day — so superfans stay first."
+    ],
+    profile: {
+      bio: "Seattle indie pop-rock · Bad Enough out now\nFri Aug 28 · Hidden Hall · Femme Friday\nStart here + official tickets ↓",
+      highlights: [
+        { name: "Start Here", use: "5-track entry + Bandcamp / Spotify stickers" },
+        { name: "Shows", use: "Official calendar only — next date pinned" },
+        { name: "Press", use: "Atwood, KEXP, Seattle Times #1" },
+        { name: "Vinyl", use: "John Richards / KEXP pressing story" },
+        { name: "Close Friends", use: "How to get added + what they get" }
+      ],
+      grid: "Alternate performance stills, lyric cards, and one press/proof tile every third post. Warm rose–sand, not generic sad-girl blue."
+    },
+    thisWeek: {
+      title: "Hidden Hall week · Aug 21–28",
+      lede: "Femme Friday with Girl Parallel and Veronica North. Doors 8:00pm, 21+. Every Story sticker goes to tinsleymusic.com/shows.",
+      beats: [
+        { day: "Fri 21", format: "Stories", idea: "Soft announce: ‘one week.’ Tag the bill. Countdown sticker." },
+        { day: "Sat 22", format: "Reel", idea: "15s: last time at Hidden Hall (80s prom) → this Friday. Save = reminder." },
+        { day: "Sun 23", format: "Carousel", idea: "What to expect: doors, bill, merch, official tickets. No third-party links." },
+        { day: "Mon 24", format: "Reel", idea: "Bad Enough glow-up — caption ends on the date." },
+        { day: "Tue 25", format: "Stories", idea: "Q&A: setlist guesses. Screenshot the funniest for Wednesday." },
+        { day: "Wed 26", format: "Reel + CF", idea: "Public: one lyric from the support set. CF: voice-note nerves." },
+        { day: "Thu 27", format: "Stories", idea: "Load-in kit, outfit poll, last ticket sticker." },
+        { day: "Fri 28", format: "Stories live", idea: "Doors → one clip (audio ok) → merch table. Thank-you DMs after — never post the full set." }
+      ]
+    },
+    pillars: [
+      { id: "reels", label: "Reels" },
+      { id: "carousel", label: "Carousels" },
+      { id: "stories", label: "Stories" },
+      { id: "closefriends", label: "Close Friends" },
+      { id: "collab", label: "Collabs" },
+      { id: "show", label: "Show week" }
+    ],
+    ideas: [
+      { id: "glowup", pillar: "reels", title: "Choosing me glow-up", format: "Reel · 12–20s", song: "Bad Enough", hook: "Hook in 1.2s. On-screen: ‘choosing me.’", do: "Outfit / hair / room flip on the chorus. End on her face, not a logo.", caption: "Choosing me was the plot twist.", cta: "Save for the next time you need it." },
+      { id: "needledrop", pillar: "reels", title: "KEXP vinyl needle-drop", format: "Reel · 15–25s", song: "Tinsley (Debut LP)", hook: "Needle hits the groove, then one line of lore.", do: "Close-up vinyl + card: funded by KEXP’s John Richards.", caption: "The record that still introduces people to her.", cta: "Start Here is in Highlights." },
+      { id: "flags", pillar: "reels", title: "Green flag / red flag", format: "Reel · list", song: "Temporary Insanity", hook: "First card on beat. Last card asks for a color.", do: "6 flags timed to the chorus. No talking required.", caption: "Intrusive thoughts, but make it a chorus.", cta: "Comment your color." },
+      { id: "seattle-country", pillar: "reels", title: "Country, but make it Seattle", format: "Reel · 12–18s", song: "Good Ride", hook: "Title bleep + boots in frame one.", do: "Dashboard night-drive or Pike/Capitol Hill contrast, not a costume.", caption: "Alt-country wit. City rain.", cta: "Save if this is your lane." },
+      { id: "starthere3", pillar: "reels", title: "If you only listen to three", format: "Reel · 20s", song: "Tinsley (Debut LP)", hook: "Text: Start Here. Three title cards, one hook each.", do: "Bad Enough / Distract Me / Classic — or swap Hard to Love for intimacy weeks.", caption: "The door, not the discography.", cta: "Highlights → Start Here." },
+      { id: "ifyoulike", pillar: "reels", title: "If you like Maisie / Gracie / Samia", format: "Reel · 15s", song: "Bad Enough", hook: "Name the like-artist in the first line, then her hook.", do: "One honest overlap, not a pile-on. End on Tinsley, not the comparison.", caption: "Same diary. Different rain.", cta: "Follow for the Seattle version." },
+      { id: "whisper", pillar: "reels", title: "The version I don’t usually post", format: "Reel · close-mic", song: "Hard to Love", hook: "First sung line on screen. Lamp light only.", do: "No polish, no jump cuts. Let a breath stay in.", caption: "Honesty made audible.", cta: "Close Friends get the take before anyone else." },
+      { id: "putthison", pillar: "reels", title: "Put this on when you leave the party", format: "Reel · mood", song: "Distract Me", hook: "Rain / window / headphones. Lyric on the dreamiest line.", do: "No talking. Let the song sell the situationship.", caption: "For the almosts.", cta: "Save to the late-night playlist." },
+      { id: "press-stack", pillar: "carousel", title: "Proof stack", format: "Carousel · 5", song: "Bad Enough", hook: "Slide 1 is the Atwood line, not a selfie.", do: "Atwood → KEXP vinyl → Seattle Times #1 → Spokesman → listen.", caption: "The quotes that already exist. Use them.", cta: "Save for editors / bookers you DM later." },
+      { id: "trackbytrack", pillar: "carousel", title: "Track-by-track growing up", format: "Carousel · 9+", song: "Tinsley (Debut LP)", hook: "One lyric per track. No essay.", do: "Last slide is Start Here, not ‘stream now.’", caption: "Nine tracks on growing up.", cta: "Comment the track that still stings." },
+      { id: "starthere5", pillar: "carousel", title: "Start Here cards", format: "Carousel · 6", song: "Tinsley (Debut LP)", hook: "Cover + five songs + why each.", do: "Match the Listen draft order. Warm rose–sand tiles.", caption: "New here? This is the door.", cta: "Highlights → Start Here." },
+      { id: "wrotechorus", pillar: "carousel", title: "How the chorus showed up", format: "Carousel · 6", song: "Bad Enough", hook: "Slide 1: one true sentence about writing it.", do: "Phone-note photo, then the finished hook, then the listen.", caption: "Diary-clear. Then a chorus.", cta: "Share with someone in their glow-up." },
+      { id: "hopeless", pillar: "carousel", title: "Hopeless romantic starter pack", format: "Carousel · 5", song: "Love Songs (EP)", hook: "Seattle Times #1 as social proof, not a humblebrag.", do: "Mood → track → lyric → ‘which are you?’", caption: "Still the yearning blueprint.", cta: "Comment your track." },
+      { id: "rooms", pillar: "carousel", title: "Rooms already played", format: "Carousel · 6", song: "", hook: "2026 proof for bookers scrolling the grid.", do: "Hidden Hall / Barboza / Spanish Ballroom / Wild Buffalo / Town Hall / Suzzallo run.", caption: "PNW first. Then the map.", cta: "Bookers: EPK in bio. Fans: official calendar." },
+      { id: "ticket-sticker", pillar: "stories", title: "Official ticket sticker", format: "Stories · 3", song: "", hook: "Frame 1 is the date. Frame 3 is the sticker.", do: "Link only tinsleymusic.com/shows. Tag Girl Parallel + Veronica North this week.", caption: "", cta: "Sticker, not ‘link in bio.’" },
+      { id: "addyours", pillar: "stories", title: "Add Yours — a lyric that chose you", format: "Stories · Add Yours", song: "Hard to Love", hook: "Her lyric first, then the template.", do: "Repost the best three to the grid Stories; screenshot for Monday.", caption: "", cta: "Use Add Yours, then reply to every one." },
+      { id: "poll-cut", pillar: "stories", title: "Deep-cut poll → Monday Reel", format: "Stories · poll", song: "Love Songs (EP)", hook: "Two real options, not engagement bait.", do: "Winner becomes Wednesday’s carousel or Monday’s Reel cover.", caption: "", cta: "DM the winner a Start Here link." },
+      { id: "qa-dm", pillar: "stories", title: "Q&A that becomes a DM", format: "Stories · Q&A", song: "", hook: "Ask something she will actually answer.", do: "Public answers for fun; private DMs get Start Here or the list.", caption: "", cta: "Soft CTA: ‘want the door? I’ll send Start Here.’" },
+      { id: "merch-after", pillar: "stories", title: "After-show merch table", format: "Stories · night-of", song: "", hook: "One clip, then the table, then thank-you.", do: "Never the full set. QR to official list / next date only.", caption: "", cta: "Thank-you DMs within 24h." },
+      { id: "voicenote", pillar: "closefriends", title: "Voice note before the Reel", format: "Close Friends", song: "Bad Enough", hook: "Unmixed chorus or the line she almost cut.", do: "Post CF tonight; public Reel tomorrow with ‘you heard it first.’", caption: "", cta: "Highlight: how to get added." },
+      { id: "daynerves", pillar: "closefriends", title: "Day-of-show nerves", format: "Close Friends", song: "", hook: "Honest, short, no polish.", do: "Hidden Hall morning. Public Stories stay useful (doors, tickets).", caption: "", cta: "Makes CF feel like a room, not a broadcast." },
+      { id: "packing", pillar: "closefriends", title: "Packing / signing vinyl", format: "Close Friends", song: "Tinsley (Debut LP)", hook: "Hands + needle + a thank-you.", do: "Invite CF to Highlights → Vinyl after.", caption: "", cta: "True Fan fuel without a store link dump." },
+      { id: "tagbill", pillar: "collab", title: "Tag the bill", format: "Reel + Stories", song: "", hook: "Name Girl Parallel and Veronica North in frame one.", do: "Ask for a collab Reel or at least a shared Story. Cross-tags compound local reach.", caption: "Femme Friday. Three names.", cta: "Official tickets in the sticker." },
+      { id: "fancovers", pillar: "collab", title: "Fan cover Stories", format: "Stories", song: "Bad Enough", hook: "Their face first, her song second.", do: "Repost covers the same day. DM a thank-you + Close Friends add.", caption: "", cta: "Turns renters into superfans." },
+      { id: "peerduet", pillar: "collab", title: "PNW peer duet", format: "Reel · collab", song: "Distract Me", hook: "Two voices, one Seattle night.", do: "Ask a warm peer (not a stretch like-artist) for a 15s split-screen.", caption: "Hometown stack.", cta: "Both accounts share the same night." },
+      { id: "countdown7", pillar: "show", title: "7-day Hidden Hall countdown", format: "Stories daily", song: "", hook: "Same visual system all week so it reads as a series.", do: "Follow thisWeek beats. Official URL only.", caption: "", cta: "Countdown sticker every day." },
+      { id: "expect", pillar: "show", title: "What to expect Friday", format: "Carousel", song: "", hook: "Doors 8 · 21+ · bill · merch · tickets.", do: "Ship Sunday 23. Bookers can steal the proof later.", caption: "Femme Friday at Hidden Hall.", cta: "Official tickets — no third-party dumps." },
+      { id: "setcrumb", pillar: "show", title: "One set crumb, not the set", format: "Reel or Stories", song: "Bad Enough", hook: "One chorus, crowd audio ok, then cut.", do: "Night-of or Saturday. Full-set leaks kill the next room.", caption: "See you next time.", cta: "Next official date in sticker." }
+    ]
+  },
 
   // ---- 10 like artists (fan-overlap targeting for playlists, ads, tour pitches) ----
   // match = estimated fan-overlap / sonic similarity (0-100).
@@ -1193,87 +1318,93 @@ const TINSLEY = {
     ],
     calendarUrl: "https://www.tinsleymusic.com/shows",
     dates: [
-      {
-        date: "2026-08-28",
-        when: "Fri Aug 28, 2026",
-        venue: "Hidden Hall",
-        city: "Seattle, WA",
-        note: "Femme Friday with Girl Parallel and Veronica North. Doors 8:00pm, 21+.",
-        href: "https://www.tinsleymusic.com/shows",
-        status: "upcoming"
-      },
-      {
-        date: "2026-06-18",
-        when: "Jun 18, 2026",
-        venue: "Add-a-Ball",
-        city: "Seattle, WA",
-        note: "With Great Comet and Moving in Slow.",
-        status: "past"
-      },
-      {
-        date: "2026-05-01",
-        when: "May 1, 2026",
-        venue: "Yonder Cider × Bale Breaker",
-        city: "Seattle, WA",
-        note: "Acoustic set — first Summer Music Nights.",
-        status: "past"
-      },
-      {
-        date: "2026-04-22",
-        when: "Apr 22, 2026",
-        venue: "Belltown Yacht Club",
-        city: "Seattle, WA",
-        note: "With Fiona Grey.",
-        status: "past"
-      },
-      {
-        date: "2026-03-27",
-        when: "Mar 27, 2026",
-        venue: "Wild Buffalo",
-        city: "Bellingham, WA",
-        note: "With Veronica North.",
-        status: "past"
-      },
-      {
-        date: "2026-03-17",
-        when: "Mar 17, 2026",
-        venue: "Barboza",
-        city: "Seattle, WA",
-        note: "Supporting Cailin Russo.",
-        status: "past"
-      },
-      {
-        date: "2026-03-13",
-        when: "Mar 13, 2026",
-        venue: "Hotel Crocodile",
-        city: "Seattle, WA",
-        note: "Lobby Session + Bad Enough music video premiere.",
-        status: "past"
-      },
-      {
-        date: "2026-02-12",
-        when: "Feb 12, 2026",
-        venue: "Spanish Ballroom",
-        city: "Tacoma, WA",
-        note: "Headline with Michael the Band and Joyla Red. Same day as the Bad Enough release.",
-        status: "past"
-      },
-      {
-        date: "2025-11-16",
-        when: "Nov 16, 2025",
-        venue: "Town Hall",
-        city: "Seattle, WA",
-        note: "Death & Music — KEXP, hosted by John Richards.",
-        status: "past"
-      },
-      {
-        date: "2025-09",
-        when: "Sep 16–23, 2025",
-        venue: "Suzzallo support run",
-        city: "Spokane → San Diego",
-        note: "West Coast dates: Spokane, Boise, Provo, Denver, Albuquerque, Phoenix, San Diego.",
-        status: "past"
-      }
+      { date: "2026-08-28", venue: "Hidden Hall", city: "Seattle, WA", note: "Femme Friday with Girl Parallel and Veronica North. Doors 8:00pm, 21+.", href: "https://www.tinsleymusic.com/shows" },
+      { date: "2026-06-18", venue: "Add-a-Ball", city: "Seattle, WA", note: "With Great Comet and Moving in Slow." },
+      { date: "2026-05-01", venue: "Yonder Cider × Bale Breaker", city: "Seattle, WA", note: "Acoustic set — first Summer Music Nights." },
+      { date: "2026-04-22", venue: "Belltown Yacht Club", city: "Seattle, WA", note: "With Fiona Grey." },
+      { date: "2026-03-27", venue: "Wild Buffalo", city: "Bellingham, WA", note: "With Veronica North." },
+      { date: "2026-03-17", venue: "Barboza", city: "Seattle, WA", note: "Supporting Cailin Russo." },
+      { date: "2026-03-13", venue: "Hotel Crocodile", city: "Seattle, WA", note: "Lobby Session + Bad Enough music video premiere." },
+      { date: "2026-02-12", venue: "Spanish Ballroom", city: "Tacoma, WA", note: "Headline with Michael the Band and Joyla Red. Same day as the Bad Enough release." },
+      { date: "2025-12-31", venue: "Tractor Tavern", city: "Seattle, WA", note: "Artist Home New Year’s Eve." },
+      { date: "2025-12-06", venue: "Hidden Hall", city: "Seattle, WA", note: "80s prom show with Joyla Red and Henry Mansfield." },
+      { date: "2025-11-20", venue: "Wild Buffalo", city: "Bellingham, WA", note: "Supporting Babes in Canyon with Lovely Colours." },
+      { date: "2025-11-16", venue: "Town Hall", city: "Seattle, WA", note: "Death & Music — KEXP, hosted by John Richards." },
+      { date: "2025-11-14", venue: "Tractor Tavern", city: "Seattle, WA", note: "Co-headline with Jaws of Brooklyn. Presented by KEXP, KBCS, and Cloudbreak." },
+      { date: "2025-09-23", venue: "Soda Bar", city: "San Diego, CA", note: "Supporting Suzzallo." },
+      { date: "2025-09-22", venue: "The Rebel Lounge", city: "Phoenix, AZ", note: "Supporting Suzzallo." },
+      { date: "2025-09-21", venue: "Backstage at Revel", city: "Albuquerque, NM", note: "Supporting Suzzallo." },
+      { date: "2025-09-20", venue: "Lost Lake Lounge", city: "Denver, CO", note: "Supporting Suzzallo." },
+      { date: "2025-09-18", venue: "Velour Live Music Gallery", city: "Provo, UT", note: "Supporting Suzzallo." },
+      { date: "2025-09-17", venue: "Neurolux", city: "Boise, ID", note: "Supporting Suzzallo." },
+      { date: "2025-09-16", venue: "The District Bar", city: "Spokane, WA", note: "Supporting Suzzallo." },
+      { date: "2025-09-13", venue: "Jazzbones", city: "Tacoma, WA", note: "Direct support for Smokey Brights’ album release." },
+      { date: "2025-08-21", venue: "Chop Suey", city: "Seattle, WA", note: "Support for City of Pines." },
+      { date: "2025-08-08", venue: "Kulshan Trackside Beer Garden", city: "Bellingham, WA", note: "Trackside Summer Music series with Veronica North." },
+      { date: "2025-05-17", venue: "Madame Lou’s", city: "Seattle, WA", note: "Support for Suzzallo (Rocky Votolato) album release." },
+      { date: "2025-03-22", venue: "The Chameleon", city: "Spokane, WA", note: "Album release with Austen and Water Monster." },
+      { date: "2025-03-15", venue: "Tractor Tavern", city: "Seattle, WA", note: "Support for Aaron Crawford." },
+      { date: "2025-03-07", venue: "The Cobalt", city: "Vancouver, BC", note: "Album release with Annika Catharina and Tess Anderson." },
+      { date: "2025-03-01", venue: "The Shakedown", city: "Bellingham, WA", note: "Album release with Cat Valley and Cat Positive." },
+      { date: "2025-02-28", venue: "Lucky Dime", city: "Everett, WA", note: "Album release with Thavoron and Clothing Optional. $10 cash at the door." },
+      { date: "2025-02-15", venue: "White Eagle Saloon", city: "Portland, OR", note: "Album release with Andrew Ash and Jacqueline Hyde." },
+      { date: "2025-02-14", venue: "Spanish Ballroom", city: "Tacoma, WA", note: "Album release with Stella Mar and Hot Stepmom." },
+      { date: "2025-01-09", venue: "Neumos", city: "Seattle, WA", note: "Seattle album release with Lovely Colours, Midnight High, and waltzerr." },
+      { date: "2024-12-07", venue: "Sunset Tavern", city: "Seattle, WA", note: "Sold-out headline with Jaws of Brooklyn and Annie J." },
+      { date: "2024-11-20", venue: "Barboza — Cloudbreak", city: "Seattle, WA", note: "Festival headline with Kazmyn and Mia Day. Presented by Visit Seattle / King County." },
+      { date: "2024-11-13", venue: "High Dive", city: "Seattle, WA", note: "Opened for New Constellations." },
+      { date: "2024-10-11", venue: "Conor Byrne Pub", city: "Seattle, WA", note: "With Babes in Canyon and Liv Victorino." },
+      { date: "2024-08-24", venue: "Madame Lou’s", city: "Seattle, WA", note: "Direct support for Sheppard." },
+      { date: "2024-08-16", venue: "Sunset Tavern", city: "Seattle, WA", note: "With Waltzerr, Pallettes, and Balcony Bridge." },
+      { date: "2024-07-20", venue: "Capitol Hill Block Party", city: "Seattle, WA", note: "Festival set." },
+      { date: "2024-07-19", venue: "Bite of Seattle — Mural Stage", city: "Seattle, WA", note: "Festival set." },
+      { date: "2024-06-22", venue: "Madame Lou’s", city: "Seattle, WA", note: "Direct support for Sam Fischer." },
+      { date: "2024-05-06", venue: "Madame Lou’s", city: "Seattle, WA", note: "Direct support for Salt Cathedral." },
+      { date: "2024-01-20", venue: "Barboza", city: "Seattle, WA", note: "Headline with AUSTEN and sister swimmer." },
+      { date: "2023-11-18", venue: "Tractor Tavern", city: "Seattle, WA", note: "Sold-out support for Kuinka with Kate Dinsmore." },
+      { date: "2023-10-30", venue: "Barboza", city: "Seattle, WA", note: "Direct support for Girl Ray." },
+      { date: "2023-08-18", venue: "Barboza", city: "Seattle, WA", note: "EP release show." },
+      { date: "2023-06-20", venue: "High Dive", city: "Seattle, WA", note: "Opened for Glassio with Mount Planet." },
+      { date: "2023-05-07", venue: "Breaking Sound: Unpublished", city: "Los Angeles, CA", note: "Adults Only." },
+      { date: "2023-05-02", venue: "Sunset Tavern", city: "Seattle, WA", note: "With Puck and Liv Victorino." },
+      { date: "2023-03-31", venue: "Emerald City Trapeze Arts", city: "Seattle, WA", note: "Sessions in Place with Byland." },
+      { date: "2023-01-14", venue: "Neumos", city: "Seattle, WA", note: "Taylor Swift night — sold-out crowd." },
+      { date: "2023-01-06", venue: "Barboza", city: "Seattle, WA", note: "Co-headline with Lovely Colours. Support from Modern Daze." },
+      { date: "2022-10-27", venue: "Bad Bar", city: "Seattle, WA", note: "Halloween with Seiichi, Gallaway, and Justin Hartinger." },
+      { date: "2022-07-28", venue: "Neumos", city: "Seattle, WA", note: "My Body, My Choice Abortion Fundraiser." },
+      { date: "2022-07-23", venue: "Capitol Hill Block Party", city: "Seattle, WA", note: "Neumos stage." },
+      { date: "2022-06-24", venue: "ALMA", city: "Tacoma, WA", note: "Rooftop — direct support for harley." },
+      { date: "2022-05-07", venue: "Belltown Bloom — The Crocodile", city: "Seattle, WA", note: "Festival set." },
+      { date: "2022-02-22", venue: "The Crocodile", city: "Seattle, WA", note: "Writer’s Block songwriter showcase." },
+      { date: "2021-07-17", venue: "Barboza", city: "Seattle, WA", note: "Headline with Justin Hartinger and ALLA." },
+      { date: "2020-11-20", venue: "The Vera Project livestream", city: "Seattle, WA", note: "VTV on YouTube and Facebook." },
+      { date: "2020-09-27", venue: "AFSP WA Out of the Darkness", city: "Washington", note: "American Foundation for Suicide Prevention event." },
+      { date: "2020-05-02", venue: "Capitol Hill Arts District stream", city: "Seattle, WA", note: "Capitol Hill Block Party curated local lineup." },
+      { date: "2020-01-23", venue: "Sofar Sounds", city: "Seattle, WA", note: "The Shop with Jake Crocker." },
+      { date: "2020-01-18", venue: "Barboza", city: "Seattle, WA", note: "EP release with Jake Crocker and ALKI." },
+      { date: "2019-12-06", venue: "Barboza", city: "Seattle, WA", note: "With The Environment and Like Lions." },
+      { date: "2019-12-05", venue: "The Crocodile", city: "Seattle, WA", note: "With Jake Crocker, Bodies on the Beach, Nacho Picasso." },
+      { date: "2019-11-14", venue: "Portland State University", city: "Portland, OR", note: "Live @ Lunch Series." },
+      { date: "2019-09-29", venue: "Sunset Tavern", city: "Seattle, WA", note: "Opened for ViVii with Jake Crocker. Presented by The Crocodile." },
+      { date: "2019-09-22", venue: "The Rendezvous", city: "Seattle, WA", note: "Local showcase with Jake Crocker, Mariah Belgrod, and Abby Brown." },
+      { date: "2019-09-14", venue: "Fremont Abbey Arts Center", city: "Seattle, WA", note: "Supported ZAHARA’s EP release with Jake Crocker and Sharmaine." },
+      { date: "2019-09-11", venue: "Sofar Sounds", city: "Seattle, WA", note: "Sold out at The Ruins." },
+      { date: "2019-09-03", venue: "Sunset Tavern", city: "Seattle, WA", note: "Headline with Jake Crocker. Support from MariGo and Neon Bloom." },
+      { date: "2019-08-24", venue: "Seward Park Amphitheater", city: "Seattle, WA", note: "Summer SMASH charity concert." },
+      { date: "2019-08-07", venue: "Sofar Sounds", city: "Seattle, WA", note: "Secret location." },
+      { date: "2019-06-29", venue: "Sofar Sounds", city: "Seattle, WA", note: "Sold-out set." },
+      { date: "2019-04-30", venue: "Funhouse", city: "Seattle, WA", note: "Singer/songwriter showcase." },
+      { date: "2019-04-24", venue: "Barboza", city: "Seattle, WA", note: "Do206 × Pabst Blue Ribbon Sound Society Showcase." },
+      { date: "2019-01-31", venue: "Funhouse", city: "Seattle, WA", note: "Opened for the Wild Moccasins with Jake Crocker." },
+      { date: "2019-01-26", venue: "Piranha Shop", city: "Seattle, WA", note: "Parke Ave anniversary party." },
+      { date: "2018-12-08", venue: "Furion Cellars", city: "Snohomish, WA", note: "Holiday open house." },
+      { date: "2018-08-31", venue: "Bumbershoot", city: "Seattle, WA", note: "Joined Jake Crocker at Ex Hall." },
+      { date: "2018-07-20", venue: "Capitol Hill Block Party", city: "Seattle, WA", note: "Festival debut with Jake Crocker at Neumos." },
+      { date: "2018-02-23", venue: "Neptune Theatre", city: "Seattle, WA", note: "Opened for Ryan Caraveo with Jake Crocker." },
+      { date: "2017-12-15", venue: "Grumpy D’s", city: "Seattle, WA", note: "Songwriters in the Round." },
+      { date: "2017-10-27", venue: "El Corazon", city: "Seattle, WA", note: "Opened for Secondhand Serenade with Brandon Parker." },
+      { date: "2017-09-10", venue: "Funhouse", city: "Seattle, WA", note: "Opened for The Icarus Account with Brandon Parker." },
+      { date: "2017-05-04", venue: "20 Corners Brewing", city: "Woodinville, WA", note: "Acoustic set with Brandon Parker." }
     ]
   },
 

@@ -19,10 +19,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/public.css" />
+  <link rel="stylesheet" href="assets/calendar.css" />
 </head>
 <body data-page="shows">
   <a class="skip-link" href="#main">Skip to content</a>
-  <div id="presentBar" class="present-bar" hidden></div>
   <p class="artist-note">For you — not fans. Draft only. Official: <a href="https://www.tinsleymusic.com/" target="_blank" rel="noopener">tinsleymusic.com</a> · <a href="index.html">Hub</a></p>
   <header class="pub-nav">
     <a class="pub-brand" href="index.html">TINSLEY</a>
@@ -52,11 +52,12 @@
 
   <main id="main">
     <section class="pub-section" id="dates">
-      <h2>Dates</h2>
-      <p class="lead">From the official calendar. Upcoming first — then the 2026 run and the routing that already happened.</p>
-      <ol class="pub-dates" id="shDates"></ol>
+      <h2>Full calendar</h2>
+      <p class="lead">Every official date on this site — upcoming first, then the archive back to 2017. Tickets stay on tinsleymusic.com/shows.</p>
+      <div class="tcal" data-tcal id="showCal"></div>
       <div class="pub-ctas" style="margin-top:22px">
-        <a class="pub-btn primary" href="https://www.tinsleymusic.com/shows" target="_blank" rel="noopener">All dates on tinsleymusic.com ↗</a>
+        <a class="pub-btn primary" href="https://www.tinsleymusic.com/shows" target="_blank" rel="noopener">Official tickets ↗</a>
+        <a class="pub-btn" href="tinsley-tour.html#calendar">Tour desk calendar</a>
       </div>
     </section>
 
@@ -108,8 +109,8 @@
   </footer>
 
   <script src="assets/data.js"></script>
-  <script src="assets/present.js"></script>
   <script src="assets/public.js"></script>
+  <script src="assets/calendar.js"></script>
   <script>
     (function () {
       var btn = document.getElementById("copyOnePager");

@@ -142,6 +142,11 @@
       margin: 16px 0 0; max-width: 38ch; color: var(--muted);
       font-size: clamp(15px, 2vw, 17.5px);
     }
+    .hub-updated {
+      margin-top: 18px; font-size: 13.5px; font-weight: 600; color: var(--faint);
+    }
+    .hub-updated time { color: var(--muted); font-weight: 700; }
+
     .hero-ctas {
       display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px;
     }
@@ -158,28 +163,6 @@
     .btn-primary:hover { filter: brightness(1.06); }
     .btn-quiet { background: transparent; color: var(--muted); border-color: transparent; }
     .btn-quiet:hover { color: var(--text); border-color: var(--line); background: rgba(255,255,255,.04); }
-
-    .hub-chrome .present-bar { position: relative; top: auto; }
-    .present-bar {
-      position: sticky; top: 0; z-index: 80;
-      background: rgba(14,11,18,.92); backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(124,224,195,.28);
-      font-size: 13px;
-    }
-    .present-bar-inner {
-      max-width: 1120px; margin: 0 auto; padding: 10px 24px;
-      display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between;
-      color: var(--muted);
-    }
-    .present-bar-inner strong { color: var(--mint); }
-    .present-bar-btn {
-      flex: none; font-weight: 700; min-height: 44px; padding: 8px 14px; border-radius: 999px;
-      display: inline-flex; align-items: center;
-      border: 1px solid rgba(124,224,195,.35); background: rgba(124,224,195,.1); color: var(--text);
-      touch-action: manipulation;
-    }
-    body.present-mode .present-bar { border-bottom-color: rgba(255,178,122,.35); }
-    body.present-mode .present-bar-inner strong { color: var(--peach); }
 
     .talk-card {
       max-width: 1120px; margin: 0 auto 28px; padding: 0 24px;
@@ -198,9 +181,6 @@
     .talk-card-inner summary::after { content: "+"; color: var(--mint); font-weight: 700; }
     .talk-card-inner[open] summary::after { content: "–"; }
     .talk-card-inner p { color: var(--muted); font-size: 14.5px; max-width: 62ch; }
-    body.present-mode .talk-card-inner {
-      border-color: rgba(255,178,122,.3); background: rgba(255,178,122,.07);
-    }
     .demo-strip {
       position: relative; z-index: 1;
       max-width: 1120px; margin: 0 auto; padding: 8px 24px 40px;
@@ -254,6 +234,15 @@
     }
     .rowhead h2 { font-family: "Fraunces", serif; font-size: 22px; font-weight: 900; }
     .rowhead span { font-size: 13px; color: var(--faint); }
+    .rowhead-left { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+    .suite-step {
+      font-family: "Fraunces", serif; font-weight: 900; font-size: 15px; color: var(--peach);
+    }
+    .suite-next {
+      font-size: 13.5px; font-weight: 700; color: var(--peach);
+      border-bottom: 1px solid rgba(255,178,122,.35);
+    }
+    .suite-next:hover { color: var(--text); border-bottom-color: rgba(255,255,255,.35); }
     .suite-blurb { color: var(--muted); font-size: 14.5px; margin: -8px 0 18px; max-width: 640px; }
     .suite-shell {
       border: 1px solid var(--line); border-radius: 24px; padding: 8px;
@@ -403,13 +392,13 @@
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
   <div class="hub-chrome">
-    <div id="presentBar" class="present-bar" hidden data-invite="1"></div>
     <nav class="hub-nav" aria-label="Hub">
-      <a href="tinsley-ops.html">Ops</a>
-      <a href="#tinsley">Decks</a>
-      <a href="#public">Drafts</a>
+      <a href="#song">Song</a>
+      <a href="#marketing">Marketing</a>
+      <a href="#pr">PR</a>
+      <a href="#campaigns">Campaigns</a>
+      <a href="#work">Ops &amp; tour</a>
       <a href="#index">Index</a>
-      <a href="tinsley-tour.html">Tour</a>
       <a href="tinsley-ops.html#this-week" class="hub-nav-listen">This week</a>
     </nav>
   </div>
@@ -418,15 +407,14 @@
     <div class="hero-inner">
       <p class="eyebrow">Private · Artist workspace</p>
       <h1 class="brand-mark">Tinsley</h1>
-      <p class="hero-line">Your marketing desk for the next chapter.</p>
-      <p class="lede">Next public date: Fri Aug 28 — Femme Friday at Hidden Hall with Girl Parallel and Veronica North. Decks, weekly ops, and draft pages you can mark up — not a fan destination. Fans stay on tinsleymusic.com until you decide otherwise.</p>
+      <p class="hero-line">Follow the work in one line.</p>
+      <p class="lede">Song analysis → marketing → PR → campaigns. Then ops and tour to ship it. Next public date: Fri Aug 28 — Femme Friday at Hidden Hall. Fans stay on tinsleymusic.com.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="tinsley-ops.html#this-week">This week</a>
-        <a class="btn" href="tinsley-tour.html">Tour desk</a>
-        <a class="btn" href="tinsley-song.html">Song deck</a>
-        <a class="btn" href="listen.html">Review Listen draft</a>
-        <a class="btn btn-quiet" href="#demo">Review order</a>
+        <a class="btn btn-primary" href="#path">Start the path</a>
+        <a class="btn" href="tinsley-song.html">Open song analysis</a>
+        <a class="btn" href="tinsley-ops.html#this-week">This week</a>
       </div>
+      <p class="hub-updated" id="hubUpdated"></p>
     </div>
   </header>
 
@@ -434,35 +422,35 @@
   <div class="talk-card" id="talkingPoints">
     <details class="talk-card-inner" id="talkingPointsDetails">
       <summary>How to use this</summary>
-      <p>This workspace is for you. Numbers and remix scores are planning tools, not claims. Listen, Press, and campaign pages are drafts to review — they are not live for fans. Official home stays <a href="https://www.tinsleymusic.com/" target="_blank" rel="noopener">tinsleymusic.com</a>.</p>
+      <p>Walk the four areas in order. <strong>Song</strong> tells you what to stand on. <strong>Marketing</strong> is the weekly show-up. <strong>PR</strong> is what you send out. <strong>Campaigns</strong> is the single in motion. Ops and tour are where you execute. Listen, Press, and campaign pages are drafts — not live for fans. Official home stays <a href="https://www.tinsleymusic.com/" target="_blank" rel="noopener">tinsleymusic.com</a>.</p>
     </details>
   </div>
 
-  <div class="demo-strip" id="demo">
-    <p class="demo-strip-label">Review in this order</p>
-    <ol class="demo-steps" aria-label="Draft review path">
+  <div class="demo-strip" id="path">
+    <p class="demo-strip-label">Work path · follow in order</p>
+    <ol class="demo-steps" aria-label="Artist work path">
       <li>
-        <a href="listen.html">
+        <a href="#song">
           <span class="sp-n">1</span>
-          <span class="sp-body"><strong>Listen draft</strong><em>Proposed fan landing</em></span>
+          <span class="sp-body"><strong>Song analysis</strong><em>Catalog, pitch, like-artists</em></span>
         </a>
       </li>
       <li>
-        <a href="press.html">
+        <a href="#marketing">
           <span class="sp-n">2</span>
-          <span class="sp-body"><strong>Press draft</strong><em>EPK-ready bio &amp; quotes</em></span>
+          <span class="sp-body"><strong>Marketing</strong><em>Calendar, platforms, street</em></span>
         </a>
       </li>
       <li>
-        <a href="bad-enough.html">
+        <a href="#pr">
           <span class="sp-n">3</span>
-          <span class="sp-body"><strong>Campaign draft</strong><em>Bad Enough → next single</em></span>
+          <span class="sp-body"><strong>PR</strong><em>Press kit, radio, sync</em></span>
         </a>
       </li>
       <li>
-        <a href="tinsley-song.html">
+        <a href="#campaigns">
           <span class="sp-n">4</span>
-          <span class="sp-body"><strong>Strategy</strong><em>Song &amp; Social decks</em></span>
+          <span class="sp-body"><strong>Campaigns</strong><em>Bad Enough → next single</em></span>
         </a>
       </li>
     </ol>
@@ -496,9 +484,9 @@
   <footer class="site-foot">
     <p><strong>Tinsley artist workspace</strong> — private planning tool from public sources (site, EPK, Bandcamp, press).</p>
     <p class="foot-note">For you, not fans. Estimates are for discussion. Official home: <a href="https://www.tinsleymusic.com/" target="_blank" rel="noopener">tinsleymusic.com</a>.</p>
+    <p class="foot-note" id="hubUpdatedFoot"></p>
   </footer>
-
-  <script src="assets/present.js"></script>
+  <script src="assets/data.js"></script>
   <script>
     /* =========================================================================
        Central registry of marketing pages. To add a page: drop its HTML file
@@ -507,139 +495,159 @@
        ========================================================================= */
     const PAGES = [
       {
-        suite: "tinsley",
-        title: "Tinsley — Song & Catalog Analysis",
-        kind: "Music Analysis Deck",
+        suite: "song",
+        title: "Song & Catalog Analysis",
+        kind: "Start here",
         href: "tinsley-song.html",
-        desc: "Catalog assessment, EDM remix scoring with sync notes, pitch one-pagers, SWOT diagnosis, like-artist positioning, and market differentiators.",
-        tags: ["Catalog Analysis", "Pitch Kit", "Differentiators"],
+        desc: "What the catalog does, which songs pitch, and who sits next to you. Read this before you write a caption or a press email.",
+        tags: ["Catalog", "Pitch Kit", "Like-artists"],
         accent: "linear-gradient(120deg, #ff6f91, #b98cff 55%, #ffb27a)"
       },
       {
-        suite: "tinsley",
-        title: "Tinsley — Social & Marketing Analysis",
-        kind: "Marketing Strategy Deck",
+        suite: "song",
+        title: "Reference — True Fans & Creative Act",
+        kind: "Frameworks",
+        href: "reference.html",
+        desc: "The money model and the art-first counterpoint — so song strategy stays honest.",
+        tags: ["True Fans", "Philosophy"],
+        accent: "linear-gradient(120deg, #7ce0c3 0%, #b98cff 100%)"
+      },
+      {
+        suite: "marketing",
+        title: "Social & Marketing",
+        kind: "Weekly show-up",
         href: "tinsley-social.html",
-        desc: "Hashtag strategy, daily content calendar, per-song weekly recipes, platform plays, and a 30→720 day growth roadmap.",
-        tags: ["Hashtag Strategy", "Content Calendar", "Roadmap"],
+        desc: "Instagram desk, hashtags, daily calendar, per-song recipes, and the 30→720 day roadmap.",
+        tags: ["Instagram", "Calendar", "Roadmap"],
         accent: "linear-gradient(135deg, #7ce0c3 0%, #b98cff 100%)"
       },
       {
-        suite: "tinsley",
-        title: "Ops Command",
-        kind: "Execution OS",
-        href: "tinsley-ops.html",
-        desc: "Weekly ritual, UTM builder, 6-week release checklists, press CRM, playlist & sync desk, content factory, paid winners, Seattle flywheel, True Fan ladder, and live routing.",
-        tags: ["Ops", "CRM", "Release OS", "UTM"],
-        accent: "linear-gradient(135deg, #ffb27a 0%, #ff6f91 55%, #b98cff 100%)"
+        suite: "marketing",
+        title: "Street Marketing — 100 ideas",
+        kind: "Field guide",
+        href: "street-marketing.html",
+        desc: "Guerrilla plays rated $–$$$$. Filter by budget, then take the Seattle picks from the Social deck.",
+        tags: ["Street", "$–$$$$", "Seattle"],
+        accent: "linear-gradient(135deg, #7c5cff 0%, #22d3ee 100%)"
       },
       {
-        suite: "tinsley",
-        title: "Tour Desk",
-        kind: "Booking OS",
-        href: "tinsley-tour.html",
-        desc: "Self-booking tools: next-show day sheet, advance checklist, holds, venue and support-slot asks, festival windows, settlement math, and a regional-run planner.",
-        tags: ["Tour", "Holds", "Settlement", "Advance"],
-        accent: "linear-gradient(135deg, #ffb27a 0%, #e8c4a0 55%, #c4789a 100%)"
-      },
-      {
-        suite: "public",
-        title: "Listen — proposed fan landing",
-        kind: "Draft surface",
-        href: "listen.html",
-        desc: "Draft Start Here + list capture + smart links. Review it here — do not send fans or QR codes to this URL.",
-        tags: ["Draft", "List capture", "Smart links"],
-        accent: "linear-gradient(120deg, #e86b6b 0%, #e8c4a0 100%)"
-      },
-      {
-        suite: "public",
+        suite: "pr",
         title: "Press Kit",
-        kind: "Draft surface",
+        kind: "Editors & radio",
         href: "press.html",
-        desc: "Draft EPK for editors and radio — bio, quotes, Start Here, facts, and asset links. Review before sharing.",
+        desc: "Draft EPK — bio, quotes, facts, Start Here. Review here; send from tinsleymusic.com/epk.",
         tags: ["Press", "EPK", "Radio"],
         accent: "linear-gradient(120deg, #e86b6b 0%, #c4789a 50%, #e8c4a0 100%)"
       },
       {
-        suite: "public",
+        suite: "pr",
         title: "Sync & Licensing",
-        kind: "Draft surface",
+        kind: "Supervisors",
         href: "sync.html",
-        desc: "Mood map and top sync-ready tracks for music supervisors — Bad Enough, Distract Me, Classic, and more.",
-        tags: ["Sync", "TV/Film", "Supervisors"],
+        desc: "Mood map and cue notes for the songs Song analysis already ranked.",
+        tags: ["Sync", "TV/Film"],
         accent: "linear-gradient(135deg, #6f9e8a 0%, #e8c4a0 100%)"
       },
       {
-        suite: "public",
-        title: "Shows & Booking",
-        kind: "Draft surface",
-        href: "shows.html",
-        desc: "Support-slot one-pager, PNW → West Coast → national routing, set lengths, and booking CTA.",
-        tags: ["Live", "Booking", "Tour"],
-        accent: "linear-gradient(135deg, #c4789a 0%, #e86b6b 100%)"
-      },
-      {
-        suite: "public",
-        title: "Bad Enough — single campaign",
-        kind: "Draft campaign",
+        suite: "campaigns",
+        title: "Bad Enough — campaign",
+        kind: "Lead single",
         href: "bad-enough.html",
-        desc: "Lead-single draft: stream CTAs, Atwood quote, content angles, weekly recipe, and hashtags.",
-        tags: ["Single", "Campaign", "Short-form"],
+        desc: "The single in motion: stream CTAs, Atwood quote, angles, weekly recipe. Point it at Listen when you approve.",
+        tags: ["Campaign", "2026"],
         accent: "linear-gradient(125deg, #e86b6b 0%, #e8c4a0 100%)"
       },
       {
-        suite: "public",
+        suite: "campaigns",
         title: "Temporary Insanity — campaign",
-        kind: "Draft campaign",
+        kind: "Next single",
         href: "temporary-insanity.html",
-        desc: "Next-single draft: chaotic-era angles, Mon/Wed/Fri recipe, hashtags, list CTA.",
-        tags: ["Single", "Campaign", "Template"],
+        desc: "Chaotic-era draft — same campaign shape, next chapter.",
+        tags: ["Campaign", "Template"],
         accent: "linear-gradient(125deg, #b98cff 0%, #7ce0c3 100%)"
       },
       {
-        suite: "public",
+        suite: "campaigns",
+        title: "Listen — fan landing draft",
+        kind: "Conversion",
+        href: "listen.html",
+        desc: "Start Here + list capture. Campaigns and street QR should land here only after you approve — not yet.",
+        tags: ["Draft", "List"],
+        accent: "linear-gradient(120deg, #e86b6b 0%, #e8c4a0 100%)"
+      },
+      {
+        suite: "campaigns",
         title: "Campaign template",
-        kind: "Draft template",
+        kind: "Next drop",
         href: "campaign.html",
-        desc: "Generic ?id= campaign draft — pick Bad Enough or Temporary Insanity, or add the next single in data.js.",
-        tags: ["Template", "Campaign"],
+        desc: "Reuse this shape for the single after Temporary Insanity.",
+        tags: ["Template"],
         accent: "linear-gradient(125deg, #ffb27a 0%, #ff6f91 100%)"
       },
       {
-        suite: "tinsley",
-        title: "Reference — Frameworks & Philosophy",
-        kind: "Reference Library",
-        href: "reference.html",
-        desc: "Shared frameworks for both decks: Kevin Kelly's 1,000 True Fans model and Rick Rubin's The Creative Act.",
-        tags: ["True Fans", "Philosophy", "Shared"],
-        accent: "linear-gradient(120deg, #7ce0c3 0%, #b98cff 100%)"
+        suite: "work",
+        title: "Ops Command",
+        kind: "Ship the week",
+        href: "tinsley-ops.html",
+        desc: "Press CRM, release checklists, factory packs, UTMs — the Monday command after the four areas.",
+        tags: ["This week", "Press CRM", "UTM"],
+        accent: "linear-gradient(135deg, #ffb27a 0%, #ff6f91 55%, #b98cff 100%)"
       },
       {
-        suite: "field",
-        title: "Street Marketing — Top 100 Ideas",
-        kind: "Guerrilla Playbook",
-        href: "street-marketing.html",
-        desc: "A searchable, filterable field guide of 100 high-impact, low-budget guerrilla tactics — from 3D chalk art to drone light shows — each tagged by budget and impact.",
-        tags: ["Guerrilla", "Idea Library", "Low Budget"],
-        accent: "linear-gradient(135deg, #7c5cff 0%, #22d3ee 100%)"
+        suite: "work",
+        title: "Tour Desk",
+        kind: "Book & settle",
+        href: "tinsley-tour.html",
+        desc: "Full show calendar, Hidden Hall day sheet, advance list, holds, settlement. Next: Fri Aug 28.",
+        tags: ["Calendar", "Tour", "Holds"],
+        accent: "linear-gradient(135deg, #ffb27a 0%, #e8c4a0 55%, #c4789a 100%)"
+      },
+      {
+        suite: "work",
+        title: "Shows & Booking draft",
+        kind: "Leave-behind",
+        href: "shows.html",
+        desc: "The booking leave-behind — full calendar, one-pager, routing.",
+        tags: ["Live", "Draft"],
+        accent: "linear-gradient(135deg, #c4789a 0%, #e86b6b 100%)"
       }
     ];
 
     const SUITES = [
       {
-        id: "tinsley",
-        title: "Strategy & ops",
-        blurb: "Your working decks — catalog, marketing playbook, weekly ops, tour desk, and frameworks."
+        id: "song",
+        step: "01",
+        title: "Song analysis",
+        blurb: "Start here. Know the catalog, the pitch, and the map before you post or email anyone.",
+        next: { href: "#marketing", label: "Next: Marketing" }
       },
       {
-        id: "public",
-        title: "Draft surfaces to review",
-        blurb: "Proposed Listen, press, sync, booking, and campaign pages. Not live for fans."
+        id: "marketing",
+        step: "02",
+        title: "Marketing",
+        blurb: "Turn the song read into a weekly cadence — calendar, platforms, street plays rated $–$$$$.",
+        next: { href: "#pr", label: "Next: PR" }
       },
       {
-        id: "field",
-        title: "Field guides",
-        blurb: "Playbooks you can open while planning street and guerrilla moves."
+        id: "pr",
+        step: "03",
+        title: "PR",
+        blurb: "What editors, radio, and supervisors receive. Draft until you send it from the official EPK.",
+        next: { href: "#campaigns", label: "Next: Campaigns" }
+      },
+      {
+        id: "campaigns",
+        step: "04",
+        title: "Campaigns",
+        blurb: "The singles in motion, then the Listen landing those campaigns should point to.",
+        next: { href: "#work", label: "Then execute" }
+      },
+      {
+        id: "work",
+        step: "Then",
+        title: "Ops & tour",
+        blurb: "Ship the week and advance the next date. Hidden Hall is Friday.",
+        next: { href: "#index", label: "Browse every section" }
       }
     ];
 
@@ -667,13 +675,14 @@
         kind: "Marketing strategy",
         items: [
           { href: "tinsley-social.html#hashtags", num: "01", label: "Hashtag Strategy", note: "Brand, genre, location, community, discovery" },
-          { href: "tinsley-social.html#bysong", num: "02", label: "Key Hashtags by Song", note: "TikTok + Instagram tiers + weekly recipes" },
+          { href: "tinsley-social.html#bysong", num: "02", label: "Key Hashtags by Song", note: "TikTok + Instagram recipes, tags, and weekly beats" },
           { href: "tinsley-social.html#calendar", num: "03", label: "Daily Content Calendar", note: "Mon–Sun cadence with skip day, share link, week review" },
-          { href: "tinsley-social.html#social", num: "04", label: "Social Media Opportunities", note: "Platform priorities and content plays" },
-          { href: "tinsley-social.html#street-picks", num: "05", label: "Guerrilla picks for Tinsley", note: "Six street tactics reframed for Seattle indie" },
-          { href: "tinsley-social.html#roadmap", num: "06", label: "Growth Roadmap · 30 → 720 Days", note: "Reach, revenue, product, foundation tracks" },
-          { href: "tinsley-social.html#north-stars", num: "06a", label: "North-star metrics", note: "Editable targets with saved trend history", sub: true },
-          { href: "tinsley-social.html#rmTracker", num: "06b", label: "Milestone tracker", note: "Check off actions — progress saves locally", sub: true }
+          { href: "tinsley-social.html#instagram", num: "04", label: "Instagram desk", note: "Reels, carousels, Stories, Close Friends, Hidden Hall week" },
+          { href: "tinsley-social.html#social", num: "05", label: "Social Media Opportunities", note: "Platform priorities and content plays" },
+          { href: "tinsley-social.html#street-picks", num: "06", label: "Guerrilla picks for Tinsley", note: "Six street tactics reframed for Seattle indie" },
+          { href: "tinsley-social.html#roadmap", num: "07", label: "Growth Roadmap · 30 → 720 Days", note: "Reach, revenue, product, foundation tracks" },
+          { href: "tinsley-social.html#north-stars", num: "07a", label: "North-star metrics", note: "Editable targets with saved trend history", sub: true },
+          { href: "tinsley-social.html#rmTracker", num: "07b", label: "Milestone tracker", note: "Check off actions — progress saves locally", sub: true }
         ]
       },
       {
@@ -705,6 +714,7 @@
         title: "Tour Desk",
         kind: "Booking OS",
         items: [
+          { href: "tinsley-tour.html#calendar", num: "00", label: "Full show calendar", note: "Month grid + every official date since 2017" },
           { href: "tinsley-tour.html#next-show", num: "00", label: "Next show command", note: "Hidden Hall day sheet + run of show" },
           { href: "tinsley-tour.html#advance", num: "01", label: "Advance checklist", note: "T–14 through the morning after" },
           { href: "tinsley-tour.html#settle", num: "02", label: "Settlement calculator", note: "Guarantee vs door + merch − costs" },
@@ -753,7 +763,7 @@
         kind: "Industry surface",
         items: [
           { href: "shows.html", num: "•", label: "Shows landing", note: "Next: Hidden Hall Aug 28" },
-          { href: "shows.html#dates", num: "01", label: "Dates", note: "Upcoming + 2026 run from the official calendar", sub: true },
+          { href: "shows.html#dates", num: "01", label: "Full calendar", note: "Month grid + every official date since 2017", sub: true },
           { href: "shows.html#main", num: "02", label: "One-pager & routing", note: "Support slot + tour legs", sub: true },
           { href: "tinsley-tour.html", num: "03", label: "Tour desk", note: "Advance, holds, settlement — the working OS", sub: true }
         ]
@@ -835,6 +845,22 @@
       return String(s).replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
     }
 
+    (function showUpdated() {
+      const raw = (typeof TINSLEY !== "undefined" && TINSLEY.meta && TINSLEY.meta.updated) || "";
+      if (!raw) return;
+      let pretty = raw;
+      try {
+        const d = new Date(raw + "T12:00:00");
+        if (!isNaN(d.getTime())) {
+          pretty = d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+        }
+      } catch (e) {}
+      const hero = document.getElementById("hubUpdated");
+      if (hero) hero.innerHTML = "Last updated <time datetime=\"" + esc(raw) + "\">" + esc(pretty) + "</time>";
+      const foot = document.getElementById("hubUpdatedFoot");
+      if (foot) foot.textContent = "Workspace last updated " + pretty + ".";
+    })();
+
     function cardHtml(p, i) {
       const upcoming = !p.href;
       const tags = (p.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join("");
@@ -899,16 +925,20 @@
     }
 
     function render() {
-      let n = 0;
       sections.innerHTML = SUITES.map((suite) => {
         const pages = PAGES.filter((p) => p.suite === suite.id);
         if (!pages.length) return "";
-        const cards = pages.map((p) => cardHtml(p, n++)).join("");
-        const live = pages.filter((p) => p.href).length;
+        const cards = pages.map((p, i) => cardHtml(p, i)).join("");
+        const next = suite.next
+          ? `<a class="suite-next" href="${esc(suite.next.href)}">${esc(suite.next.label)} →</a>`
+          : `<span>${pages.length} pages</span>`;
         return `
           <div class="rowhead" id="${esc(suite.id)}">
-            <h2>${esc(suite.title)}</h2>
-            <span>${live} live</span>
+            <div class="rowhead-left">
+              ${suite.step ? `<span class="suite-step">${esc(suite.step)}</span>` : ""}
+              <h2>${esc(suite.title)}</h2>
+            </div>
+            ${next}
           </div>
           <p class="suite-blurb">${esc(suite.blurb)}</p>
           <div class="suite-shell"><div class="grid">${cards}</div></div>`;
@@ -917,9 +947,9 @@
       const liveAll = PAGES.filter(p => p.href).length;
       const sectionTotal = SECTION_INDEX.reduce((n, g) => n + g.items.length, 0);
       statRow.innerHTML = [
-        { b: liveAll, s: "Live pages" },
-        { b: sectionTotal, s: "Deep-linked sections" },
-        { b: "4-step", s: "Artist demo path" }
+        { b: "4", s: "Areas on the path" },
+        { b: liveAll, s: "Pages you can open" },
+        { b: sectionTotal, s: "Deep-linked sections" }
       ].map(x => `<div class="stat"><b>${x.b}</b><span>${x.s}</span></div>`).join("");
 
       renderToc("");
@@ -940,10 +970,6 @@
         renderToc("");
         tocSearch.focus();
       });
-    }
-    if (document.body.classList.contains("present-mode")) {
-      const talk = document.getElementById("talkingPointsDetails");
-      if (talk) talk.open = true;
     }
     render();
 

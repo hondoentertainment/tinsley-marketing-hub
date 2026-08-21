@@ -93,9 +93,7 @@
     if (joinUnwired) joinUnwired.hidden = !unwired;
     const note = $("joinUnwiredNote");
     if (note) {
-      note.textContent = document.body.classList.contains("present-mode")
-        ? "Linktree is the live signup until this draft is wired."
-        : "This form is a prototype. Kit / webhook is not live — don’t send fans here.";
+      note.textContent = "This form is a prototype. Kit / webhook is not live — don’t send fans here.";
     }
     if (heroJoin) {
       if (unwired && linktreeFallback) {

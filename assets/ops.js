@@ -70,12 +70,7 @@
       </article>`
       )
       .join("")}</div>
-      <p class="ops-hint">Copy <code>.env.example</code> → Vercel env for Kit (<code>KIT_API_KEY</code> + <code>KIT_FORM_ID</code>) or <code>EMAIL_WEBHOOK_URL</code>, plus Spotify client credentials. Listen form posts to <code>/api/subscribe</code>; bio/QR defaults to <code>/listen</code>. For artist demos, keep this panel collapsed and use <a href="index.html?present=1">present mode</a>.</p>`;
-
-    const details = $("#opsSetupDetails");
-    if (details && document.body.classList.contains("present-mode")) {
-      details.open = false;
-    }
+      <p class="ops-hint">Copy <code>.env.example</code> → Vercel env for Kit (<code>KIT_API_KEY</code> + <code>KIT_FORM_ID</code>) or <code>EMAIL_WEBHOOK_URL</code>, plus Spotify client credentials. Listen form posts to <code>/api/subscribe</code>; bio/QR defaults to <code>/listen</code>.</p>`;
 
     const setChip = (id, state, label) => {
       const card = wrap.querySelector('[data-id="' + id + '"]');
@@ -333,6 +328,7 @@
           </div>
           <div class="ops-row-actions" style="margin-top:0">
             <a class="btn btn-primary" href="tinsley-tour.html#next-show">Open tour desk</a>
+            <a class="btn" href="tinsley-tour.html#calendar">Full calendar</a>
             <a class="btn" href="tinsley-tour.html#advance">Advance list</a>
             <a class="btn" href="${esc(nextShow.tickets || "https://www.tinsleymusic.com/shows")}" target="_blank" rel="noopener">Tickets ↗</a>
           </div>
@@ -531,7 +527,6 @@
 
       const pull = $("#kpiPullSpotify");
       if (pull) {
-        if (document.body.classList.contains("present-mode")) pull.hidden = true;
         pull.addEventListener("click", () => {
           pull.disabled = true;
           pull.textContent = "Pulling…";
@@ -1406,7 +1401,7 @@
             return `<article class="ops-street-card${rec.done ? " on" : ""}" data-id="${esc(id)}">
               <div class="ops-fly-top">
                 <div>
-                  <span class="ops-muted">#${p.rank} · ${esc(p.category)}</span>
+                  <span class="ops-muted">#${p.rank} · ${esc(p.category)}${p.cost ? " · " + esc(p.cost) : ""}</span>
                   <strong>${esc(p.title)}</strong>
                 </div>
                 <button type="button" class="cal-skip-day street-toggle" aria-pressed="${!!rec.done}">${rec.done ? "Shipped" : "Mark shipped"}</button>
@@ -1503,6 +1498,8 @@
       </div>
       <div class="ops-row-actions">
         <a class="btn btn-primary" href="tinsley-tour.html">Open tour desk</a>
+        <a class="btn" href="tinsley-tour.html#calendar">Full calendar</a>
+        <a class="btn" href="shows.html#dates">Shows draft calendar</a>
         <a class="btn" href="tinsley-song.html#artists">Like-artist map</a>
         <a class="btn" href="tinsley-song.html#pitch">Pitch Kit</a>
       </div>`;

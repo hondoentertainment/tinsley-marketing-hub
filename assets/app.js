@@ -186,18 +186,29 @@
       const week = (s.weekPlan || [])
         .map((line) => `<li>${line}</li>`)
         .join("");
+      const igWeek = (s.igPlan || []).map((line) => `<li>${line}</li>`).join("");
       const weekBlock = week
         ? `<div class="bs-week">
             <div class="bs-week-h">
-              <span class="bs-angle-l">This week's recipe</span>
+              <span class="bs-angle-l">TikTok this week</span>
               ${s.roadmapHook ? `<span class="bs-roadmap">${s.roadmapHook}</span>` : ""}
             </div>
             <ol>${week}</ol>
           </div>`
         : "";
+      const igBlock = igWeek
+        ? `<div class="bs-week bs-week-ig">
+            <div class="bs-week-h">
+              <span class="bs-angle-l">Instagram this week</span>
+              <a class="bs-ig-link" href="#instagram">Open desk</a>
+            </div>
+            <ol>${igWeek}</ol>
+          </div>`
+        : "";
       bsPanel.innerHTML = `
         <div class="bs-angle"><span class="bs-angle-l">Content angle</span><p>${s.angle}</p></div>
         ${weekBlock}
+        ${igBlock}
         <div class="bs-cols">
           <div class="bs-card tiktok">
             <div class="bs-ch"><h3>TikTok</h3><button class="mini-copy" data-set="tt">Copy set</button></div>
@@ -320,6 +331,13 @@
         const beat = (song.weekPlan || [])[day.songBeat];
         if (beat && slot.kind === "publish" && slot.platform === "TikTok") {
           return stripBeatPrefix(beat);
+        }
+        const ig = song.igPlan || [];
+        if (ig.length) {
+          if (slot.platform === "Instagram" && slot.kind === "publish" && ig[1]) return stripBeatPrefix(ig[1]);
+          if (slot.platform === "IG Reels" && ig[0]) return stripBeatPrefix(ig[0]);
+          if (slot.platform === "IG Stories" && ig[2]) return stripBeatPrefix(ig[2]);
+          if (slot.platform === "IG Close Friends" && ig[2]) return stripBeatPrefix(ig[2]);
         }
       }
       const pack = song ? matchFactory(song.title) : null;
@@ -631,14 +649,156 @@
       const card = el("div", "social-card");
       const prioClass = s.priority.replace(/[^A-Za-z]/g, "") || "Medium";
       const plays = s.plays.map((p) => `<li>${p}</li>`).join("");
+      const desk = s.desk ? `<a class="social-desk" href="${s.desk}">Open Instagram desk →</a>` : "";
       card.innerHTML = `
         <div class="sh"><h3>${s.platform}</h3><span class="prio ${prioClass}">${s.priority}</span></div>
         <div class="handle">${s.handle}</div>
         <p class="why">${s.why}</p>
-        <ul>${plays}</ul>`;
+        <ul>${plays}</ul>
+        ${desk}`;
       social.appendChild(card);
     });
   }
+
+  /* ---- Instagram desk ---- */
+  (function instagramDesk() {
+    const root = $("#igDesk");
+    const P = D.instagramPlaybook;
+    if (!root || !P) return;
+    const esc = (s) =>
+      String(s == null ? "" : s).replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+
+    let filter = "all";
+    const pillars = P.pillars || [];
+
+    function render() {
+      const ideas = (P.ideas || []).filter((it) => filter === "all" || it.pillar === filter);
+      const rules = (P.rules || []).map((r) => `<li>${esc(r)}</li>`).join("");
+      const highs = (P.profile.highlights || [])
+        .map((h) => `<li><strong>${esc(h.name)}</strong> — ${esc(h.use)}</li>`)
+        .join("");
+      const week = (P.thisWeek.beats || [])
+        .map((b) => `<li><span class="ig-day">${esc(b.day)}</span><span class="ig-fmt">${esc(b.format)}</span><span>${esc(b.idea)}</span></li>`)
+        .join("");
+      const chips = ['<button type="button" class="ig-chip' + (filter === "all" ? " is-on" : "") + '" data-ig="all">All (' + P.ideas.length + ")</button>"]
+        .concat(
+          pillars.map((p) => {
+            const n = P.ideas.filter((it) => it.pillar === p.id).length;
+            return '<button type="button" class="ig-chip' + (filter === p.id ? " is-on" : "") + '" data-ig="' + p.id + '">' + esc(p.label) + " (" + n + ")</button>";
+          })
+        )
+        .join("");
+      const cards = ideas
+        .map((it) => {
+          const cap = it.caption
+            ? `<button type="button" class="mini-copy" data-caption="${esc(it.caption)}">Copy caption</button>`
+            : "";
+          return `<article class="ig-card" data-pillar="${esc(it.pillar)}">
+            <div class="ig-card-h">
+              <span class="ig-pill">${esc((pillars.find((p) => p.id === it.pillar) || {}).label || it.pillar)}</span>
+              <span class="ig-fmt">${esc(it.format)}</span>
+            </div>
+            <h3>${esc(it.title)}</h3>
+            ${it.song ? `<p class="ig-song">${esc(it.song)}</p>` : ""}
+            <p class="ig-hook"><strong>Hook.</strong> ${esc(it.hook)}</p>
+            <p><strong>Do.</strong> ${esc(it.do)}</p>
+            ${it.caption ? `<p class="ig-cap">“${esc(it.caption)}”</p>` : ""}
+            <p class="ig-cta">${esc(it.cta)}</p>
+            <div class="ig-card-act">${cap}</div>
+          </article>`;
+        })
+        .join("");
+
+      root.innerHTML = `
+        <div class="ig-intro">
+          <p class="ig-job">${esc(P.job)}</p>
+          <p class="ig-principle">${esc(P.principle)}</p>
+          <ul class="ig-rules">${rules}</ul>
+        </div>
+        <div class="ig-two">
+          <article class="ig-panel">
+            <h3>Profile this cycle</h3>
+            <pre class="ig-bio">${esc(P.profile.bio)}</pre>
+            <button type="button" class="btn" id="igCopyBio">Copy bio</button>
+            <h4>Highlights</h4>
+            <ul class="ig-highs">${highs}</ul>
+            <p class="ig-grid-note">${esc(P.profile.grid)}</p>
+          </article>
+          <article class="ig-panel ig-week">
+            <h3>${esc(P.thisWeek.title)}</h3>
+            <p>${esc(P.thisWeek.lede)}</p>
+            <ol class="ig-beats">${week}</ol>
+            <div class="ig-week-act">
+              <button type="button" class="btn btn-primary" id="igCopyWeek">Copy this week</button>
+              <a class="btn" href="https://www.tinsleymusic.com/shows" target="_blank" rel="noopener">Official tickets ↗</a>
+            </div>
+          </article>
+        </div>
+        <div class="ig-toolbar" role="group" aria-label="Idea format">${chips}</div>
+        <div class="ig-grid">${cards}</div>
+        <div class="ig-foot">
+          <button type="button" class="btn btn-primary" id="igCopyAll">Copy full Instagram brief</button>
+          <a class="btn" href="#bysong">Per-song Instagram recipes</a>
+          <a class="btn" href="#calendar">Drop into this week’s calendar</a>
+        </div>`;
+
+      root.querySelectorAll("[data-ig]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          filter = btn.getAttribute("data-ig");
+          render();
+        });
+      });
+      root.querySelectorAll("[data-caption]").forEach((btn) => {
+        btn.addEventListener("click", () => copy(btn.getAttribute("data-caption"), "Caption copied"));
+      });
+      const copyBio = $("#igCopyBio");
+      if (copyBio) copyBio.addEventListener("click", () => copy(P.profile.bio, "Bio copied"));
+      const copyWeek = $("#igCopyWeek");
+      if (copyWeek) {
+        copyWeek.addEventListener("click", () => {
+          const text = [
+            "TINSLEY — " + P.thisWeek.title.toUpperCase(),
+            P.thisWeek.lede,
+            "",
+            ...(P.thisWeek.beats || []).map((b) => b.day + " · " + b.format + " — " + b.idea)
+          ].join("\n");
+          copy(text, "Show week copied");
+        });
+      }
+      const copyAll = $("#igCopyAll");
+      if (copyAll) {
+        copyAll.addEventListener("click", () => {
+          const lines = [
+            "TINSLEY — INSTAGRAM DESK",
+            P.job,
+            P.principle,
+            "",
+            "RULES",
+            ...(P.rules || []).map((r) => "• " + r),
+            "",
+            "BIO",
+            P.profile.bio,
+            "",
+            P.thisWeek.title.toUpperCase(),
+            ...(P.thisWeek.beats || []).map((b) => b.day + " · " + b.format + " — " + b.idea),
+            "",
+            "IDEAS"
+          ];
+          (P.ideas || []).forEach((it) => {
+            lines.push("");
+            lines.push(it.title + " · " + it.format + (it.song ? " · " + it.song : ""));
+            lines.push("Hook: " + it.hook);
+            lines.push("Do: " + it.do);
+            if (it.caption) lines.push("Caption: " + it.caption);
+            lines.push("CTA: " + it.cta);
+          });
+          copy(lines.join("\n"), "Instagram brief copied");
+        });
+      }
+    }
+
+    render();
+  })();
 
   /* ---- like artists ---- */
   const ag = $("#artistGrid");
@@ -1075,10 +1235,6 @@
         chip.textContent = label;
         chip.classList.add("off");
         chip.title = "Live metrics unavailable — curated deck data still works.";
-        if (document.body.classList.contains("present-mode")) {
-          chip.hidden = true;
-          chip.setAttribute("aria-hidden", "true");
-        }
       }
     };
 
@@ -1269,12 +1425,6 @@
     tools.innerHTML = `<button type="button" class="btn" id="nsPullSpotify">Pull Spotify followers</button>
       <a class="btn" href="tinsley-ops.html#kpis">Sunday review on Ops</a>
       <span class="ops-muted ns-tools-hint">Monthly listeners still come from Spotify for Artists (not in the public API).</span>`;
-    if (document.body.classList.contains("present-mode")) {
-      const pull = tools.querySelector("#nsPullSpotify");
-      const hint = tools.querySelector(".ns-tools-hint");
-      if (pull) pull.hidden = true;
-      if (hint) hint.hidden = true;
-    }
     wrap.parentNode.insertBefore(tools, wrap);
 
     const pullBtn = $("#nsPullSpotify");
@@ -1502,7 +1652,7 @@
         return `<a class="spick" href="${catUrl}">
           <span class="spick-rank">#${p.rank}</span>
           <div>
-            <div class="spick-top"><strong>${esc(p.title)}</strong><span class="spick-cat">${esc(p.category)}</span></div>
+            <div class="spick-top"><strong>${esc(p.title)}</strong><span class="spick-cat">${esc(p.category)}${p.cost ? " · " + esc(p.cost) : ""}</span></div>
             <p>${esc(p.angle)}</p>
           </div>
         </a>`;
@@ -1642,6 +1792,30 @@
   })();
 
   /* ---- optional analytics (Plausible + Vercel Web Analytics) ---- */
+  (function workPath() {
+    const deck = document.body.getAttribute("data-deck");
+    if (deck !== "song" && deck !== "social") return;
+    if (document.querySelector(".work-path")) return;
+    const here = deck === "song" ? "song" : "marketing";
+    const steps = [
+      { id: "song", href: "tinsley-song.html", label: "1 Song" },
+      { id: "marketing", href: "tinsley-social.html", label: "2 Marketing" },
+      { id: "pr", href: "press.html", label: "3 PR" },
+      { id: "campaigns", href: "bad-enough.html", label: "4 Campaigns" }
+    ];
+    const nav = document.createElement("nav");
+    nav.className = "work-path";
+    nav.setAttribute("aria-label", "Work path");
+    nav.innerHTML = steps
+      .map((s) => {
+        const on = s.id === here ? ' aria-current="step"' : "";
+        return `<a href="${s.href}"${on}>${s.label}</a>`;
+      })
+      .join('<span aria-hidden="true">→</span>');
+    const header = document.getElementById("nav");
+    if (header) header.after(nav);
+  })();
+
   (function analytics() {
     const a = D.meta && D.meta.analytics;
     if (!a) return;

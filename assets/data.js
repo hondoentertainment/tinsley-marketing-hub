@@ -2,7 +2,7 @@
    Tinsley — Marketing & Analysis Data Layer
    All strategic content lives here so the site stays easy to maintain.
    Sources: tinsleymusic.com, EPK, Bandcamp discography, Atwood Magazine,
-   Spokesman-Review, She Is The Music, KEXP.
+   Spokesman-Review, The Seattle Times, She Is The Music, KEXP.
    ========================================================================= */
 
 const TINSLEY = {
@@ -10,7 +10,7 @@ const TINSLEY = {
   // Credibility layer. `updated` drives the "Last updated" badge; `sources`
   // renders the Methodology block; `spotifyArtistId` powers the live data fetch.
   meta: {
-    updated: "2026-08-21",
+    updated: "2026-08-22",
     spotifyArtistId: "1encEkVjZ4iqby8BXZc8Pa",
     canonicalUrl: "https://tinsley-marketing-hub.vercel.app/",
     publicListenPath: "/listen",
@@ -21,6 +21,7 @@ const TINSLEY = {
       { label: "Spotify artist profile (live)", url: "https://open.spotify.com/artist/1encEkVjZ4iqby8BXZc8Pa", kind: "Live data" },
       { label: "Bandcamp discography", url: "https://musicbytinsley.bandcamp.com/", kind: "Primary" },
       { label: "KEXP", url: "https://www.kexp.org/", kind: "Press" },
+      { label: "The Seattle Times (Aug 2026 feature — Lee syndicate reprint)", url: "https://www.yakimaherald.com/news/nation_and_world/entertainment/with-help-from-kexp-dj-seattle-musician-releases-vinyl-album/article_f15d942f-345c-5186-b5a2-780782157ea3.html", kind: "Press" },
       { label: "Atwood Magazine", url: "https://atwoodmagazine.com/tybe-tinsley-bad-enough-song-premiere/", kind: "Press" },
       { label: "The Spokesman-Review", url: "https://www.spokesman.com/stories/2025/mar/20/west-side-indie-pop-rocker-tinsley-brings-new-albu/", kind: "Press" },
       { label: "Kevin Kelly — 1,000 True Fans (2008)", url: "https://kk.org/thetechnium/1000-true-fans/", kind: "Framework" }
@@ -54,7 +55,7 @@ const TINSLEY = {
     genrePrimary: "Indie Pop-Rock",
     genreTags: ["Indie Pop", "Indie Rock", "Alt-Country", "Folk-Pop", "Bedroom Pop"],
     influences: ["Taylor Swift", "Kacey Musgraves", "Feist", "Sharon Van Etten", "The Cranberries"],
-    bio: "Seattle-based singer-songwriter Tinsley makes indie pop-rock that's equal parts heartfelt and playful, blending breezy melodies with sharp lyrical self-awareness. Releasing mononymously since 2018, she blends indie, rock, country and folk textures with emotionally honest, diary-like storytelling. Her 2023 EP \"Love Songs\" was named the #1 pick in The Seattle Times Washington music critics poll, and in January 2025 she released her self-titled debut album with vinyl funded by KEXP DJ John Richards.",
+    bio: "Seattle-based singer-songwriter Tinsley makes indie pop-rock that's equal parts heartfelt and playful, blending breezy melodies with sharp lyrical self-awareness. Releasing mononymously since 2018, she blends indie, rock, country and folk textures with emotionally honest, diary-like storytelling. Her 2023 EP \"Love Songs\" was named the #1 pick in The Seattle Times Washington music critics poll, and in January 2025 she released her self-titled debut album with vinyl funded by KEXP DJ John Richards. In August 2026, The Seattle Times featured that vinyl story and the next chapter: new songs in Los Angeles and at Bear Creek Studio in Woodinville, with at least two singles planned before year's end.",
     links: {
       website: "https://www.tinsleymusic.com/",
       linktree: "https://tr.ee/h6fNd7BTOw",
@@ -209,7 +210,7 @@ const TINSLEY = {
     { title: "Temporary Insanity", year: 2025, type: "Single", mood: "Restless", genre: "Indie Pop",
       note: "Recent release extending the debut-era momentum." },
     { title: "Tinsley (Debut LP)", year: 2025, type: "Album", mood: "Coming-of-age", genre: "Indie Pop-Rock",
-      note: "Nine-track self-titled debut on grief, relationships and growing up. Vinyl funded by KEXP's John Richards. The flagship catalog asset." },
+      note: "Nine-track self-titled debut on grief, relationships and growing up. Vinyl funded by KEXP's John Richards. Featured in The Seattle Times (Aug 2026). The flagship catalog asset." },
     { title: "Hard to Love", year: 2025, type: "Single", mood: "Vulnerable", genre: "Indie Pop",
       note: "Debut-album era track leaning into emotional exposure." },
     { title: "Good Ride (Mechanical Bullshit)", year: 2024, type: "Single", mood: "Wry", genre: "Alt-Country",
@@ -249,13 +250,13 @@ const TINSLEY = {
       "Distinct, 'smokey' vocal identity praised by American Songwriter — a recognizable instrument across eras.",
       "Genre range (indie, rock, country, folk, electro-pop) = multiple playlist and sync lanes without changing the voice.",
       "Deep 19+ track catalog with a flagship self-titled LP and a clear country-pop lead single ('Bad Enough').",
-      "Elite local validation: KEXP, 107.7 The End, C89.5, #1 Seattle Times critics poll — press that playlist editors trust."
+      "Elite local validation: KEXP, 107.7 The End, C89.5, an August 2026 Seattle Times feature, and a #1 Seattle Times critics poll — press that playlist editors trust."
     ],
     opportunities: [
       "Country-pop lane ('Bad Enough', 'Good Ride') is trending — pitch to country-crossover editors and Americana curators.",
       "Sync / TV: hook-forward, diary-clear songs ('Bad Enough', 'Classic', 'Hard to Love') fit teen / YA / coming-of-age cues.",
       "Early electro-pop stems ('Skin', 'Lovesick', 'Heart Attack') are remix-ready — highest dance-floor conversion with least production overhaul.",
-      "Vinyl / KEXP funding story is a press + merch narrative that elevates the catalog beyond streams."
+      "Vinyl / KEXP funding story now has an August 2026 Seattle Times feature — use it for press, bookers, and merch."
     ],
     watchouts: [
       "Mononym 'Tinsley' collides in search with Tinsley Ellis (blues) & 'tinsel' — title tracks and 'TinsleyMusic' matter for SEO.",
@@ -294,7 +295,7 @@ const TINSLEY = {
         title: "Compete on path",
         blurb: "How she enters the market should not look like a pure TikTok peer.",
         items: [
-          { title: "Tastemaker-first, TikTok-second", action: "Lead pitches with #1 Seattle Times + KEXP / The End / C89.5 — then short-form.", why: "She’s critic-born; most confessional peers are algorithm-born." },
+          { title: "Tastemaker-first, TikTok-second", action: "Lead pitches with the Aug 2026 Seattle Times feature + #1 poll + KEXP / The End / C89.5 — then short-form.", why: "She’s critic-born; most confessional peers are algorithm-born." },
           { title: "Pin Start Here hard", action: "Never let discovery land on formative electro first.", why: "Coherence is the product when the catalog spans eras." },
           { title: "One hero lane per release", action: "Bad Enough = country-pop glow-up. Next single ≠ also dream-pop.", why: "Range is a strength only when cycles are sequential." }
         ]
@@ -599,7 +600,7 @@ const TINSLEY = {
       highlights: [
         { name: "Start Here", use: "5-track entry + Bandcamp / Spotify stickers" },
         { name: "Shows", use: "Official calendar only — next date pinned" },
-        { name: "Press", use: "Atwood, KEXP, Seattle Times #1" },
+        { name: "Press", use: "Seattle Times 2026, Atwood, KEXP vinyl" },
         { name: "Vinyl", use: "John Richards / KEXP pressing story" },
         { name: "Close Friends", use: "How to get added + what they get" }
       ],
@@ -636,7 +637,7 @@ const TINSLEY = {
       { id: "ifyoulike", pillar: "reels", title: "If you like Maisie / Gracie / Samia", format: "Reel · 15s", song: "Bad Enough", hook: "Name the like-artist in the first line, then her hook.", do: "One honest overlap, not a pile-on. End on Tinsley, not the comparison.", caption: "Same diary. Different rain.", cta: "Follow for the Seattle version." },
       { id: "whisper", pillar: "reels", title: "The version I don’t usually post", format: "Reel · close-mic", song: "Hard to Love", hook: "First sung line on screen. Lamp light only.", do: "No polish, no jump cuts. Let a breath stay in.", caption: "Honesty made audible.", cta: "Close Friends get the take before anyone else." },
       { id: "putthison", pillar: "reels", title: "Put this on when you leave the party", format: "Reel · mood", song: "Distract Me", hook: "Rain / window / headphones. Lyric on the dreamiest line.", do: "No talking. Let the song sell the situationship.", caption: "For the almosts.", cta: "Save to the late-night playlist." },
-      { id: "press-stack", pillar: "carousel", title: "Proof stack", format: "Carousel · 5", song: "Bad Enough", hook: "Slide 1 is the Atwood line, not a selfie.", do: "Atwood → KEXP vinyl → Seattle Times #1 → Spokesman → listen.", caption: "The quotes that already exist. Use them.", cta: "Save for editors / bookers you DM later." },
+      { id: "press-stack", pillar: "carousel", title: "Proof stack", format: "Carousel · 5", song: "Bad Enough", hook: "Slide 1 is the Seattle Times Richards line, not a selfie.", do: "Seattle Times 2026 → Atwood → KEXP vinyl → Spokesman → listen.", caption: "The quotes that already exist. Use them.", cta: "Save for editors / bookers you DM later." },
       { id: "trackbytrack", pillar: "carousel", title: "Track-by-track growing up", format: "Carousel · 9+", song: "Tinsley (Debut LP)", hook: "One lyric per track. No essay.", do: "Last slide is Start Here, not ‘stream now.’", caption: "Nine tracks on growing up.", cta: "Comment the track that still stings." },
       { id: "starthere5", pillar: "carousel", title: "Start Here cards", format: "Carousel · 6", song: "Tinsley (Debut LP)", hook: "Cover + five songs + why each.", do: "Match the Listen draft order. Warm rose–sand tiles.", caption: "New here? This is the door.", cta: "Highlights → Start Here." },
       { id: "wrotechorus", pillar: "carousel", title: "How the chorus showed up", format: "Carousel · 6", song: "Bad Enough", hook: "Slide 1: one true sentence about writing it.", do: "Phone-note photo, then the finished hook, then the listen.", caption: "Diary-clear. Then a chorus.", cta: "Share with someone in their glow-up." },
@@ -913,6 +914,7 @@ const TINSLEY = {
   ],
 
   press: [
+    { quote: "If given a chance, this is an artist who could be a very, very big deal to a lot of people.", source: "John Richards, in The Seattle Times", url: "https://www.yakimaherald.com/news/nation_and_world/entertainment/with-help-from-kexp-dj-seattle-musician-releases-vinyl-album/article_f15d942f-345c-5186-b5a2-780782157ea3.html" },
     { quote: "Boasting a dreamy pop rock sound that evokes bands like The Cranberries, Tinsley has become one of the up-and-coming artists to watch in the Seattle music scene.", source: "Seth Sommerfield, Inlander" },
     { quote: "An earnest, endearing collection of infectious indie-pop and indie-rock, with occasional alt-country undertones… bright guitars, irresistible hooks and plenty of allure.", source: "Chris Sanley, KEXP Music Director" },
     { quote: "The smokey-voiced indie pop artist is as sticky in her lyrics as her music is in melody.", source: "American Songwriter" },
@@ -1060,7 +1062,7 @@ const TINSLEY = {
     { id: "kexp", name: "KEXP", lane: "Radio / Seattle", contact: "kexp.org · in-studio / local music", priority: "A" },
     { id: "theend", name: "107.7 The End", lane: "Radio / Seattle", contact: "Local specialty / new music", priority: "A" },
     { id: "c895", name: "C89.5", lane: "Radio / Seattle", contact: "College / community radio", priority: "A" },
-    { id: "seatimes", name: "The Seattle Times", lane: "Press / Seattle", contact: "Music critics / poll alumni angle", priority: "A" },
+    { id: "seatimes", name: "The Seattle Times", lane: "Press / Seattle", contact: "Aug 2026 feature (KEXP vinyl / next chapter) — thank-you + next-single follow, not only poll alumni", priority: "A" },
     { id: "atwood", name: "Atwood Magazine", lane: "Press / National indie", contact: "Premiere history (Bad Enough)", priority: "A" },
     { id: "obscure", name: "Obscure Sound", lane: "Press / Blog", contact: "Distract Me praise — soft follow-up", priority: "B" },
     { id: "spokesman", name: "The Spokesman-Review", lane: "Press / PNW", contact: "West-side feature history", priority: "B" },
@@ -1072,7 +1074,7 @@ const TINSLEY = {
   playlistTargets: [
     { id: "s4a-indie", name: "Spotify editorial — Indie Pop / Fresh Finds", lane: "Editorial", fit: "Bad Enough, Distract Me, Classic", tip: "Pitch via Spotify for Artists 4+ weeks early with Start Here context." },
     { id: "s4a-country", name: "Spotify editorial — Country-pop / Americana edge", lane: "Editorial", fit: "Bad Enough, Good Ride", tip: "Lead with Atwood ‘cathartic country-pop’ quote." },
-    { id: "pnw-indie", name: "PNW indie curator lists", lane: "Indie", fit: "Debut LP cuts, Love Songs era", tip: "Seattle Times #1 poll + KEXP vinyl story as social proof." },
+    { id: "pnw-indie", name: "PNW indie curator lists", lane: "Indie", fit: "Debut LP cuts, Love Songs era", tip: "Seattle Times Aug 2026 feature + #1 poll + KEXP vinyl as social proof." },
     { id: "sadgirl", name: "Sad-girl / diary-pop user lists", lane: "User", fit: "Hard to Love, Classic, Distract Me", tip: "SubmitHub + manual outreach; lyric screenshots convert." },
     { id: "sync-lib", name: "Sync libraries / supervisors", lane: "Sync", fit: "Bad Enough, Skin, Lovesick, Distract Me", tip: "Use Pitch Kit sync cues; one ask per track." },
     { id: "college", name: "College radio charts", lane: "Radio", fit: "Debut LP, Love Songs", tip: "Pair with C89.5 relationship; ship physical if possible." }
@@ -1125,8 +1127,8 @@ const TINSLEY = {
     {
       song: "Tinsley (Debut LP)",
       hooks: ["vinyl unboxing / KEXP story", "coming-of-age montage", "Start Here deep-cut tease"],
-      shots: ["needle-drop close-up", "track-by-track lyric carousel", "John Richards vinyl lore card"],
-      captions: ["Vinyl funded by KEXP’s John Richards — the flagship.", "Nine tracks on growing up.", "If you only listen to three… Start Here."]
+      shots: ["needle-drop close-up", "Seattle Times feature screenshot", "John Richards vinyl lore card"],
+      captions: ["The Seattle Times told the vinyl story in August 2026.", "Nine tracks on growing up.", "If you only listen to three… Start Here."]
     }
   ],
 
@@ -1147,7 +1149,7 @@ const TINSLEY = {
   },
 
   seattleFlywheel: [
-    { id: "kexp-spin", outlet: "KEXP", cadence: "Ongoing", asset: "In-studio ready: 3-song set + vinyl story one-pager", next: "Offer new single + Start Here for local music desk" },
+    { id: "kexp-spin", outlet: "KEXP", cadence: "Ongoing", asset: "In-studio ready: 3-song set + vinyl story one-pager + Seattle Times clip", next: "Thank Richards; offer new single + Start Here for local music desk" },
     { id: "end-spin", outlet: "107.7 The End", cadence: "Per release", asset: "Clean WAV + short artist letter + Atwood quote", next: "Follow up within 10 days of send" },
     { id: "c895-spin", outlet: "C89.5", cadence: "Per release", asset: "College radio package + optional physical", next: "Ask for specialty show spin" },
     { id: "chbp", outlet: "Capitol Hill Block Party", cadence: "Seasonal", asset: "Support-slot one-pager + live routing kit", next: "Apply / network previous performers" },
@@ -1169,7 +1171,7 @@ const TINSLEY = {
   liveRouting: {
     blurb: "2026 proof is already on the books — Hidden Hall this week, plus Cailin Russo support, a Tacoma headline, and last fall’s Suzzallo West Coast run. PNW first, then the map.",
     onePager: [
-      "Seattle indie pop-rock with a country-pop edge — Atwood, Seattle Times #1 EP, KEXP vinyl story.",
+      "Seattle indie pop-rock with a country-pop edge — Atwood, Seattle Times feature (2026), #1 EP (2023), KEXP vinyl story.",
       "Next date: Fri Aug 28, 2026 — Femme Friday at Hidden Hall with Girl Parallel and Veronica North.",
       "2026 live: Spanish Ballroom headline (Feb 12), Bad Enough video premiere at Hotel Crocodile (Mar 13), Cailin Russo support at Barboza (Mar 17), Wild Buffalo, Belltown Yacht Club, Yonder Cider acoustic, Add-a-Ball (Jun 18).",
       "2025 routing already opened the West: Suzzallo support (Spokane → San Diego) plus KEXP Town Hall with John Richards.",
@@ -1335,14 +1337,14 @@ const TINSLEY = {
       miles: 220
     },
     advanceEmail:
-      "Hi {name},\n\nConfirming Tinsley for {date} at {venue}.\n\nSet: 30–45 support / 60+ headline. Standard indie backline; acoustic duo available.\nTech rider + hospitality attached. Guest list of 6 unless you prefer otherwise.\n\nDraw: Seattle indie pop-rock with a country-pop edge — Atwood on Bad Enough, KEXP vinyl story, #1 Seattle Times EP. Next hometown date is Fri Aug 28 at Hidden Hall (Femme Friday).\n\nEPK + photos: https://www.tinsleymusic.com/epk\nOfficial calendar: https://www.tinsleymusic.com/shows\n\nPlease reply with load-in, set time, settlement (guarantee / door / merch), and parking.\n\nThank you,\nTinsley"
+      "Hi {name},\n\nConfirming Tinsley for {date} at {venue}.\n\nSet: 30–45 support / 60+ headline. Standard indie backline; acoustic duo available.\nTech rider + hospitality attached. Guest list of 6 unless you prefer otherwise.\n\nDraw: Seattle indie pop-rock with a country-pop edge — Atwood on Bad Enough, KEXP vinyl story, Seattle Times feature (Aug 2026), #1 critics-poll EP. Next hometown date is Fri Aug 28 at Hidden Hall (Femme Friday).\n\nEPK + photos: https://www.tinsleymusic.com/epk\nOfficial calendar: https://www.tinsleymusic.com/shows\n\nPlease reply with load-in, set time, settlement (guarantee / door / merch), and parking.\n\nThank you,\nTinsley"
   },
 
   // ---- Public marketing surfaces (press / sync / shows / single campaign) ----
   pressKit: {
     eyebrow: "Electronic Press Kit",
     headline: "For editors, radio, and playlist desks.",
-    lede: "Seattle indie pop-rock with a country-pop edge — diary-clear hooks, KEXP-backed vinyl, and a #1 Seattle Times critics-poll EP.",
+    lede: "Seattle indie pop-rock with a country-pop edge — diary-clear hooks, KEXP-backed vinyl, an August 2026 Seattle Times feature, and a #1 Seattle Times critics-poll EP.",
     oneLiner: "Seattle indie pop-rock with a country-pop edge.",
     contactNote: "Booking & press: use the official EPK form on tinsleymusic.com, or reply via the channels below.",
     assets: [
@@ -1358,6 +1360,7 @@ const TINSLEY = {
       { k: "Lead single", v: "Bad Enough (Feb 12, 2026) + video" },
       { k: "Next date", v: "Aug 28, 2026 · Hidden Hall, Seattle" },
       { k: "Radio", v: "KEXP · 107.7 The End · C89.5" },
+      { k: "Featured", v: "The Seattle Times (Aug 2026) — KEXP vinyl / next chapter" },
       { k: "Milestone", v: "#1 Seattle Times WA critics poll (Love Songs EP)" }
     ]
   },

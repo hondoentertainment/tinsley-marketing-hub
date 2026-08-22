@@ -55,7 +55,12 @@
     const quotes = $("#pkQuotes");
     if (quotes && D.press) {
       quotes.innerHTML = D.press
-        .map((q) => `<blockquote class="pub-quote"><p>“${esc(q.quote)}”</p><cite>${esc(q.source)}</cite></blockquote>`)
+        .map((q) => {
+          const cite = q.url
+            ? `<a href="${esc(q.url)}" target="_blank" rel="noopener">${esc(q.source)}</a>`
+            : esc(q.source);
+          return `<blockquote class="pub-quote"><p>“${esc(q.quote)}”</p><cite>${cite}</cite></blockquote>`;
+        })
         .join("");
     }
 

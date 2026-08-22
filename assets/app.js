@@ -92,7 +92,10 @@
   const pressList = $("#pressList");
   if (pressList) {
     D.press.forEach((p) => {
-      pressList.appendChild(el("div", "press-item", `<p>"${p.quote}"</p><div class="src">— ${p.source}</div>`));
+      const src = p.url
+        ? `— <a href="${p.url}" target="_blank" rel="noopener">${p.source}</a>`
+        : `— ${p.source}`;
+      pressList.appendChild(el("div", "press-item", `<p>"${p.quote}"</p><div class="src">${src}</div>`));
     });
   }
 
@@ -1579,7 +1582,12 @@
       .join("");
 
     const pressHtml = press
-      .map((p) => `<blockquote class="pitch-quote"><p>“${esc(p.quote)}”</p><cite>— ${esc(p.source)}</cite></blockquote>`)
+      .map((p) => {
+        const cite = p.url
+          ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.source)}</a>`
+          : esc(p.source);
+        return `<blockquote class="pitch-quote"><p>“${esc(p.quote)}”</p><cite>— ${cite}</cite></blockquote>`;
+      })
       .join("");
 
     const download = (filename, text) => {

@@ -80,7 +80,7 @@ const TINSLEY = {
     },
     social: {
       job: "Reach & revenue",
-      lede: "Your weekly show-up: Instagram desk, posting week, per-song recipes, and the growth roadmap — how listeners become an owned audience."
+      lede: "Your weekly show-up: social music trends, Instagram desk, posting week, per-song recipes, and the growth roadmap — how listeners become an owned audience."
     },
     ops: {
       job: "Execute & measure",
@@ -132,9 +132,9 @@ const TINSLEY = {
         next: "Next: PR — what you send out.",
         nextHref: "press.html",
         steps: [
+          "Scan social music trends — pick one Ride format, skip the costume.",
           "Open the Instagram desk and run the Hidden Hall show week.",
-          "Copy this week’s bio. Official tickets only in Stories.",
-          "Check one slot on the posting week, then go to PR."
+          "Copy this week’s bio. Official tickets only in Stories."
         ]
       },
       ops: {
@@ -657,6 +657,253 @@ const TINSLEY = {
       { id: "countdown7", pillar: "show", title: "7-day Hidden Hall countdown", format: "Stories daily", song: "", hook: "Same visual system all week so it reads as a series.", do: "Follow thisWeek beats. Official URL only.", caption: "", cta: "Countdown sticker every day." },
       { id: "expect", pillar: "show", title: "What to expect Friday", format: "Carousel", song: "", hook: "Doors 8 · 21+ · bill · merch · tickets.", do: "Ship Sunday 23. Bookers can steal the proof later.", caption: "Femme Friday at Hidden Hall.", cta: "Official tickets — no third-party dumps." },
       { id: "setcrumb", pillar: "show", title: "One set crumb, not the set", format: "Reel or Stories", song: "Bad Enough", hook: "One chorus, crowd audio ok, then cut.", do: "Night-of or Saturday. Full-set leaks kill the next room.", caption: "See you next time.", cta: "Next official date in sticker." }
+    ]
+  },
+
+  // ---- Social music trends (late-2026 formats, mapped to this catalog) ----
+  // Planning layer, not a live feed. Heat = Ride / Watch / Skip for this artist.
+  socialTrends: {
+    asOf: "2026-08",
+    job: "Ride a format. Don’t wear a costume.",
+    principle: "TikTok still finds strangers. Reels keep the ones who save. Shorts feed YouTube. A trend only earns a post if one of your songs already sounds like it.",
+    rules: [
+      "One song per trend post. If you can’t name the track in the first line, skip it.",
+      "Native edit per platform. A TikTok watermark on Reels is a dead post.",
+      "Identity in 1.2s. Talking-head essays lose to a lyric, a needle, or a room flip.",
+      "You win when other people use your sound — name the audio, then seed two duets.",
+      "Official tickets only. Trends do not get a third-party link."
+    ],
+    lanes: [
+      { id: "tiktok", label: "TikTok" },
+      { id: "reels", label: "Reels" },
+      { id: "shorts", label: "Shorts" },
+      { id: "sound", label: "Sounds" },
+      { id: "skip", label: "Skip" }
+    ],
+    platforms: [
+      { id: "tiktok", name: "TikTok", job: "Find strangers", heat: "High", note: "Volume + own-audio. Raw, 15–30s, first frame is the hook. Success is other creators using the sound." },
+      { id: "reels", name: "Instagram Reels", job: "Keep savers", heat: "High", note: "Indie converts here. Recut last week’s TikTok winner 1–2 weeks later — Reels lag TikTok. Optimize for saves, not views." },
+      { id: "shorts", name: "YouTube Shorts", job: "Feed the channel", heat: "Med", note: "Same hook, then a card to the live session / lyric video. Don’t start a third posting habit unless a Short already works." },
+      { id: "stories", name: "Stories + CF", job: "Sell the room", heat: "High", note: "Show week lives here. Close Friends tonight, public tomorrow. Stickers beat ‘link in bio.’" }
+    ],
+    thisCycle: {
+      title: "This cycle · late August 2026",
+      lede: "Three rides while the Times story is still warm and Hidden Hall is this Friday. Everything else can wait.",
+      items: [
+        { title: "Times vinyl clip", song: "Tinsley (Debut LP)", do: "Needle-drop + Richards line. Screenshot the feature. Don’t narrate the whole article." },
+        { title: "Hidden Hall crumb", song: "Bad Enough", do: "One chorus, crowd audio ok, then cut. Stories sticker to tinsleymusic.com/shows." },
+        { title: "Own-audio seed", song: "Bad Enough", do: "Name the sound ‘choosing me chorus.’ Post the original, then ask two peers to duet within 48h." }
+      ]
+    },
+    items: [
+      {
+        id: "own-audio",
+        lane: "sound",
+        heat: "Ride",
+        title: "Own-audio first",
+        format: "15–25s · named sound",
+        platforms: ["TikTok", "Reels"],
+        song: "Bad Enough",
+        why: "In 2026 a music post wins when other people use the sound — not when you hit a view count.",
+        do: "Post the chorus on your audio. Name it something people will search. DM two PNW peers the same day.",
+        skip: "Don’t bury the hook under a talking intro.",
+        caption: "Use this sound if choosing you is the plot twist."
+      },
+      {
+        id: "hook-12",
+        lane: "tiktok",
+        heat: "Ride",
+        title: "Identity in 1.2 seconds",
+        format: "7–20s clip",
+        platforms: ["TikTok", "Reels", "Shorts"],
+        song: "Bad Enough",
+        why: "The scroll dies in the first frames. Lyric on screen, room flip, or needle — not a logo.",
+        do: "On-screen: ‘choosing me.’ Outfit / hair / room on the chorus. End on her face.",
+        skip: "Don’t open with ‘hey guys new song.’",
+        caption: "Choosing me was the plot twist."
+      },
+      {
+        id: "native-recut",
+        lane: "reels",
+        heat: "Ride",
+        title: "Native recut, not a dump",
+        format: "Reel · new cover frame",
+        platforms: ["Reels"],
+        song: "Any TikTok winner",
+        why: "Reels trail TikTok by about a week. A watermarked crosspost gets buried.",
+        do: "New 1.2s cover. Slightly longer if the save is the job. Caption asks for a save, not a follow.",
+        skip: "Don’t post the TikTok file as-is.",
+        caption: "The version I recut so it actually lives here."
+      },
+      {
+        id: "save-carousel",
+        lane: "reels",
+        heat: "Ride",
+        title: "Save-bait carousel",
+        format: "Carousel · 5–6",
+        platforms: ["Instagram"],
+        song: "Tinsley (Debut LP)",
+        why: "Indie still wins on Instagram saves — Start Here, press stack, ‘put this on when…’ — not dances.",
+        do: "Slide 1 is the Richards Times line or Start Here. Last slide is a save prompt, not ‘stream now.’",
+        skip: "Don’t make slide 1 a selfie.",
+        caption: "Save this for the next editor or late-night playlist."
+      },
+      {
+        id: "glowup",
+        lane: "tiktok",
+        heat: "Ride",
+        title: "Choosing-me glow-up",
+        format: "12–20s transition",
+        platforms: ["TikTok", "Reels"],
+        song: "Bad Enough",
+        why: "Glow-up / revenge-soft is still a durable lifestyle bed. You already have the chorus.",
+        do: "Before → after on the hook. Warm rose–sand, not generic sad-girl blue.",
+        skip: "Don’t costume a trend that needs a dance you didn’t start.",
+        caption: "Choosing me was the plot twist."
+      },
+      {
+        id: "flags",
+        lane: "tiktok",
+        heat: "Ride",
+        title: "Green flag / red flag",
+        format: "List · on-beat cards",
+        platforms: ["TikTok", "Reels"],
+        song: "Temporary Insanity",
+        why: "Listicles still travel. Comment-trigger is the point.",
+        do: "Six flags timed to the chorus. Last card asks for a color. No talking required.",
+        skip: "Don’t write a paragraph between cards.",
+        caption: "Intrusive thoughts, but make it a chorus."
+      },
+      {
+        id: "almosts",
+        lane: "reels",
+        heat: "Ride",
+        title: "For the almosts",
+        format: "Mood Reel · no talk",
+        platforms: ["Reels", "TikTok"],
+        song: "Distract Me",
+        why: "Situationship / late-night save culture is still the dream-pop lane.",
+        do: "Rain, window, headphones. Lyric on the dreamiest line. Let the song sell it.",
+        skip: "Don’t explain the lore over the hook.",
+        caption: "Put this on when you leave the party."
+      },
+      {
+        id: "seattle-country",
+        lane: "tiktok",
+        heat: "Watch",
+        title: "Country, but make it Seattle",
+        format: "12–18s contrast",
+        platforms: ["TikTok", "Reels"],
+        song: "Good Ride",
+        why: "Coastal-cowgirl is crowded. City-rain twang is still your wedge.",
+        do: "Dashboard night-drive or Pike / Capitol Hill. Boots in frame one, not a costume.",
+        skip: "Don’t play dress-up Nashville.",
+        caption: "Alt-country wit. City rain."
+      },
+      {
+        id: "vinyl-times",
+        lane: "reels",
+        heat: "Ride",
+        title: "Times needle-drop",
+        format: "15–25s lore",
+        platforms: ["Reels", "TikTok", "Shorts"],
+        song: "Tinsley (Debut LP)",
+        why: "The August 2026 Seattle Times feature is a live news cycle. Vinyl ASMR plus a critic line is the proof stack.",
+        do: "Needle hits the groove, then the Richards line. One screenshot. Then Start Here.",
+        skip: "Don’t read the article to camera.",
+        caption: "The Seattle Times told the vinyl story. The record still introduces people."
+      },
+      {
+        id: "cf-first",
+        lane: "reels",
+        heat: "Ride",
+        title: "Close Friends, then public",
+        format: "CF tonight → Reel tomorrow",
+        platforms: ["Instagram"],
+        song: "Hard to Love",
+        why: "Superfan platforms still reward the people who heard it first.",
+        do: "Unmixed chorus or the line you almost cut on CF. Public the next day: ‘you heard it first.’",
+        skip: "Don’t dump the same file to everyone at once.",
+        caption: "Honesty made audible — Close Friends got it last night."
+      },
+      {
+        id: "show-sticker",
+        lane: "reels",
+        heat: "Ride",
+        title: "Show-week sticker",
+        format: "Stories · 3 frames",
+        platforms: ["Instagram"],
+        song: "Hidden Hall · Aug 28",
+        why: "Stories convert rooms. Reels find strangers. Don’t mix the jobs.",
+        do: "Date → bill → official sticker. Tag Girl Parallel and Veronica North.",
+        skip: "Don’t send anyone to this hub.",
+        caption: ""
+      },
+      {
+        id: "shorts-funnel",
+        lane: "shorts",
+        heat: "Watch",
+        title: "Shorts that point to a session",
+        format: "Short → live / lyric",
+        platforms: ["Shorts"],
+        song: "Hard to Love",
+        why: "Shorts only pay if they feed a longer YouTube asset. You already have live and session footage.",
+        do: "Same 15s hook, end card to the acoustic or KING 5 / CHBP clip. One Shorts habit, not a third calendar.",
+        skip: "Don’t start daily Shorts from scratch this week.",
+        caption: "Full take is on the channel."
+      },
+      {
+        id: "comment-card",
+        lane: "tiktok",
+        heat: "Ride",
+        title: "Which-track comment card",
+        format: "Carousel or last-frame ask",
+        platforms: ["TikTok", "Reels"],
+        song: "Love Songs (EP)",
+        why: "Comments are still the cheapest distribution. A real binary beats a vague ‘thoughts?’",
+        do: "Two real options. Winner becomes Wednesday’s Reel cover.",
+        skip: "Don’t ask ‘what should I post.’",
+        caption: "Comment the Love Songs track that still stings."
+      },
+      {
+        id: "skip-dance",
+        lane: "skip",
+        heat: "Skip",
+        title: "Dance you didn’t start",
+        format: "Challenge chase",
+        platforms: ["TikTok"],
+        song: "",
+        why: "You’re critic-born. Borrowed choreography reads as costume and burns a posting slot.",
+        do: "If a dance uses your audio, duet the dancer. Don’t learn the routine to keep up.",
+        skip: "Don’t invent a dance for Bad Enough this week.",
+        caption: ""
+      },
+      {
+        id: "skip-sadblue",
+        lane: "skip",
+        heat: "Skip",
+        title: "Generic sad-girl blue",
+        format: "Mood dump",
+        platforms: ["TikTok", "Reels"],
+        song: "",
+        why: "That’s the interchangeable diary-pop pile. Your wedge is Seattle rain + country-pop edge + Times proof.",
+        do: "Warm rose–sand. Press tile every third grid post.",
+        skip: "Don’t post another teal-bedroom whisper with no song title.",
+        caption: ""
+      },
+      {
+        id: "skip-dayinthelife",
+        lane: "skip",
+        heat: "Skip",
+        title: "Day-in-the-life vlog",
+        format: "60–90s talk",
+        platforms: ["TikTok", "Reels"],
+        song: "",
+        why: "Artist-vlog volume is high and conversion is low unless a hook is already playing.",
+        do: "If you film the day, drop the chorus in the first 1.2s or keep it Close Friends.",
+        skip: "Don’t open with coffee and a calendar.",
+        caption: ""
+      }
     ]
   },
 

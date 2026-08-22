@@ -803,6 +803,172 @@
     render();
   })();
 
+  /* ---- social music trends ---- */
+  (function socialTrendsDesk() {
+    const root = $("#trendsDesk");
+    const T = D.socialTrends;
+    if (!root || !T) return;
+    const esc = (s) =>
+      String(s == null ? "" : s).replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+
+    let filter = "all";
+    const lanes = T.lanes || [];
+
+    function render() {
+      const items = (T.items || []).filter((it) => filter === "all" || it.lane === filter);
+      const rules = (T.rules || []).map((r) => `<li>${esc(r)}</li>`).join("");
+      const heat = (T.platforms || [])
+        .map(
+          (p) => `<article class="tr-heat">
+            <div class="tr-heat-h">
+              <h3>${esc(p.name)}</h3>
+              <span class="tr-heat-pill">${esc(p.heat)}</span>
+            </div>
+            <p class="tr-heat-job">${esc(p.job)}</p>
+            <p>${esc(p.note)}</p>
+          </article>`
+        )
+        .join("");
+      const cycle = ((T.thisCycle && T.thisCycle.items) || [])
+        .map(
+          (c) => `<li>
+            <strong>${esc(c.title)}</strong>
+            ${c.song ? `<span class="tr-song">${esc(c.song)}</span>` : ""}
+            <span>${esc(c.do)}</span>
+          </li>`
+        )
+        .join("");
+      const chips = ['<button type="button" class="ig-chip' + (filter === "all" ? " is-on" : "") + '" data-tr="all">All (' + T.items.length + ")</button>"]
+        .concat(
+          lanes.map((p) => {
+            const n = T.items.filter((it) => it.lane === p.id).length;
+            return '<button type="button" class="ig-chip' + (filter === p.id ? " is-on" : "") + '" data-tr="' + p.id + '">' + esc(p.label) + " (" + n + ")</button>";
+          })
+        )
+        .join("");
+      const cards = items
+        .map((it) => {
+          const plats = (it.platforms || []).map((p) => `<span class="tr-plat">${esc(p)}</span>`).join("");
+          const cap = it.caption
+            ? `<button type="button" class="mini-copy" data-caption="${esc(it.caption)}">Copy caption</button>`
+            : "";
+          const heatClass = String(it.heat || "").toLowerCase();
+          return `<article class="tr-card heat-${esc(heatClass)}" data-lane="${esc(it.lane)}">
+            <div class="tr-card-h">
+              <span class="tr-heat-pill ${esc(heatClass)}">${esc(it.heat)}</span>
+              <span class="ig-fmt">${esc(it.format)}</span>
+            </div>
+            <h3>${esc(it.title)}</h3>
+            ${it.song ? `<p class="ig-song">${esc(it.song)}</p>` : ""}
+            <div class="tr-plats">${plats}</div>
+            <p class="ig-hook"><strong>Why.</strong> ${esc(it.why)}</p>
+            <p><strong>Do.</strong> ${esc(it.do)}</p>
+            ${it.skip ? `<p class="tr-skip"><strong>Skip.</strong> ${esc(it.skip)}</p>` : ""}
+            ${it.caption ? `<p class="ig-cap">“${esc(it.caption)}”</p>` : ""}
+            <div class="ig-card-act">${cap}</div>
+          </article>`;
+        })
+        .join("");
+
+      const cycleBlock = T.thisCycle
+        ? `<article class="ig-panel tr-cycle">
+            <h3>${esc(T.thisCycle.title)}</h3>
+            <p>${esc(T.thisCycle.lede)}</p>
+            <ol class="tr-cycle-list">${cycle}</ol>
+            <div class="ig-week-act">
+              <button type="button" class="btn btn-primary" id="trCopyCycle">Copy this cycle</button>
+              <a class="btn" href="#instagram">Open Instagram desk</a>
+            </div>
+          </article>`
+        : "";
+
+      root.innerHTML = `
+        <div class="ig-intro">
+          <p class="ig-job">${esc(T.job)}</p>
+          <p class="ig-principle">${esc(T.principle)}</p>
+          <p class="tr-asof">As of ${esc(T.asOf)} — formats for this catalog, not a live trend feed.</p>
+          <ul class="ig-rules">${rules}</ul>
+        </div>
+        <div class="tr-heat-grid">${heat}</div>
+        <div class="ig-two">
+          ${cycleBlock}
+          <article class="ig-panel">
+            <h3>How to use this</h3>
+            <p>Pick one <strong>Ride</strong>. Film that, then drop it on the posting week. Watch means test once if you have leftover footage. Skip means do not spend Friday on it.</p>
+            <ul class="ig-rules">
+              <li>Hidden Hall week: ride the Times clip and the show sticker first.</li>
+              <li>After Friday: seed Bad Enough as named audio.</li>
+              <li>Reels get the recut, not the TikTok file.</li>
+            </ul>
+            <div class="ig-week-act">
+              <a class="btn" href="#calendar">Drop into posting week</a>
+              <a class="btn" href="#bysong">Pick the song tags</a>
+            </div>
+          </article>
+        </div>
+        <div class="ig-toolbar" role="group" aria-label="Trend format">${chips}</div>
+        <div class="tr-grid">${cards}</div>
+        <div class="ig-foot">
+          <button type="button" class="btn btn-primary" id="trCopyAll">Copy trends brief</button>
+          <a class="btn" href="#instagram">Instagram desk</a>
+          <a class="btn" href="#social">Platform plays</a>
+        </div>`;
+
+      root.querySelectorAll("[data-tr]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          filter = btn.getAttribute("data-tr");
+          render();
+        });
+      });
+      root.querySelectorAll("[data-caption]").forEach((btn) => {
+        btn.addEventListener("click", () => copy(btn.getAttribute("data-caption"), "Caption copied"));
+      });
+      const copyCycle = $("#trCopyCycle");
+      if (copyCycle && T.thisCycle) {
+        copyCycle.addEventListener("click", () => {
+          const text = [
+            "TINSLEY — " + T.thisCycle.title.toUpperCase(),
+            T.thisCycle.lede,
+            "",
+            ...(T.thisCycle.items || []).map((c) => "• " + c.title + (c.song ? " · " + c.song : "") + " — " + c.do)
+          ].join("\n");
+          copy(text, "This cycle copied");
+        });
+      }
+      const copyAll = $("#trCopyAll");
+      if (copyAll) {
+        copyAll.addEventListener("click", () => {
+          const lines = [
+            "TINSLEY — SOCIAL MUSIC TRENDS",
+            "As of " + T.asOf,
+            T.job,
+            T.principle,
+            "",
+            "RULES",
+            ...(T.rules || []).map((r) => "• " + r),
+            "",
+            T.thisCycle ? T.thisCycle.title.toUpperCase() : "",
+            T.thisCycle ? T.thisCycle.lede : "",
+            ...((T.thisCycle && T.thisCycle.items) || []).map((c) => "• " + c.title + (c.song ? " · " + c.song : "") + " — " + c.do),
+            "",
+            "TRENDS"
+          ];
+          (T.items || []).forEach((it) => {
+            lines.push("");
+            lines.push((it.heat || "") + " · " + it.title + " · " + it.format + (it.song ? " · " + it.song : ""));
+            lines.push("Why: " + it.why);
+            lines.push("Do: " + it.do);
+            if (it.skip) lines.push("Skip: " + it.skip);
+            if (it.caption) lines.push("Caption: " + it.caption);
+          });
+          copy(lines.join("\n"), "Trends brief copied");
+        });
+      }
+    }
+
+    render();
+  })();
+
   /* ---- like artists ---- */
   const ag = $("#artistGrid");
   if (ag) {
@@ -1705,6 +1871,8 @@
     ".track",
     ".remix-row",
     ".social-card",
+    ".tr-card",
+    ".tr-heat",
     ".cal-day",
     ".rm-phase",
     ".diff-item",

@@ -1416,6 +1416,7 @@
           })
           .join("") +
         `<div class="ops-row-actions">
+          <a class="btn" href="tinsley-social.html#trends">Social music trends</a>
           <a class="btn" href="tinsley-social.html#street-picks">Social street picks</a>
           <a class="btn" href="street-marketing.html">All 100 ideas</a>
         </div>`;
